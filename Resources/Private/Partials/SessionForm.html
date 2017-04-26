@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<head>
+	<title>Edit form</title>
+</head>
+<body>
+<f:section name="Main">
+	<script type="text/template" id="session">
+		<div>
+			<form class="new-session">
+				<f:form.hidden name="day" value="{day.uid}"/>
+				<dl>
+					<dt><f:translate key="topic"/>*</dt>
+					<dd><f:form.textfield name="topic" class="topic"/></dd>
+
+					<dt><f:translate key="speaker"/>*</dt>
+					<dd><f:form.textfield name="speaker" class="speaker"/></dd>
+
+					<dt><f:translate key="attendees"/></dt>
+					<dd><f:form.textfield name="attendees" class="attendees"/></dd>
+
+					<dt><f:translate key="description"/>*</dt>
+					<dd><f:form.textarea name="description" class="description"/></dd>
+
+					<dt><f:translate key="twitter"/></dt>
+					<dd><f:form.textfield name="twitter" class="twitter"/></dd>
+
+					<dt><f:translate key="type"/></dt>
+					<dd><f:form.select name="type" class="type" options="{
+							1: '{f:translate(key: \'type-talk\')}',
+							2: '{f:translate(key: \'type-tutorial\')}'
+							3: '{f:translate(key: \'type-workshop\')}'
+							4: '{f:translate(key: \'type-other\')}'
+						}"/></dd>
+
+					<dt><f:translate key="level"/></dt>
+					<dd><f:form.select name="level" class="level" options="{
+							1: '{f:translate(key: \'level-starter\')}',
+							2: '{f:translate(key: \'level-advanced\')}'
+							3: '{f:translate(key: \'level-pro\')}'
+						}"/></dd>
+				</dl>
+			</form>
+			<div><f:translate key="mandatory"/></div>
+			<div class="error"></div>
+		</div>
+	</script>
+</f:section>
+</body>
+</html>

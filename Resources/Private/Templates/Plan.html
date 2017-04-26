@@ -1,0 +1,56 @@
+<div id="sessionplaner">
+	<!-- ###DAYLIST### begin -->
+	<h3 class="###DAY###">###NAME###</h3>
+	<ul>
+		<!-- ###ROOM### begin -->
+		<li class="room">
+			<!-- ###STATUS### begin -->
+			<!-- ###ROOM_IMAGE### begin -->
+			<h4><img src="###IMAGE###" alt="###NAME###"></h4>
+			<!-- ###ROOM_IMAGE### end -->
+			<!-- ###ROOM_FILLED### begin -->
+			<h4>###NAME###</h4>
+			<!-- ###ROOM_FILLED### end -->
+			<!-- ###STATUS### end -->
+			<ul>
+				<!-- ###SESSION### begin -->
+				<li class="slot" key="###MD5###"
+					info="###TOOLTIP###"><span class="time">###POSITION###</span>
+					<!-- ###SESSION_INFO### begin -->
+					<section>
+						<strong>###NAME###</strong><br/>
+						von ###SPEAKER###
+					</section>
+					<!-- ###SESSION_INFO### end -->
+				</li>
+				<!-- ###SESSION### begin -->
+			</ul>
+		</li>
+		<!-- ###ROOM### end -->
+	</ul>
+	<!-- ###DAYLIST### begin -->
+
+	<div style="clear:both"></div>
+
+	<!-- ###SESSIONS### begin -->
+	<h2>###LABEL_SESSIONPOOL###</h2>
+	<ul class="sessionpool">
+		<!-- ###ITEM### begin -->
+		<li class="slot" key="###KEY###" info="###TOOLTIP###">
+			<section>
+				<strong>###NAME###</strong><br/>
+				###LABEL_BY### ###SPEAKER###
+			</section>
+		</li>
+		<!-- ###ITEM### end -->
+	</ul>
+	<!-- ###SESSIONS### begin -->
+
+	<!-- ###CONTENT### begin -->
+	<!-- ###REFRESH### begin -->
+	<meta http-equiv="refresh" content="30">
+	<!-- ###REFRESH### end -->
+	<!-- ###CONTENT### end -->
+
+	<div class="hide">###TWITTER###</div>
+</div>

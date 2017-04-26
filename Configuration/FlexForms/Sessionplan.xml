@@ -1,0 +1,55 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+	
+	<General>
+	    <ROOT>
+		<TCEforms>
+		    <sheetTitle>LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:display_flexform.sheet_general</sheetTitle>
+		</TCEforms>
+		<type>array</type>
+		<el>
+		    <settings.day>
+			<TCEforms>                            
+			    <label>LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:sessionplan_flexform.settings.day</label>
+			    <config>
+				<allowed>tx_sessionplaner_domain_model_day</allowed>
+				<internal_type>db</internal_type>
+				<maxitems>1</maxitems>
+				<minitems>0</minitems>
+				<size>1</size>
+				<type>group</type>
+				<wizards>
+				    <suggest>
+					<type>suggest</type>
+				    </suggest>
+				</wizards>
+			    </config>
+			</TCEforms>
+		    </settings.day>
+		    <settings.singlePid>
+			<TCEforms>
+			    <label>LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:sessionplan_flexform.settings.singlePid</label>
+			    <config>
+				<allowed>pages</allowed>
+				<internal_type>db</internal_type>
+				<maxitems>1</maxitems>
+				<minitems>0</minitems>
+				<size>1</size>
+				<type>group</type>
+				<wizards>
+				    <suggest>
+					<type>suggest</type>
+				    </suggest>
+				</wizards>
+			    </config>
+			</TCEforms>
+		    </settings.singlePid>
+		</el>
+	    </ROOT>
+    	</General>
+	
+    </sheets>
+</T3DataStructure>

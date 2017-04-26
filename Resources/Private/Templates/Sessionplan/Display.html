@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<head>
+	<title>List Sessions</title>
+</head>
+<body>
+<f:layout name="Frontend" />
+<f:section name="content">
+           
+    <f:if condition="{day}">
+    <div class="sessionplaner-day row">
+	
+	<h1>{day.name} <f:format.date format="d.m.Y">@{day.date}</f:format.date></h1>
+	
+	<f:if condition="{day.rooms}">
+	<div class="sessionplaner-row sessionplaner-row-header">
+	    <f:for each="{day.rooms}" as="room">
+	    <div class="sessionplaner-col sessionplaner-col-header sessionplaner-slot-room">
+		<f:if condition="{room.logo}">
+		    <f:then>
+			<f:image class="sessionplaner-col-header-room-logo" src="{room.logo.uid}" treatIdAsReference="true" title="{room.logo.OriginalResource.title}" alt="{room.logo.OriginalResource.alternative}" width="148c" />
+		    </f:then>
+		    <f:else>
+			{room.name}
+		    </f:else>
+		</f:if>
+	    </div>
+	    </f:for>
+	</div>
+	</f:if>
+	<f:for each="{day.slots}" as="slot">
+	<div class="sessionplaner-row">
+	    <div class="sessionplaner-slot-time"><f:format.date format="H:i">{slot.start}</f:format.date></div>
+	    <f:for each="{day.rooms}" as="room">
+	    <div class="sessionplaner-col sessionplaner-slot-session" data-slot="{day.uid}-{slot.uid}" data-room="{room.uid}">
+		<div class="sessionplaner-slot-session-room">
+		    {room.name}
+		</div>
+		<f:for each="{room.sessions}" as="session">    
+		    <f:if condition="{session.day} == {day}">
+		    <f:if condition="{session.slot} == {slot}">
+			<div class="sessionplaner-slot-session-info">
+			    <div class="sessionplaner-session-topic">
+				<f:if condition="{session.donotlink}">
+				    <f:then>
+					<strong>{session.topic}</strong>
+				    </f:then>
+				    <f:else>
+					<f:link.action controller="Session" action="show" pluginName="Session" pageUid="{settings.singlePid}" arguments="{session:session}"><strong>{session.topic}</strong></f:link.action>
+				    </f:else>
+				</f:if>
+			    </div>
+			    <f:if condition="{session.speaker}">
+			    <div class="sessionplaner-session-speaker">{session.speaker}</div>
+			    </f:if>
+			</div>
+		    </f:if>
+		    </f:if>
+		</f:for>
+	    </div>
+	    </f:for>
+	</div>
+	</f:for>
+    </div>
+    </f:if>
+	
+    
+</f:section>
+</body>
+</html>

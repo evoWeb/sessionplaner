@@ -1,0 +1,31 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:display_flexform.sheet_general</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<switchableControllerActions>
+						<TCEforms>
+							<label>LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:display_flexform.switchableControllerAction</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+											<numIndex index="0">LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:edit_flexform.switchableControllerAction.suggest</numIndex>
+											<numIndex index="1">Edit->suggestForm;Edit->suggestSave</numIndex>
+									</numIndex>
+								</items>
+							</config>
+						</TCEforms>
+					</switchableControllerActions>
+				</el>
+			</ROOT>
+		</sDEF>
+	</sheets>
+</T3DataStructure>

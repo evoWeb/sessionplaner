@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
+	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<head>
+	<title>List Sessions</title>
+</head>
+<body>
+<f:layout name="Frontend" />
+<f:section name="content">
+
+<f:if condition="{settings.listViewHeadline">
+    <h1>{settings.listViewHeadline}</h1>
+</f:if>
+<f:if condition="{settings.listViewText">
+    <f:format.html>{settings.listViewText}</f:format.html>
+</f:if>
+
+<f:if condition="{sessions}">
+    <f:then>
+	
+	<f:if condition="{settings.suggestions}">
+	    <f:then>
+
+		<f:for each="{sessions}" as="session">
+		<div class="csc-frame-section session">
+		    <div class="session-title">
+			<h4><f:link.action action="show" arguments="{session:session}">{session.topic}</f:link.action></h4>
+		    </div>
+		    <div class="session-description">
+			<f:format.html>{session.description}</f:format.html>
+		    </div>
+		    <div class="session-meta">
+			<p>
+			    <span class="session-meta-item session-meta-type">
+				<f:if condition="{session.type} == 1">{f:translate(key: 'type-talk')}</f:if>
+				<f:if condition="{session.type} == 2">{f:translate(key: 'type-tutorial')}</f:if>
+				<f:if condition="{session.type} == 3">{f:translate(key: 'type-workshop')}</f:if>
+				<f:if condition="{session.type} == 4">{f:translate(key: 'type-other')}</f:if>
+				<f:if condition="{session.type} == 5">{f:translate(key: 'type-break')}</f:if>
+				<f:if condition="{session.type} == 6">{f:translate(key: 'type-wish')}</f:if>
+			    </span>
+			    -
+			    <span class="session-meta-item session-meta-level">
+				<f:if condition="{session.level} == 1">{f:translate(key: 'level-starter')}</f:if>
+				<f:if condition="{session.level} == 2">{f:translate(key: 'level-advanced')}</f:if>
+				<f:if condition="{session.level} == 3">{f:translate(key: 'level-pro')}</f:if>
+			    </span>
+			</p>
+		    </div>
+		    <f:if condition="{session.speaker}">
+			<div class="session-speaker">
+			    <span class="session-speaker-item session-speaker-name">{session.speaker}</span>
+			    <f:if condition="{session.twitter}"><span class="session-speaker-item session-speaker-twitter"><a href="https://www.twitter.com/{session.twitter}" title="@{session.twitter}" target="_blank"/>@{session.twitter}</a></span></f:if>
+			</div>
+		    </f:if>
+		</div>
+		</f:for>
+		
+	    </f:then>
+	    <f:else>
+		
+		<f:if condition="{days}">
+		<div class="csc-frame-section">
+		    
+		    <f:for each="{days}" as="day">
+		    <table class="striped">
+			<thead>
+			    <tr>
+				<th>{day.name}</th>
+			    </tr>
+			</thead>
+			<tbody>
+
+			    <f:for each="{sessions}" as="session">
+				<f:if condition="{session.donotlink} == 0">
+				<f:if condition="{day.uid} == {session.day.uid}">
+				<tr>
+				    <td>
+					<div class="row">
+					    <div class="seven columns">
+						<f:link.action action="show" arguments="{session:session}" title="{session.topic}">{session.topic}</f:link.action>
+					    </div>
+					    <div class="five columns">
+						{session.speaker}
+					    </div>
+					</div>
+				    </td>
+				</tr>
+				</f:if>
+				</f:if>
+			    </f:for>
+
+			</tbody>
+		    </table>	    
+		    </f:for>
+			    
+		</div>
+		</f:if>
+		
+	    </f:else>	    
+	</f:if>
+	
+    </f:then>
+    <f:else>
+
+	<p>{f:translate(key: 'warning-nosessionsfound')}</p>
+
+    </f:else>
+</f:if>
+
+
+</f:section>
+</body>
+</html>

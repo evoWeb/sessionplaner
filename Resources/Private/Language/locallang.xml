@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<description>language labels for sessionplaner</description>
+		<type>module</type>
+		<fileId>EXT:sessionplaner/Resources/Private/Language/locallang.xml</fileId>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="storageFolderEmpty"><![CDATA[The selected storage folder does not contain any days.<br/>
+				Please create days, rooms and slots previous planing sessions.<br/>
+				For further information consulte the documentation.]]></label>
+			<label index="session-new">Add new session</label>
+			
+			<label index="filter-tags">Tags</label>
+			<label index="filter-user">Users</label>
+			<label index="filter-user">Sessiontyp</label>
+			<label index="filter-user">Slideshare verfügbar</label>
+			<label index="filter-time">Aktuelle Zeit</label>
+			<label index="filter-headline">Sessionfilter</label>
+			<label index="filter-comment">Mit einem Doppelklick werden Einträge markiert und in einem
+					Cookie gespeichert. Filter gehen nach einem Reload verloren.</label>
+			<label index="by">von</label>
+			<label index="sessionpool">Sessionpool</label>
+			
+			<label index="filter-tags">Tags</label>
+
+			<label index="topic">Topic</label>
+			<label index="description">Description</label>
+			<label index="speaker">Speaker</label>
+			<label index="twitter">Twitter</label>
+			<label index="attendees">Attendees</label>
+			<label index="type">Type</label>
+			<label index="type-talk">Talk</label>
+			<label index="type-tutorial">Tutorial</label>
+			<label index="type-workshop">Workshop</label>
+			<label index="type-other">Other</label>
+			<label index="type-wish">Wish</label>
+			<label index="type-break">Break</label>
+			<label index="level">Level</label>
+			<label index="level-starter">Starter / Overview</label>
+			<label index="level-advanced">Advanced / Basic knowleg</label>
+			<label index="level-pro">Pro / Detailed</label>
+			<label index="tags">Tags</label>
+			<label index="suggest">submit suggestion</label>
+			<label index="mandatory">Mandatory fields are marked with an *</label>
+			<label index="slideshare_download">Slideshare download</label>
+
+			<label index="yourSessionIsSaved">Thank you for your suggestion. It will be available online after it was reviewed.</label>
+			<label index="field_1221560718">The field %s may not be empty</label>
+			
+			<label index="warning-nosessionsfound">No Sessions found.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="topic">Thema</label>
+			<label index="description">Beschreibung</label>
+			<label index="speaker">Speaker</label>
+			<label index="twitter">Twitter</label>
+			<label index="type">Typ</label>
+			<label index="type-talk">Vortrag</label>
+			<label index="type-tutorial">Tutorial</label>
+			<label index="type-workshop">Workshop</label>
+			<label index="type-other">Sonstiges</label>
+			<label index="type-wish">Wunsch</label>
+			<label index="type-break">Pause</label>
+			<label index="level">Level</label>
+			<label index="level-starter">Anfänger / erste Einblicke</label>
+			<label index="level-advanced">Fortgeschrittene / Grundkenntnisse</label>
+			<label index="level-pro">Profis / Detailliert</label>
+			<label index="tags">Tags</label>
+			<label index="suggest">Vorschlag abschicken</label>
+			<label index="mandatory">Pflichtfelder sind mit einem * markiert</label>
+			<label index="slideshare_download">Slideshare download</label>
+
+			<label index="yourSessionIsSaved">Vielen Danke für Deinen Vorschlag. Er wird online verfügbar nachdem er überprüft wurde.</label>
+			<label index="field_1221560718">Das Feld %s darf nicht leer sein</label>
+			
+			<label index="warning-nosessionsfound">Es wurden keine Sessions gefunden.</label>
+		</languageKey>
+	</data>
+</T3locallang>
