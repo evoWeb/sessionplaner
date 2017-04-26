@@ -24,9 +24,10 @@ namespace Evoweb\Sessionplaner\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * @var \DateTime
      */
@@ -67,9 +68,9 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     public function __construct()
     {
-        $this->days = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->rooms = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->sessions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->days = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->rooms = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->sessions = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
     }
 
     /**

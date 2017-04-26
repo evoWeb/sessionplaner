@@ -24,7 +24,7 @@ namespace Evoweb\Sessionplaner\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Session Suggest Controller
@@ -46,6 +46,8 @@ class SuggestController extends ActionController
     }
 
     /**
+     * @param \Evoweb\Sessionplaner\Domain\Model\Session|null $session
+     *
      * @return void
      */
     public function newAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)

@@ -24,6 +24,8 @@ namespace Evoweb\Sessionplaner\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
@@ -35,12 +37,12 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var boolean
      */
     protected $suggestion = false;
-    
+
     /**
      * @var boolean
      */
     protected $social = true;
-    
+
     /**
      * @var boolean
      */
@@ -114,8 +116,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->documents = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->tags = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->documents = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->tags = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
     }
 
     /**
@@ -133,7 +135,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->hidden;
     }
-    
+
     /**
      * @param boolean $social
      */
@@ -149,7 +151,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->social;
     }
-    
+
     /**
      * @param boolean $donotlink
      */
@@ -303,11 +305,11 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @return array
      */
     public function getDocuments()
     {
-        $result = array();
+        $result = [];
         foreach ($this->documents as $file) {
             $result[] = $file->getOriginalResource();
         }

@@ -1,8 +1,8 @@
 plugin.tx_sessionplaner {
 	view {
-		templateRootPath = {$plugin.tx_sessionplaner.view.templateRootPath}
-		partialRootPath = {$plugin.tx_sessionplaner.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_sessionplaner.view.layoutRootPath}
+		templateRootPaths.0 = {$plugin.tx_sessionplaner.view.templateRootPath}
+		partialRootPaths.0 = {$plugin.tx_sessionplaner.view.partialRootPath}
+		layoutRootPath.0 = {$plugin.tx_sessionplaner.view.layoutRootPath}
 	}
 	persistence {
 		storagePid = {$plugin.tx_sessionplaner.persistence.storagePid}
@@ -10,7 +10,6 @@ plugin.tx_sessionplaner {
 	features {
 		skipDefaultArguments = 1
 	}
-	settings {
-	    cssFile = {$plugin.tx_sessionplaner.settings.cssFile}
-	}
 }
+
+page.includeCSS.sessionplaner = {$plugin.tx_sessionplaner.settings.cssFile}

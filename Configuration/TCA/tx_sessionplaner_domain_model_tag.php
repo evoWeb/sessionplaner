@@ -1,34 +1,39 @@
 <?php
-return array(
-    'ctrl' => array(
-        'title' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_tag',
+
+$languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:';
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_tag');
+
+return [
+    'ctrl' => [
+        'title' => $languageFile . 'tx_sessionplaner_domain_model_tag',
         'label' => 'label',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY label',
         'delete' => 'deleted',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
-        ),
+        ],
         'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/sessionplaner_tag.png',
-    ),
-    'interface' => array(
+    ],
+    'interface' => [
         'showRecordFieldList' => 'start'
-    ),
-    'columns' => array(
-        'label' => array(
+    ],
+    'columns' => [
+        'label' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_tag-label',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-label',
+            'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim,required',
                 'max' => 256,
-            ),
-        ),
-        'sessions' => array(
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_tag-sessions',
-            'config' => array(
+            ],
+        ],
+        'sessions' => [
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-sessions',
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_sessionplaner_domain_model_tag',
@@ -40,20 +45,20 @@ return array(
                 'size' => 5,
                 'minitems' => 0,
                 'maxitems' => 100,
-                'wizards' => array(
-                    'suggest' => array(
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'types' => array(
-        '0' => array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'types' => [
+        '0' => [
             'showitem' => '
             label,
             sessions
-        '
-        )
-    ),
-);
+            '
+        ]
+    ],
+];

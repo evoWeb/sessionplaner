@@ -1,0 +1,82 @@
+language: php
+
+branches:
+  only:
+    - master
+    - develop
+    - /^[0-9]+\.[0-9]+\.[0-9]+$/
+
+php:
+  - 7.0
+  - 7.1
+
+env:
+  - TYPO3_VERSION="^7.6"
+    PHPUNIT_VERSION="~4.8.0"
+    UNITTEST_FOLDER="Tests/Unit7/"
+    UNITTEST_SUITE=".Build/Web/typo3/sysext/core/Build/UnitTests.xml"
+
+  - TYPO3_VERSION="^8.7"
+    PHPUNIT_VERSION="~5.7.0"
+    UNITTEST_FOLDER="Tests/Unit/"
+    UNITTEST_SUITE=".Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml"
+
+  - TYPO3_VERSION="dev-master as 8.7.0"
+    PHPUNIT_VERSION="~5.7.0"
+    UNITTEST_FOLDER="Tests/Unit/"
+    UNITTEST_SUITE=".Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml"
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: TYPO3_VERSION="dev-master as 8.7.0"
+           PHPUNIT_VERSION="~5.7.0"
+           UNITTEST_FOLDER="Tests/Unit/"
+           UNITTEST_SUITE=".Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml"
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - parallel
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+notifications:
+  email:
+    - typo3@evoweb.de
+
+before_install:
+  - composer self-update
+  - composer --version
+
+before_script:
+  - composer require typo3/cms="$TYPO3_VERSION"
+  - composer require --dev phpunit/phpunit="$PHPUNIT_VERSION"
+  - if [ "$PHPUNIT_VERSION" = "~5.7.0" ]; then composer require --dev typo3/testing-framework="~1.0.0"; fi;
+  - git checkout composer.json
+  - export TYPO3_PATH_WEB=$PWD/.Build/Web
+
+script:
+  - >
+    echo;
+    echo "Running php lint";
+    find . -name \*.php ! -path "./.Build/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
+
+after_script:
+  - >
+    if [ -n "$TRAVIS_TAG" ] && [ -n "$TYPO3_ORG_USERNAME" ] && [ -n "$TYPO3_ORG_PASSWORD" ]; then
+      echo -e "Preparing upload of release ${TRAVIS_TAG} to TER\n"
+      curl -sSL https://raw.githubusercontent.com/alrra/travis-after-all/1.4.4/lib/travis-after-all.js | node
+      if [ $? -eq 0 ]; then
+        composer require --dev namelesscoder/typo3-repository-client:^2.0.0
+        git reset --hard HEAD && git clean -fx
+
+        TAG_MESSAGE=`git tag -n10 -l $TRAVIS_TAG | sed 's/^[0-9.]*[ ]*//g'`
+        echo "Uploading release ${TRAVIS_TAG} to TER"
+        .Build/bin/upload . "$TYPO3_ORG_USERNAME" "$TYPO3_ORG_PASSWORD" "$TAG_MESSAGE"
+      fi;
+    fi;

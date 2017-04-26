@@ -26,42 +26,52 @@ namespace Evoweb\Sessionplaner\Domain\Repository;
 
 class SessionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-    
     /**
      * Default Orderings
      */
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'topic' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-    );
-    
+    ];
+
     /**
      * @param $day \Evoweb\Sessionplaner\Domain\Model\Day
+     *
      * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
      */
     public function findByDayAndEmptySlot($day)
     {
         $query = $this->createQuery();
 
-        $query->matching($query->logicalAnd($query->equals('day', $day), $query->equals('slot', 0)));
+        $query->matching(
+            $query->logicalAnd(
+                [
+                    $query->equals('day', $day),
+                    $query->equals('slot', 0)
+                ]
+            )
+        );
 
         return $query->execute();
     }
-    
+
     /**
      * @param string $days
-     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult|null
      */
     public function findByDayAndHasSlotHasRoom($days)
     {
-        
         $days = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $days);
         if (is_array($days) && count($days) > 0) {
             $query = $this->createQuery();
+
             $result = $query->matching(
                 $query->logicalAnd(
-                    $query->in('day', $days),
-                    $query->logicalNot($query->equals('slot', 0)),
-                    $query->logicalNot($query->equals('room', 0))
+                    [
+                        $query->in('day', $days),
+                        $query->logicalNot($query->equals('slot', 0)),
+                        $query->logicalNot($query->equals('room', 0))
+                    ]
                 )
             )->execute();
         } else {

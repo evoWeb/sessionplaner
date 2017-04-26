@@ -1,7 +1,12 @@
 <?php
-return array(
-    'ctrl' => array(
-        'title' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_day',
+
+$languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:';
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_day');
+
+return [
+    'ctrl' => [
+        'title' => $languageFile . 'tx_sessionplaner_domain_model_day',
         'label' => 'name',
         'label_alt' => 'date',
         'label_alt_force' => 1,
@@ -10,39 +15,39 @@ return array(
         'dividers2tabs' => true,
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY date',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
-        ),
+        ],
         'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/sessionplaner_day.png'
-    ),
-    'interface' => array(
+    ],
+    'interface' => [
         'showRecordFieldList' => 'name'
-    ),
-    'columns' => array(
-        'name' => array(
+    ],
+    'columns' => [
+        'name' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_day-name',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_day-name',
+            'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim,required',
                 'max'  => 256,
-            ),
-        ),
-        'date' => array(
+            ],
+        ],
+        'date' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_day-date',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
+            'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'date',
                 'max'  => 256,
-            ),
-        ),
-        'rooms' => array(
+            ],
+        ],
+        'rooms' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_day-rooms',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_day-rooms',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
@@ -52,30 +57,33 @@ return array(
                 'minitems' => 0,
                 'maxitems' => 100,
                 'autoSizeMax' => 20,
-            ),
-        ),
-        'slots' => array(
+            ],
+        ],
+        'slots' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_day-slots',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_day-slots',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID### ORDER BY tx_sessionplaner_domain_model_slot.start',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###
+                    ORDER BY tx_sessionplaner_domain_model_slot.start',
                 'MM' => 'tx_sessionplaner_day_slot_mm',
                 'size' => 10,
                 'minitems' => 0,
                 'maxitems' => 100,
                 'autoSizeMax' => 100,
-            ),
-        ),
-    ),
-    'types' => array(
-        '0' => array('showitem' => '
+            ],
+        ],
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => '
             name,
             date,
             rooms,
             slots
-        ')
-    ),
-);
+            '
+        ]
+    ],
+];

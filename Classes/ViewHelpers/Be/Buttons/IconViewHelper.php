@@ -1,75 +1,124 @@
 <?php
 namespace Evoweb\Sessionplaner\ViewHelpers\Be\Buttons;
 
-/*                                                                        *
- * This script is backported from the TYPO3 Flow package "TYPO3.Fluid".   *
- *                                                                        *
- * It is free software; you can redistribute it and/or modify it under    *
- * the terms of the GNU Lesser General Public License, either version 3   *
- *  of the License, or (at your option) any later version.                *
- *                                                                        *
- *                                                                        *
- * This script is distributed in the hope that it will be useful, but     *
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHAN-    *
- * TABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser       *
- * General Public License for more details.                               *
- *                                                                        *
- * You should have received a copy of the GNU Lesser General Public       *
- * License along with the script.                                         *
- * If not, see http://www.gnu.org/licenses/lgpl.html                      *
- *                                                                        *
- * The TYPO3 project - inspiring people to share!                         *
- *                                                                        */
+use TYPO3\CMS\Core\Imaging\IconRegistry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+
 /**
- * View helper which returns a button icon
+ * View helper which returns save button with icon
+ * Note: This view helper is experimental!
  *
  * = Examples =
  *
  * <code title="Default">
- * <f:ew.buttons.icon uri="{f:uri.action()}" />
- * </code>
- * <output>
- * An icon button as known from the TYPO3 backend, skinned and linked with the default action of the current controller.
- * Note: By default the "close" icon is used as image
- * </output>
- *
- * <code title="Default">
- * <f:ew.buttons.icon uri="{f:uri.action(action:'new')}" icon="actions-document-new" title="Create new Foo" />
+ * <f:be.buttons.icon uri="{f:uri.action()}" />
  * </code>
  *
+ * Output:
+ * An icon button as known from the TYPO3 backend, skinned and linked with the
+ * default action of the current controller. Note: By default the "close" icon
+ * is used as image
+ *
  * <code title="Default">
- * <f:ew.buttons.icon icon="actions-document-new" title="Create new Foo" />
+ * <f:be.buttons.icon uri="{f:uri.action(action='new')}"
+ * icon="new_el" title="Create new Foo" />
  * </code>
- * <output>
- * Here the "actions-document-new" icon is returned, but without link.
- * </output>
+ *
+ * Output:
+ * This time the "new_el" icon is returned, the button has the title attribute
+ * set and links to the "new" action of the current controller.
  */
-class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Buttons\IconViewHelper
+class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
 {
+    /**
+     * Initialize arguments.
+     */
+    public function initializeArguments()
+    {
+        $this->registerArgument(
+            'uri',
+            'string',
+            'The URI for the link. If you want to execute JavaScript here, prefix with "javascript:"',
+            true
+        );
+        $this->registerArgument(
+            'iconKey',
+            'string',
+            'Icon to be used. See IconRegistry::icons for a list of allowed icon names',
+            false,
+            'actions-close'
+        );
+        $this->registerArgument(
+            'title',
+            'string',
+            'Title attribute of the resulting link'
+        );
+        $this->registerArgument(
+            'onclick',
+            'string',
+            'Javascript action taken if clicked'
+        );
+        $this->registerArgument('id', 'string', '');
+        $this->registerArgument('class', 'string', '');
+    }
 
     /**
-     * Renders a linked icon as known from the TYPO3 backend.
+     * Renders an icon link as known from the TYPO3 backend
      *
-     * If the URI is left empty, the icon is rendered without link.
-     *
-     * @param string $uri The target URI for the link. If you want to execute JavaScript here, prefix the URI with "javascript:". Leave empty to render just an icon.
-     * @param string $icon Icon to be used.
-     * @param string $title Title attribute of the icon construct
-     * @param string $onclick Javascript code executed on click
-     * @return string The rendered icon with or without link
+     * @return string the rendered icon link
      */
-    public function render($uri = '', $icon = 'actions-document-close', $title = '', $onclick = '')
+    public function render()
     {
-        $id = $icon;
-        $icon = \TYPO3\CMS\Backend\Utility\IconUtility::getSpriteIcon(
-            $icon,
-            array('title' => $title, 'id' => $icon)
+        return static::renderStatic(
+            $this->arguments,
+            $this->buildRenderChildrenClosure(),
+            $this->renderingContext
         );
-        if (empty($uri)) {
+    }
+
+    /**
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
+     *
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $uri = $arguments['uri'];
+        $title = $arguments['title'];
+        $iconKey = $arguments['iconKey'];
+        $onclick = $arguments['onclick'];
+        $id = $arguments['id'];
+        $class = $arguments['class'];
+
+        $iconRegistry = GeneralUtility::makeInstance(IconRegistry::class);
+        $allowedIcons = $iconRegistry->getAllRegisteredIconIdentifiers();
+
+        if (!in_array($iconKey, $allowedIcons)) {
+            throw new \TYPO3Fluid\Fluid\Core\ViewHelper\Exception(
+                '"' . $iconKey . '" is no valid icon. Allowed are "' . implode('", "', $allowedIcons) . '".',
+                1253208523
+            );
+        } else {
+            /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
+            $iconFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconFactory::class);
+            $icon = $iconFactory->getIcon($iconKey, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL);
+        }
+
+        if (empty($uri) && empty($onclick)) {
             return $icon;
         } else {
             $onclick = ' onclick="' . $onclick . '"';
-            return '<a href="' . $uri . '" id="' . $id . '"' . $onclick . '>' . $icon . '</a>';
+            return '<a href="' . $uri . '"
+                title="' . $title . '"
+                class="' . $class . '"
+                id="' . $id . '" ' . $onclick . '>' . $icon . '</a>';
         }
     }
 }

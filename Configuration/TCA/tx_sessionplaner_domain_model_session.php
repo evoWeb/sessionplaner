@@ -1,173 +1,178 @@
 <?php
-return array(
-    'ctrl' => array(
-        'title' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session',
+
+$languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:';
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_session');
+
+return [
+    'ctrl' => [
+        'title' => $languageFile . 'tx_sessionplaner_domain_model_session',
         'label' => 'topic',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY topic',
         'dividers2tabs' => true,
         'delete' => 'deleted',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
-        ),
+        ],
         'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/sessionplaner_session.png',
-    ),
-    'interface' => array(
+    ],
+    'interface' => [
         'showRecordFieldList' => 'name'
-    ),
-    'columns' => array(
-        'hidden' => array(
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'suggestion' => array(
+            ],
+        ],
+        'suggestion' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-suggestion',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-suggestion',
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'social' => array(
+            ],
+        ],
+        'social' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-social',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-social',
+            'config' => [
                 'type' => 'check',
                 'default' => '1'
-            ),
-        ),
-        'donotlink' => array(
+            ],
+        ],
+        'donotlink' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-donotlink',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-donotlink',
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'topic' => array(
+            ],
+        ],
+        'topic' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-topic',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-topic',
+            'config' => [
                 'type' => 'input',
                 'size' => 40,
                 'eval' => 'trim,required',
                 'max' => 256,
-            ),
-        ),
-        'speaker' => array(
+            ],
+        ],
+        'speaker' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-speaker',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
+            'config' => [
                 'type' => 'input',
                 'size' => 40,
                 'eval' => 'trim,required',
                 'max' => 256,
-            ),
-        ),
-        'twitter' => array(
+            ],
+        ],
+        'twitter' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-twitter',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-twitter',
+            'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
                 'max' => 256,
-            ),
-        ),
-        'attendees' => array(
+            ],
+        ],
+        'attendees' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-attendees',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-attendees',
+            'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'int',
                 'max' => 256,
-            ),
-        ),
-        'description' => array(
+            ],
+        ],
+        'description' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-description',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-description',
+            'config' => [
                 'type' => 'text'
-            ),
-        ),
-        'documents' => array(
+            ],
+        ],
+        'documents' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-download',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('documents', array(
-                'foreign_types' => array(
-                    '0' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-download',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('documents', [
+                'foreign_types' => [
+                    '0' => [
                         'showitem' => '
                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
 					--palette--;;filePalette'
-                    ),
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => array(
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
                         'showitem' => '
                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
 					--palette--;;filePalette'
-                    ),
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => array(
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
                         'showitem' => '
                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
 					--palette--;;filePalette'
-                    ),
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => array(
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
                         'showitem' => '
                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
 					--palette--;;filePalette'
-                    ),
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => array(
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
                         'showitem' => '
                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
 					--palette--;;filePalette'
-                    ),
-                    \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => array(
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
                         'showitem' => '
                     --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
 					--palette--;;filePalette'
-                    ),
-                ),
+                    ],
+                ],
                 'minitems' => 0,
                 'maxitems' => 100
-            )),
-        ),
-        'type' => array(
+            ]),
+        ],
+        'type' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-type',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-type',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array(
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:notassigned', 0),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-type-talk', 1),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-type-tutorial', 2),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-type-workshop', 3),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-type-wish', 6),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-type-other', 4),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-type-break', 5),
-                ),
-            ),
-        ),
-        'level' => array(
+                'items' => [
+                    [$languageFile . 'notassigned', 0],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-talk', 1],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-tutorial', 2],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-workshop', 3],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-wish', 6],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-other', 4],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-break', 5],
+                ],
+            ],
+        ],
+        'level' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-level',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array(
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:notassigned', 0),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-level-starter', 1),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-level-advanced', 2),
-                    array('LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-level-pro', 3),
-                ),
-            ),
-        ),
-        'day' => array(
+                'items' => [
+                    [$languageFile . 'notassigned', 0],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-level-starter', 1],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-level-advanced', 2],
+                    [$languageFile . 'tx_sessionplaner_domain_model_session-level-pro', 3],
+                ],
+            ],
+        ],
+        'day' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-day',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-day',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
@@ -175,22 +180,22 @@ return array(
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'items' => array(
-                    '0' => array(
-                        '0' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:notassigned',
-                    ),
-                ),
-                'wizards' => array(
-                    'suggest' => array(
+                'items' => [
+                    '0' => [
+                        '0' => $languageFile . 'notassigned',
+                    ],
+                ],
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-        'room' => array(
+                    ],
+                ],
+            ],
+        ],
+        'room' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-room',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-room',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
@@ -198,22 +203,22 @@ return array(
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'items' => array(
-                    '0' => array(
-                        '0' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:notassigned',
-                    ),
-                ),
-                'wizards' => array(
-                    'suggest' => array(
+                'items' => [
+                    '0' => [
+                        '0' => $languageFile . 'notassigned',
+                    ],
+                ],
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-        'slot' => array(
+                    ],
+                ],
+            ],
+        ],
+        'slot' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-slot',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-slot',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
@@ -221,22 +226,22 @@ return array(
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'items' => array(
-                    '0' => array(
-                        '0' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:notassigned',
-                    ),
-                ),
-                'wizards' => array(
-                    'suggest' => array(
+                'items' => [
+                    '0' => [
+                        '0' => $languageFile . 'notassigned',
+                    ],
+                ],
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-        'tags' => array(
+                    ],
+                ],
+            ],
+        ],
+        'tags' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_session-tags',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-tags',
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_sessionplaner_domain_model_tag',
@@ -247,21 +252,21 @@ return array(
                 'size' => 5,
                 'minitems' => 0,
                 'maxitems' => 100,
-                'wizards' => array(
-                    'suggest' => array(
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'types' => array(
-        '0' => array(
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'types' => [
+        '0' => [
             'showitem' => '
-            hidden;;1,
-            suggestion;;1,
-            social;;1,
-            donotlink;;1,
+            hidden,
+            suggestion,
+            social,
+            donotlink,
             topic,
             speaker,
             twitter,
@@ -276,7 +281,7 @@ return array(
             room,
             slot,
             tags
-		'
-        )
-    ),
-);
+            '
+        ]
+    ],
+];

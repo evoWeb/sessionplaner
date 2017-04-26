@@ -17,15 +17,26 @@
 	"require": {
 		"typo3/cms-core": "*"
 	},
+
 	"autoload": {
 		"psr-4": {
 			"Evoweb\\Sessionplaner\\": "Classes/"
 		}
 	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/evoWeb/sessionplaner.git"
+	"autoload-dev": {
+		"psr-4": {
+			"Evoweb\\Sessionplaner\\Tests\\": "Tests/"
 		}
-	]
+	},
+
+	"config": {
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
+	"extra": {
+		"typo3/cms": {
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web"
+		}
+	}
 }

@@ -26,7 +26,6 @@ namespace Evoweb\Sessionplaner\ViewHelpers;
 
 class TitleTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
     /**
      * @return void
      */
@@ -34,8 +33,16 @@ class TitleTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
     {
         $content = trim($this->renderChildren());
         if (!empty($content)) {
-            $GLOBALS['TSFE']->page['title'] = $content;
-            $GLOBALS['TSFE']->indexedDocTitle = $content;
+            $this->getTypoScriptFrontendController()->page['title'] = $content;
+            $this->getTypoScriptFrontendController()->indexedDocTitle = $content;
         }
+    }
+
+    /**
+     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
     }
 }

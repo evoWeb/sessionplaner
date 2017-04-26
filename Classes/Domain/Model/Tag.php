@@ -24,6 +24,8 @@ namespace Evoweb\Sessionplaner\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
@@ -42,7 +44,7 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->sessions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->sessions = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
     }
 
     /**

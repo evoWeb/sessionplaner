@@ -1,51 +1,56 @@
 <?php
-return array(
-    'ctrl' => array(
-        'title' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_slot',
+
+$languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:';
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_slot');
+
+return [
+    'ctrl' => [
+        'title' => $languageFile . 'tx_sessionplaner_domain_model_slot',
         'label' => 'start',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY start',
         'delete' => 'deleted',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
-        ),
+        ],
         'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/sessionplaner_slot.png',
-    ),
-    'interface' => array(
+    ],
+    'interface' => [
         'showRecordFieldList' => 'start'
-    ),
-    'columns' => array(
-        'start' => array(
+    ],
+    'columns' => [
+        'start' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_slot-start',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-start',
+            'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'time,required',
                 'max' => 256,
-            ),
-        ),
-        'duration' => array(
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_slot-duration',
-            'config' => array(
+            ],
+        ],
+        'duration' => [
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-duration',
+            'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'int,trim,required',
                 'default' => 45,
                 'max' => 256,
-            )
-        ),
-        'break' => array(
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_slot-break',
-            'config' => array(
+            ]
+        ],
+        'break' => [
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-break',
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'days' => array(
+            ],
+        ],
+        'days' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_slot-days',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-days',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
@@ -56,12 +61,12 @@ return array(
                 'minitems' => 0,
                 'maxitems' => 100,
                 'autoSizeMax' => 20,
-            ),
-        ),
-        'rooms' => array(
+            ],
+        ],
+        'rooms' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:tx_sessionplaner_domain_model_slot-rooms',
-            'config' => array(
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-rooms',
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
@@ -72,18 +77,18 @@ return array(
                 'minitems' => 0,
                 'maxitems' => 100,
                 'autoSizeMax' => 20,
-            ),
-        ),
-    ),
-    'types' => array(
-        '0' => array(
+            ],
+        ],
+    ],
+    'types' => [
+        '0' => [
             'showitem' => '
             start,
             duration,
             break,
             days,
             rooms
-        '
-        )
-    ),
-);
+            '
+        ]
+    ],
+];
