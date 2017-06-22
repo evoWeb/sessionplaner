@@ -44,6 +44,7 @@ class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository
+     *
      * @return void
      */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository)
@@ -53,6 +54,7 @@ class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
+     *
      * @return void
      */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)

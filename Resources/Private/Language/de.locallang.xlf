@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
+		<header/>
+		<body>
+			<trans-unit id="storageFolderEmpty" xml:space="preserve" approved="yes">
+				<source>The selected storage folder does not contain any days.&lt;br/&gt;
+				Please create days, rooms and slots previous planing sessions.&lt;br/&gt;
+				For further information consulte the documentation.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="session-new" xml:space="preserve" approved="yes">
+				<source>Add new session</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="filter-tags" xml:space="preserve" approved="yes">
+				<source>Tags</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="filter-user" xml:space="preserve" approved="yes">
+				<source>Slideshare verfügbar</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="filter-time" xml:space="preserve" approved="yes">
+				<source>Aktuelle Zeit</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="filter-headline" xml:space="preserve" approved="yes">
+				<source>Sessionfilter</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="filter-comment" xml:space="preserve" approved="yes">
+				<source>Mit einem Doppelklick werden Einträge markiert und in einem
+					Cookie gespeichert. Filter gehen nach einem Reload verloren.</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="by" xml:space="preserve" approved="yes">
+				<source>von</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="sessionpool" xml:space="preserve" approved="yes">
+				<source>Sessionpool</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="topic" xml:space="preserve" approved="yes">
+				<source>Topic</source>
+				<target>Thema</target>
+			</trans-unit>
+			<trans-unit id="description" xml:space="preserve" approved="yes">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="speaker" xml:space="preserve" approved="yes">
+				<source>Speaker</source>
+				<target>Speaker</target>
+			</trans-unit>
+			<trans-unit id="twitter" xml:space="preserve" approved="yes">
+				<source>Twitter</source>
+				<target>Twitter</target>
+			</trans-unit>
+			<trans-unit id="attendees" xml:space="preserve" approved="yes">
+				<source>Attendees</source>
+				<target></target>
+			</trans-unit>
+			<trans-unit id="type" xml:space="preserve" approved="yes">
+				<source>Type</source>
+				<target>Typ</target>
+			</trans-unit>
+			<trans-unit id="type-talk" xml:space="preserve" approved="yes">
+				<source>Talk</source>
+				<target>Vortrag</target>
+			</trans-unit>
+			<trans-unit id="type-tutorial" xml:space="preserve" approved="yes">
+				<source>Tutorial</source>
+				<target>Tutorial</target>
+			</trans-unit>
+			<trans-unit id="type-workshop" xml:space="preserve" approved="yes">
+				<source>Workshop</source>
+				<target>Workshop</target>
+			</trans-unit>
+			<trans-unit id="type-other" xml:space="preserve" approved="yes">
+				<source>Other</source>
+				<target>Sonstiges</target>
+			</trans-unit>
+			<trans-unit id="type-wish" xml:space="preserve" approved="yes">
+				<source>Wish</source>
+				<target>Wunsch</target>
+			</trans-unit>
+			<trans-unit id="type-break" xml:space="preserve" approved="yes">
+				<source>Break</source>
+				<target>Pause</target>
+			</trans-unit>
+			<trans-unit id="level" xml:space="preserve" approved="yes">
+				<source>Level</source>
+				<target>Level</target>
+			</trans-unit>
+			<trans-unit id="level-starter" xml:space="preserve" approved="yes">
+				<source>Starter / Overview</source>
+				<target>Anfänger / erste Einblicke</target>
+			</trans-unit>
+			<trans-unit id="level-advanced" xml:space="preserve" approved="yes">
+				<source>Advanced / Basic knowleg</source>
+				<target>Fortgeschrittene / Grundkenntnisse</target>
+			</trans-unit>
+			<trans-unit id="level-pro" xml:space="preserve" approved="yes">
+				<source>Pro / Detailed</source>
+				<target>Profis / Detailliert</target>
+			</trans-unit>
+			<trans-unit id="tags" xml:space="preserve" approved="yes">
+				<source>Tags</source>
+				<target>Tags</target>
+			</trans-unit>
+			<trans-unit id="suggest" xml:space="preserve" approved="yes">
+				<source>submit suggestion</source>
+				<target>Vorschlag abschicken</target>
+			</trans-unit>
+			<trans-unit id="mandatory" xml:space="preserve" approved="yes">
+				<source>Mandatory fields are marked with an *</source>
+				<target>Pflichtfelder sind mit einem * markiert</target>
+			</trans-unit>
+			<trans-unit id="slideshare_download" xml:space="preserve" approved="yes">
+				<source>Slideshare download</source>
+				<target>Slideshare download</target>
+			</trans-unit>
+			<trans-unit id="yourSessionIsSaved" xml:space="preserve" approved="yes">
+				<source>Thank you for your suggestion. It will be available online after it was reviewed.</source>
+				<target>Vielen Danke für Deinen Vorschlag. Er wird online verfügbar nachdem er überprüft wurde.</target>
+			</trans-unit>
+			<trans-unit id="field_1221560718" xml:space="preserve" approved="yes">
+				<source>The field %s may not be empty</source>
+				<target>Das Feld %s darf nicht leer sein</target>
+			</trans-unit>
+			<trans-unit id="warning-nosessionsfound" xml:space="preserve" approved="yes">
+				<source>No Sessions found.</source>
+				<target>Es wurden keine Sessions gefunden.</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

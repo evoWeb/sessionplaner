@@ -41,6 +41,7 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository
+     *
      * @return void
      */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository)
@@ -50,6 +51,7 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
+     *
      * @return void
      */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
@@ -63,7 +65,6 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function listDaysAction()
     {
         $days = $this->dayRepository->findAll();
-        $days->rewind();
         $this->view->assign('days', $days);
     }
 
@@ -72,7 +73,6 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function showDay()
     {
-
     }
 
     /**
@@ -80,7 +80,6 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function showRoom()
     {
-
     }
 
     /**
@@ -88,7 +87,6 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listSessions()
     {
-
     }
 
     /**
@@ -96,6 +94,5 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function screenAction()
     {
-
     }
 }

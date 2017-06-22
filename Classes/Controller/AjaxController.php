@@ -26,8 +26,8 @@ namespace Evoweb\Sessionplaner\Controller;
 
 use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Slot;
-use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class AjaxController
@@ -54,19 +54,22 @@ class AjaxController
 
 
     /**
-     * @var Response
+     * @var ResponseInterface
      */
     protected $response;
 
     /**
      * @var array
      */
-    protected $parameter = array();
+    protected $parameter = [];
 
     /**
      * @var array
      */
-    protected $allowedActions = array('addSession', 'updateSession');
+    protected $allowedActions = [
+        'addSession',
+        'updateSession'
+    ];
 
     /**
      * @var string
@@ -109,7 +112,7 @@ class AjaxController
     protected $slotRepository;
 
     /**
-     * @return self
+     * Constructor
      */
     public function __construct()
     {
@@ -124,11 +127,12 @@ class AjaxController
     }
 
     /**
-     * @param ServerRequest $request
-     * @param Response $response
-     * @return Response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     *
+     * @return ResponseInterface
      */
-    public function dispatch(ServerRequest $request, Response $response)
+    public function dispatch(ServerRequestInterface $request, ResponseInterface $response)
     {
         $this->initializeAction($request, $response);
         $this->callActionMethod();
@@ -138,8 +142,9 @@ class AjaxController
     }
 
     /**
-     * @param ServerRequest $request
-     * @param Response $response
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     *
      * @return void
      */
     protected function initializeAction($request, $response)
@@ -169,6 +174,7 @@ class AjaxController
 
     /**
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InfiniteLoopException
+     *
      * @return void
      */
     protected function callActionMethod()
@@ -187,10 +193,10 @@ class AjaxController
 
             $actionInitializationMethodName = 'initialize' . ucfirst($this->actionMethodName);
             if (method_exists($this, $actionInitializationMethodName)) {
-                call_user_func(array($this, $actionInitializationMethodName));
+                call_user_func([$this, $actionInitializationMethodName]);
             }
 
-            call_user_func(array($this, $this->actionMethodName));
+            call_user_func([$this, $this->actionMethodName]);
         }
     }
 
@@ -199,11 +205,15 @@ class AjaxController
      */
     protected function render()
     {
-        $this->response->getBody()->write(json_encode(array(
-            'status' => $this->status,
-            'message' => $this->message,
-            'data' => $this->data
-        )));
+        $this->response->getBody()->write(
+            json_encode(
+                [
+                    'status' => $this->status,
+                    'message' => $this->message,
+                    'data' => $this->data
+                ]
+            )
+        );
     }
 
     /**
@@ -236,7 +246,7 @@ class AjaxController
             $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class)->persistAll();
 
             $this->message = 'Session ' . $session->getTopic() . ' saved';
-            $this->data = array('uid' => $session->getUid());
+            $this->data = ['uid' => $session->getUid()];
         } else {
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
@@ -248,9 +258,15 @@ class AjaxController
      */
     protected function initializeUpdateSessionAction()
     {
-        $this->repository = $this->objectManager->get(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class);
-        $this->roomRepository = $this->objectManager->get(\Evoweb\Sessionplaner\Domain\Repository\RoomRepository::class);
-        $this->slotRepository = $this->objectManager->get(\Evoweb\Sessionplaner\Domain\Repository\SlotRepository::class);
+        $this->repository = $this->objectManager->get(
+            \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
+        );
+        $this->roomRepository = $this->objectManager->get(
+            \Evoweb\Sessionplaner\Domain\Repository\RoomRepository::class
+        );
+        $this->slotRepository = $this->objectManager->get(
+            \Evoweb\Sessionplaner\Domain\Repository\SlotRepository::class
+        );
     }
 
     /**
@@ -267,7 +283,7 @@ class AjaxController
             $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class)->persistAll();
 
             $this->message = 'Session ' . $session->getTopic() . ' updated';
-            $this->data = array('uid' => $session->getUid());
+            $this->data = ['uid' => $session->getUid()];
         } else {
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
@@ -290,7 +306,6 @@ class AjaxController
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     * @return \Evoweb\Sessionplaner\Domain\Model\Session
      */
     protected function updateSessionFromRequest($session)
     {
@@ -303,21 +318,25 @@ class AjaxController
                 case $field == 'room' && $value == 0:
                     $session->setRoom(null);
                     break;
+
                 case $field == 'room':
                     // get room model and set
                     /** @var Room $room */
                     $room = $this->roomRepository->findByUid($value);
                     $session->setRoom($room);
                     break;
+
                 case $field == 'slot' && $value == 0:
                     $session->setSlot(null);
                     break;
+
                 case $field == 'slot':
                     // get slot model and set
                     /** @var Slot $slot */
                     $slot = $this->slotRepository->findByUid($value);
                     $session->setSlot($slot);
                     break;
+
                 case $field == 'day':
                     // do nothing
                     break;

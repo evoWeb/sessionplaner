@@ -34,7 +34,41 @@ class SessionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     ];
 
     /**
-     * @param $day \Evoweb\Sessionplaner\Domain\Model\Day
+     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     */
+    public function findSuggested()
+    {
+        $query = $this->createQuery();
+
+        $query->matching(
+            $query->logicalAnd(
+                [
+                    $query->equals('suggestion', 1)
+                ]
+            )
+        );
+
+        return $query->execute();
+    }
+
+    /**
+     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     */
+    public function findByDay($day)
+    {
+        $query = $this->createQuery();
+
+        $query->matching(
+            $query->equals('day', $day)
+        );
+
+        return $query->execute();
+    }
+
+    /**
+     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
      */

@@ -7,7 +7,7 @@ defined('TYPO3_MODE') or die('Access denied.');
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Evoweb.sessionplaner',
     'Suggest',
-    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:tt_content.list_type_suggest',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest',
     'EXT:sessionplaner/ext_icon.gif'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_suggest'] =
@@ -19,7 +19,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionp
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Evoweb.sessionplaner',
     'Session',
-    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:tt_content.list_type_session',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session',
     'EXT:sessionplaner/ext_icon.gif'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_session'] =
@@ -36,7 +36,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'Evoweb.sessionplaner',
     'Sessionplan',
-    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xml:tt_content.list_type_sessionplan',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan',
     'EXT:sessionplaner/ext_icon.gif'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_sessionplan'] =

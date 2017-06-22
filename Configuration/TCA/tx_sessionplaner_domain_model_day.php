@@ -1,6 +1,6 @@
 <?php
 
-$languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xml:';
+$languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_day');
 
@@ -18,7 +18,7 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/sessionplaner_day.png'
+        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg'
     ],
     'interface' => [
         'showRecordFieldList' => 'name'

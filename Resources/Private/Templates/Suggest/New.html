@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <head>
 	<title>List days</title>
 </head>
 <body>
+
 <f:layout name="Frontend" />
+
 <f:section name="content">
 
 <f:flashMessages as="flashMessages">
@@ -25,7 +25,7 @@
 				</label>
 			</div>
 			<div class="eight columns">
-				<div class="field<f:form.validationResults for="session.topic">{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+				<div class="field<f:form.validationResults for='session.topic'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
 					<f:form.textfield property="topic" id="input_topic" class="input text"/>
 				</div>
 			</div>
@@ -37,7 +37,7 @@
 				</label>
 			</div>
 			<div class="eight columns">
-				<div class="field<f:form.validationResults for="session.description">{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+				<div class="field<f:form.validationResults for='session.description'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
 					<f:form.textarea property="description" id="input_description" class="input textarea"/>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				</label>
 			</div>
 			<div class="eight columns">
-				<div class="field<f:form.validationResults for="session.speaker">{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+				<div class="field<f:form.validationResults for='session.speaker'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
 					<f:form.textfield property="speaker" id="input_speaker" class="input text"/>
 				</div>
 			</div>
@@ -61,7 +61,7 @@
 				</label>
 			</div>
 			<div class="eight columns">
-				<div class="field prepend<f:form.validationResults for="session.twitter">{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+				<div class="field prepend<f:form.validationResults for='session.twitter'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
 					<span class="adjoined">@</span>
 					<f:form.textfield property="twitter" id="input_twitter" class="input wide text"/>
 				</div>
@@ -69,12 +69,12 @@
 		</div>
 		<div class="row">
 			<div class="four columns">
-				<label for="input_type">
+				<label for="type">
 					<f:translate key="type"/>*
 				</label>
 			</div>
 			<div class="eight columns">
-				<div class="field<f:form.validationResults for="session.type">{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+				<div class="field<f:form.validationResults for='session.type'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
 					<div class="picker">
 						<f:form.select property="type" options="{
 							1: '{f:translate(key: \'type-talk\')}',
@@ -89,12 +89,12 @@
 		</div>
 		<div class="row">
 			<div class="four columns">
-				<label for="input_level">
+				<label for="level">
 					<f:translate key="level"/>*
 				</label>
 			</div>
 			<div class="eight columns">
-				<div class="field<f:form.validationResults for="session.level">{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+				<div class="field<f:form.validationResults for='session.level'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
 					<div class="picker">
 						<f:form.select property="level" options="{
 							1: '{f:translate(key: \'level-starter\')}',

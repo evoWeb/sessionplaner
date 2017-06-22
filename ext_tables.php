@@ -17,8 +17,8 @@ call_user_func(function () {
             ],
             [
                 'access' => 'user,group',
-                'icon' => 'EXT:sessionplaner/Resources/Public/Icons/sessionplaner_module.png',
-                'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xml',
+                'icon' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4.svg',
+                'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xlf',
             ]
         );
     }

@@ -29,19 +29,19 @@ namespace Evoweb\Sessionplaner\Controller;
  */
 class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-    
     /**
      * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
      */
     protected $dayRepository;
-    
+
     /**
      * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
      */
     protected $sessionRepository;
-    
+
     /**
      * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository
+     *
      * @return void
      */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository)
@@ -51,6 +51,7 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
+     *
      * @return void
      */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
@@ -60,6 +61,7 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
+     *
      * @return void
      */
     public function listAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
@@ -68,7 +70,7 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $this->forward('show');
         }
         if ($this->settings['suggestions']) {
-            $sessions = $this->sessionRepository->findBySuggestion(true);
+            $sessions = $this->sessionRepository->findSuggested();
         } else {
             $sessions = $this->sessionRepository->findByDayAndHasSlotHasRoom($this->settings['days']);
             $days = $this->dayRepository->findByUidsRaw($this->settings['days']);
@@ -81,6 +83,7 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * action show
      *
      * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
+     *
      * @return void
      */
     public function showAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)

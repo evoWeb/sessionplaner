@@ -38,6 +38,7 @@ class SuggestController extends ActionController
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
+     *
      * @return void
      */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
@@ -55,13 +56,15 @@ class SuggestController extends ActionController
         // Has a session been submitted?
         if ($session === null) {
             // Get a blank one
-            $session = $this->objectManager->get("Evoweb\\Sessionplaner\\Domain\\Model\\Session");
+            $session = $this->objectManager->get(\Evoweb\Sessionplaner\Domain\Model\Session::class);
         }
         $this->view->assign('session', $session);
     }
 
     /**
      * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
+     *
+     * @return void
      */
     public function createAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
