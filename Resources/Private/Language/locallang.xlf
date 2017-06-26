@@ -3,29 +3,29 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
 		<header/>
 		<body>
-			<trans-unit id="storageFolderEmpty" xml:space="preserve">
-				<source>The selected storage folder does not contain any days.&lt;br/&gt;
-				Please create days, rooms and slots previous planing sessions.&lt;br/&gt;
-				For further information consulte the documentation.</source>
+			<trans-unit id="storageFolderEmpty" xml:space="preserve" approved="yes">
+				<source><![CDATA[The selected storage folder does not contain any days.<br/>
+				Please create days, rooms and slots previous planing sessions.<br/>
+				For further information consulte the documentation.]]></source>
 			</trans-unit>
-			<trans-unit id="session-new" xml:space="preserve">
+			<trans-unit id="session-new" xml:space="preserve" approved="yes">
 				<source>Add new session</source>
 			</trans-unit>
-			<trans-unit id="filter-tags" xml:space="preserve">
+			<trans-unit id="filter-tags" xml:space="preserve" approved="yes">
 				<source>Tags</source>
 			</trans-unit>
-			<trans-unit id="filter-user" xml:space="preserve">
+			<trans-unit id="filter-user" xml:space="preserve" approved="yes">
 				<source>Slideshare verfügbar</source>
 			</trans-unit>
-			<trans-unit id="filter-time" xml:space="preserve">
-				<source>Aktuelle Zeit</source>
+			<trans-unit id="filter-time" xml:space="preserve" approved="yes">
+				<source>Current time</source>
 			</trans-unit>
-			<trans-unit id="filter-headline" xml:space="preserve">
+			<trans-unit id="filter-headline" xml:space="preserve" approved="yes">
 				<source>Sessionfilter</source>
 			</trans-unit>
-			<trans-unit id="filter-comment" xml:space="preserve">
-				<source>Mit einem Doppelklick werden Einträge markiert und in einem
-					Cookie gespeichert. Filter gehen nach einem Reload verloren.</source>
+			<trans-unit id="filter-comment" xml:space="preserve" approved="yes">
+				<source>Entries are marked and stored in a cookie by double click an item.
+					Filter are list after a reload.</source>
 			</trans-unit>
 			<trans-unit id="by" xml:space="preserve">
 				<source>von</source>

@@ -4,43 +4,46 @@
 		<header/>
 		<body>
 			<trans-unit id="storageFolderEmpty" xml:space="preserve" approved="yes">
-				<source>The selected storage folder does not contain any days.&lt;br/&gt;
-				Please create days, rooms and slots previous planing sessions.&lt;br/&gt;
-				For further information consulte the documentation.</source>
-				<target></target>
+				<source><![CDATA[The selected storage folder does not contain any days.<br/>
+				Please create days, rooms and slots previous planing sessions.<br/>
+				For further information consulte the documentation.]]></source>
+				<target><![CDATA[Der ausgewählte Datensatzordner enth#lt keine Tage<br/>
+				Bitte erstellen Sie Tage, Räume und Slots vor der Sessionplanung<br/>
+				Für weitere Informationen lesen sie in der Dokumentation nach.]]></target>
 			</trans-unit>
 			<trans-unit id="session-new" xml:space="preserve" approved="yes">
 				<source>Add new session</source>
-				<target></target>
+				<target>Neue Session anlegen</target>
 			</trans-unit>
 			<trans-unit id="filter-tags" xml:space="preserve" approved="yes">
 				<source>Tags</source>
-				<target></target>
+				<target>Tags</target>
 			</trans-unit>
 			<trans-unit id="filter-user" xml:space="preserve" approved="yes">
 				<source>Slideshare verfügbar</source>
-				<target></target>
+				<target>Slideshare verfügbar</target>
 			</trans-unit>
 			<trans-unit id="filter-time" xml:space="preserve" approved="yes">
-				<source>Aktuelle Zeit</source>
-				<target></target>
+				<source>Current time</source>
+				<target>Aktuelle Zeit</target>
 			</trans-unit>
 			<trans-unit id="filter-headline" xml:space="preserve" approved="yes">
 				<source>Sessionfilter</source>
-				<target></target>
+				<target>Sessionfilter</target>
 			</trans-unit>
 			<trans-unit id="filter-comment" xml:space="preserve" approved="yes">
-				<source>Mit einem Doppelklick werden Einträge markiert und in einem
-					Cookie gespeichert. Filter gehen nach einem Reload verloren.</source>
-				<target></target>
+				<source>Entries are marked and stored in a cookie by double click an item.
+					Filter are list after a reload.</source>
+				<target>Mit einem Doppelklick werden Einträge markiert und in einem
+					Cookie gespeichert. Filter gehen nach einem Reload verloren.</target>
 			</trans-unit>
 			<trans-unit id="by" xml:space="preserve" approved="yes">
-				<source>von</source>
-				<target></target>
+				<source>by</source>
+				<target>von</target>
 			</trans-unit>
 			<trans-unit id="sessionpool" xml:space="preserve" approved="yes">
 				<source>Sessionpool</source>
-				<target></target>
+				<target>Sessionpool</target>
 			</trans-unit>
 			<trans-unit id="topic" xml:space="preserve" approved="yes">
 				<source>Topic</source>
@@ -60,7 +63,7 @@
 			</trans-unit>
 			<trans-unit id="attendees" xml:space="preserve" approved="yes">
 				<source>Attendees</source>
-				<target></target>
+				<target>Teilnehmer</target>
 			</trans-unit>
 			<trans-unit id="type" xml:space="preserve" approved="yes">
 				<source>Type</source>
