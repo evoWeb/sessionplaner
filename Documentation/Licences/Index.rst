@@ -18,4 +18,5 @@ Calender Icon
 - iconmonstr-calendar-4_record.svg
   Used unmodified for database record icon
 
+https://iconmonstr.com/calendar-4/
 https://iconmonstr.com/license/
