@@ -30,7 +30,7 @@
 }
 
 [class^="icon-"], [class*=" icon-"], [class^="ui-icon-"], [class*=" ui-icon-"] {
-	display: inline;
+	/*display: inline;
 	width: auto;
 	height: auto;
 	line-height: normal;
@@ -38,7 +38,7 @@
 	background-image: none;
 	background-position: 0 0;
 	background-repeat: repeat;
-	margin-top: 0
+	margin-top: 0*/
 }
 
 .icon-white, .nav-pills > .active > a > [class^="icon-"], .nav-pills > .active > a > [class*=" icon-"], .nav-list > .active > a > [class^="icon-"], .nav-list > .active > a > [class*=" icon-"], .navbar-inverse .nav > .active > a > [class^="icon-"], .navbar-inverse .nav > .active > a > [class*=" icon-"], .dropdown-menu > li > a:hover > [class^="icon-"], .dropdown-menu > li > a:hover > [class*=" icon-"], .dropdown-menu > .active > a > [class^="icon-"], .dropdown-menu > .active > a > [class*=" icon-"], .dropdown-submenu:hover > a > [class^="icon-"], .dropdown-submenu:hover > a > [class*=" icon-"] {
@@ -57,7 +57,7 @@
 }
 
 a [class^="icon-"], a [class*=" icon-"] {
-	display: inline-block
+	/*display: inline-block*/
 }
 
 .icon-large:before {
@@ -66,7 +66,7 @@ a [class^="icon-"], a [class*=" icon-"] {
 }
 
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"] {
-	display: inline
+	/*display: inline*/
 }
 
 .btn [class^="icon-"].icon-large, .nav [class^="icon-"].icon-large, .btn [class*=" icon-"].icon-large, .nav [class*=" icon-"].icon-large {
