@@ -1,4 +1,8 @@
-define(['jquery'], function ($) {
+define([
+	'jquery',
+	'jquery-ui/droppable',
+	'TYPO3/CMS/Backend/Modal'
+], function ($) {
 	'use strict';
 
 	$.extend({
@@ -14,7 +18,7 @@ define(['jquery'], function ($) {
 		},
 
 		getUrlVar: function(name) {
-			return $.getUrlVars()[name];
+			return this.getUrlVars()[name];
 		}
 	});
 
@@ -128,10 +132,11 @@ define(['jquery'], function ($) {
 	}
 
 	/**
-	 * @retrn void
+	 * @param $dialog element
+	 * @return void
 	 */
-	function closeModal() {
-		$(this).dialog('close').remove();
+	function closeModal($dialog) {
+		$dialog.dialog('close').remove();
 	}
 
 	/**
@@ -157,9 +162,11 @@ define(['jquery'], function ($) {
 	function createSessionSuccess(response) {
 		sessionData.uid = response.data.uid;
 
-		$stash.append(createSessionCard(sessionData));
+		var $card = createSessionCard(sessionData);
+		$stash.append($card);
 
-		closeModal.apply(this);
+		initializeSessionCard($card);
+		closeModal($newSession);
 	}
 
 	/**
@@ -168,7 +175,7 @@ define(['jquery'], function ($) {
 	function updateSessionSuccess() {
 		updateSessionCard(sessionData);
 
-		closeModal.apply(this);
+		closeModal.apply($(this));
 	}
 
 	/**
@@ -211,17 +218,16 @@ define(['jquery'], function ($) {
 	/**
 	 * @retrn void
 	 */
-	function createSession() {
-		var createdSessionData = prepareData($('form', $newSession).serializeArray());
+	function createSession(e) {
+		var createdSessionData = prepareData($('form', e.target).serializeArray());
 		sessionData = createdSessionData;
 
 		$.ajax({
 			type: 'POST',
-			url: 'ajax.php',
+			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_edit'],
 			context: this,
 			params: {},
 			data: {
-				ajaxID: 'Sessionplaner',
 				id: $.getUrlVar('id'),
 				tx_sessionplaner: {
 					action: 'addSession',
@@ -244,11 +250,10 @@ define(['jquery'], function ($) {
 
 		$.ajax({
 			type: 'POST',
-			url: 'ajax.php',
+			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_edit'],
 			context: this,
 			params: {},
 			data: {
-				ajaxID: 'Sessionplaner',
 				id: $.getUrlVar('id'),
 				tx_sessionplaner: {
 					action: 'updateSession',
@@ -271,11 +276,10 @@ define(['jquery'], function ($) {
 
 		$.ajax({
 			type: 'POST',
-			url: 'ajax.php',
+			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_edit'],
 			context: this,
 			params: {},
 			data: {
-				ajaxID: 'Sessionplaner',
 				id: $.getUrlVar('id'),
 				tx_sessionplaner: {
 					action: 'updateSession',
@@ -294,15 +298,28 @@ define(['jquery'], function ($) {
 	 */
 	function createNewSessionForm() {
 		$newSession = getTemplateElement('session');
-		$newSession.dialog({
-			width: 440,
-			height: 330,
-			modal: true,
-			buttons: {
-				'Create a session': createSession,
-				Cancel: closeModal
-			}
-		});
+		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
+		t.TYPO3.Modal.confirm(
+			t.TYPO3.lang['alert'] || 'Alert',
+			$newSession.html(),
+			t.TYPO3.Severity.ok,
+			[
+				{
+					text: 'Create a session',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'ok'
+				},
+				{
+					text: 'Cancel',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'cancel'
+				}
+			]
+		).on('button.clicked', function() {
+			t.TYPO3.Modal.dismiss();
+		}).on('confirm.button.ok', createSession);
 	}
 
 	/**
@@ -318,7 +335,7 @@ define(['jquery'], function ($) {
 			modal: true,
 			buttons: {
 				'Update session': updateSession,
-				Cancel: closeModal
+				Cancel: function() { closeModal($editSession); }
 			}
 		});
 	}
@@ -335,8 +352,14 @@ define(['jquery'], function ($) {
 					movedSession.apply(ui.draggable[0]);
 				}
 			});
+	}
 
-		$('.sessionCard')
+	function initializeSessionCard($card) {
+		if (typeof $card === 'undefined') {
+			$card = $('.sessionCard');
+		}
+
+		$card
 			.disableSelection()
 			.draggable({
 				scope: 'sessions',
@@ -346,11 +369,12 @@ define(['jquery'], function ($) {
 			});
 	}
 
-
 	$(document).ready(function() {
+		$stash = $('#stash');
 		$('#actions-document-new').click(createNewSessionForm);
 		$(document).on('dblclick', '.sessionCard', editSessionForm);
 
 		initializeDragAndDrop();
+		initializeSessionCard();
 	});
 });
