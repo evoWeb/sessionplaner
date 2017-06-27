@@ -1,8 +1,8 @@
 define([
 	'jquery',
-	'jquery-ui/droppable',
+	'TYPO3/CMS/Backend/LayoutModule/DragDrop',
 	'TYPO3/CMS/Backend/Modal'
-], function ($) {
+], function ($, dragDrop, modal) {
 	'use strict';
 
 	$.extend({
@@ -129,14 +129,6 @@ define([
 		var $card = $('.uid[data-value="' + sessionData.uid + '"]', '.sessionCard').parent();
 
 		applySessionValuesToCard($card, sessionData);
-	}
-
-	/**
-	 * @param $dialog element
-	 * @return void
-	 */
-	function closeModal($dialog) {
-		$dialog.dialog('close').remove();
 	}
 
 	/**
@@ -299,7 +291,7 @@ define([
 	function createNewSessionForm() {
 		$newSession = getTemplateElement('session');
 		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
-		t.TYPO3.Modal.confirm(
+		modal.confirm(
 			t.TYPO3.lang['alert'] || 'Alert',
 			$newSession.html(),
 			t.TYPO3.Severity.ok,
@@ -318,7 +310,7 @@ define([
 				}
 			]
 		).on('button.clicked', function() {
-			t.TYPO3.Modal.dismiss();
+			modal.dismiss();
 		}).on('confirm.button.ok', createSession);
 	}
 
@@ -329,15 +321,28 @@ define([
 		sessionData = getDataFromCard(this);
 
 		$editSession = applySessionValuesToForm(getTemplateElement('session'), sessionData);
-		$editSession.dialog({
-			width: 440,
-			height: 330,
-			modal: true,
-			buttons: {
-				'Update session': updateSession,
-				Cancel: function() { closeModal($editSession); }
-			}
-		});
+		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
+		modal.confirm(
+			t.TYPO3.lang['alert'] || 'Alert',
+			$editSession.html(),
+			t.TYPO3.Severity.ok,
+			[
+				{
+					text: 'Create a session',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'ok'
+				},
+				{
+					text: 'Cancel',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'cancel'
+				}
+			]
+		).on('button.clicked', function() {
+			modal.dismiss();
+		}).on('confirm.button.ok', updateSession);
 	}
 
 	/**
