@@ -29,22 +29,22 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $hidden = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $suggestion = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $social = true;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $donotlink = false;
 
@@ -71,17 +71,17 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $twitter = '';
 
     /**
-     * @var integer
+     * @var int
      */
     protected $attendees = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $type = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $level = 0;
 
@@ -121,7 +121,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $hidden
+     * @param bool $hidden
      */
     public function setHidden($hidden)
     {
@@ -129,7 +129,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getHidden()
     {
@@ -137,7 +137,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $social
+     * @param bool $social
      */
     public function setSocial($social)
     {
@@ -145,7 +145,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getSocial()
     {
@@ -153,7 +153,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $donotlink
+     * @param bool $donotlink
      */
     public function setDonotlink($donotlink)
     {
@@ -161,7 +161,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getDonotlink()
     {
@@ -169,7 +169,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $suggestion
+     * @param bool $suggestion
      */
     public function setSuggestion($suggestion)
     {
@@ -177,7 +177,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getSuggestion()
     {

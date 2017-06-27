@@ -111,7 +111,7 @@ return [
             'exclude' => 0,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-type',
             'config' => [
-                'type' => 'select',
+                'type' => 'check',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
@@ -128,7 +128,7 @@ return [
             'exclude' => 0,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
             'config' => [
-                'type' => 'select',
+                'type' => 'check',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
