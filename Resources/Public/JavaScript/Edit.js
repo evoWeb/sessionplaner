@@ -1,3 +1,4 @@
+/* globals jQuery, TYPO3 */
 define([
 	'jquery',
 	'TYPO3/CMS/Sessionplaner/DragDrop',
@@ -40,18 +41,18 @@ define([
 	};
 
 	/**
-	 * @param id string
+	 * @param {string} id
 	 *
-	 * @return element
+	 * @return {object}
 	 */
 	Sessionplaner.getTemplateElement = function (id) {
 		return $($('#' + id).html().replace(/^\s+|\s+$/g, ''));
 	};
 
 	/**
-	 * @param serializedData
+	 * @param {object} serializedData
 	 *
-	 * @return object
+	 * @return {object}
 	 */
 	Sessionplaner.prepareData = function (serializedData) {
 		var data = {};
@@ -64,10 +65,10 @@ define([
 	};
 
 	/**
-	 * @param $form element
-	 * @param sessionData object
+	 * @param {object} $form
+	 * @param {object} sessionData
 	 *
-	 * @returns element
+	 * @returns {object}
 	 */
 	Sessionplaner.applySessionValuesToForm = function ($form, sessionData) {
 		$.each(sessionData, function(index, value) {
@@ -82,9 +83,10 @@ define([
 	};
 
 	/**
-	 * @param $card element
-	 * @param sessionData object
-	 * @return element
+	 * @param {object} $card
+	 * @param {object} sessionData
+	 *
+	 * @return {object}
 	 */
 	Sessionplaner.applySessionValuesToCard = function ($card, sessionData) {
 		$.each(sessionData, function(index, value) {
@@ -101,9 +103,10 @@ define([
 	};
 
 	/**
-	 * @param sessionData object
-	 * @param card element
-	 * @returns object
+	 * @param {object} sessionData
+	 * @param {object} card
+	 *
+	 * @returns {object}
 	 */
 	Sessionplaner.addValuesFromParent = function (sessionData, card) {
 		var cardParent = $(card).parent();
@@ -122,8 +125,9 @@ define([
 	/**
 	 * Create session card
 	 *
-	 * @param sessionData
-	 * @return element
+	 * @param {object} sessionData
+	 *
+	 * @return {object}
 	 */
 	Sessionplaner.createSessionCard = function (sessionData) {
 		var $card = Sessionplaner.getTemplateElement('sessionCardTemplate');
@@ -134,7 +138,8 @@ define([
 	};
 
 	/**
-	 * @param sessionData
+	 * @param {object} sessionData
+	 *
 	 * @return void
 	 */
 	Sessionplaner.updateSessionCard = function (sessionData) {
@@ -144,7 +149,8 @@ define([
 	};
 
 	/**
-	 * @param card element
+	 * @param {object} card
+	 *
 	 * @returns object
 	 */
 	Sessionplaner.getDataFromCard = function (card) {
@@ -160,7 +166,8 @@ define([
 
 
 	/**
-	 * @param response object
+	 * @param {object} response
+	 *
 	 * @return void
 	 */
 	Sessionplaner.createSessionSuccess = function (response) {
@@ -187,7 +194,7 @@ define([
 
 
 	/**
-	 * @return boolean
+	 * @return {boolean}
 	 */
 	Sessionplaner.beforeSend = function () {
 		var result = true;
@@ -389,6 +396,9 @@ define([
 			});
 	};
 
+	/**
+	 * @return void
+	 */
 	Sessionplaner.initialize = function () {
 		Sessionplaner.uiBlock = $('#t3js-ui-block');
 		Sessionplaner.stash = $('#stash');
