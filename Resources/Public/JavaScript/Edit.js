@@ -1,48 +1,59 @@
 define([
 	'jquery',
-	'TYPO3/CMS/Backend/LayoutModule/DragDrop',
+	'TYPO3/CMS/Sessionplaner/DragDrop',
 	'TYPO3/CMS/Backend/Modal'
 ], function ($, dragDrop, modal) {
 	'use strict';
 
-	$.extend({
-		getUrlVars: function() {
-			var vars = [], hash;
-			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-			for (var i = 0; i < hashes.length; i++) {
-				hash = hashes[i].split('=');
-				vars.push(hash[0]);
-				vars[hash[0]] = hash[1];
-			}
-			return vars;
-		},
-
-		getUrlVar: function(name) {
-			return this.getUrlVars()[name];
-		}
-	});
-
-	var $newSession,
-		$editSession,
-		$stash,
-		$mask,
-		sessionData = {},
-		ajaxActive = false;
+	var Sessionplaner = {
+		uiBlock: null,
+		stash: null,
+		sessionData: {},
+		ajaxActive: false
+	};
 
 	/**
+	 * Returns all url parameter
 	 *
+	 * @returns {Array}
+	 */
+	Sessionplaner.getUrlVars = function () {
+		var vars = [], hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		for (var i = 0; i < hashes.length; i++) {
+			hash = hashes[i].split('=');
+			vars.push(hash[0]);
+			vars[hash[0]] = hash[1];
+		}
+		return vars;
+	};
+
+	/**
+	 * Needed to get the selected page for the ajax requests
+	 *
+	 * @param {string} name
+	 *
+	 * @returns {*}
+	 */
+	Sessionplaner.getUrlVar = function(name) {
+		return Sessionplaner.getUrlVars()[name];
+	};
+
+	/**
 	 * @param id string
+	 *
 	 * @return element
 	 */
-	function getTemplateElement(id) {
+	Sessionplaner.getTemplateElement = function (id) {
 		return $($('#' + id).html().replace(/^\s+|\s+$/g, ''));
-	}
+	};
 
 	/**
 	 * @param serializedData
+	 *
 	 * @return object
 	 */
-	function prepareData(serializedData) {
+	Sessionplaner.prepareData = function (serializedData) {
 		var data = {};
 
 		$.each(serializedData, function(index, fieldNameAndValue) {
@@ -50,14 +61,15 @@ define([
 		});
 
 		return data;
-	}
+	};
 
 	/**
 	 * @param $form element
 	 * @param sessionData object
+	 *
 	 * @returns element
 	 */
-	function applySessionValuesToForm($form, sessionData) {
+	Sessionplaner.applySessionValuesToForm = function ($form, sessionData) {
 		$.each(sessionData, function(index, value) {
 			var $element = $('dd .' + index + ':first', $form);
 
@@ -67,14 +79,14 @@ define([
 		});
 
 		return $form;
-	}
+	};
 
 	/**
 	 * @param $card element
 	 * @param sessionData object
 	 * @return element
 	 */
-	function applySessionValuesToCard($card, sessionData) {
+	Sessionplaner.applySessionValuesToCard = function ($card, sessionData) {
 		$.each(sessionData, function(index, value) {
 			var $element = $('.' + index, $card);
 
@@ -86,14 +98,14 @@ define([
 		});
 
 		return $card;
-	}
+	};
 
 	/**
 	 * @param sessionData object
 	 * @param card element
 	 * @returns object
 	 */
-	function addValuesFromParent(sessionData, card) {
+	Sessionplaner.addValuesFromParent = function (sessionData, card) {
 		var cardParent = $(card).parent();
 
 		if (cardParent.attr('id') === 'stash') {
@@ -105,7 +117,7 @@ define([
 		}
 
 		return sessionData;
-	}
+	};
 
 	/**
 	 * Create session card
@@ -113,29 +125,29 @@ define([
 	 * @param sessionData
 	 * @return element
 	 */
-	function createSessionCard(sessionData) {
-		var $card = getTemplateElement('sessionCardTemplate');
+	Sessionplaner.createSessionCard = function (sessionData) {
+		var $card = Sessionplaner.getTemplateElement('sessionCardTemplate');
 
-		$card = applySessionValuesToCard($card, sessionData);
+		$card = Sessionplaner.applySessionValuesToCard($card, sessionData);
 
 		return $card;
-	}
+	};
 
 	/**
 	 * @param sessionData
 	 * @return void
 	 */
-	function updateSessionCard(sessionData) {
+	Sessionplaner.updateSessionCard = function (sessionData) {
 		var $card = $('.uid[data-value="' + sessionData.uid + '"]', '.sessionCard').parent();
 
-		applySessionValuesToCard($card, sessionData);
-	}
+		Sessionplaner.applySessionValuesToCard($card, sessionData);
+	};
 
 	/**
 	 * @param card element
 	 * @returns object
 	 */
-	function getDataFromCard(card) {
+	Sessionplaner.getDataFromCard = function (card) {
 		var data = {};
 
 		$(card).children().each(function() {
@@ -144,75 +156,69 @@ define([
 		});
 
 		return data;
-	}
+	};
 
 
 	/**
 	 * @param response object
 	 * @return void
 	 */
-	function createSessionSuccess(response) {
-		sessionData.uid = response.data.uid;
+	Sessionplaner.createSessionSuccess = function (response) {
+		Sessionplaner.sessionData.uid = response.data.uid;
 
-		var $card = createSessionCard(sessionData);
-		$stash.append($card);
+		var $card = Sessionplaner.createSessionCard(Sessionplaner.sessionData);
+		Sessionplaner.stash.append($card);
 
-		initializeSessionCard($card);
-		closeModal($newSession);
-	}
-
-	/**
-	 * @return void
-	 */
-	function updateSessionSuccess() {
-		updateSessionCard(sessionData);
-
-		closeModal.apply($(this));
-	}
+		Sessionplaner.initializeSessionCard($card);
+	};
 
 	/**
 	 * @return void
 	 */
-	function movedSessionSuccess() {
-	}
+	Sessionplaner.updateSessionSuccess = function () {
+		Sessionplaner.updateSessionCard(Sessionplaner.sessionData);
+	};
+
+	/**
+	 * @return void
+	 */
+	Sessionplaner.movedSessionSuccess = function () {
+	};
 
 
 	/**
 	 * @return boolean
 	 */
-	function beforeSend() {
+	Sessionplaner.beforeSend = function () {
 		var result = true;
 
-		if (!ajaxActive) {
-			ajaxActive = true;
+		if (!Sessionplaner.ajaxActive) {
+			Sessionplaner.ajaxActive = true;
 
-			$mask = $('<div class="t3-mask-loading"><div class="ext-el-mask"></div></div>');
-			$mask.appendTo(document.body);
+			Sessionplaner.uiBlock.removeClass('hidden');
 		} else {
 			result = false;
 		}
 
 		return result;
-	}
+	};
 
 	/**
 	 * @return void
 	 */
-	function afterSend() {
-		ajaxActive = false;
+	Sessionplaner.afterSend = function () {
+		Sessionplaner.uiBlock.addClass('hidden');
 
-		if (typeof($mask) === 'object') {
-			$mask.remove();
-		}
-	}
+		Sessionplaner.ajaxActive = false;
+	};
 
 
 	/**
 	 * @retrn void
 	 */
-	function createSession(e) {
-		var createdSessionData = prepareData($('form', e.target).serializeArray());
-		sessionData = createdSessionData;
+	Sessionplaner.createSession = function (e) {
+		var createdSessionData = Sessionplaner.prepareData($('form', e.target).serializeArray());
+		Sessionplaner.sessionData = createdSessionData;
 
 		$.ajax({
 			type: 'POST',
@@ -220,25 +226,25 @@ define([
 			context: this,
 			params: {},
 			data: {
-				id: $.getUrlVar('id'),
+				id: Sessionplaner.getUrlVar('id'),
 				tx_sessionplaner: {
 					action: 'addSession',
 					session: createdSessionData
 				}
 			},
-			beforeSend: beforeSend,
-			complete: afterSend,
-			success: createSessionSuccess
+			beforeSend: Sessionplaner.beforeSend,
+			complete: Sessionplaner.afterSend,
+			success: Sessionplaner.createSessionSuccess
 		});
-	}
+	};
 
 	/**
 	 * @return void
 	 */
-	function updateSession() {
-		var editSessionData = prepareData($('form', $editSession).serializeArray());
-		editSessionData.uid = sessionData.uid;
-		sessionData = editSessionData;
+	Sessionplaner.updateSession = function (e) {
+		var updateSessionData = Sessionplaner.prepareData($('form', e.target).serializeArray());
+		updateSessionData.uid = Sessionplaner.sessionData.uid;
+		Sessionplaner.sessionData = updateSessionData;
 
 		$.ajax({
 			type: 'POST',
@@ -246,25 +252,25 @@ define([
 			context: this,
 			params: {},
 			data: {
-				id: $.getUrlVar('id'),
+				id: Sessionplaner.getUrlVar('id'),
 				tx_sessionplaner: {
 					action: 'updateSession',
-					session: editSessionData
+					session: updateSessionData
 				}
 			},
-			beforeSend: beforeSend,
-			complete: afterSend,
-			success: updateSessionSuccess
+			beforeSend: Sessionplaner.beforeSend,
+			complete: Sessionplaner.afterSend,
+			success: Sessionplaner.updateSessionSuccess
 		});
-	}
+	};
 
 	/**
 	 * @return void
 	 */
-	function movedSession() {
-		var movedSessionData = getDataFromCard(this);
-		movedSessionData = addValuesFromParent(movedSessionData, this);
-		sessionData = movedSessionData;
+	Sessionplaner.movedSession = function () {
+		var movedSessionData = Sessionplaner.getDataFromCard(this);
+		movedSessionData = Sessionplaner.addValuesFromParent(movedSessionData, this);
+		Sessionplaner.sessionData = movedSessionData;
 
 		$.ajax({
 			type: 'POST',
@@ -272,24 +278,24 @@ define([
 			context: this,
 			params: {},
 			data: {
-				id: $.getUrlVar('id'),
+				id: Sessionplaner.getUrlVar('id'),
 				tx_sessionplaner: {
 					action: 'updateSession',
 					session: movedSessionData
 				}
 			},
-			beforeSend: beforeSend,
-			complete: afterSend,
-			success: movedSessionSuccess
+			beforeSend: Sessionplaner.beforeSend,
+			complete: Sessionplaner.afterSend,
+			success: Sessionplaner.movedSessionSuccess
 		});
-	}
+	};
 
 
 	/**
 	 * @return void
 	 */
-	function createNewSessionForm() {
-		$newSession = getTemplateElement('session');
+	Sessionplaner.createNewSessionForm = function () {
+		var $newSession = Sessionplaner.getTemplateElement('sessionFormTemplate');
 		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
 		modal.confirm(
 			t.TYPO3.lang['alert'] || 'Alert',
@@ -311,16 +317,19 @@ define([
 			]
 		).on('button.clicked', function() {
 			modal.dismiss();
-		}).on('confirm.button.ok', createSession);
-	}
+		}).on('confirm.button.ok', Sessionplaner.createSession);
+	};
 
 	/**
 	 * @return void
 	 */
-	function editSessionForm() {
-		sessionData = getDataFromCard(this);
+	Sessionplaner.editSessionForm = function () {
+		Sessionplaner.sessionData = Sessionplaner.getDataFromCard(this);
 
-		$editSession = applySessionValuesToForm(getTemplateElement('session'), sessionData);
+		var $editSession = Sessionplaner.applySessionValuesToForm(
+			Sessionplaner.getTemplateElement('sessionFormTemplate'),
+			Sessionplaner.sessionData
+		);
 		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
 		modal.confirm(
 			t.TYPO3.lang['alert'] || 'Alert',
@@ -342,25 +351,31 @@ define([
 			]
 		).on('button.clicked', function() {
 			modal.dismiss();
-		}).on('confirm.button.ok', updateSession);
-	}
+		}).on('confirm.button.ok', Sessionplaner.updateSession);
+	};
+
 
 	/**
 	 * @return void
 	 */
-	function initializeDragAndDrop() {
+	Sessionplaner.initializeDragAndDrop = function () {
 		$('#stash, .active td.room')
 			.droppable({
 				scope: 'sessions',
 				drop: function(event, ui) {
 					$(ui.draggable).css({ top: 0, left: 0 }).appendTo($(this));
-					movedSession.apply(ui.draggable[0]);
+					Sessionplaner.movedSession.apply(ui.draggable[0]);
 				}
 			});
-	}
+	};
 
-	function initializeSessionCard($card) {
-		if (typeof $card === 'undefined') {
+	/**
+	 * @param {object} $card
+	 *
+	 * @return void
+	 */
+	Sessionplaner.initializeSessionCard = function ($card) {
+		if ($card === null) {
 			$card = $('.sessionCard');
 		}
 
@@ -372,14 +387,20 @@ define([
 				snap: true,
 				revert: 'invalid'
 			});
-	}
+	};
 
-	$(document).ready(function() {
-		$stash = $('#stash');
-		$('#actions-document-new').click(createNewSessionForm);
-		$(document).on('dblclick', '.sessionCard', editSessionForm);
+	Sessionplaner.initialize = function () {
+		Sessionplaner.uiBlock = $('#t3js-ui-block');
+		Sessionplaner.stash = $('#stash');
 
-		initializeDragAndDrop();
-		initializeSessionCard();
-	});
+		$(document)
+			.on('click', '#actions-document-new', Sessionplaner.createNewSessionForm)
+			.on('dblclick', '.sessionCard', Sessionplaner.editSessionForm);
+
+		Sessionplaner.initializeDragAndDrop();
+		Sessionplaner.initializeSessionCard(null);
+	};
+
+	$(Sessionplaner.initialize);
+	return Sessionplaner;
 });

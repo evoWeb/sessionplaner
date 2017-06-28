@@ -6,7 +6,7 @@
 </head>
 <body>
 <f:section name="Main">
-	<script type="text/template" id="session">
+	<script type="text/template" id="sessionFormTemplate">
 		<div>
 			<form class="new-session">
 				<f:form.hidden name="day" value="{day.uid}"/>
@@ -29,15 +29,15 @@
 					<dt><f:translate key="type"/></dt>
 					<dd><f:form.select name="type" class="type" options="{
 							1: '{f:translate(key: \'type-talk\')}',
-							2: '{f:translate(key: \'type-tutorial\')}'
-							3: '{f:translate(key: \'type-workshop\')}'
+							2: '{f:translate(key: \'type-tutorial\')}',
+							3: '{f:translate(key: \'type-workshop\')}',
 							4: '{f:translate(key: \'type-other\')}'
 						}"/></dd>
 
 					<dt><f:translate key="level"/></dt>
 					<dd><f:form.select name="level" class="level" options="{
 							1: '{f:translate(key: \'level-starter\')}',
-							2: '{f:translate(key: \'level-advanced\')}'
+							2: '{f:translate(key: \'level-advanced\')}',
 							3: '{f:translate(key: \'level-pro\')}'
 						}"/></dd>
 				</dl>
