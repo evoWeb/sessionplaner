@@ -1,7 +1,6 @@
 /* globals jQuery, TYPO3 */
 define([
 	'jquery',
-	'jquery-ui/sortable',
 	'TYPO3/CMS/Sessionplaner/DragDrop',
 	'TYPO3/CMS/Backend/Modal'
 ], function ($, dragDrop, modal) {
