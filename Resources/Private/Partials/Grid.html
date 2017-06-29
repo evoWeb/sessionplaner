@@ -24,11 +24,19 @@
 						{slot.duration} <f:translate key="minutes"/>
 					</th>
 					<f:for each="{day.rooms}" as="room">
-						<td class="room" data-room="{room.uid}" data-slot="{slot.uid}"><f:for each="{room.sessions}" as="session">
-							<f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
-								<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
-							</f:if>
-						</f:for></td>
+						<f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
+							<f:then>
+								<td class="room t3js-session-dropzone-available" data-room="{room.uid}" data-slot="{slot.uid}">
+									<f:for each="{room.sessions}" as="session">
+									<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
+									</f:for>
+								</td>
+							</f:then>
+							<f:else>
+								<td class="room t3js-session-dropzone-available active" data-room="{room.uid}" data-slot="{slot.uid}">
+								</td>
+							</f:else>
+						</f:if>
 					</f:for>
 				</tr>
 			</f:for>

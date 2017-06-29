@@ -1,6 +1,7 @@
 /* globals jQuery, TYPO3 */
 define([
 	'jquery',
+	'jquery-ui/sortable',
 	'TYPO3/CMS/Sessionplaner/DragDrop',
 	'TYPO3/CMS/Backend/Modal'
 ], function ($, dragDrop, modal) {
@@ -272,10 +273,12 @@ define([
 	};
 
 	/**
+	 * @param {object} $element
+	 *
 	 * @return void
 	 */
-	Sessionplaner.movedSession = function () {
-		var movedSessionData = Sessionplaner.getDataFromCard(this);
+	Sessionplaner.movedSession = function ($element) {
+		var movedSessionData = Sessionplaner.getDataFromCard($element);
 		movedSessionData = Sessionplaner.addValuesFromParent(movedSessionData, this);
 		Sessionplaner.sessionData = movedSessionData;
 
@@ -363,17 +366,12 @@ define([
 
 
 	/**
+	 * Hook into drop stop to store moving the session
+	 *
 	 * @return void
 	 */
 	Sessionplaner.initializeDragAndDrop = function () {
-		$('#stash, .active td.room')
-			.droppable({
-				scope: 'sessions',
-				drop: function(event, ui) {
-					$(ui.draggable).css({ top: 0, left: 0 }).appendTo($(this));
-					Sessionplaner.movedSession.apply(ui.draggable[0]);
-				}
-			});
+		dragDrop.onDrop = Sessionplaner.movedSession;
 	};
 
 	/**

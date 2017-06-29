@@ -16,23 +16,23 @@
  * this JS code is a copy of the drag+drop logic for the Layout module (Web => Page)
  * based on jQuery UI
  */
-define(['jquery', 'jquery-ui/droppable'], function ($) {
+define([
+	'jquery',
+	'jquery-ui/sortable',
+	'jquery-ui/droppable'
+], function ($) {
 	'use strict';
 
-	/**
-	 *
-	 * @type {{contentIdentifier: string, dragIdentifier: string, dragHeaderIdentifier: string, dropZoneIdentifier: string, columnIdentifier: string, validDropZoneClass: string, dropPossibleHoverClass: string, addContentIdentifier: string, originalStyles: string}}
-	 * @exports TYPO3/CMS/Backend/LayoutModule/DragDrop
-	 */
 	var DragDrop = {
-		contentIdentifier: '.t3js-page-ce',
-		dragIdentifier: '.t3-page-ce-dragitem',
-		dragHeaderIdentifier: '.t3js-page-ce-draghandle',
-		dropZoneIdentifier: '.t3js-page-ce-dropzone-available',
+		contentIdentifier: '.t3js-session',
+		dragIdentifier: '.t3-session-dragitem',
+		dragHeaderIdentifier: '.t3js-session-draghandle',
+		dropZoneIdentifier: '.t3js-session-dropzone-available',
 		columnIdentifier: '.t3js-page-column',
+		columnHolderIdentifier: '.zzz',
 		validDropZoneClass: 'active',
-		dropPossibleHoverClass: 't3-page-ce-dropzone-possible',
-		addContentIdentifier: '.t3js-page-new-ce',
+		dropPossibleHoverClass: 't3-session-dropzone-possible',
+		addContentIdentifier: '.t3js-session-new',
 		clone: true,
 		originalStyles: ''
 	};
@@ -43,32 +43,32 @@ define(['jquery', 'jquery-ui/droppable'], function ($) {
 	DragDrop.initialize = function () {
 		$(DragDrop.contentIdentifier).draggable({
 			handle: this.dragHeaderIdentifier,
-			scope: 'tt_content',
+			scope: 'sessionplaner',
 			cursor: 'move',
 			distance: 20,
 			addClasses: 'active-drag',
 			revert: 'invalid',
 			zIndex: 100,
-			start: function (evt, ui) {
-				DragDrop.onDragStart($(this));
+			start: function (event, ui) {
+				DragDrop.onDragStart($(this), ui);
 			},
-			stop: function (evt, ui) {
-				DragDrop.onDragStop($(this));
+			stop: function (event, ui) {
+				DragDrop.onDragStop($(this), ui);
 			}
 		});
 
 		$(DragDrop.dropZoneIdentifier).droppable({
 			accept: this.contentIdentifier,
-			scope: 'tt_content',
+			scope: 'sessionplaner',
 			tolerance: 'pointer',
-			over: function (evt, ui) {
+			over: function (event, ui) {
 				DragDrop.onDropHoverOver($(ui.draggable), $(this));
 			},
-			out: function (evt, ui) {
+			out: function (event, ui) {
 				DragDrop.onDropHoverOut($(ui.draggable), $(this));
 			},
-			drop: function (evt, ui) {
-				DragDrop.onDrop($(ui.draggable), $(this), evt);
+			drop: function (event, ui) {
+				DragDrop.onDrop($(ui.draggable), $(this), event);
 			}
 		});
 	};
@@ -155,114 +155,7 @@ define(['jquery', 'jquery-ui/droppable'], function ($) {
 	 * @private
 	 */
 	DragDrop.onDrop = function ($draggableElement, $droppableElement, evt) {
-		var newColumn = DragDrop.getColumnPositionForElement($droppableElement);
-
-		$droppableElement.removeClass(DragDrop.dropPossibleHoverClass);
-		var $pasteAction = typeof $draggableElement === 'number';
-
-		// send an AJAX requst via the AjaxDataHandler
-		var contentElementUid = $pasteAction ? $draggableElement : parseInt($draggableElement.data('uid'));
-		if (contentElementUid > 0) {
-			var parameters = {};
-			// add the information about a possible column position change
-			var targetFound = $droppableElement.closest(DragDrop.contentIdentifier).data('uid');
-			// the item was moved to the top of the colPos, so the page ID is used here
-			var targetPid = 0;
-			if (typeof targetFound === 'undefined') {
-				// the actual page is needed
-				targetPid = $('[data-page]').first().data('page');
-			} else {
-				// the negative value of the content element after where it should be moved
-				targetPid = 0 - parseInt(targetFound);
-			}
-			var language = parseInt($droppableElement.closest('[data-language-uid]').data('language-uid'));
-			var colPos = 0;
-			if (targetPid !== 0) {
-				colPos = newColumn;
-			}
-			parameters['cmd'] = {tt_content: {}};
-			parameters['data'] = {tt_content: {}};
-			var copyAction = (evt && evt.originalEvent.ctrlKey || $droppableElement.hasClass('t3js-paste-copy'));
-			if (copyAction) {
-				parameters['cmd']['tt_content'][contentElementUid] = {
-					copy: {
-						action: 'paste',
-						target: targetPid,
-						update: {
-							colPos: colPos,
-							sys_language_uid: language
-						}
-					}
-				};
-				DragDrop.ajaxAction($droppableElement, $draggableElement, parameters, copyAction, $pasteAction);
-			} else {
-				parameters['data']['tt_content'][contentElementUid] = {
-					colPos: colPos,
-					sys_language_uid: language
-				};
-				if ($pasteAction) {
-					parameters = {
-						CB: {
-							paste: 'tt_content|' + targetPid,
-							update: {
-								colPos: colPos,
-								sys_language_uid: language
-							}
-						}
-					};
-				} else {
-					parameters['cmd']['tt_content'][contentElementUid] = {move: targetPid};
-				}
-				// fire the request, and show a message if it has failed
-				DragDrop.ajaxAction($droppableElement, $draggableElement, parameters, copyAction, $pasteAction);
-			}
-		}
-	};
-
-	/**
-	 * this method does the actual AJAX request for both, the  move and the copy action.
-	 *
-	 * @param $droppableElement
-	 * @param $draggableElement
-	 * @param parameters
-	 * @param $copyAction
-	 * @param $pasteAction
-	 * @private
-	 */
-	DragDrop.ajaxAction = function ($droppableElement, $draggableElement, parameters, $copyAction, $pasteAction) {
-		require(['TYPO3/CMS/Backend/AjaxDataHandler'], function (DataHandler) {
-			DataHandler.process(parameters).done(function (result) {
-				if (!result.hasErrors) {
-					// insert draggable on the new position
-					if (!$pasteAction) {
-						if (!$droppableElement.parent().hasClass(DragDrop.contentIdentifier.substring(1))) {
-							$draggableElement.detach().css({top: 0, left: 0})
-									.insertAfter($droppableElement.closest(DragDrop.dropZoneIdentifier));
-						} else {
-							$draggableElement.detach().css({top: 0, left: 0})
-									.insertAfter($droppableElement.closest(DragDrop.contentIdentifier));
-						}
-					}
-					if ($('.t3js-page-lang-column').length || $copyAction || $pasteAction) {
-						self.location.reload(true);
-					}
-				}
-			});
-		});
-	};
-
-	/**
-	 * returns the next "upper" container colPos parameter inside the code
-	 * @param $element
-	 * @return int|null the colPos
-	 */
-	DragDrop.getColumnPositionForElement = function ($element) {
-		var $columnContainer = $element.closest('[data-colpos]');
-		if ($columnContainer.length && $columnContainer.data('colpos') !== 'undefined') {
-			return $columnContainer.data('colpos');
-		} else {
-			return false;
-		}
+		// found in Sessionplaner.movedSession
 	};
 
 	$(DragDrop.initialize);
