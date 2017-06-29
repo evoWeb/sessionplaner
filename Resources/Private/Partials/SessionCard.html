@@ -5,27 +5,31 @@
 	<title>Edit form</title>
 </head>
 <body>
+
 <f:section name="Main">
-<div class="sessionCard t3js-session">
-	<div class="uid" data-value="{session.uid}">{session.uid}</div>
-	<div class="topic t3js-session-draghandle" data-value="{session.topic}">{session.topic}</div>
-	<div class="speaker" data-value="{session.speaker}">{session.speaker}</div>
-	<div class="description" data-value="{session.description}">{session.description}</div>
-	<div class="twitter" data-value="{session.twitter}">{session.twitter}</div>
-	<div class="attendees" data-value="{session.attendees}">{session.attendees}</div>
-	<div class="type" data-value="{session.type}"><f:if condition="{session.type}==1">
-		<f:then><f:translate key="type-talk"/></f:then></f:if><f:if condition="{session.type}==2">
-		<f:then><f:translate key="type-tutorial"/></f:then></f:if><f:if condition="{session.type}==3">
-		<f:then><f:translate key="type-workshop"/></f:then></f:if><f:if condition="{session.type}==4">
-		<f:then><f:translate key="type-other"/></f:then></f:if></div>
-	<div class="level" data-value="{session.level}"><f:if condition="{session.level}==1">
-		<f:then><f:translate key="level-starter"/></f:then></f:if><f:if condition="{session.level}==2">
-		<f:then><f:translate key="level-advanced"/></f:then></f:if><f:if condition="{session.level}==3">
-		<f:then><f:translate key="level-pro"/></f:then></f:if></div>
-	<div class="day" data-value="{session.day.uid}">{session.day.uid}</div>
-	<div class="room" data-value="{session.room.uid}">{session.room.uid}</div>
-	<div class="slot" data-value="{session.slot.uid}">{session.slot.uid}</div>
+<div class="sessionCard t3js-page-ce">
+	<div class="t3-page-ce-dragitem">
+		<div class="topic t3js-page-ce-draghandle" data-value="{session.topic}">{session.topic}</div>
+		<div class="uid" data-value="{session.uid}">{session.uid}</div>
+		<div class="speaker" data-value="{session.speaker}">{session.speaker}</div>
+		<div class="description" data-value="{session.description}">{session.description}</div>
+		<div class="twitter" data-value="{session.twitter}">{session.twitter}</div>
+		<div class="attendees" data-value="{session.attendees}">{session.attendees}</div>
+		<div class="type" data-value="{session.type}"><f:if condition="{session.type}==1">
+			<f:then><f:translate key="type-talk"/></f:then></f:if><f:if condition="{session.type}==2">
+			<f:then><f:translate key="type-tutorial"/></f:then></f:if><f:if condition="{session.type}==3">
+			<f:then><f:translate key="type-workshop"/></f:then></f:if><f:if condition="{session.type}==4">
+			<f:then><f:translate key="type-other"/></f:then></f:if></div>
+		<div class="level" data-value="{session.level}"><f:if condition="{session.level}==1">
+			<f:then><f:translate key="level-starter"/></f:then></f:if><f:if condition="{session.level}==2">
+			<f:then><f:translate key="level-advanced"/></f:then></f:if><f:if condition="{session.level}==3">
+			<f:then><f:translate key="level-pro"/></f:then></f:if></div>
+		<div class="day" data-value="{session.day.uid}">{session.day.uid}</div>
+		<div class="room" data-value="{session.room.uid}">{session.room.uid}</div>
+		<div class="slot" data-value="{session.slot.uid}">{session.slot.uid}</div>
+	</div>
 </div>
 </f:section>
+
 </body>
 </html>

@@ -24,16 +24,13 @@ define([
 	'use strict';
 
 	var DragDrop = {
-		contentIdentifier: '.t3js-session',
-		dragIdentifier: '.t3-session-dragitem',
-		dragHeaderIdentifier: '.t3js-session-draghandle',
-		dropZoneIdentifier: '.t3js-session-dropzone-available',
-		columnIdentifier: '.t3js-page-column',
-		columnHolderIdentifier: '.zzz',
+		contentIdentifier: '.t3js-page-ce',
+		dragHeaderIdentifier: '.t3js-page-ce-draghandle',
+		dropZoneIdentifier: '.t3js-page-ce-dropzone-available',
+		dragIdentifier: '.t3-page-ce-dragitem',
 		validDropZoneClass: 'active',
-		dropPossibleHoverClass: 't3-session-dropzone-possible',
-		addContentIdentifier: '.t3js-session-new',
-		clone: true,
+		dropPossibleHoverClass: 't3-page-ce-dropzone-possible',
+		addContentIdentifier: '.t3js-page-new-ce',
 		originalStyles: ''
 	};
 
@@ -50,6 +47,10 @@ define([
 			revert: 'invalid',
 			zIndex: 100,
 			start: function (event, ui) {
+				// needs to be called instead of giving the reference
+				// to the method directly to be able to override
+				// the onDragStart method as hook where ever the
+				// module is used.
 				DragDrop.onDragStart($(this), ui);
 			},
 			stop: function (event, ui) {
@@ -79,27 +80,14 @@ define([
 	 * @private
 	 */
 	DragDrop.onDragStart = function ($element) {
-		// Add css class for the drag shadow
+		// Backup inline styles
 		DragDrop.originalStyles = $element.get(0).style.cssText;
-		$element.children(DragDrop.dragIdentifier).addClass('dragitem-shadow');
-		$element.append('<div class="ui-draggable-copy-message">' + TYPO3.lang['dragdrop.copy.message'] + '</div>');
-		// Hide create new element button
-		$element.children(DragDrop.dropZoneIdentifier).addClass('drag-start');
-		$element.closest(DragDrop.columnIdentifier).removeClass('active');
 
-		$element.parents(DragDrop.columnHolderIdentifier).find(DragDrop.addContentIdentifier).hide();
-		$element.find(DragDrop.dropZoneIdentifier).hide();
+		// Add css class for the drag shadow
+		$element.children(DragDrop.dragIdentifier).addClass('dragitem-shadow');
 
 		// make the drop zones visible
-		$(DragDrop.dropZoneIdentifier).each(function () {
-			if (
-				$(this).parent().find('.icon-actions-document-new').length
-			) {
-				$(this).addClass(DragDrop.validDropZoneClass);
-			} else {
-				$(this).closest(DragDrop.contentIdentifier).find('> ' + DragDrop.addContentIdentifier + ', > > ' + DragDrop.addContentIdentifier).show();
-			}
-		});
+		$(DragDrop.dropZoneIdentifier).addClass(DragDrop.validDropZoneClass);
 	};
 
 	/**
@@ -110,17 +98,12 @@ define([
 	DragDrop.onDragStop = function ($element) {
 		// Remove css class for the drag shadow
 		$element.children(DragDrop.dragIdentifier).removeClass('dragitem-shadow');
-		// Show create new element button
-		$element.children(DragDrop.dropZoneIdentifier).removeClass('drag-start');
-		$element.closest(DragDrop.columnIdentifier).addClass('active');
-		$element.parents(DragDrop.columnHolderIdentifier).find(DragDrop.addContentIdentifier).show();
-		$element.find(DragDrop.dropZoneIdentifier).show();
-		$element.find('.ui-draggable-copy-message').remove();
+
+		// make the drop zones invisible
+		$(DragDrop.dropZoneIdentifier + '.' + DragDrop.validDropZoneClass).removeClass(DragDrop.validDropZoneClass);
 
 		// Reset inline style
 		$element.get(0).style.cssText = DragDrop.originalStyles;
-
-		$(DragDrop.dropZoneIdentifier + '.' + DragDrop.validDropZoneClass).removeClass(DragDrop.validDropZoneClass);
 	};
 
 	/**
@@ -130,6 +113,7 @@ define([
 	 * @private
 	 */
 	DragDrop.onDropHoverOver = function ($draggableElement, $droppableElement) {
+		console.log('over and active');
 		if ($droppableElement.hasClass(DragDrop.validDropZoneClass)) {
 			$droppableElement.addClass(DragDrop.dropPossibleHoverClass);
 		}

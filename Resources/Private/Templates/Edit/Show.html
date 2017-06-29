@@ -12,9 +12,12 @@
 	<f:be.menus.actionMenu>
 		<f:for each="{days}" as="day">
 			<sp:be.menus.actionMenuItem
-				label="{day.name}" controller="Edit" action="show"
+				label="{day.name}"
+				controller="Edit"
+				action="show"
 				arguments="{day: day.uid}"
-				current="{currentDay.uid}" currentArgumentKey="day"/>
+				current="{currentDay.uid}"
+				currentArgumentKey="day"/>
 		</f:for>
 	</f:be.menus.actionMenu>
 </f:if>
@@ -22,7 +25,12 @@
 
 <f:section name="iconLeftButtons">
 	<f:format.raw>
-		<sp:be.buttons.icon id="actions-document-new" uri="#" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm"/>
+		<sp:be.buttons.icon
+			uri="#"
+			id="actions-document-new"
+			iconKey="actions-document-new"
+			title="{f:translate(key: 'session-new')}"
+			class="btn btn-default btn-sm t3js-page-new-ce"/>
 	</f:format.raw>
 </f:section>
 
@@ -31,7 +39,10 @@
 		<span class="btn btn-default btn-sm">
 			<f:be.buttons.shortcut />
 		</span>
-		<sp:be.buttons.icon uri="#" iconKey="actions-window-open" title="{f:translate(key: 'LLL:EXT:lang/locallang_core.xlf:labels.openInNewWindow')}"
+		<sp:be.buttons.icon
+			uri="#"
+			iconKey="actions-window-open"
+			title="{f:translate(key: 'LLL:EXT:lang/locallang_core.xlf:labels.openInNewWindow')}"
 			onclick="sessionplanerWin=window.open(location.href, 'Sessionplaner', 'width=790,status=0,menubar=0,resizable=1,location=0,scrollbars=1,toolbar=0'); return false;"
 			class="btn btn-default btn-sm"/>
 	</f:format.raw>
@@ -49,7 +60,7 @@
 				<div id="sessionplaner">
 				<h1>{day.name}</h1>
 
-				<div id="stash">
+				<div id="stash" class="t3-page-ce-dropzone-available t3js-page-ce-dropzone-available">
 					<f:for each="{unassignedSessions}" as="session">
 						<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
 					</f:for>
