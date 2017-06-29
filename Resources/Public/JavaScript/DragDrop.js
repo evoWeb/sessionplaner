@@ -39,7 +39,7 @@ define([
 	 */
 	DragDrop.initialize = function () {
 		$(DragDrop.contentIdentifier).draggable({
-			handle: this.dragHeaderIdentifier,
+			handle: DragDrop.dragHeaderIdentifier,
 			scope: 'sessionplaner',
 			cursor: 'move',
 			distance: 20,
@@ -59,16 +59,19 @@ define([
 		});
 
 		$(DragDrop.dropZoneIdentifier).droppable({
-			accept: this.contentIdentifier,
+			accept: DragDrop.contentIdentifier,
 			scope: 'sessionplaner',
 			tolerance: 'pointer',
 			over: function (event, ui) {
+				console.log('over');
 				DragDrop.onDropHoverOver($(ui.draggable), $(this));
 			},
 			out: function (event, ui) {
+				console.log('out');
 				DragDrop.onDropHoverOut($(ui.draggable), $(this));
 			},
 			drop: function (event, ui) {
+				console.log('drop');
 				DragDrop.onDrop($(ui.draggable), $(this), event);
 			}
 		});
