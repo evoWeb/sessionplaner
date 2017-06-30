@@ -11,31 +11,31 @@
 			<form class="new-session">
 				<f:form.hidden name="day" value="{day.uid}"/>
 				<dl>
-					<dt><f:translate key="topic"/>*</dt>
-					<dd><f:form.textfield name="topic" class="topic"/></dd>
+					<dt><label for="topic"><f:translate key="topic"/>*</label></dt>
+					<dd><f:form.textfield id="topic" name="topic" class="topic"/></dd>
 
-					<dt><f:translate key="speaker"/>*</dt>
-					<dd><f:form.textfield name="speaker" class="speaker"/></dd>
+					<dt><label for="speaker"><f:translate key="speaker"/>*</label></dt>
+					<dd><f:form.textfield id="speaker" name="speaker" class="speaker"/></dd>
 
-					<dt><f:translate key="attendees"/></dt>
-					<dd><f:form.textfield name="attendees" class="attendees"/></dd>
+					<dt><label for="attendees"><f:translate key="attendees"/></label></dt>
+					<dd><f:form.textfield id="attendees" name="attendees" class="attendees"/></dd>
 
-					<dt><f:translate key="description"/>*</dt>
-					<dd><f:form.textarea name="description" class="description"/></dd>
+					<dt><label for="description"><f:translate key="description"/>*</label></dt>
+					<dd><f:form.textarea id="description" name="description" class="description"/></dd>
 
-					<dt><f:translate key="twitter"/></dt>
-					<dd><f:form.textfield name="twitter" class="twitter"/></dd>
+					<dt><label for="twitter"><f:translate key="twitter"/></label></dt>
+					<dd><f:form.textfield id="twitter" name="twitter" class="twitter"/></dd>
 
-					<dt><f:translate key="type"/></dt>
-					<dd><f:form.select name="type" class="type" options="{
+					<dt><label for="type"><f:translate key="type"/></label></dt>
+					<dd><f:form.select id="type" name="type" class="type" options="{
 							1: '{f:translate(key: \'type-talk\')}',
 							2: '{f:translate(key: \'type-tutorial\')}',
 							3: '{f:translate(key: \'type-workshop\')}',
 							4: '{f:translate(key: \'type-other\')}'
 						}"/></dd>
 
-					<dt><f:translate key="level"/></dt>
-					<dd><f:form.select name="level" class="level" options="{
+					<dt><label for="level"><f:translate key="level"/></label></dt>
+					<dd><f:form.select id="level" name="level" class="level" options="{
 							1: '{f:translate(key: \'level-starter\')}',
 							2: '{f:translate(key: \'level-advanced\')}',
 							3: '{f:translate(key: \'level-pro\')}'
