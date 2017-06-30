@@ -154,9 +154,9 @@ define([
 	Sessionplaner.getDataFromCard = function (card) {
 		var data = {};
 
-		$(card).children().each(function() {
+		$(card).children().children().each(function() {
 			var $element = $(this);
-			data[$element.attr('class')] = $element.data('value');
+			data[$element.data('name')] = $element.data('value');
 		});
 
 		return data;
@@ -371,7 +371,7 @@ define([
 	Sessionplaner.initializeDragAndDrop = function () {
 		var originalDrop = dragDrop.onDrop;
 		dragDrop.onDrop = function($draggableElement, $droppableElement, event) {
-			//Sessionplaner.movedSession($draggableElement, $droppableElement);
+			Sessionplaner.movedSession($draggableElement, $droppableElement);
 			originalDrop($draggableElement, $droppableElement, event);
 		}
 	};

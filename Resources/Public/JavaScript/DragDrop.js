@@ -109,7 +109,6 @@ define([
 	 */
 	DragDrop.onDropHoverOver = function ($draggableElement, $droppableElement) {
 		if ($droppableElement.hasClass(DragDrop.validDropZoneClass)) {
-			console.log('over and active');
 			$droppableElement.addClass(DragDrop.dropPossibleHoverClass);
 		}
 	};
@@ -137,6 +136,7 @@ define([
 	 * @return void
 	 */
 	DragDrop.onDrop = function ($draggableElement, $droppableElement, event) {
+		$droppableElement.removeClass(DragDrop.dropPossibleHoverClass);
 		$draggableElement
 			.detach()
 			.css({top: 0, left: 0})
