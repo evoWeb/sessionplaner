@@ -1,19 +1,6 @@
-/*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
- */
-
 /**
  * Module: TYPO3/CMS/Sessionplaner/DragDrop
- * this JS code is a copy of the drag+drop logic for the Layout module (Web => Page)
+ * this JS code is copied and modified drag+drop logic of the Layout module (Web => Page)
  * based on jQuery UI
  */
 define([
@@ -36,6 +23,8 @@ define([
 
 	/**
 	 * initializes Drag+Drop for all content elements on the page
+	 *
+	 * @return void
 	 */
 	DragDrop.initialize = function () {
 		$(DragDrop.contentIdentifier).draggable({
@@ -71,7 +60,6 @@ define([
 				DragDrop.onDropHoverOut($(ui.draggable), $(this));
 			},
 			drop: function (event, ui) {
-				console.log('drop');
 				DragDrop.onDrop($(ui.draggable), $(this), event);
 			}
 		});
@@ -79,8 +67,10 @@ define([
 
 	/**
 	 * called when a draggable is selected to be moved
+	 *
 	 * @param $element a jQuery object for the draggable
-	 * @private
+	 *
+	 * @return void
 	 */
 	DragDrop.onDragStart = function ($element) {
 		// Backup inline styles
@@ -95,8 +85,10 @@ define([
 
 	/**
 	 * called when a draggable is released
-	 * @param $element a jQuery object for the draggable
-	 * @private
+	 *
+	 * @param {object} $element a jQuery object for the draggable
+	 *
+	 * @return void
 	 */
 	DragDrop.onDragStop = function ($element) {
 		// Remove css class for the drag shadow
@@ -111,22 +103,26 @@ define([
 
 	/**
 	 * adds CSS classes when hovering over a dropzone
-	 * @param $draggableElement
-	 * @param $droppableElement
-	 * @private
+	 *
+	 * @param {object} $draggableElement
+	 * @param {object} $droppableElement
+	 *
+	 * @return void
 	 */
 	DragDrop.onDropHoverOver = function ($draggableElement, $droppableElement) {
-		console.log('over and active');
 		if ($droppableElement.hasClass(DragDrop.validDropZoneClass)) {
+			console.log('over and active');
 			$droppableElement.addClass(DragDrop.dropPossibleHoverClass);
 		}
 	};
 
 	/**
 	 * removes the CSS classes after hovering out of a dropzone again
-	 * @param $draggableElement
-	 * @param $droppableElement
-	 * @private
+	 *
+	 * @param {object} $draggableElement
+	 * @param {object} $droppableElement
+	 *
+	 * @return void
 	 */
 	DragDrop.onDropHoverOut = function ($draggableElement, $droppableElement) {
 		$droppableElement.removeClass(DragDrop.dropPossibleHoverClass);
@@ -136,13 +132,17 @@ define([
 	 * this method does the whole logic when a draggable is dropped on to a dropzone
 	 * sending out the request and afterwards move the HTML element in the right place.
 	 *
-	 * @param $draggableElement
-	 * @param $droppableElement
-	 * @param {Event} evt the event
-	 * @private
+	 * @param {object} $draggableElement
+	 * @param {object} $droppableElement
+	 * @param {Event} event the event
+	 *
+	 * @return void
 	 */
-	DragDrop.onDrop = function ($draggableElement, $droppableElement, evt) {
-		// found in Sessionplaner.movedSession
+	DragDrop.onDrop = function ($draggableElement, $droppableElement, event) {
+		$draggableElement
+			.detach()
+			.css({top: 0, left: 0})
+			.appendTo($droppableElement);
 	};
 
 	$(DragDrop.initialize);

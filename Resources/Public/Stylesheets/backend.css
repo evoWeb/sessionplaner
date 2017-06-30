@@ -23,72 +23,71 @@
 .sessionCard {
   background-color: #fff;
   border: 1px solid #f1f1f1;
-  width: 197px;
 }
-/* line 26, ../../Private/Sass/_sessionplaner.scss */
+/* line 25, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard:hover, .sessionCard.ui-draggable-dragging {
   border: 1px solid #666;
 }
-/* line 30, ../../Private/Sass/_sessionplaner.scss */
+/* line 29, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard:hover .topic, .sessionCard.ui-draggable-dragging .topic {
   background-color: #666;
 }
-/* line 35, ../../Private/Sass/_sessionplaner.scss */
+/* line 34, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .uid {
   display: none;
 }
-/* line 36, ../../Private/Sass/_sessionplaner.scss */
+/* line 35, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .topic {
   background-color: #cacaca;
   padding: 7px;
 }
-/* line 40, ../../Private/Sass/_sessionplaner.scss */
+/* line 39, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .speaker {
   padding: 7px;
 }
-/* line 43, ../../Private/Sass/_sessionplaner.scss */
+/* line 42, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .description {
   display: none;
 }
-/* line 44, ../../Private/Sass/_sessionplaner.scss */
+/* line 43, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .twitter {
   display: none;
 }
-/* line 45, ../../Private/Sass/_sessionplaner.scss */
+/* line 44, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .attendees {
   display: none;
 }
-/* line 46, ../../Private/Sass/_sessionplaner.scss */
+/* line 45, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .type {
   display: none;
 }
-/* line 47, ../../Private/Sass/_sessionplaner.scss */
+/* line 46, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .level {
   display: none;
 }
-/* line 48, ../../Private/Sass/_sessionplaner.scss */
+/* line 47, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .day {
   display: none;
 }
-/* line 49, ../../Private/Sass/_sessionplaner.scss */
+/* line 48, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .room {
   display: none;
 }
-/* line 50, ../../Private/Sass/_sessionplaner.scss */
+/* line 49, ../../Private/Sass/_sessionplaner.scss */
 .sessionCard .slot {
   display: none;
 }
 
-/* line 53, ../../Private/Sass/_sessionplaner.scss */
+/* line 52, ../../Private/Sass/_sessionplaner.scss */
 #grid {
   margin-left: 223px;
 }
-/* line 56, ../../Private/Sass/_sessionplaner.scss */
+/* line 55, ../../Private/Sass/_sessionplaner.scss */
 #grid table {
   border-collapse: collapse;
   width: 100%;
 }
-/* line 60, ../../Private/Sass/_sessionplaner.scss */
+/* line 59, ../../Private/Sass/_sessionplaner.scss */
 #grid table th.time,
 #grid table td.time,
 #grid table th.room,
@@ -96,58 +95,60 @@
   border-left: 12px solid #fff;
   border-right: 12px solid #fff;
 }
-/* line 70, ../../Private/Sass/_sessionplaner.scss */
+/* line 69, ../../Private/Sass/_sessionplaner.scss */
 #grid thead th {
   border-bottom: 1px solid #cdcdcd;
   color: #999999;
   font-size: 13px;
   padding: 6px 20px 6px 10px;
 }
-/* line 79, ../../Private/Sass/_sessionplaner.scss */
+/* line 78, ../../Private/Sass/_sessionplaner.scss */
 #grid tbody th {
   vertical-align: middle;
 }
-/* line 83, ../../Private/Sass/_sessionplaner.scss */
+/* line 82, ../../Private/Sass/_sessionplaner.scss */
 #grid tbody th, #grid tbody td {
   background-color: #f1f1f1;
   border-bottom: 12px solid #fff;
 }
-/* line 88, ../../Private/Sass/_sessionplaner.scss */
+/* line 87, ../../Private/Sass/_sessionplaner.scss */
 #grid tbody tr.break th,
 #grid tbody tr.break td {
   background-color: #d1d1d1;
 }
-/* line 93, ../../Private/Sass/_sessionplaner.scss */
+/* line 92, ../../Private/Sass/_sessionplaner.scss */
 #grid tbody th.time,
 #grid tbody td.time,
 #grid tbody th.room,
 #grid tbody td.room {
   height: 66px;
 }
-/* line 100, ../../Private/Sass/_sessionplaner.scss */
+/* line 99, ../../Private/Sass/_sessionplaner.scss */
 #grid tbody th.time,
 #grid tbody td.time {
   padding: 6px 20px 6px 10px;
 }
-/* line 105, ../../Private/Sass/_sessionplaner.scss */
+/* line 104, ../../Private/Sass/_sessionplaner.scss */
 #grid tbody th.room,
 #grid tbody td.room {
   min-width: 199px;
   padding: 12px;
 }
-/* line 112, ../../Private/Sass/_sessionplaner.scss */
+/* line 111, ../../Private/Sass/_sessionplaner.scss */
 #grid .sessionCard {
   width: inherit;
 }
 
-/* line 117, ../../Private/Sass/_sessionplaner.scss */
+/* line 116, ../../Private/Sass/_sessionplaner.scss */
 #stash {
   background-color: #f1f1f1;
   border-top: 1px solid #cdcdcd;
   float: left;
   margin-top: 30px;
+  min-width: 150px;
+  max-width: 300px;
 }
-/* line 123, ../../Private/Sass/_sessionplaner.scss */
+/* line 124, ../../Private/Sass/_sessionplaner.scss */
 #stash .sessionCard {
   margin-bottom: 10px;
 }

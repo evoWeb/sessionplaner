@@ -272,12 +272,13 @@ define([
 	};
 
 	/**
-	 * @param {object} $element
+	 * @param {object} $movedElement
+	 * @param {object} $droppedOnElement
 	 *
 	 * @return void
 	 */
-	Sessionplaner.movedSession = function ($element) {
-		var movedSessionData = Sessionplaner.getDataFromCard($element);
+	Sessionplaner.movedSession = function ($movedElement, $droppedOnElement) {
+		var movedSessionData = Sessionplaner.getDataFromCard($movedElement);
 		movedSessionData = Sessionplaner.addValuesFromParent(movedSessionData, this);
 		Sessionplaner.sessionData = movedSessionData;
 
@@ -370,7 +371,11 @@ define([
 	 * @return void
 	 */
 	Sessionplaner.initializeDragAndDrop = function () {
-		dragDrop.onDrop = Sessionplaner.movedSession;
+		var originalDrop = dragDrop.onDrop;
+		dragDrop.onDrop = function($draggableElement, $droppableElement, event) {
+			Sessionplaner.movedSession($draggableElement, $droppableElement);
+			originalDrop($draggableElement, $droppableElement, event);
+		}
 	};
 
 	/**
