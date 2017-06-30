@@ -104,19 +104,17 @@ define([
 
 	/**
 	 * @param {object} sessionData
-	 * @param {object} card
+	 * @param {object} $cardParent
 	 *
 	 * @returns {object}
 	 */
-	Sessionplaner.addValuesFromParent = function (sessionData, card) {
-		var cardParent = $(card).parent();
-
-		if (cardParent.attr('id') === 'stash') {
+	Sessionplaner.addValuesFromParent = function (sessionData, $cardParent) {
+		if ($cardParent.attr('id') === 'stash') {
 			sessionData.slot = 0;
 			sessionData.room = 0;
 		} else {
-			sessionData.slot = cardParent.data('slot');
-			sessionData.room = cardParent.data('room');
+			sessionData.slot = $cardParent.data('slot');
+			sessionData.room = $cardParent.data('room');
 		}
 
 		return sessionData;
@@ -279,7 +277,7 @@ define([
 	 */
 	Sessionplaner.movedSession = function ($movedElement, $droppedOnElement) {
 		var movedSessionData = Sessionplaner.getDataFromCard($movedElement);
-		movedSessionData = Sessionplaner.addValuesFromParent(movedSessionData, this);
+		movedSessionData = Sessionplaner.addValuesFromParent(movedSessionData, $droppedOnElement);
 		Sessionplaner.sessionData = movedSessionData;
 
 		$.ajax({
