@@ -20,61 +20,61 @@
 }
 
 /* line 21, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard {
+.t3-page-ce {
   background-color: #fff;
   border: 1px solid #f1f1f1;
 }
 /* line 25, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard:hover, .sessionCard.ui-draggable-dragging {
+.t3-page-ce:hover, .t3-page-ce.ui-draggable-dragging {
   border: 1px solid #666;
 }
 /* line 29, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard:hover .topic, .sessionCard.ui-draggable-dragging .topic {
+.t3-page-ce:hover .topic, .t3-page-ce.ui-draggable-dragging .topic {
   background-color: #666;
 }
 /* line 34, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .uid {
+.t3-page-ce .uid {
   display: none;
 }
 /* line 35, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .topic {
+.t3-page-ce .topic {
   background-color: #cacaca;
   padding: 7px;
 }
 /* line 39, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .speaker {
+.t3-page-ce .speaker {
   padding: 7px;
 }
 /* line 42, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .description {
+.t3-page-ce .description {
   display: none;
 }
 /* line 43, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .twitter {
+.t3-page-ce .twitter {
   display: none;
 }
 /* line 44, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .attendees {
+.t3-page-ce .attendees {
   display: none;
 }
 /* line 45, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .type {
+.t3-page-ce .type {
   display: none;
 }
 /* line 46, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .level {
+.t3-page-ce .level {
   display: none;
 }
 /* line 47, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .day {
+.t3-page-ce .day {
   display: none;
 }
 /* line 48, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .room {
+.t3-page-ce .room {
   display: none;
 }
 /* line 49, ../../Private/Sass/_sessionplaner.scss */
-.sessionCard .slot {
+.t3-page-ce .slot {
   display: none;
 }
 
@@ -135,7 +135,7 @@
   padding: 12px;
 }
 /* line 111, ../../Private/Sass/_sessionplaner.scss */
-#grid .sessionCard {
+#grid .t3-page-ce {
   width: inherit;
 }
 
@@ -149,6 +149,6 @@
   max-width: 300px;
 }
 /* line 124, ../../Private/Sass/_sessionplaner.scss */
-#stash .sessionCard {
+#stash .t3-page-ce {
   margin-bottom: 10px;
 }

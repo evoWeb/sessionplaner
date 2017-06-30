@@ -371,7 +371,7 @@ define([
 	Sessionplaner.initializeDragAndDrop = function () {
 		var originalDrop = dragDrop.onDrop;
 		dragDrop.onDrop = function($draggableElement, $droppableElement, event) {
-			Sessionplaner.movedSession($draggableElement, $droppableElement);
+			//Sessionplaner.movedSession($draggableElement, $droppableElement);
 			originalDrop($draggableElement, $droppableElement, event);
 		}
 	};

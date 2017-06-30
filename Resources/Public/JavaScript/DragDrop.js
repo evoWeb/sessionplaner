@@ -52,11 +52,9 @@ define([
 			scope: 'sessionplaner',
 			tolerance: 'pointer',
 			over: function (event, ui) {
-				console.log('over');
 				DragDrop.onDropHoverOver($(ui.draggable), $(this));
 			},
 			out: function (event, ui) {
-				console.log('out');
 				DragDrop.onDropHoverOut($(ui.draggable), $(this));
 			},
 			drop: function (event, ui) {
