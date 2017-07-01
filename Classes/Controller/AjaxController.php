@@ -316,7 +316,7 @@ class AjaxController
             switch (true) {
                 // the following lines are needed to move the session back to stash
                 case $field == 'room' && $value == 0:
-                    $session->setRoom(null);
+                    $session->setRoom(0);
                     break;
 
                 case $field == 'room':
@@ -327,7 +327,7 @@ class AjaxController
                     break;
 
                 case $field == 'slot' && $value == 0:
-                    $session->setSlot(null);
+                    $session->setSlot(0);
                     break;
 
                 case $field == 'slot':
