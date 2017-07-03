@@ -141,7 +141,7 @@ define([
 	 * @return void
 	 */
 	Sessionplaner.updateSessionCard = function (sessionData) {
-		var $card = $('.uid[data-value="' + sessionData.uid + '"]', '.sessionCard').parent();
+		var $card = $('.uid[data-value="' + sessionData.uid + '"]', '.t3js-page-ce').parent();
 
 		Sessionplaner.applySessionValuesToCard($card, sessionData);
 	};
@@ -307,7 +307,7 @@ define([
 		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
 		modal.confirm(
 			t.TYPO3.lang['alert'] || 'Alert',
-			$newSession.html(),
+			$newSession,
 			t.TYPO3.Severity.ok,
 			[
 				{
@@ -341,7 +341,7 @@ define([
 		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
 		modal.confirm(
 			t.TYPO3.lang['alert'] || 'Alert',
-			$editSession.html(),
+			$editSession,
 			t.TYPO3.Severity.ok,
 			[
 				{
@@ -383,7 +383,7 @@ define([
 	 */
 	Sessionplaner.initializeSessionCard = function ($card) {
 		if ($card === null) {
-			$card = $('.sessionCard');
+			$card = $('.t3js-page-ce');
 		}
 
 		$card
@@ -405,7 +405,7 @@ define([
 
 		$(document)
 			.on('click', '#actions-document-new', Sessionplaner.createNewSessionForm)
-			.on('dblclick', '.sessionCard', Sessionplaner.editSessionForm);
+			.on('dblclick', '.t3js-page-ce', Sessionplaner.editSessionForm);
 
 		Sessionplaner.initializeDragAndDrop();
 		Sessionplaner.initializeSessionCard(null);

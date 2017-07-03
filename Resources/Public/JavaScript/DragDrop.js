@@ -35,15 +35,15 @@ define([
 			addClasses: 'active-drag',
 			revert: 'invalid',
 			zIndex: 100,
-			start: function (event, ui) {
+			start: function () {
 				// needs to be called instead of giving the reference
 				// to the method directly to be able to override
 				// the onDragStart method as hook where ever the
 				// module is used.
-				DragDrop.onDragStart($(this), ui);
+				DragDrop.onDragStart($(this));
 			},
-			stop: function (event, ui) {
-				DragDrop.onDragStop($(this), ui);
+			stop: function () {
+				DragDrop.onDragStop($(this));
 			}
 		});
 
@@ -58,7 +58,7 @@ define([
 				DragDrop.onDropHoverOut($(ui.draggable), $(this));
 			},
 			drop: function (event, ui) {
-				DragDrop.onDrop($(ui.draggable), $(this), event);
+				DragDrop.onDrop($(ui.draggable), $(this));
 			}
 		});
 	};
@@ -131,11 +131,10 @@ define([
 	 *
 	 * @param {object} $draggableElement
 	 * @param {object} $droppableElement
-	 * @param {Event} event the event
 	 *
 	 * @return void
 	 */
-	DragDrop.onDrop = function ($draggableElement, $droppableElement, event) {
+	DragDrop.onDrop = function ($draggableElement, $droppableElement) {
 		$droppableElement.removeClass(DragDrop.dropPossibleHoverClass);
 		$draggableElement
 			.detach()
