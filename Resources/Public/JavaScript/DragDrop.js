@@ -32,7 +32,7 @@ define([
 			scope: 'sessionplaner',
 			cursor: 'move',
 			distance: 20,
-			addClasses: 'active-drag',
+			addClasses: false,
 			revert: 'invalid',
 			zIndex: 100,
 			start: function () {
@@ -78,7 +78,14 @@ define([
 		$element.children(DragDrop.dragIdentifier).addClass('dragitem-shadow');
 
 		// make the drop zones visible
-		$(DragDrop.dropZoneIdentifier).addClass(DragDrop.validDropZoneClass);
+		$(DragDrop.dropZoneIdentifier).each(function() {
+			var $droppableElement = $(this);
+			if ($droppableElement.attr('id') === 'stash'
+				|| $droppableElement.children().length === 0
+			) {
+				$droppableElement.addClass(DragDrop.validDropZoneClass);
+			}
+		});
 	};
 
 	/**
@@ -95,6 +102,8 @@ define([
 		// make the drop zones invisible
 		$(DragDrop.dropZoneIdentifier + '.' + DragDrop.validDropZoneClass).removeClass(DragDrop.validDropZoneClass);
 
+		$(DragDrop.dropZoneIdentifier).droppable('enable');
+
 		// Reset inline style
 		$element.get(0).style.cssText = DragDrop.originalStyles;
 	};
@@ -108,7 +117,10 @@ define([
 	 * @return void
 	 */
 	DragDrop.onDropHoverOver = function ($draggableElement, $droppableElement) {
-		if ($droppableElement.hasClass(DragDrop.validDropZoneClass)) {
+		$droppableElement.droppable('enable');
+		if ($droppableElement.attr('id') !== 'stash' && $droppableElement.children().length) {
+			$droppableElement.droppable('disable');
+		} else if ($droppableElement.hasClass(DragDrop.validDropZoneClass)) {
 			$droppableElement.addClass(DragDrop.dropPossibleHoverClass);
 		}
 	};

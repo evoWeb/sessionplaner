@@ -389,10 +389,13 @@ define([
 		$card
 			.disableSelection()
 			.draggable({
-				scope: 'sessions',
-				connectToSortable: '#stash',
-				snap: true,
-				revert: 'invalid'
+				handle: DragDrop.dragHeaderIdentifier,
+				scope: 'sessionplaner',
+				cursor: 'move',
+				distance: 20,
+				addClasses: 'active-drag',
+				revert: 'invalid',
+				zIndex: 100
 			});
 	};
 
@@ -408,7 +411,6 @@ define([
 			.on('dblclick', '.t3js-page-ce', Sessionplaner.editSessionForm);
 
 		Sessionplaner.initializeDragAndDrop();
-		Sessionplaner.initializeSessionCard(null);
 	};
 
 	$(Sessionplaner.initialize);
