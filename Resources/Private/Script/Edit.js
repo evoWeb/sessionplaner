@@ -306,12 +306,12 @@ define([
 		var $newSession = Sessionplaner.getTemplateElement('sessionFormTemplate');
 		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
 		modal.confirm(
-			t.TYPO3.lang['alert'] || 'Alert',
+			'Create session',
 			$newSession,
 			t.TYPO3.Severity.ok,
 			[
 				{
-					text: 'Create a session',
+					text: 'Create session',
 					active: true,
 					btnClass: 'btn-default',
 					name: 'ok'
@@ -340,12 +340,12 @@ define([
 		);
 		var t = (opener !== null && typeof opener.top.TYPO3 !== 'undefined' ? opener.top : top);
 		modal.confirm(
-			t.TYPO3.lang['alert'] || 'Alert',
+			'Edit session',
 			$editSession,
 			t.TYPO3.Severity.ok,
 			[
 				{
-					text: 'Create a session',
+					text: 'Update session',
 					active: true,
 					btnClass: 'btn-default',
 					name: 'ok'
