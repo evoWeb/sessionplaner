@@ -19,33 +19,14 @@
 }
 
 .t3js-page-ce {
-	background-color: #fff;
-	border: 1px solid #f1f1f1;
-
-	&:hover,
-	&.ui-draggable-dragging {
-		border: 1px solid #666;
-
-		.topic {
-			background-color: #666;
-		}
-	}
-
-	.uid { display: none; }
-	.topic {
-		background-color: #cacaca;
-		padding: 7px;
-	}
-	.speaker {
-		padding: 7px;
-	}
-	.description { display: none; }
-	.twitter { display: none; }
-	.attendees { display: none; }
-	.type { display: none; }
-	.level { display: none; }
-	.day { display: none; }
-	.room { display: none; }
+	.uid,
+	.description,
+	.twitter,
+	.attendees,
+	.type,
+	.level,
+	.day,
+	.room,
 	.slot { display: none; }
 }
 
@@ -53,40 +34,20 @@
 	height: auto;
 }
 
-#grid {
+.t3-grid-container {
 	margin-left: 223px;
 
 	table {
-		border-collapse: collapse;
 		width: 100%;
-
-		th.time,
-		td.time,
-		th.room,
-		td.room {
-			border-left: 12px solid #fff;
-			border-right: 12px solid #fff;
-		}
-	}
-
-	thead {
-		th {
-			border-bottom: 1px solid #cdcdcd;
-			color: #999999;
-			font-size: 13px;
-			padding: 6px 20px 6px 10px;
-		}
 	}
 
 	tbody {
 		th {
 			vertical-align: middle;
+			border-bottom: 1px solid #cdcdcd;
 		}
 
 		th, td {
-			background-color: #f1f1f1;
-			border-bottom: 12px solid #fff;
-
 			&.t3js-page-ce-dropzone-available.active {
 				background-color: #fbefdd;
 			}
@@ -101,42 +62,29 @@
 			background-color: #d1d1d1;
 		}
 
-		th.time,
-		td.time,
-		th.room,
-		td.room {
+		.time,
+		.room {
 			height: 66px;
 		}
 
-		th.time,
-		td.time {
+		.time {
 			padding: 6px 20px 6px 10px;
-		}
-
-		th.room,
-		td.room {
-			min-width: 199px;
-			padding: 12px;
 		}
 	}
 
 	.t3js-page-ce {
 		width: inherit;
-		margin-bottom: 10px;
-	}
-	.t3js-page-ce:last-child {
-		margin-bottom: 0;
+		margin: 10px;
 	}
 }
 
 #stash {
-	background-color: #f1f1f1;
+	background-color: #fafafa;
 	border-top: 1px solid #cdcdcd;
+	border-bottom: 1px solid #cdcdcd;
 	float: left;
-	padding: 10px;
-	margin-top: 30px;
-	min-width: 150px;
-	max-width: 300px;
+	margin-top: 42px;
+	width: 200px;
 	min-height: 30px;
 
 	&.t3js-page-ce-dropzone-available.active {
@@ -148,9 +96,6 @@
 	}
 
 	.t3js-page-ce {
-		margin-bottom: 10px;
-	}
-	.t3js-page-ce:last-child {
-		margin-bottom: 0;
+		margin: 10px;
 	}
 }

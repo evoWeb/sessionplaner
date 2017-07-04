@@ -1,7 +1,7 @@
-{namespace sp = Evoweb\Sessionplaner\ViewHelpers}
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+	  xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers">
 <head>
 	<title>Show Session</title>
 </head>
@@ -48,8 +48,8 @@
                 </p>
             </div>
             </f:if>
-	    
-	    
+
+
 	    <f:if condition="{session.documents}">
 		<div class="session-files">
 		    <h4>Sessionunterlagen</h4>
@@ -64,7 +64,7 @@
 		    </table>
 		</div>
 	    </f:if>
-	    
+
         </div>
 
         <div class="session-backlink">

@@ -90,7 +90,7 @@ define([
 	 */
 	Sessionplaner.applySessionValuesToCard = function ($card, sessionData) {
 		$.each(sessionData, function(index, value) {
-			var $element = $('.' + index, $card);
+			var $element = $('.' + index, $card.find('.t3-page-ce-body-inner'));
 
 			$element.data('value', value);
 
@@ -154,7 +154,7 @@ define([
 	Sessionplaner.getDataFromCard = function (card) {
 		var data = {};
 
-		$(card).children().children().each(function() {
+		$(card).find('.t3-page-ce-body-inner .property').each(function() {
 			var $element = $(this);
 			data[$element.data('name')] = $element.data('value');
 		});

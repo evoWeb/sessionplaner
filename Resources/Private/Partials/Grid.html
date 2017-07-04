@@ -6,25 +6,31 @@
 </head>
 <body>
 <f:section name="Main">
-<div id="grid">
-	<table class="table table-bordered">
+<div class="t3-grid-container">
+	<table class="t3-grid-table">
+		<colgroup>
+			<col width="55px">
+			<f:for each="{day.rooms}" as="room">
+				<col>
+			</f:for>
+		</colgroup>
 		<thead>
 			<tr>
-				<th class="time" data-width="">&nbsp;</th>
+				<th class="t3-page-column-header">&nbsp;</th>
 				<f:for each="{day.rooms}" as="room">
-					<th class="room">{room.name}</th>
+					<th class="t3-page-column-header">{room.name}</th>
 				</f:for>
 			</tr>
 		</thead>
 		<tbody>
 			<f:for each="{day.slots}" as="slot">
 				<tr class="{f:if(condition: slot.break, then: 'break', else: 'active')}">
-					<th class="time">
+					<th class="t3-grid-cell time">
 						<f:format.date date="{slot.start}" format="H:i"/><br/>
 						{slot.duration} <f:translate key="minutes"/>
 					</th>
 					<f:for each="{day.rooms}" as="room">
-						<td class="room t3-page-ce-dropzone-available t3js-page-ce-dropzone-available"
+						<td class="t3-grid-cell t3-page-ce-dropzone-available t3js-page-ce-dropzone-available"
 								data-room="{room.uid}"
 								data-slot="{slot.uid}">
 							<f:for each="{room.sessions}" as="session">

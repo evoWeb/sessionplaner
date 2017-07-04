@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+	  xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers">
 <head>
 	<title>Edit form</title>
 </head>
 <body>
 
 <f:section name="Main">
-<div class="t3js-page-ce">
+<div class="t3-page-ce t3js-page-ce t3-page-ce-hidden">
 	<div class="t3-page-ce-dragitem">
-		<div class="topic t3-page-ce-header-draggable t3js-page-ce-draghandle" data-name="topic" data-value="{session.topic}">{session.topic}</div>
-		<div class="uid" data-name="uid" data-value="{session.uid}">{session.uid}</div>
-		<div class="speaker" data-name="speaker" data-value="{session.speaker}">{session.speaker}</div>
-		<div class="description" data-name="description" data-value="{session.description}">{session.description}</div>
-		<div class="twitter" data-name="twitter" data-value="{session.twitter}">{session.twitter}</div>
-		<div class="attendees" data-name="attendees" data-value="{session.attendees}">{session.attendees}</div>
-		<div class="type" data-name="type" data-value="{session.type}"><f:if condition="{session.type}==1">
-			<f:then><f:translate key="type-talk"/></f:then></f:if><f:if condition="{session.type}==2">
-			<f:then><f:translate key="type-tutorial"/></f:then></f:if><f:if condition="{session.type}==3">
-			<f:then><f:translate key="type-workshop"/></f:then></f:if><f:if condition="{session.type}==4">
-			<f:then><f:translate key="type-other"/></f:then></f:if></div>
-		<div class="level" data-name="level" data-value="{session.level}"><f:if condition="{session.level}==1">
-			<f:then><f:translate key="level-starter"/></f:then></f:if><f:if condition="{session.level}==2">
-			<f:then><f:translate key="level-advanced"/></f:then></f:if><f:if condition="{session.level}==3">
-			<f:then><f:translate key="level-pro"/></f:then></f:if></div>
-		<div class="day" data-name="day" data-value="{session.day.uid}">{session.day.uid}</div>
-		<div class="room" data-name="room" data-value="{session.room.uid}">{session.room.uid}</div>
-		<div class="slot" data-name="slot" data-value="{session.slot.uid}">{session.slot.uid}</div>
+		<div class="t3-page-ce-header t3-page-ce-header-draggable t3js-page-ce-draghandle">
+			<div class="t3-page-ce-header-icons-right">
+				<div class="btn-group btn-group-sm" role="group">
+					<a class="btn btn-default t3js-modal-trigger"
+							href="#"
+							data-severity="warning"
+							data-title="Delete this record?"
+							data-content="Are you sure you want to delete this record?"
+							data-button-close-text="Cancel"
+							title="Delete">
+						<f:format.raw><sp:be.buttons.icon
+								uri=""
+							iconKey="actions-edit-delete"
+							class="btn btn-default btn-sm"/>
+						</f:format.raw>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="t3-page-ce-body">
+			<div class="t3-page-ce-body-inner">
+				<div class="property uid" data-name="uid" data-value="{session.uid}">{session.uid}</div>
+				<div class="property topic" data-name="topic" data-value="{session.topic}"><strong>{session.topic}</strong></div>
+				<div class="property speaker" data-name="speaker" data-value="{session.speaker}"><strong>{session.speaker}</strong></div>
+				<div class="property description" data-name="description" data-value="{session.description}">{session.description}</div>
+				<div class="property twitter" data-name="twitter" data-value="{session.twitter}">{session.twitter}</div>
+				<div class="property attendees" data-name="attendees" data-value="{session.attendees}">{session.attendees}</div>
+				<div class="property type" data-name="type" data-value="{session.type}"><f:if condition="{session.type}==1">
+					<f:then><f:translate key="type-talk"/></f:then></f:if><f:if condition="{session.type}==2">
+					<f:then><f:translate key="type-tutorial"/></f:then></f:if><f:if condition="{session.type}==3">
+					<f:then><f:translate key="type-workshop"/></f:then></f:if><f:if condition="{session.type}==4">
+					<f:then><f:translate key="type-other"/></f:then></f:if></div>
+				<div class="property level" data-name="level" data-value="{session.level}"><f:if condition="{session.level}==1">
+					<f:then><f:translate key="level-starter"/></f:then></f:if><f:if condition="{session.level}==2">
+					<f:then><f:translate key="level-advanced"/></f:then></f:if><f:if condition="{session.level}==3">
+					<f:then><f:translate key="level-pro"/></f:then></f:if></div>
+				<div class="property day" data-name="day" data-value="{session.day.uid}">{session.day.uid}</div>
+				<div class="property room" data-name="room" data-value="{session.room.uid}">{session.room.uid}</div>
+				<div class="property slot" data-name="slot" data-value="{session.slot.uid}">{session.slot.uid}</div>
+			</div>
+		</div>
 	</div>
 </div>
 </f:section>

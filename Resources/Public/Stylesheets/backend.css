@@ -19,168 +19,84 @@
   padding: 0 0 5px 0;
 }
 
-/* line 21, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce {
-  background-color: #fff;
-  border: 1px solid #f1f1f1;
-}
-/* line 25, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce:hover, .t3js-page-ce.ui-draggable-dragging {
-  border: 1px solid #666;
-}
-/* line 29, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce:hover .topic, .t3js-page-ce.ui-draggable-dragging .topic {
-  background-color: #666;
-}
-/* line 34, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .uid {
-  display: none;
-}
-/* line 35, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .topic {
-  background-color: #cacaca;
-  padding: 7px;
-}
-/* line 39, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .speaker {
-  padding: 7px;
-}
-/* line 42, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .description {
-  display: none;
-}
-/* line 43, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .twitter {
-  display: none;
-}
-/* line 44, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .attendees {
-  display: none;
-}
-/* line 45, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .type {
-  display: none;
-}
-/* line 46, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .level {
-  display: none;
-}
-/* line 47, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .day {
-  display: none;
-}
-/* line 48, ../../Private/Sass/_sessionplaner.scss */
-.t3js-page-ce .room {
-  display: none;
-}
-/* line 49, ../../Private/Sass/_sessionplaner.scss */
+/* line 22, ../../Private/Sass/_sessionplaner.scss */
+.t3js-page-ce .uid,
+.t3js-page-ce .description,
+.t3js-page-ce .twitter,
+.t3js-page-ce .attendees,
+.t3js-page-ce .type,
+.t3js-page-ce .level,
+.t3js-page-ce .day,
+.t3js-page-ce .room,
 .t3js-page-ce .slot {
   display: none;
 }
 
-/* line 52, ../../Private/Sass/_sessionplaner.scss */
+/* line 33, ../../Private/Sass/_sessionplaner.scss */
 .t3js-page-ce-dropzone-available.active {
   height: auto;
 }
 
-/* line 56, ../../Private/Sass/_sessionplaner.scss */
-#grid {
+/* line 37, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container {
   margin-left: 223px;
 }
-/* line 59, ../../Private/Sass/_sessionplaner.scss */
-#grid table {
-  border-collapse: collapse;
+/* line 40, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container table {
   width: 100%;
 }
-/* line 63, ../../Private/Sass/_sessionplaner.scss */
-#grid table th.time,
-#grid table td.time,
-#grid table th.room,
-#grid table td.room {
-  border-left: 12px solid #fff;
-  border-right: 12px solid #fff;
-}
-/* line 73, ../../Private/Sass/_sessionplaner.scss */
-#grid thead th {
-  border-bottom: 1px solid #cdcdcd;
-  color: #999999;
-  font-size: 13px;
-  padding: 6px 20px 6px 10px;
-}
-/* line 82, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody th {
+/* line 45, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container tbody th {
   vertical-align: middle;
+  border-bottom: 1px solid #cdcdcd;
 }
-/* line 86, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody th, #grid tbody td {
-  background-color: #f1f1f1;
-  border-bottom: 12px solid #fff;
-}
-/* line 90, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody th.t3js-page-ce-dropzone-available.active, #grid tbody td.t3js-page-ce-dropzone-available.active {
+/* line 51, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container tbody th.t3js-page-ce-dropzone-available.active, .t3-grid-container tbody td.t3js-page-ce-dropzone-available.active {
   background-color: #fbefdd;
 }
-/* line 94, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody th.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible, #grid tbody td.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
+/* line 55, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container tbody th.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible, .t3-grid-container tbody td.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
   background-color: #d1e2bd;
 }
-/* line 99, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody tr.break th,
-#grid tbody tr.break td {
+/* line 60, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container tbody tr.break th,
+.t3-grid-container tbody tr.break td {
   background-color: #d1d1d1;
 }
-/* line 104, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody th.time,
-#grid tbody td.time,
-#grid tbody th.room,
-#grid tbody td.room {
+/* line 65, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container tbody .time,
+.t3-grid-container tbody .room {
   height: 66px;
 }
-/* line 111, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody th.time,
-#grid tbody td.time {
+/* line 70, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container tbody .time {
   padding: 6px 20px 6px 10px;
 }
-/* line 116, ../../Private/Sass/_sessionplaner.scss */
-#grid tbody th.room,
-#grid tbody td.room {
-  min-width: 199px;
-  padding: 12px;
-}
-/* line 123, ../../Private/Sass/_sessionplaner.scss */
-#grid .t3js-page-ce {
+/* line 75, ../../Private/Sass/_sessionplaner.scss */
+.t3-grid-container .t3js-page-ce {
   width: inherit;
-  margin-bottom: 10px;
-}
-/* line 127, ../../Private/Sass/_sessionplaner.scss */
-#grid .t3js-page-ce:last-child {
-  margin-bottom: 0;
+  margin: 10px;
 }
 
-/* line 132, ../../Private/Sass/_sessionplaner.scss */
+/* line 81, ../../Private/Sass/_sessionplaner.scss */
 #stash {
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   border-top: 1px solid #cdcdcd;
+  border-bottom: 1px solid #cdcdcd;
   float: left;
-  padding: 10px;
-  margin-top: 30px;
-  min-width: 150px;
-  max-width: 300px;
+  margin-top: 42px;
+  width: 200px;
   min-height: 30px;
 }
-/* line 142, ../../Private/Sass/_sessionplaner.scss */
+/* line 90, ../../Private/Sass/_sessionplaner.scss */
 #stash.t3js-page-ce-dropzone-available.active {
   background-color: #fbefdd;
 }
-/* line 146, ../../Private/Sass/_sessionplaner.scss */
+/* line 94, ../../Private/Sass/_sessionplaner.scss */
 #stash.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
   background-color: #d1e2bd;
 }
-/* line 150, ../../Private/Sass/_sessionplaner.scss */
+/* line 98, ../../Private/Sass/_sessionplaner.scss */
 #stash .t3js-page-ce {
-  margin-bottom: 10px;
-}
-/* line 153, ../../Private/Sass/_sessionplaner.scss */
-#stash .t3js-page-ce:last-child {
-  margin-bottom: 0;
+  margin: 10px;
 }
