@@ -174,7 +174,7 @@ define([
 		var $card = Sessionplaner.createSessionCard(Sessionplaner.sessionData);
 		Sessionplaner.stash.append($card);
 
-		Sessionplaner.initializeSessionCard($card);
+		dragDrop.initializeDraggable($card);
 	};
 
 	/**
@@ -374,29 +374,6 @@ define([
 			Sessionplaner.movedSession($draggableElement, $droppableElement);
 			originalDrop($draggableElement, $droppableElement, event);
 		}
-	};
-
-	/**
-	 * @param {object} $card
-	 *
-	 * @return void
-	 */
-	Sessionplaner.initializeSessionCard = function ($card) {
-		if ($card === null) {
-			$card = $('.t3js-page-ce');
-		}
-
-		$card
-			.disableSelection()
-			.draggable({
-				handle: DragDrop.dragHeaderIdentifier,
-				scope: 'sessionplaner',
-				cursor: 'move',
-				distance: 20,
-				addClasses: 'active-drag',
-				revert: 'invalid',
-				zIndex: 100
-			});
 	};
 
 	/**

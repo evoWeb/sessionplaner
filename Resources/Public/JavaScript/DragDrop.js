@@ -27,7 +27,24 @@ define([
 	 * @return void
 	 */
 	DragDrop.initialize = function () {
-		$(DragDrop.contentIdentifier).draggable({
+		DragDrop.initializeDraggable();
+		DragDrop.initializeDroppable();
+	};
+
+	/**
+	 * Initialize draggable elements
+	 * If none is given as parameter all are selected
+	 *
+	 * @param {object} $draggableElement a jQuery object for the draggable
+	 *
+	 * @return void
+	 */
+	DragDrop.initializeDraggable = function ($draggableElement) {
+		if (typeof $draggableElement !== 'object') {
+			$draggableElement = $(DragDrop.contentIdentifier);
+		}
+
+		$draggableElement.draggable({
 			handle: DragDrop.dragHeaderIdentifier,
 			scope: 'sessionplaner',
 			cursor: 'move',
@@ -46,7 +63,14 @@ define([
 				DragDrop.onDragStop($(this));
 			}
 		});
+	};
 
+	/**
+	 * Initialize droppable elements
+	 *
+	 * @return void
+	 */
+	DragDrop.initializeDroppable = function () {
 		$(DragDrop.dropZoneIdentifier).droppable({
 			accept: DragDrop.contentIdentifier,
 			scope: 'sessionplaner',
@@ -66,16 +90,16 @@ define([
 	/**
 	 * called when a draggable is selected to be moved
 	 *
-	 * @param $element a jQuery object for the draggable
+	 * @param {object} $draggableElement a jQuery object for the draggable
 	 *
 	 * @return void
 	 */
-	DragDrop.onDragStart = function ($element) {
+	DragDrop.onDragStart = function ($draggableElement) {
 		// Backup inline styles
-		DragDrop.originalStyles = $element.get(0).style.cssText;
+		DragDrop.originalStyles = $draggableElement.get(0).style.cssText;
 
 		// Add css class for the drag shadow
-		$element.children(DragDrop.dragIdentifier).addClass('dragitem-shadow');
+		$draggableElement.children(DragDrop.dragIdentifier).addClass('dragitem-shadow');
 
 		// make the drop zones visible
 		$(DragDrop.dropZoneIdentifier).each(function() {
@@ -91,13 +115,13 @@ define([
 	/**
 	 * called when a draggable is released
 	 *
-	 * @param {object} $element a jQuery object for the draggable
+	 * @param {object} $draggableElement a jQuery object for the draggable
 	 *
 	 * @return void
 	 */
-	DragDrop.onDragStop = function ($element) {
+	DragDrop.onDragStop = function ($draggableElement) {
 		// Remove css class for the drag shadow
-		$element.children(DragDrop.dragIdentifier).removeClass('dragitem-shadow');
+		$draggableElement.children(DragDrop.dragIdentifier).removeClass('dragitem-shadow');
 
 		// make the drop zones invisible
 		$(DragDrop.dropZoneIdentifier + '.' + DragDrop.validDropZoneClass).removeClass(DragDrop.validDropZoneClass);
@@ -105,7 +129,7 @@ define([
 		$(DragDrop.dropZoneIdentifier).droppable('enable');
 
 		// Reset inline style
-		$element.get(0).style.cssText = DragDrop.originalStyles;
+		$draggableElement.get(0).style.cssText = DragDrop.originalStyles;
 	};
 
 	/**
