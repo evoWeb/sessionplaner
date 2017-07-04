@@ -1,41 +1,9 @@
-.new-session {
-	dl {
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-	}
-
-	dt {
-		width: 150px;
-		clear: left;
-		float: left;
-		padding: 0 0 5px 0;
-	}
-
-	dd {
-		float: left;
-		padding: 0 0 5px 0;
-	}
-}
-
-.t3js-page-ce {
-	.uid,
-	.description,
-	.twitter,
-	.attendees,
-	.type,
-	.level,
-	.day,
-	.room,
-	.slot { display: none; }
-}
-
 .t3js-page-ce-dropzone-available.active {
 	height: auto;
 }
 
 .t3-grid-container {
-	margin-left: 223px;
+	margin-left: 210px;
 
 	table {
 		width: 100%;
@@ -43,7 +11,7 @@
 
 	tbody {
 		th {
-			vertical-align: middle;
+			vertical-align: top;
 			border-bottom: 1px solid #cdcdcd;
 		}
 
@@ -64,11 +32,11 @@
 
 		.time,
 		.room {
-			height: 66px;
+			min-height: 94px;
 		}
 
 		.time {
-			padding: 6px 20px 6px 10px;
+			padding: 10px;
 		}
 	}
 
