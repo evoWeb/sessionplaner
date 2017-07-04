@@ -7,6 +7,24 @@
 <body>
 <f:section name="Main">
 	<script type="text/template" id="sessionFormTemplate">
+		<style>
+			.new-session dl {
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+			.new-session dt {
+				width: 150px;
+				clear: left;
+				float: left;
+				padding: 0 0 5px 0;
+			}
+			.new-session dd {
+				float: left;
+				padding: 0 0 5px 0;
+			}
+		</style>
+
 		<div>
 			<form class="new-session">
 				<f:form.hidden name="day" value="{day.uid}"/>
