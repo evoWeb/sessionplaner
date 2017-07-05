@@ -59,6 +59,15 @@ define([
 		var data = {};
 
 		$.each(serializedData, function(index, fieldNameAndValue) {
+			if (fieldNameAndValue.name === 'attendees'
+				|| fieldNameAndValue.name === 'type'
+				|| fieldNameAndValue.name === 'level'
+				|| fieldNameAndValue.name === 'day'
+				|| fieldNameAndValue.name === 'room'
+				|| fieldNameAndValue.name === 'slot'
+			) {
+				fieldNameAndValue.value = parseInt(fieldNameAndValue.value) || 0;
+			}
 			data[fieldNameAndValue.name] = fieldNameAndValue.value;
 		});
 
@@ -93,7 +102,7 @@ define([
 		var $sessionCard = $card.find('.t3-page-ce-body-inner');
 		$.each(sessionData, function(index, value) {
 			var $element = $('.' + index, $sessionCard);
-console.log($element);
+
 			$element.data('value', value);
 			$element.text(value);
 		});
@@ -158,7 +167,7 @@ console.log($element);
 			var $element = $(this);
 			data[$element.data('name')] = $element.data('value');
 		});
-console.log(data);
+
 		return data;
 	};
 
@@ -172,7 +181,7 @@ console.log(data);
 		Sessionplaner.sessionData.uid = response.data.uid;
 
 		var $card = Sessionplaner.createSessionCard(Sessionplaner.sessionData);
-		Sessionplaner.stash.append($card);
+		Sessionplaner.stash.prepend($card);
 
 		dragDrop.initializeDraggable($card);
 	};
