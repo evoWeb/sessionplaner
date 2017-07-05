@@ -25,6 +25,7 @@ namespace Evoweb\Sessionplaner\Controller;
  ***************************************************************/
 
 use Evoweb\Sessionplaner\Domain\Model\Room;
+use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\Domain\Model\Slot;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -66,9 +67,10 @@ class AjaxController
     /**
      * @var array
      */
-    protected $allowedActions = [
-        'addSession',
-        'updateSession'
+    protected $actions = [
+        '/ajax/evoweb/sessionplaner/create' => 'createSession',
+        '/ajax/evoweb/sessionplaner/update' => 'updateSession',
+        '/ajax/evoweb/sessionplaner/delete' => 'deleteSession',
     ];
 
     /**
@@ -150,14 +152,14 @@ class AjaxController
     protected function initializeAction($request, $response)
     {
         $this->parameter = $request->getParsedBody()['tx_sessionplaner'];
+        $routePath = $request->getAttribute('routePath');
 
         if (!($this->backendUser->isAdmin()
             || $this->backendUser->modAccess($this->moduleConfiguration, 0))
-            || !isset($this->parameter['action'])
-            || !in_array($this->parameter['action'], $this->allowedActions)) {
+            || !isset($this->actions[$routePath])) {
             $this->actionMethodName = 'errorAction';
         } else {
-            $this->actionMethodName = $this->parameter['action'] . 'Action';
+            $this->actionMethodName = $this->actions[$routePath] . 'Action';
         }
 
         $this->response = $response;
@@ -216,6 +218,7 @@ class AjaxController
         );
     }
 
+
     /**
      * @return void
      */
@@ -229,7 +232,7 @@ class AjaxController
     /**
      * @return void
      */
-    protected function initializeAddSessionAction()
+    protected function initializeCreateSessionAction()
     {
         $this->repository = $this->objectManager->get(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class);
     }
@@ -237,10 +240,10 @@ class AjaxController
     /**
      * @return void
      */
-    protected function addSessionAction()
+    protected function createSessionAction()
     {
         $session = $this->getSessionFromRequest();
-        if ($session instanceof \Evoweb\Sessionplaner\Domain\Model\Session) {
+        if ($session instanceof Session) {
             $this->repository->add($session);
 
             $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class)->persistAll();
@@ -252,6 +255,7 @@ class AjaxController
             $this->message = 'Request did not contain valid data';
         }
     }
+
 
     /**
      * @return void
@@ -274,10 +278,10 @@ class AjaxController
      */
     protected function updateSessionAction()
     {
-        /** @var \Evoweb\Sessionplaner\Domain\Model\Session $session */
+        /** @var Session $session */
         $session = $this->repository->findByUid((int) $this->parameter['session']['uid']);
         $this->updateSessionFromRequest($session);
-        if ($session instanceof \Evoweb\Sessionplaner\Domain\Model\Session) {
+        if ($session instanceof Session) {
             $this->repository->update($session);
 
             $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class)->persistAll();
@@ -292,7 +296,41 @@ class AjaxController
 
 
     /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Session
+     * @return void
+     */
+    protected function initializeDeleteSessionAction()
+    {
+        $this->repository = $this->objectManager->get(
+            \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
+        );
+    }
+
+    /**
+     * @return void
+     */
+    protected function deleteSessionAction()
+    {
+        /** @var Session $session */
+        $session = $this->repository->findByUid((int) $this->parameter['session']['uid']);
+        if ($session instanceof Session) {
+            $this->repository->remove($session);
+
+            /** @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
+            $persistenceManager = $this->objectManager->get(
+                \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
+            );
+            $persistenceManager->persistAll();
+
+            $this->message = 'Session ' . $session->getTopic() . ' deleted';
+        } else {
+            $this->status = 'error';
+            $this->message = 'Request did not contain valid data';
+        }
+    }
+
+
+    /**
+     * @return Session
      */
     protected function getSessionFromRequest()
     {
@@ -300,12 +338,12 @@ class AjaxController
             ->get(\TYPO3\CMS\Extbase\Property\PropertyMapper::class)
             ->convert(
                 $this->parameter['session'],
-                \Evoweb\Sessionplaner\Domain\Model\Session::class
+                Session::class
             );
     }
 
     /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
+     * @param Session $session
      */
     protected function updateSessionFromRequest($session)
     {

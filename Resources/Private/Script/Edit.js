@@ -1,4 +1,4 @@
-/* globals jQuery, TYPO3 */
+/* globals jQuery */
 define([
 	'jquery',
 	'TYPO3/CMS/Sessionplaner/DragDrop',
@@ -6,7 +6,8 @@ define([
 ], function ($, dragDrop, modal) {
 	'use strict';
 
-	var Sessionplaner = {
+	var TYPO3 = window.TYPO3 || {},
+		Sessionplaner = {
 		uiBlock: null,
 		stash: null,
 		sessionData: {},
@@ -89,14 +90,12 @@ define([
 	 * @return {object}
 	 */
 	Sessionplaner.applySessionValuesToCard = function ($card, sessionData) {
+		var $sessionCard = $card.find('.t3-page-ce-body-inner');
 		$.each(sessionData, function(index, value) {
-			var $element = $('.' + index, $card.find('.t3-page-ce-body-inner'));
-
+			var $element = $('.' + index, $sessionCard);
+console.log($element);
 			$element.data('value', value);
-
-			if ($element.children().length < 2) {
-				$element.text(value);
-			}
+			$element.text(value);
 		});
 
 		return $card;
@@ -152,13 +151,14 @@ define([
 	 * @returns object
 	 */
 	Sessionplaner.getDataFromCard = function (card) {
-		var data = {};
+		var $sessionCard = $(card).find('.t3-page-ce-body-inner'),
+			data = {};
 
-		$(card).find('.t3-page-ce-body-inner .property').each(function() {
+		$sessionCard.find('.property').each(function() {
 			var $element = $(this);
 			data[$element.data('name')] = $element.data('value');
 		});
-
+console.log(data);
 		return data;
 	};
 
@@ -188,6 +188,14 @@ define([
 	 * @return void
 	 */
 	Sessionplaner.movedSessionSuccess = function () {
+	};
+
+	/**
+	 * @return void
+	 */
+	Sessionplaner.deleteSessionSuccess = function () {
+		var $card = $(this).parents('.t3-page-ce');
+		$card.remove();
 	};
 
 
@@ -227,13 +235,12 @@ define([
 
 		$.ajax({
 			type: 'POST',
-			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_edit'],
+			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_create'],
 			context: this,
 			params: {},
 			data: {
 				id: Sessionplaner.getUrlVar('id'),
 				tx_sessionplaner: {
-					action: 'addSession',
 					session: createdSessionData
 				}
 			},
@@ -253,19 +260,47 @@ define([
 
 		$.ajax({
 			type: 'POST',
-			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_edit'],
+			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_update'],
 			context: this,
 			params: {},
 			data: {
 				id: Sessionplaner.getUrlVar('id'),
 				tx_sessionplaner: {
-					action: 'updateSession',
 					session: updateSessionData
 				}
 			},
 			beforeSend: Sessionplaner.beforeSend,
 			complete: Sessionplaner.afterSend,
 			success: Sessionplaner.updateSessionSuccess
+		});
+	};
+
+	/**
+	 * @param event
+	 *
+	 * @return void
+	 */
+	Sessionplaner.deleteSession = function (event) {
+		event.preventDefault();
+		var $card = $(this).parents('.t3-page-ce'),
+			uid = $card.find('.uid').data('value');
+
+		$.ajax({
+			type: 'POST',
+			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_delete'],
+			context: this,
+			params: {},
+			data: {
+				id: Sessionplaner.getUrlVar('id'),
+				tx_sessionplaner: {
+					session: {
+						uid: uid
+					}
+				}
+			},
+			beforeSend: Sessionplaner.beforeSend,
+			complete: Sessionplaner.afterSend,
+			success: Sessionplaner.deleteSessionSuccess
 		});
 	};
 
@@ -282,13 +317,12 @@ define([
 
 		$.ajax({
 			type: 'POST',
-			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_edit'],
+			url: TYPO3.settings.ajaxUrls['evoweb_sessionplaner_update'],
 			context: this,
 			params: {},
 			data: {
 				id: Sessionplaner.getUrlVar('id'),
 				tx_sessionplaner: {
-					action: 'updateSession',
 					session: movedSessionData
 				}
 			},
@@ -385,6 +419,7 @@ define([
 
 		$(document)
 			.on('click', '#actions-document-new', Sessionplaner.createNewSessionForm)
+			.on('click', '.icon-actions-edit-delete', Sessionplaner.deleteSession)
 			.on('dblclick', '.t3js-page-ce', Sessionplaner.editSessionForm);
 
 		Sessionplaner.initializeDragAndDrop();
