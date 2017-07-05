@@ -149,7 +149,7 @@ define([
 	 * @return void
 	 */
 	Sessionplaner.updateSessionCard = function (sessionData) {
-		var $card = $('.uid[data-value="' + sessionData.uid + '"]', '.t3js-page-ce').parent();
+		var $card = $('.uid[data-value="' + sessionData.uid + '"]', '.t3js-page-ce').parents('.t3js-page-ce');
 
 		Sessionplaner.applySessionValuesToCard($card, sessionData);
 	};
