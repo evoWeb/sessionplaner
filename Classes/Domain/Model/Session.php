@@ -173,7 +173,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setSuggestion($suggestion)
     {
-        $this->hidden = $suggestion;
+        $this->suggestion = $suggestion;
     }
 
     /**

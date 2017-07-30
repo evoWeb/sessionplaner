@@ -24,6 +24,7 @@ namespace Evoweb\Sessionplaner\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -73,15 +74,59 @@ class SuggestController extends ActionController
             $this->redirect('form');
         }
 
-        $session->setHidden(true);
-        $session->setSuggestion(true);
+        $session = $this->setDefaultValues($session);
         $this->sessionRepository->add($session);
+
         $title = null;
         $message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('yourSessionIsSaved', 'sessionplaner');
         $this->addFlashMessage($message, $title);
 
         // Redirect to prevent multiple entries through reloading
         $this->redirect('new');
+    }
+
+    /**
+     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
+     *
+     * @return \Evoweb\Sessionplaner\Domain\Model\Session
+     */
+    protected function setDefaultValues(\Evoweb\Sessionplaner\Domain\Model\Session $session)
+    {
+        if (isset($this->settings['default'])
+            && is_array($this->settings['default'])
+            && !empty($this->settings['default'])) {
+            foreach ($this->settings['default'] as $field => $value) {
+                $value = $this->getDefaultValues($field, $value);
+
+                $setter = 'set' . ucfirst($field);
+                if (method_exists($session, $setter)) {
+                    call_user_func([$session, $setter], $value);
+                }
+            }
+        }
+
+        return $session;
+    }
+
+    /**
+     * @param string $field
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    protected function getDefaultValues($field, $value)
+    {
+        switch ($field) {
+            case 'day':
+                if (!empty($value) && intval($value) > 0) {
+                    /** @var DayRepository $dayRepository */
+                    $dayRepository = $this->objectManager->get(DayRepository::class);
+                    $value = $dayRepository->findByUid($value);
+                }
+                break;
+        }
+
+        return $value;
     }
 
     /**

@@ -3,27 +3,27 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
 		<header/>
 		<body>
-			<trans-unit id="storageFolderEmpty" xml:space="preserve" approved="yes">
-				<source><![CDATA[The selected storage folder does not contain any days.<br/>
+			<trans-unit id="storageFolderEmpty" xml:space="preserve">
+				<source><![CDATA[The selected storage folder does not contain any rooms.<br/>
 				Please create days, rooms and slots previous planing sessions.<br/>
 				For further information consulte the documentation.]]></source>
 			</trans-unit>
-			<trans-unit id="session-new" xml:space="preserve" approved="yes">
+			<trans-unit id="session-new" xml:space="preserve">
 				<source>Add new session</source>
 			</trans-unit>
-			<trans-unit id="filter-tags" xml:space="preserve" approved="yes">
+			<trans-unit id="filter-tags" xml:space="preserve">
 				<source>Tags</source>
 			</trans-unit>
-			<trans-unit id="filter-user" xml:space="preserve" approved="yes">
+			<trans-unit id="filter-user" xml:space="preserve">
 				<source>Slideshare verfügbar</source>
 			</trans-unit>
-			<trans-unit id="filter-time" xml:space="preserve" approved="yes">
+			<trans-unit id="filter-time" xml:space="preserve">
 				<source>Current time</source>
 			</trans-unit>
-			<trans-unit id="filter-headline" xml:space="preserve" approved="yes">
+			<trans-unit id="filter-headline" xml:space="preserve">
 				<source>Sessionfilter</source>
 			</trans-unit>
-			<trans-unit id="filter-comment" xml:space="preserve" approved="yes">
+			<trans-unit id="filter-comment" xml:space="preserve">
 				<source>Entries are marked and stored in a cookie by double click an item.
 					Filter are list after a reload.</source>
 			</trans-unit>
