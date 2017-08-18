@@ -155,11 +155,6 @@ return [
                         '0' => $languageFile . 'notassigned',
                     ],
                 ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
             ],
         ],
         'room' => [
@@ -176,11 +171,6 @@ return [
                 'items' => [
                     '0' => [
                         '0' => $languageFile . 'notassigned',
-                    ],
-                ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
                     ],
                 ],
             ],
@@ -201,11 +191,6 @@ return [
                         '0' => $languageFile . 'notassigned',
                     ],
                 ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
             ],
         ],
         'tags' => [
@@ -222,35 +207,29 @@ return [
                 'size' => 5,
                 'minitems' => 0,
                 'maxitems' => 100,
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
             ],
         ],
     ],
     'types' => [
         '0' => [
             'showitem' => '
-            hidden,
-            suggestion,
-            social,
-            donotlink,
-            topic,
-            speaker,
-            twitter,
-            attendees,
-            documents,
-            description,
-            --div--;
-            Relations,
-            type,
-            level,
-            day,
-            room,
-            slot,
-            tags
+                hidden,
+                suggestion,
+                social,
+                donotlink,
+                topic,
+                speaker,
+                twitter,
+                attendees,
+                documents,
+                description,
+                --div--;Relations,
+                type,
+                level,
+                day,
+                room,
+                slot,
+                tags
             '
         ]
     ],

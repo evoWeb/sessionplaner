@@ -26,9 +26,9 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-start',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 20,
-                'eval' => 'time,required',
-                'max' => 256,
+                'eval' => 'time,required'
             ],
         ],
         'duration' => [
