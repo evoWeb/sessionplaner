@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
-	  xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers"
-	  data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers"
+			data-namespace-typo3-fluid="true">
 <head>
 	<title>Edit form</title>
 </head>
@@ -61,15 +59,15 @@
 		<f:for each="{days}" as="day">
 			<f:if condition="{day} == {currentDay}">
 				<div id="sessionplaner">
-				<h1>{day.name}</h1>
+					<h1>{day.name}</h1>
 
-				<div id="stash" class="t3-page-ce-dropzone-available t3js-page-ce-dropzone-available">
-					<f:for each="{unassignedSessions}" as="session">
-						<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
-					</f:for>
-				</div>
+					<div id="stash" class="t3-page-ce-dropzone-available t3js-page-ce-dropzone-available">
+						<f:for each="{unassignedSessions}" as="session">
+							<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
+						</f:for>
+					</div>
 
-				<f:render partial="Grid" section="Main" arguments="{day: day}"/>
+					<f:render partial="Grid" section="Main" arguments="{day: day}"/>
 				</div>
 			</f:if>
 		</f:for>

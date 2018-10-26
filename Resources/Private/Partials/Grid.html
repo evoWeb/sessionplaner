@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers"
+			data-namespace-typo3-fluid="true">
 <head>
 	<title>Edit form</title>
 </head>
 <body>
 <f:section name="Main">
+<div id="">
+	<f:format.raw>
+		<sp:be.buttons.icon
+			uri="#"
+			id="actions-document-new-in-grid"
+			iconKey="actions-document-new"
+			title="{f:translate(key: 'session-new')}"
+			class="btn btn-default btn-sm t3js-page-new-ce"/>
+	</f:format.raw>
+</div>
 <div class="t3-grid-container">
 	<table class="t3-grid-table">
 		<colgroup>
-			<col width="55px">
+			<col width="60px">
 			<f:for each="{day.rooms}" as="room">
 				<col>
 			</f:for>
@@ -31,6 +41,7 @@
 					</th>
 					<f:for each="{day.rooms}" as="room">
 						<td class="t3-grid-cell t3-page-ce-dropzone-available t3js-page-ce-dropzone-available"
+								data-day="{day.uid}"
 								data-room="{room.uid}"
 								data-slot="{slot.uid}">
 							<f:for each="{room.sessions}" as="session">
