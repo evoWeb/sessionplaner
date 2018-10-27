@@ -317,9 +317,9 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
+     * @param int|\Evoweb\Sessionplaner\Domain\Model\Day $day
      */
-    public function setDay(\Evoweb\Sessionplaner\Domain\Model\Day $day)
+    public function setDay($day)
     {
         $this->day = $day;
     }
@@ -333,7 +333,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param integer|\Evoweb\Sessionplaner\Domain\Model\Room $room
+     * @param int|\Evoweb\Sessionplaner\Domain\Model\Room $room
      */
     public function setRoom($room)
     {
@@ -349,7 +349,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param integer|\Evoweb\Sessionplaner\Domain\Model\Slot $slot
+     * @param int|\Evoweb\Sessionplaner\Domain\Model\Slot $slot
      */
     public function setSlot($slot)
     {

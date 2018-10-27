@@ -39,59 +39,34 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository
-     *
-     * @return void
-     */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository)
     {
         $this->dayRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @return void
-     */
     public function listDaysAction()
     {
         $days = $this->dayRepository->findAll();
         $this->view->assign('days', $days);
     }
 
-    /**
-     * @return void
-     */
     public function showDay()
     {
     }
 
-    /**
-     * @return void
-     */
     public function showRoom()
     {
     }
 
-    /**
-     * @return void
-     */
     public function listSessions()
     {
     }
 
-    /**
-     * @return void
-     */
     public function screenAction()
     {
     }

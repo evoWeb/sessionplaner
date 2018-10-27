@@ -39,31 +39,16 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository
-     *
-     * @return void
-     */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository)
     {
         $this->dayRepository = $dayRepository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     *
-     * @return void
-     */
     public function listAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         if ($session) {
@@ -79,13 +64,6 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->view->assign('sessions', $sessions);
     }
 
-    /**
-     * action show
-     *
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     *
-     * @return void
-     */
     public function showAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         if ($session === null) {

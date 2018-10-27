@@ -24,6 +24,7 @@ namespace Evoweb\Sessionplaner\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Evoweb\Sessionplaner\Domain\Model\Day;
 use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\Domain\Model\Slot;
@@ -65,28 +66,9 @@ class AjaxController
     protected $parameter = [];
 
     /**
-     * @var array
-     */
-    protected $actions = [
-        '/ajax/evoweb/sessionplaner/create' => 'createSession',
-        '/ajax/evoweb/sessionplaner/update' => 'updateSession',
-        '/ajax/evoweb/sessionplaner/delete' => 'deleteSession',
-    ];
-
-    /**
-     * @var string
-     */
-    protected $actionMethodName;
-
-    /**
-     * @var boolean
-     */
-    protected $isProcessed = false;
-
-    /**
      * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
      */
-    protected $repository;
+    protected $sessionRepository;
 
     /**
      * @var string
@@ -101,7 +83,12 @@ class AjaxController
     /**
      * @var array
      */
-    protected $data;
+    protected $data = [];
+
+    /**
+     * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
+     */
+    protected $dayRepository;
 
     /**
      * @var \Evoweb\Sessionplaner\Domain\Repository\RoomRepository
@@ -119,7 +106,6 @@ class AjaxController
     public function __construct()
     {
         $this->backendUser = $GLOBALS['BE_USER'];
-
         $this->moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration']['web_SessionplanerTxSessionplanerM1'];
 
         $this->objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
@@ -128,83 +114,27 @@ class AjaxController
         );
     }
 
-    /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     *
-     * @return ResponseInterface
-     */
-    public function dispatch(ServerRequestInterface $request, ResponseInterface $response)
-    {
-        $this->initializeAction($request, $response);
-        $this->callActionMethod();
-        $this->render();
-
-        return $this->response;
-    }
-
-    /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     *
-     * @return void
-     */
-    protected function initializeAction($request, $response)
+    protected function initializeAction(ServerRequestInterface $request, ResponseInterface $response)
     {
         $this->parameter = $request->getParsedBody()['tx_sessionplaner'];
-        $routePath = $request->getAttribute('routePath');
-
-        if (!($this->backendUser->isAdmin()
-            || $this->backendUser->modAccess($this->moduleConfiguration, 0))
-            || !isset($this->actions[$routePath])) {
-            $this->actionMethodName = 'errorAction';
-        } else {
-            $this->actionMethodName = $this->actions[$routePath] . 'Action';
-        }
-
         $this->response = $response;
-        $this->response->withHeader('Content-Type', 'application/json; charset=utf-8');
+
+        if (!($this->backendUser->isAdmin() || $this->backendUser->modAccess($this->moduleConfiguration, 0))) {
+            $this->errorAction();
+            return false;
+        }
 
         $configuration = $this->configurationManager->getConfiguration(
             \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
         if (empty($configuration['persistence']['storagePid'])) {
-            $currentPid['persistence']['storagePid'] = $_REQUEST['id'];
+            $currentPid['persistence']['storagePid'] = $request->getParsedBody()['id'];
             $this->configurationManager->setConfiguration(array_merge($configuration, $currentPid));
         }
+        return true;
     }
 
-    /**
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InfiniteLoopException
-     *
-     * @return void
-     */
-    protected function callActionMethod()
-    {
-        $dispatchLoopCount = 0;
-        while ($this->isProcessed === false) {
-            if ($dispatchLoopCount++ > 99) {
-                throw new \TYPO3\CMS\Extbase\Mvc\Exception\InfiniteLoopException(
-                    'Could not ultimately dispatch the request after ' . $dispatchLoopCount .
-                    ' iterations. Most probably, a @ignorevalidation or @dontvalidate (old propertymapper) annotation
-                    is missing on re-displaying a form with validation errors.',
-                    1217839467
-                );
-            }
-            $this->isProcessed = true;
 
-            $actionInitializationMethodName = 'initialize' . ucfirst($this->actionMethodName);
-            if (method_exists($this, $actionInitializationMethodName)) {
-                call_user_func([$this, $actionInitializationMethodName]);
-            }
-
-            call_user_func([$this, $this->actionMethodName]);
-        }
-    }
-
-    /***
-     * @return void
-     */
     protected function render()
     {
         $this->response->getBody()->write(
@@ -219,9 +149,6 @@ class AjaxController
     }
 
 
-    /**
-     * @return void
-     */
     protected function errorAction()
     {
         $this->status = 'error';
@@ -229,24 +156,23 @@ class AjaxController
     }
 
 
-    /**
-     * @return void
-     */
     protected function initializeCreateSessionAction()
     {
-        $this->repository = $this->objectManager->get(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class);
+        $this->sessionRepository = $this->objectManager->get(
+            \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
+        );
     }
 
-    /**
-     * @return void
-     */
-    protected function createSessionAction()
+    public function createSessionAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
+        $this->initializeAction($request, $response);
+        $this->initializeCreateSessionAction();
+
         $session = $this->getSessionFromRequest();
         if ($session instanceof Session) {
-            $this->repository->add($session);
+            $this->sessionRepository->add($session);
 
-            $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class)->persistAll();
+            $this->persistAll();
 
             $this->message = 'Session ' . $session->getTopic() . ' saved';
             $this->data = ['uid' => $session->getUid()];
@@ -254,16 +180,18 @@ class AjaxController
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
         }
+        $this->render();
+        return $response;
     }
 
 
-    /**
-     * @return void
-     */
     protected function initializeUpdateSessionAction()
     {
-        $this->repository = $this->objectManager->get(
+        $this->sessionRepository = $this->objectManager->get(
             \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
+        );
+        $this->dayRepository = $this->objectManager->get(
+            \Evoweb\Sessionplaner\Domain\Repository\DayRepository::class
         );
         $this->roomRepository = $this->objectManager->get(
             \Evoweb\Sessionplaner\Domain\Repository\RoomRepository::class
@@ -273,18 +201,18 @@ class AjaxController
         );
     }
 
-    /**
-     * @return void
-     */
-    protected function updateSessionAction()
+    public function updateSessionAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
+        $this->initializeAction($request, $response);
+        $this->initializeUpdateSessionAction();
+
         /** @var Session $session */
-        $session = $this->repository->findByUid((int) $this->parameter['session']['uid']);
+        $session = $this->sessionRepository->findByUid((int) $this->parameter['session']['uid']);
         $this->updateSessionFromRequest($session);
         if ($session instanceof Session) {
-            $this->repository->update($session);
+            $this->sessionRepository->update($session);
 
-            $this->objectManager->get(\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class)->persistAll();
+            $this->persistAll();
 
             $this->message = 'Session ' . $session->getTopic() . ' updated';
             $this->data = ['uid' => $session->getUid()];
@@ -292,46 +220,40 @@ class AjaxController
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
         }
+        $this->render();
+        return $response;
     }
 
 
-    /**
-     * @return void
-     */
     protected function initializeDeleteSessionAction()
     {
-        $this->repository = $this->objectManager->get(
+        $this->sessionRepository = $this->objectManager->get(
             \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
         );
     }
 
-    /**
-     * @return void
-     */
-    protected function deleteSessionAction()
+    public function deleteSessionAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        /** @var Session $session */
-        $session = $this->repository->findByUid((int) $this->parameter['session']['uid']);
-        if ($session instanceof Session) {
-            $this->repository->remove($session);
+        $this->initializeAction($request, $response);
+        $this->initializeDeleteSessionAction();
 
-            /** @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
-            $persistenceManager = $this->objectManager->get(
-                \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
-            );
-            $persistenceManager->persistAll();
+        /** @var Session $session */
+        $session = $this->sessionRepository->findByUid((int) $this->parameter['session']['uid']);
+        if ($session instanceof Session) {
+            $this->sessionRepository->remove($session);
+
+            $this->persistAll();
 
             $this->message = 'Session ' . $session->getTopic() . ' deleted';
         } else {
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
         }
+        $this->render();
+        return $response;
     }
 
 
-    /**
-     * @return Session
-     */
     protected function getSessionFromRequest()
     {
         return $this->objectManager
@@ -342,10 +264,7 @@ class AjaxController
             );
     }
 
-    /**
-     * @param Session $session
-     */
-    protected function updateSessionFromRequest($session)
+    protected function updateSessionFromRequest(Session $session)
     {
         $sessionData = $this->parameter['session'];
         unset($sessionData['uid']);
@@ -375,13 +294,29 @@ class AjaxController
                     $session->setSlot($slot);
                     break;
 
+                case $field == 'day' && $value == 0:
+                    $session->setDay(0);
+                    break;
+
                 case $field == 'day':
-                    // do nothing
+                    // get day model and set
+                    /** @var Day $day */
+                    $day = $this->dayRepository->findByUid($value);
+                    $session->setDay($day);
                     break;
 
                 default:
                     $session->{'set' . GeneralUtility::underscoredToUpperCamelCase($field)}($value);
             }
         }
+    }
+
+    protected function persistAll()
+    {
+        /** @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
+        $persistenceManager = $this->objectManager->get(
+            \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
+        );
+        $persistenceManager->persistAll();
     }
 }

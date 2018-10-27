@@ -8,6 +8,7 @@ define([
 	'use strict';
 
 	function Sessionplaner() {
+		this.pageId = 0;
 		this.uiBlock = null;
 		this.stash = null;
 		this.sessionData = {};
@@ -16,34 +17,8 @@ define([
 		this.initialize();
 	}
 
-	/**
-	 * Returns all url parameter
-	 *
-	 * @returns {Array}
-	 */
-	Sessionplaner.prototype.getUrlVars = function () {
-		let vars = [],
-			hash,
-			hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-
-		for (let i = 0; i < hashes.length; i++) {
-			hash = hashes[i].split('=');
-			vars.push(hash[0]);
-			vars[hash[0]] = hash[1];
-		}
-
-		return vars;
-	};
-
-	/**
-	 * Needed to get the selected page for the ajax requests
-	 *
-	 * @param {string} name
-	 *
-	 * @returns {*}
-	 */
-	Sessionplaner.prototype.getUrlVar = function(name) {
-		return this.getUrlVars()[name];
+	Sessionplaner.prototype.setPageId = function (pageId) {
+		this.pageId = pageId;
 	};
 
 	/**
@@ -193,7 +168,7 @@ define([
 	};
 
 	Sessionplaner.prototype.deleteSessionSuccess = function () {
-		$(this).parents('.t3-page-ce').remove();
+		$('[data-name="uid"][data-value="' + this.sessionData.uid + '"]').parents('.t3-page-ce').remove();
 	};
 
 
@@ -220,33 +195,34 @@ define([
 		this.ajaxActive = false;
 	};
 
-	Sessionplaner.prototype.sendAjaxRequest = function (ajaxUrlKey, sessionData, cb) {
+	Sessionplaner.prototype.sendAjaxRequest = function (ajaxUrlKey, sessionData, doneCallback) {
 		let self = this;
 
 		$.ajax(TYPO3.settings.ajaxUrls[ajaxUrlKey], {
 			method: 'post',
-			beforeSend: self.beforeSend,
-			complete: self.afterSend,
+			beforeSend: function () { self.beforeSend(); },
+			complete: function () { self.afterSend(); },
 			data: {
-				id: self.getUrlVar('id'),
+				id: self.pageId,
 				tx_sessionplaner: {
 					session: sessionData
 				}
 			}
-		}).done(cb);
+		}).done(doneCallback);
 	};
 
 	/**
 	 * @param {object} event
 	 */
 	Sessionplaner.prototype.createSession = function (event) {
+		let self = this;
 		this.sessionData = this.prepareData($('form', event.target).serializeArray());
 
 		this.sendAjaxRequest(
 			'evoweb_sessionplaner_create',
 			this.sessionData,
 			function (data) {
-				this.createSessionSuccess(data);
+				self.createSessionSuccess(data);
 			}
 		);
 	};
@@ -255,7 +231,8 @@ define([
 	 * @param {object} event
 	 */
 	Sessionplaner.prototype.updateSession = function (event) {
-		let updateSessionData = this.prepareData($('form', event.target).serializeArray());
+		let self = this,
+			updateSessionData = this.prepareData($('form', event.target).serializeArray());
 		updateSessionData.uid = this.sessionData.uid;
 		this.sessionData = updateSessionData;
 
@@ -263,7 +240,7 @@ define([
 			'evoweb_sessionplaner_update',
 			this.sessionData,
 			function (data) {
-				this.updateSessionSuccess(data);
+				self.updateSessionSuccess(data);
 			}
 		);
 	};
@@ -274,13 +251,15 @@ define([
 	 */
 	Sessionplaner.prototype.deleteSession = function (element, event) {
 		event.preventDefault();
-		let uid = $(element).parents('.t3-page-ce').find('.uid').data('value');
+		console.log(event);
+		let self = this;
+		this.sessionData = { uid: $(element).parents('.t3-page-ce').find('.uid').data('value') };
 
 		this.sendAjaxRequest(
 			'evoweb_sessionplaner_delete',
-			{ uid: uid },
+			this.sessionData,
 			function (data) {
-				this.deleteSessionSuccess(data);
+				self.deleteSessionSuccess(data);
 			}
 		);
 	};
@@ -290,17 +269,19 @@ define([
 	 * @param {object} $droppedOnElement
 	 */
 	Sessionplaner.prototype.movedSession = function ($movedElement, $droppedOnElement) {
-		let movedSessionData = this.getDataFromCard($movedElement);
+		let self = this,
+			movedSessionData = this.getDataFromCard($movedElement);
 		this.sessionData = this.addValuesFromParent(movedSessionData, $droppedOnElement);
 
 		this.sendAjaxRequest(
 			'evoweb_sessionplaner_update',
 			this.sessionData,
 			function (data) {
-				this.movedSessionSuccess(data);
+				self.movedSessionSuccess(data);
 			}
 		);
 	};
+
 
 	Sessionplaner.prototype.createNewSessionForm = function () {
 		let self = this,

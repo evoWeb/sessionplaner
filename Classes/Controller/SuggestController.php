@@ -37,21 +37,11 @@ class SuggestController extends ActionController
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session|null $session
-     *
-     * @return void
-     */
     public function newAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         // Has a session been submitted?
@@ -62,11 +52,6 @@ class SuggestController extends ActionController
         $this->view->assign('session', $session);
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     *
-     * @return void
-     */
     public function createAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         if ($session === null) {
@@ -85,13 +70,9 @@ class SuggestController extends ActionController
         $this->redirect('new');
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     *
-     * @return \Evoweb\Sessionplaner\Domain\Model\Session
-     */
-    protected function setDefaultValues(\Evoweb\Sessionplaner\Domain\Model\Session $session)
-    {
+    protected function setDefaultValues(
+        \Evoweb\Sessionplaner\Domain\Model\Session $session
+    ): \Evoweb\Sessionplaner\Domain\Model\Session {
         if (isset($this->settings['default'])
             && is_array($this->settings['default'])
             && !empty($this->settings['default'])) {

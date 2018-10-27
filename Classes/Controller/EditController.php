@@ -42,39 +42,25 @@ class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository
-     *
-     * @return void
-     */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository)
     {
         $this->dayRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @return void
-     */
     protected function initializeAction()
     {
         /** @var \TYPO3\CMS\Core\Page\PageRenderer::class $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Sessionplaner/Edit');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Sessionplaner/Edit', 'function(sessionplaner) {
+            sessionplaner.setPageId(' . (int)GeneralUtility::_GP('id') . ');
+        }');
     }
 
-    /**
-     * @return void
-     */
     public function showAction()
     {
         if ($this->request->hasArgument('day')) {
