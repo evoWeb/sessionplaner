@@ -28,8 +28,8 @@
 		<div>
 			<form class="new-session">
 				<f:form.hidden name="day" value="{day.uid}"/>
-				<f:form.hidden name="room" value="0"/>
-				<f:form.hidden name="slot" value="0"/>
+				<f:form.hidden class="room" name="room" value="0"/>
+				<f:form.hidden class="slot" name="slot" value="0"/>
 				<dl>
 					<dt><label for="topic"><f:translate key="topic"/>*</label></dt>
 					<dd><f:form.textfield id="topic" name="topic" class="topic"/></dd>

@@ -65,8 +65,7 @@ define([
 	 */
 	Sessionplaner.prototype.applySessionValuesToForm = function ($form, sessionData) {
 		$.each(sessionData, function(index, value) {
-			let $element = $('dd .' + index + ':first', $form);
-
+			let $element = $('input.' + index + ':first', $form);
 			if ($element.length > 0) {
 				$element.val(value);
 			}
@@ -379,7 +378,8 @@ define([
 	Sessionplaner.prototype.mouseOver = function (element) {
 		let $element = $(element);
 		this.sessionData = {
-
+			room: $element.data('room'),
+			slot: $element.data('slot')
 		};
 		if (!this.dragActive && $element.children().length === 0) {
 			this.gridNewSessionButton.appendTo($element);
@@ -388,7 +388,8 @@ define([
 
 	Sessionplaner.prototype.mouseOut = function (element, event) {
 		let e = event.toElement || event.relatedTarget;
-		if (e === element
+		if (e === null
+			|| e === element
 			|| e.parentNode === element
 			|| e.parentNode.parentNode === element
 			|| e.parentNode.parentNode.parentNode === element
