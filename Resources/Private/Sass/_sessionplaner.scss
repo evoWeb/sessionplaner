@@ -1,74 +1,80 @@
 .t3js-page-ce-dropzone-available.active {
-	height: auto;
+    height: auto;
 }
 
 .topic,
 .speaker {
-	font-weight: 700;
+    font-weight: 700;
 }
 
 .t3-grid-container {
-	margin-left: 210px;
+    margin-left: 210px;
 
-	table {
-		width: 100%;
-	}
+    table {
+        width: 100%;
+    }
 
-	tbody {
-		th {
-			vertical-align: top;
-			border-bottom: 1px solid #cdcdcd;
-		}
+    tbody {
+        th {
+            vertical-align: top;
+            border-bottom: 1px solid #cdcdcd;
+        }
 
-		th, td {
-			&.t3js-page-ce-dropzone-available.active {
-				background-color: #fbefdd;
-			}
+        th, td {
+            &.t3js-page-ce-dropzone-available.active {
+                background-color: #fbefdd;
+            }
 
-			&.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
-				background-color: #d1e2bd;
-			}
-		}
+            &.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
+                background-color: #d1e2bd;
+            }
+        }
 
-		tr.break th,
-		tr.break td {
-			background-color: #d1d1d1;
-		}
+        tr.break th,
+        tr.break td {
+            background-color: #d1d1d1;
+        }
 
-		.time,
-		.room {
-			min-height: 94px;
-		}
+        .time,
+        .room {
+            min-height: 94px;
+        }
 
-		.time {
-			padding: 10px;
-		}
-	}
+        .time {
+            padding: 10px;
+        }
+    }
 
-	.t3js-page-ce {
-		width: inherit;
-		margin: 10px;
-	}
+    .t3js-page-ce {
+        width: inherit;
+        margin: 10px;
+    }
 }
 
 #stash {
-	background-color: #fafafa;
-	border-top: 1px solid #cdcdcd;
-	border-bottom: 1px solid #cdcdcd;
-	float: left;
-	margin-top: 27px;
-	width: 200px;
-	min-height: 30px;
+    background-color: #fafafa;
+    border-top: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+    float: left;
+    margin-top: 27px;
+    width: 200px;
+    min-height: 30px;
 
-	&.t3js-page-ce-dropzone-available.active {
-		background-color: #fbefdd;
-	}
+    &.t3js-page-ce-dropzone-available.active {
+        background-color: #fbefdd;
+    }
 
-	&.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
-		background-color: #d1e2bd;
-	}
+    &.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
+        background-color: #d1e2bd;
+    }
 
-	.t3js-page-ce {
-		margin: 10px;
-	}
+    .t3js-page-ce {
+        margin: 10px;
+    }
+}
+
+.t3-grid-cell #actions-document-new-in-grid {
+    display: block;
+    width: 26px;
+    margin: 0 auto;
 }

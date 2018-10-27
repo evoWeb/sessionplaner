@@ -11,8 +11,11 @@ define([
 		this.pageId = 0;
 		this.uiBlock = null;
 		this.stash = null;
+		this.gridButtonGroup = null;
+		this.gridNewSessionButton = null;
 		this.sessionData = {};
 		this.ajaxActive = false;
+		this.dragActive = false;
 
 		this.initialize();
 	}
@@ -155,7 +158,11 @@ define([
 		this.sessionData.uid = response.data.uid;
 
 		let $card = this.createSessionCard(this.sessionData);
-		this.stash.prepend($card);
+		if (this.sessionData.room && this.sessionData.slot) {
+			$('[data-room="' + this.sessionData.room + '"][data-slot="' + this.sessionData.slot + '"]').prepend($card);
+		} else {
+			this.stash.prepend($card);
+		}
 
 		dragDrop.initializeDraggable($card);
 	};
@@ -247,11 +254,8 @@ define([
 
 	/**
 	 * @param {object} element
-	 * @param {object} event
 	 */
-	Sessionplaner.prototype.deleteSession = function (element, event) {
-		event.preventDefault();
-		console.log(event);
+	Sessionplaner.prototype.deleteSession = function (element) {
 		let self = this;
 		this.sessionData = { uid: $(element).parents('.t3-page-ce').find('.uid').data('value') };
 
@@ -284,12 +288,15 @@ define([
 
 
 	Sessionplaner.prototype.createNewSessionForm = function () {
-		let self = this,
-			$newSession = this.getTemplateElement('sessionFormTemplate');
+		let self = this;
+		this.sessionData = {};
 
 		modal.confirm(
 			'Create session',
-			$newSession,
+			this.applySessionValuesToForm(
+				this.getTemplateElement('sessionFormTemplate'),
+				this.sessionData
+			),
 			Severity.ok,
 			[
 				{
@@ -311,12 +318,14 @@ define([
 	};
 
 	Sessionplaner.prototype.createNewSessionFormInGrid = function () {
-		let self = this,
-			$newSession = this.getTemplateElement('sessionFormTemplate');
+		let self = this;
 
 		modal.confirm(
 			'Create session',
-			$newSession,
+			this.applySessionValuesToForm(
+				this.getTemplateElement('sessionFormTemplate'),
+				this.sessionData
+			),
 			Severity.ok,
 			[
 				{
@@ -337,17 +346,16 @@ define([
 		}).on('confirm.button.ok', function (event) { self.createSession(event); });
 	};
 
-	Sessionplaner.prototype.editSessionForm = function (element) {
+	Sessionplaner.prototype.editSession = function (element) {
+		let self = this;
 		this.sessionData = this.getDataFromCard(element);
-
-		let $editSession = this.applySessionValuesToForm(
-			this.getTemplateElement('sessionFormTemplate'),
-			this.sessionData
-		);
 
 		modal.confirm(
 			'Edit session',
-			$editSession,
+			this.applySessionValuesToForm(
+				this.getTemplateElement('sessionFormTemplate'),
+				this.sessionData
+			),
 			Severity.ok,
 			[
 				{
@@ -365,11 +373,29 @@ define([
 			]
 		).on('button.clicked', function() {
 			modal.dismiss();
-		}).on('confirm.button.ok', function () { this.updateSession(); });
+		}).on('confirm.button.ok', function (event) { self.updateSession(event); });
 	};
 
-	Sessionplaner.prototype.moveNewButton = function (element) {
+	Sessionplaner.prototype.mouseOver = function (element) {
+		let $element = $(element);
+		this.sessionData = {
 
+		};
+		if (!this.dragActive && $element.children().length === 0) {
+			this.gridNewSessionButton.appendTo($element);
+		}
+	};
+
+	Sessionplaner.prototype.mouseOut = function (element, event) {
+		let e = event.toElement || event.relatedTarget;
+		if (e === element
+			|| e.parentNode === element
+			|| e.parentNode.parentNode === element
+			|| e.parentNode.parentNode.parentNode === element
+			|| e.parentNode.parentNode.parentNode.parentNode === element) {
+			return;
+		}
+		this.gridNewSessionButton.appendTo(this.gridButtonGroup);
 	};
 
 	/**
@@ -377,11 +403,18 @@ define([
 	 */
 	Sessionplaner.prototype.initializeDragAndDrop = function () {
 		let self = this,
+			originalDragStart = dragDrop.onDragStart,
 			originalDrop = dragDrop.onDrop;
 
-		dragDrop.onDrop = function($draggableElement, $dropAbleElement, event) {
+		dragDrop.onDragStart = function ($draggableElement) {
+			self.dragActive = true;
+			originalDragStart($draggableElement);
+		};
+
+		dragDrop.onDrop = function ($draggableElement, $dropAbleElement, event) {
 			self.movedSession($draggableElement, $dropAbleElement);
 			originalDrop($draggableElement, $dropAbleElement, event);
+			self.dragActive = false;
 		}
 	};
 
@@ -390,14 +423,16 @@ define([
 
 		this.uiBlock = $('#t3js-ui-block');
 		this.stash = $('#stash');
+		this.gridButtonGroup = $('#gridButtonGroup');
+		this.gridNewSessionButton = this.gridButtonGroup.find('#actions-document-new-in-grid');
 
 		$(document)
 			.on('click', '#actions-document-new', function () { self.createNewSessionForm(); })
 			.on('click', '#actions-document-new-in-grid', function () { self.createNewSessionFormInGrid(); })
-			.on('click', '.icon-actions-edit-delete', function (event) { self.deleteSession(this, event); })
-			.on('dblclick', '.t3js-page-ce', function () { self.editSessionForm(this); })
-			.on('mouseover', '', function () { self.moveNewButton(this); })
-			.on('mouseout', '', function () { self.moveNewButton(this); });
+			.on('click', '.icon-actions-edit-delete', function () { self.deleteSession(this); })
+			.on('dblclick', '.t3js-page-ce', function () { self.editSession(this); })
+			.on('mouseover', '.t3js-grid-cell', function () { self.mouseOver(this); })
+			.on('mouseout', '.t3js-grid-cell', function (event) { self.mouseOut(this, event); });
 
 		this.initializeDragAndDrop();
 	};

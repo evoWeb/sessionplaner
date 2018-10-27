@@ -6,7 +6,7 @@
 </head>
 <body>
 <f:section name="Main">
-<div id="">
+<div id="gridButtonGroup" class="hidden">
 	<f:format.raw>
 		<sp:be.buttons.icon
 			uri="#"
@@ -40,7 +40,7 @@
 						{slot.duration} <f:translate key="minutes"/>
 					</th>
 					<f:for each="{day.rooms}" as="room">
-						<td class="t3-grid-cell t3-page-ce-dropzone-available t3js-page-ce-dropzone-available"
+						<td class="t3-grid-cell t3-page-ce-dropzone-available t3js-page-ce-dropzone-available t3js-grid-cell"
 								data-day="{day.uid}"
 								data-room="{room.uid}"
 								data-slot="{slot.uid}">

@@ -60,4 +60,10 @@
   margin: 10px;
 }
 
+.t3-grid-cell #actions-document-new-in-grid {
+  display: block;
+  width: 26px;
+  margin: 0 auto;
+}
+
 /*# sourceMappingURL=backend.css.map */
