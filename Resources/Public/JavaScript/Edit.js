@@ -174,7 +174,13 @@ define([
 	};
 
 	Sessionplaner.prototype.deleteSessionSuccess = function () {
-		$('[data-name="uid"][data-value="' + this.sessionData.uid + '"]').parents('.t3-page-ce').remove();
+		let self = this;
+		$('[data-name="uid"]').each(function () {
+			let $element = $(this);
+			if (parseInt($element.data('value')) === self.sessionData.uid) {
+				$element.parents('.t3-page-ce').remove();
+			}
+		});
 	};
 
 
@@ -257,7 +263,7 @@ define([
 	Sessionplaner.prototype.deleteSession = function (element) {
 		let self = this;
 		this.sessionData = { uid: $(element).parents('.t3-page-ce').find('.uid').data('value') };
-
+console.log($(element).parents('.t3-page-ce'));
 		this.sendAjaxRequest(
 			'evoweb_sessionplaner_delete',
 			this.sessionData,
