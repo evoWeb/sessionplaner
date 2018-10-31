@@ -263,7 +263,7 @@ define([
 	Sessionplaner.prototype.deleteSession = function (element) {
 		let self = this;
 		this.sessionData = { uid: $(element).parents('.t3-page-ce').find('.uid').data('value') };
-console.log($(element).parents('.t3-page-ce'));
+
 		this.sendAjaxRequest(
 			'evoweb_sessionplaner_delete',
 			this.sessionData,
