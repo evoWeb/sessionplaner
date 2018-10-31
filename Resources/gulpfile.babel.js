@@ -2,6 +2,7 @@
 
 import gulp from 'gulp';
 import path from 'path';
+import sourcemaps from 'gulp-sourcemaps';
 import babel from 'gulp-babel';
 import compass from 'gulp-compass';
 import concat from 'gulp-concat';
@@ -72,6 +73,12 @@ const tasks = {
 			}
 		]
 	},
+	babel: {
+		srcs: [
+			path.join(paths.src, 'Script/*.js')
+		],
+		dest: 'JavaScript'
+	},
 	uglify: [
 		{
 			src: path.join(paths.dest, 'JavaScript/Edit.js'),
@@ -107,7 +114,14 @@ gulp.task('concat', () => {
 });
 
 // Uglify
-gulp.task('uglify', () => {
+gulp.task('babel', () => {
+	return gulp.src(tasks.babel.srcs)
+		.pipe(sourcemaps.init())
+		.pipe(babel({ presets: ['es2015'] }))
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest(path.join(paths.dest, tasks.babel.dest)));
+});
+gulp.task('uglify', ['babel'], () => {
 	tasks.uglify.forEach(function (file) {
 		gulp.src(file.src)
 			.pipe(uglify())
@@ -144,5 +158,5 @@ gulp.task('watch', () => {
 
 gulp.task('test', ['jshint']);
 gulp.task('development', ['compass:development', 'jshint', 'concat']);
-gulp.task('production', ['compass:production', 'concat', 'uglify']);
+gulp.task('production', ['compass:production', 'uglify']);
 gulp.task('default', ['watch']);

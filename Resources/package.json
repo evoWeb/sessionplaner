@@ -18,11 +18,12 @@
     "gulp-concat": "^2.6.1",
     "gulp-jshint": "^2.1.0",
     "gulp-rename": "^1.0.4",
+    "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "gulp-watch": "~5.0.1",
     "jshint": "~2.9.6",
-    "node-normalize-scss": "^8.0.0",
-    "modularscale-sass-npm": "^2.1.5"
+    "modularscale-sass-npm": "^2.1.5",
+    "node-normalize-scss": "^8.0.0"
   },
   "babel": {
     "presets": [

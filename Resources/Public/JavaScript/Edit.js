@@ -446,3 +446,5 @@ define([
 
 	return new Sessionplaner();
 });
+
+//# sourceMappingURL=Edit.js.map
