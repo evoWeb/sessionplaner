@@ -46,11 +46,7 @@
 								data-slot="{slot.uid}">
 							<f:for each="{room.sessions}" as="session">
 								<f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
-									<f:then>
-										<f:for each="{room.sessions}" as="session">
-										<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
-										</f:for>
-									</f:then>
+									<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
 								</f:if>
 							</f:for>
 						</td>
