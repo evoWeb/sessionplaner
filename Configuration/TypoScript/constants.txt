@@ -13,5 +13,9 @@ plugin.tx_sessionplaner {
 	}
 	settings {
 	    cssFile = typo3conf/ext/sessionplaner/Resources/Public/Stylesheets/frontend.css
+		disqusShortname =
+
+		twitterHashtag = TYPO3
+		twitterAccount = typo3
 	}
 }

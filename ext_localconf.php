@@ -84,4 +84,14 @@ call_user_func(function () {
             ],
         ],
     ];
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
+    config.pageTitleProviders {
+        event {
+            provider = Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider
+            before = record
+            after = altPageTitle
+        }
+    }
+'));
 });

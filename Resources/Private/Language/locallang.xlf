@@ -87,6 +87,15 @@
 			<trans-unit id="tags">
 				<source>Tags</source>
 			</trans-unit>
+			<trans-unit id="back-to-overview">
+				<source>Back to overview</source>
+			</trans-unit>
+			<trans-unit id="tweet">
+				<source>Tweet</source>
+			</trans-unit>
+			<trans-unit id="documents">
+				<source>Documents</source>
+			</trans-unit>
 			<trans-unit id="suggest">
 				<source>submit suggestion</source>
 			</trans-unit>

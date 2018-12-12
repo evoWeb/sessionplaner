@@ -10,6 +10,13 @@ plugin.tx_sessionplaner {
 	features {
 		skipDefaultArguments = 1
 	}
+	settings {
+		disqusShortname = {$plugin.tx_sessionplaner.settings.disqusShortname}
+		twitter {
+			account = {$plugin.tx_sessionplaner.settings.twitterAccount}
+			hashtag = {$plugin.tx_sessionplaner.settings.twitterHashtag}
+		}
+	}
 }
 
 page.includeCSS.sessionplaner = {$plugin.tx_sessionplaner.settings.cssFile}

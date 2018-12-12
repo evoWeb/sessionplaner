@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
 	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-	  xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers">
 <head>
 	<title>Show Session</title>
 </head>
@@ -9,11 +8,7 @@
 
 <f:layout name="Frontend" />
 <f:section name="content">
-
     <f:if condition="{session}">
-
-        <sp:titleTag>{session.topic}</sp:titleTag>
-        <sp:metaTag property="og:url" content="" useCurrentDomain="1" />
 
         <div class="session">
             <div class="session-title">
@@ -52,7 +47,7 @@
 
 	    <f:if condition="{session.documents}">
 		<div class="session-files">
-		    <h4>Sessionunterlagen</h4>
+		    <h4>{f:translate(key: 'documents')}</h4>
 		    <table>
 			<tbody>
 			    <f:for each="{session.documents}" as="document">
@@ -69,7 +64,7 @@
 
         <div class="session-backlink">
             <div class="medium primary btn">
-                <f:link.action action="list">zurück zur Übersicht</f:link.action>
+                <f:link.action action="list">{f:translate(key: 'back-to-overview')}</f:link.action>
             </div>
         </div>
 
@@ -81,33 +76,32 @@
             <div class="session-social-item">
                 <f:if condition="{session.twitter}">
                     <f:then>
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="{session.twitter}" data-lang="de" data-hashtags="T3CRR">Twittern</a>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="{session.twitter}" data-hashtags="{settings.twitter.hashtag}">{f:translate(key: 'tweet')}</a>
                     </f:then>
                     <f:else>
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="t3crr" data-lang="de" data-hashtags="T3CRR">Twittern</a>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="{settings.twitter.account}" data-hashtags="{settings.twitter.hashtag}">{f:translate(key: 'tweet')}</a>
                     </f:else>
 
                 </f:if>
             </div>
         </div>
 
-        <div class="session-comments-disqus">
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                var disqus_shortname = 't3crr'; // required: replace example with your forum shortname
+        <f:if condition="{settings.disqusShortname}">
+            <div class="session-comments-disqus">
+                <div id="disqus_thread"></div>
+                <script type="text/javascript">
+                    var disqus_shortname = '{settings.disqusShortname}';
 
-                /* * * DON'T EDIT BELOW THIS LINE * * */
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            </script>
-            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-        </div>
-
+                    (function() {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+        </f:if>
     </f:if>
 
 </f:section>

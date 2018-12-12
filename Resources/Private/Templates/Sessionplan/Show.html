@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
 	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-	  xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers">
 <head>
 	<title>Show Session</title>
 </head>
@@ -11,9 +10,6 @@
 <f:section name="content">
 
     <f:if condition="{session}">
-
-        <sp:titleTag>{session.topic}</sp:titleTag>
-        <sp:metaTag property="og:url" content="" useCurrentDomain="1" />
 
         <div class="session">
             <div class="session-title">
@@ -54,7 +50,7 @@
 
         <div class="session-backlink">
             <div class="medium primary btn">
-                <f:link.action action="list">zurück zur Übersicht</f:link.action>
+                <f:link.action action="list">{f:translate(key: 'back-to-overview')}</f:link.action>
             </div>
         </div>
 

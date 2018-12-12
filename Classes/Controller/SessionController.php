@@ -1,6 +1,10 @@
 <?php
 namespace Evoweb\Sessionplaner\Controller;
 
+use Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider;
+use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -69,6 +73,15 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         if ($session === null) {
             $this->forward('list');
         }
+        $provider = GeneralUtility::makeInstance(EventTitleTagProvider::class);
+        $provider->setTitle($session->getTopic());
+
+        $ogMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('og:title');
+        $ogMetaTagManager->addProperty('og:title', $session->getTopic());
+
+        $twitterMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('twitter:title');
+        $twitterMetaTagManager->addProperty('twitter:title', $session->getTopic());
+
         $this->view->assign('session', $session);
     }
 

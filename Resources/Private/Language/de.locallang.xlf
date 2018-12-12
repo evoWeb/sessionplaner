@@ -117,6 +117,18 @@
 				<source>Tags</source>
 				<target>Tags</target>
 			</trans-unit>
+			<trans-unit id="back-to-overview">
+				<source>Back</source>
+				<target>zurück zur Übersicht</target>
+			</trans-unit>
+			<trans-unit id="tweet">
+				<source>Tweet</source>
+				<target>Twittern</target>
+			</trans-unit>
+			<trans-unit id="documents">
+				<source>Documents</source>
+				<target>Sessionunterlagen</target>
+			</trans-unit>
 			<trans-unit id="suggest">
 				<source>submit suggestion</source>
 				<target>Vorschlag abschicken</target>
