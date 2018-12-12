@@ -4,7 +4,7 @@
 	"description": "Sessionplaner for TYPO3Camps",
 	"homepage": "https://github.com/evoWeb/sessionplaner/",
 	"license": [
-		"GPL-2.0+"
+		"GPL-2.0-or-later"
 	],
 	"support": {
 		"issues": "https://github.com/evoWeb/sessionplaner/issues"
