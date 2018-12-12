@@ -78,7 +78,7 @@ indent_size = 2
 
 [*.tsconfig]
 indent_style = space
-indent_size = 2
+indent_size = 4
 
 # XLF-Files
 [*.xlf]
