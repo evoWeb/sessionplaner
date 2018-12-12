@@ -3,21 +3,20 @@
 	"type": "typo3-cms-extension",
 	"description": "Sessionplaner for TYPO3Camps",
 	"homepage": "https://github.com/evoWeb/sessionplaner/",
-	"license": ["GPL-2.0+"],
-
-	"support" : {
-		"issues" : "https://github.com/evoWeb/sessionplaner/issues"
+	"license": [
+		"GPL-2.0+"
+	],
+	"support": {
+		"issues": "https://github.com/evoWeb/sessionplaner/issues"
 	},
 	"keywords": [
 		"sessionplaner",
 		"barcamp",
 		"TYPO3Camps"
 	],
-
 	"require": {
 		"typo3/cms-core": "^9.5"
 	},
-
 	"autoload": {
 		"psr-4": {
 			"Evoweb\\Sessionplaner\\": "Classes/"
@@ -28,7 +27,6 @@
 			"Evoweb\\Sessionplaner\\Tests\\": "Tests/"
 		}
 	},
-
 	"config": {
 		"vendor-dir": ".Build/vendor",
 		"bin-dir": ".Build/bin"
@@ -38,5 +36,8 @@
 			"cms-package-dir": "{$vendor-dir}/typo3/cms",
 			"web-dir": ".Build/Web"
 		}
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.13"
 	}
 }

@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Evoweb\Sessionplaner\Controller;
 
 use Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider;
@@ -82,7 +90,7 @@ class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
     /**
      * Disable error flash message
      *
-     * @return boolean
+     * @return bool
      */
     protected function getErrorFlashMessage()
     {

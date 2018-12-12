@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Evoweb\Sessionplaner\ViewHelpers;
 
 /***************************************************************
@@ -43,9 +51,9 @@ class MetaTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBase
     }
 
     /**
-     * @param boolean $useCurrentDomain
-     * @param boolean $forceAbsoluteUrl
-     * @param boolean $useNameAttribute
+     * @param bool $useCurrentDomain
+     * @param bool $forceAbsoluteUrl
+     * @param bool $useNameAttribute
      * @return void
      */
     public function render($useCurrentDomain = false, $forceAbsoluteUrl = false, $useNameAttribute = false)

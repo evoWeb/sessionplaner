@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Evoweb\Sessionplaner\Controller;
 
 /***************************************************************
@@ -79,7 +87,7 @@ class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * Disable error flash message
      *
-     * @return boolean
+     * @return bool
      */
     protected function getErrorFlashMessage()
     {

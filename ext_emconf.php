@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 $EM_CONF['sessionplaner'] = [
     'title' => 'Session Planer',
     'description' => '',
@@ -17,9 +24,9 @@ $EM_CONF['sessionplaner'] = [
         'conflicts' => [],
         'suggests' => [],
     ],
-    "autoload-dev" => [
-        "psr-4" => [
-            "Evoweb\\Sessionplaner\\Tests\\" => "Tests/",
+    'autoload-dev' => [
+        'psr-4' => [
+            'Evoweb\\Sessionplaner\\Tests\\' => 'Tests/',
         ],
     ],
 ];

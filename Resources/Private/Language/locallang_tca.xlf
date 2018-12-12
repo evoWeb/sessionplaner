@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:40Z" product-name="sessionplaner">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:40Z"
+		  product-name="sessionplaner">
 		<header/>
 		<body>
 			<trans-unit id="tx_sessionplaner_domain_model_day" xml:space="preserve">

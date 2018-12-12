@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
 
 /*
@@ -87,7 +95,7 @@ class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\Act
      * @param string $current
      * @param string $currentArgumentKey
      *
-     * @return boolean
+     * @return bool
      */
     public function isSelected($controller, $action, $arguments, $current, $currentArgumentKey)
     {

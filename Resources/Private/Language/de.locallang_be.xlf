@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-06-23T05:48:33Z" product-name="sessionplaner">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2017-06-23T05:48:33Z"
+		  product-name="sessionplaner">
 		<header/>
 		<body>
 			<trans-unit id="tt_content.list_type_display" xml:space="preserve" approved="yes">
@@ -91,7 +92,8 @@
 				<source>List room</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="display_flexform.switchableControllerAction.listSessions" xml:space="preserve" approved="yes">
+			<trans-unit id="display_flexform.switchableControllerAction.listSessions" xml:space="preserve"
+						approved="yes">
 				<source>List sessions</source>
 				<target></target>
 			</trans-unit>

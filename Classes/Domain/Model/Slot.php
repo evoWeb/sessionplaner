@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Evoweb\Sessionplaner\Domain\Model;
 
 /***************************************************************
@@ -34,17 +42,17 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $start = '';
 
     /**
-     * @var integer
+     * @var int
      */
     protected $duration = 0;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $break = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $noBreakAfter = false;
 
@@ -106,7 +114,7 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $break
+     * @param bool $break
      */
     public function setBreak($break)
     {
@@ -114,7 +122,7 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getBreak()
     {
@@ -122,7 +130,7 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $noBreakAfter
+     * @param bool $noBreakAfter
      */
     public function setNoBreakAfter($noBreakAfter)
     {
@@ -130,7 +138,7 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getNoBreakAfter()
     {

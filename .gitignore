@@ -1,3 +1,6 @@
 node_modules
 .sass-cache
 *.unminified.js
+composer.lock
+.php_cs.cache
+.Build

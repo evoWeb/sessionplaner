@@ -1,6 +1,13 @@
 <?php
-defined('TYPO3_MODE') || die('Access denied.');
 
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
+defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(function () {
     /**

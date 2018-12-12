@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Evoweb\Sessionplaner\Domain\Model;
 
 /***************************************************************
@@ -39,7 +47,7 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $logo;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $seats = 0;
 
@@ -104,7 +112,7 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param integer $seats
+     * @param int $seats
      */
     public function setSeats($seats)
     {
@@ -112,7 +120,7 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getSeats()
     {

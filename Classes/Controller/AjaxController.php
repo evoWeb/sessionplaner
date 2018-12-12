@@ -1,4 +1,12 @@
 <?php
+
+/*
+ * This file is part of the package Evoweb\Sessionplaner.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Evoweb\Sessionplaner\Controller;
 
 /***************************************************************
@@ -53,7 +61,6 @@ class AjaxController
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
      */
     protected $configurationManager;
-
 
     /**
      * @var ResponseInterface
@@ -134,7 +141,6 @@ class AjaxController
         return true;
     }
 
-
     protected function render()
     {
         $this->response->getBody()->write(
@@ -148,13 +154,11 @@ class AjaxController
         );
     }
 
-
     protected function errorAction()
     {
         $this->status = 'error';
         $this->message = 'No access granted';
     }
-
 
     protected function initializeCreateSessionAction()
     {
@@ -184,7 +188,6 @@ class AjaxController
         return $response;
     }
 
-
     protected function initializeUpdateSessionAction()
     {
         $this->sessionRepository = $this->objectManager->get(
@@ -207,7 +210,7 @@ class AjaxController
         $this->initializeUpdateSessionAction();
 
         /** @var Session $session */
-        $session = $this->sessionRepository->findByUid((int) $this->parameter['session']['uid']);
+        $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
         $this->updateSessionFromRequest($session);
         if ($session instanceof Session) {
             $this->sessionRepository->update($session);
@@ -224,7 +227,6 @@ class AjaxController
         return $response;
     }
 
-
     protected function initializeDeleteSessionAction()
     {
         $this->sessionRepository = $this->objectManager->get(
@@ -238,7 +240,7 @@ class AjaxController
         $this->initializeDeleteSessionAction();
 
         /** @var Session $session */
-        $session = $this->sessionRepository->findByUid((int) $this->parameter['session']['uid']);
+        $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
         if ($session instanceof Session) {
             $this->sessionRepository->remove($session);
 
@@ -252,7 +254,6 @@ class AjaxController
         $this->render();
         return $response;
     }
-
 
     protected function getSessionFromRequest()
     {
