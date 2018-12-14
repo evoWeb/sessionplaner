@@ -1,8 +1,11 @@
 plugin.tx_sessionplaner {
     view {
-        templateRootPaths.0 = {$plugin.tx_sessionplaner.view.templateRootPath}
-        partialRootPaths.0 = {$plugin.tx_sessionplaner.view.partialRootPath}
-        layoutRootPaths.0 = {$plugin.tx_sessionplaner.view.layoutRootPath}
+        templateRootPaths.0 = EXT:sessionplaner/Resources/Private/Templates/
+        templateRootPaths.1 = {$plugin.tx_sessionplaner.view.templateRootPath}
+        partialRootPaths.0 = EXT:sessionplaner/Resources/Private/Partials/
+        partialRootPaths.1 = {$plugin.tx_sessionplaner.view.partialRootPath}
+        layoutRootPaths.0 = EXT:sessionplaner/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$plugin.tx_sessionplaner.view.layoutRootPath}
     }
 
     persistence {
