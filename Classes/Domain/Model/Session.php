@@ -35,6 +35,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @var string
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $topic = '';
 
@@ -45,6 +46,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @var string
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $speaker = '';
 
