@@ -49,20 +49,20 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $noBreakAfter = false;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Day>
-     * @lazy
      */
     protected $days;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Room>
-     * @lazy
      */
     protected $rooms;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
-     * @lazy
      */
     protected $sessions;
 

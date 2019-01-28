@@ -39,14 +39,14 @@ class Day extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $date = '';
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Room>
-     * @lazy
      */
     protected $rooms;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Slot>
-     * @lazy
      */
     protected $slots;
 

@@ -34,8 +34,8 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $label = '';
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
-     * @lazy
      */
     protected $sessions;
 

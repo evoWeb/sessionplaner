@@ -49,8 +49,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $donotlink = false;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @var string
-     * @validate NotEmpty
      */
     protected $topic = '';
 
@@ -60,8 +60,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @var string
-     * @validate NotEmpty
      */
     protected $speaker = '';
 
@@ -106,8 +106,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $slot;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
-     * @lazy
      */
     protected $tags;
 

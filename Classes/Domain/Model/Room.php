@@ -44,20 +44,20 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $seats = 0;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Day>
-     * @lazy
      */
     protected $days;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Slot>
-     * @lazy
      */
     protected $slots;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
-     * @lazy
      */
     protected $sessions;
 
