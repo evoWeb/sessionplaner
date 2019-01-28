@@ -12,7 +12,6 @@ return [
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'dividers2tabs' => true,
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY date',
         'enablecolumns' => [

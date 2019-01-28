@@ -11,7 +11,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY topic',
-        'dividers2tabs' => true,
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
