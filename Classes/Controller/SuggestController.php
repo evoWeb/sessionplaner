@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Benjamin Kott <info@bk2k.info>
+ *  (c) 2013-2019 Benjamin Kott <info@bk2k.info>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,9 +27,6 @@ namespace Evoweb\Sessionplaner\Controller;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
-/**
- * Session Suggest Controller
- */
 class SuggestController extends ActionController
 {
     /**
@@ -113,7 +110,7 @@ class SuggestController extends ActionController
     /**
      * Disable error flash message
      *
-     * @return boolean
+     * @return bool
      */
     protected function getErrorFlashMessage()
     {

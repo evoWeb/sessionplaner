@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Sebastian Fischer <typo3@evoweb.de>
+ *  (c) 2013-2019 Sebastian Fischer <typo3@evoweb.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,9 +27,6 @@ namespace Evoweb\Sessionplaner\Controller;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * An display controller
- */
 class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
@@ -79,7 +76,7 @@ class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * Disable error flash message
      *
-     * @return boolean
+     * @return bool
      */
     protected function getErrorFlashMessage()
     {

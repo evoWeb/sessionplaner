@@ -36,6 +36,7 @@ class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendView
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
         $this->registerArgument(
             'uri',
             'string',
