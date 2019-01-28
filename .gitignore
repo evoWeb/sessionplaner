@@ -1,3 +1,9 @@
+.idea
+.Build/bin/**
+.Build/vendor/**
+.Build/Web/**
+composer.*
+!composer.json
 node_modules
 .sass-cache
 *.unminified.js
