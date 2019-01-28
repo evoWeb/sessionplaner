@@ -1,7 +1,7 @@
 TYPO3 Extending extbase domain models [![Build Status](https://travis-ci.org/evoWeb/sessionplaner.svg?branch=master)](https://travis-ci.org/evoWeb/sessionplaner)
 =====================================
 
-See full documentation at https://docs.typo3.org/typo3cms/extensions/extender/Index.html
+See full documentation at https://docs.typo3.org/typo3cms/extensions/sessionplaner/Index.html
 
 ## Installation
 
