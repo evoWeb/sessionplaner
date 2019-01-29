@@ -56,11 +56,6 @@ class AjaxController
 
 
     /**
-     * @var ResponseInterface
-     */
-    protected $response;
-
-    /**
      * @var array
      */
     protected $parameter = [];
@@ -114,10 +109,9 @@ class AjaxController
         );
     }
 
-    protected function initializeAction(ServerRequestInterface $request, ResponseInterface $response)
+    protected function initializeAction(ServerRequestInterface $request)
     {
         $this->parameter = $request->getParsedBody()['tx_sessionplaner'];
-        $this->response = $response;
 
         if (!($this->backendUser->isAdmin() || $this->backendUser->modAccess($this->moduleConfiguration, 0))) {
             $this->errorAction();
@@ -135,16 +129,14 @@ class AjaxController
     }
 
 
-    protected function render()
+    protected function render(): ResponseInterface
     {
-        $this->response->getBody()->write(
-            json_encode(
-                [
-                    'status' => $this->status,
-                    'message' => $this->message,
-                    'data' => $this->data
-                ]
-            )
+        return new \TYPO3\CMS\Core\Http\JsonResponse(
+            [
+                'status' => $this->status,
+                'message' => $this->message,
+                'data' => $this->data
+            ]
         );
     }
 
@@ -163,9 +155,9 @@ class AjaxController
         );
     }
 
-    public function createSessionAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function createSessionAction(ServerRequestInterface $request): ResponseInterface
     {
-        $this->initializeAction($request, $response);
+        $this->initializeAction($request);
         $this->initializeCreateSessionAction();
 
         $session = $this->getSessionFromRequest();
@@ -180,8 +172,8 @@ class AjaxController
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
         }
-        $this->render();
-        return $response;
+
+        return $this->render();
     }
 
 
@@ -201,9 +193,9 @@ class AjaxController
         );
     }
 
-    public function updateSessionAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function updateSessionAction(ServerRequestInterface $request): ResponseInterface
     {
-        $this->initializeAction($request, $response);
+        $this->initializeAction($request);
         $this->initializeUpdateSessionAction();
 
         /** @var Session $session */
@@ -220,8 +212,8 @@ class AjaxController
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
         }
-        $this->render();
-        return $response;
+
+        return $this->render();
     }
 
 
@@ -232,9 +224,9 @@ class AjaxController
         );
     }
 
-    public function deleteSessionAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function deleteSessionAction(ServerRequestInterface $request): ResponseInterface
     {
-        $this->initializeAction($request, $response);
+        $this->initializeAction($request);
         $this->initializeDeleteSessionAction();
 
         /** @var Session $session */
@@ -249,8 +241,8 @@ class AjaxController
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
         }
-        $this->render();
-        return $response;
+
+        return $this->render();
     }
 
 
