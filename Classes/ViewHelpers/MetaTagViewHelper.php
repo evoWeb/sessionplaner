@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\ViewHelpers;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Benjamin Kott <info@bk2k.info>
+ *  (c) 2013-2019 Benjamin Kott <info@bk2k.info>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,53 +26,39 @@ namespace Evoweb\Sessionplaner\ViewHelpers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class MetaTagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
+class MetaTagViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-    /**
-     * @var string
-     */
-    protected $tagName = 'meta';
-
-    /**
-     * @return void
-     */
     public function initializeArguments()
     {
-        $this->registerTagAttribute('property', 'string', 'Property of meta tag');
-        $this->registerTagAttribute('content', 'string', 'Content of meta tag');
+        $this->registerArgument('property', 'string', 'Property of meta tag');
+        $this->registerArgument('content', 'string', 'Content of meta tag');
+        $this->registerArgument('useCurrentDomain', 'bool', 'Use current domain', false, false);
+        $this->registerArgument('forceAbsoluteUrl', 'bool', 'Force absolute url', false, false);
+        $this->registerArgument('useNameAttribute', 'bool', 'Use name attribute', false, false);
     }
 
-    /**
-     * @param boolean $useCurrentDomain
-     * @param boolean $forceAbsoluteUrl
-     * @param boolean $useNameAttribute
-     * @return void
-     */
-    public function render($useCurrentDomain = false, $forceAbsoluteUrl = false, $useNameAttribute = false)
+    public function render()
     {
+        $useCurrentDomain = $this->arguments['useCurrentDomain'];
+        $forceAbsoluteUrl = $this->arguments['forceAbsoluteUrl'];
+        $useNameAttribute = $this->arguments['useNameAttribute'];
+
+        $content = $this->arguments['content'];
+        $type = 'property';
         if ($useCurrentDomain) {
-            $this->tag->addAttribute(
-                'content',
-                GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL')
-            );
+            $content = GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL');
         }
         if ($forceAbsoluteUrl) {
             $path = $this->arguments['content'];
             if (!GeneralUtility::isFirstPartOfStr($path, GeneralUtility::getIndpEnv('TYPO3_SITE_URL'))) {
-                $this->tag->addAttribute(
-                    'content',
-                    GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . $this->arguments['content']
-                );
+                $content = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . $this->arguments['content'];
             }
         }
-        if ($useCurrentDomain || (isset($this->arguments['content']) && !empty($this->arguments['content']))) {
-            if ($useNameAttribute && $this->arguments['property'] !== '') {
-                $attributesContent = $this->arguments['property'];
-                $this->tag->removeAttribute('property');
-                $this->tag->addAttribute('name', $attributesContent);
-            }
-            $this->getPageRenderer()->addMetaTag($this->tag->render());
+        if ($useNameAttribute && $this->arguments['property'] !== '') {
+            $type = 'name';
+            $content = $this->arguments['property'];
         }
+        $this->getPageRenderer()->setMetaTag($type, $this->arguments['property'], $content);
     }
 
     /**

@@ -1,34 +1,55 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers"
+			data-namespace-typo3-fluid="true">
 <head>
 	<title>Edit form</title>
 </head>
 <body>
 <f:section name="Main">
-<div id="grid">
-	<table class="table table-bordered">
+<div id="gridButtonGroup" class="hidden">
+	<f:format.raw>
+		<sp:be.buttons.icon
+			uri="#"
+			id="actions-document-new-in-grid"
+			iconKey="actions-document-new"
+			title="{f:translate(key: 'session-new')}"
+			class="btn btn-default btn-sm t3js-page-new-ce"/>
+	</f:format.raw>
+</div>
+<div class="t3-grid-container">
+	<table class="t3-grid-table">
+		<colgroup>
+			<col width="60px">
+			<f:for each="{day.rooms}" as="room">
+				<col>
+			</f:for>
+		</colgroup>
 		<thead>
 			<tr>
-				<th class="time" data-width="">&nbsp;</th>
+				<th class="t3-page-column-header">&nbsp;</th>
 				<f:for each="{day.rooms}" as="room">
-					<th class="room">{room.name}</th>
+					<th class="t3-page-column-header">{room.name}</th>
 				</f:for>
 			</tr>
 		</thead>
 		<tbody>
 			<f:for each="{day.slots}" as="slot">
 				<tr class="{f:if(condition: slot.break, then: 'break', else: 'active')}">
-					<th class="time">
+					<th class="t3-grid-cell time">
 						<f:format.date date="{slot.start}" format="H:i"/><br/>
 						{slot.duration} <f:translate key="minutes"/>
 					</th>
 					<f:for each="{day.rooms}" as="room">
-						<td class="room" data-room="{room.uid}" data-slot="{slot.uid}"><f:for each="{room.sessions}" as="session">
-							<f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
-								<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
-							</f:if>
-						</f:for></td>
+						<td class="t3-grid-cell t3-page-ce-dropzone-available t3js-page-ce-dropzone-available t3js-grid-cell"
+								data-day="{day.uid}"
+								data-room="{room.uid}"
+								data-slot="{slot.uid}">
+							<f:for each="{room.sessions}" as="session">
+								<f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
+									<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
+								</f:if>
+							</f:for>
+						</td>
 					</f:for>
 				</tr>
 			</f:for>

@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Sebastian Fischer <typo3@evoweb.de>
+ *  (c) 2013-2019 Sebastian Fischer <typo3@evoweb.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -34,8 +34,8 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $label = '';
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
-     * @lazy
      */
     protected $sessions;
 

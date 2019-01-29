@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Sebastian Fischer <typo3@evoweb.de>
+ *  (c) 2013-2019 Sebastian Fischer <typo3@evoweb.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -29,28 +29,28 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * @var boolean
+     * @var bool
      */
     protected $hidden = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $suggestion = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $social = true;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $donotlink = false;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @var string
-     * @validate NotEmpty
      */
     protected $topic = '';
 
@@ -60,8 +60,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @var string
-     * @validate NotEmpty
      */
     protected $speaker = '';
 
@@ -71,17 +71,17 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $twitter = '';
 
     /**
-     * @var integer
+     * @var int
      */
     protected $attendees = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $type = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $level = 0;
 
@@ -106,8 +106,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $slot;
 
     /**
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
-     * @lazy
      */
     protected $tags;
 
@@ -121,7 +121,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $hidden
+     * @param bool $hidden
      */
     public function setHidden($hidden)
     {
@@ -129,7 +129,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getHidden()
     {
@@ -137,7 +137,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $social
+     * @param bool $social
      */
     public function setSocial($social)
     {
@@ -145,7 +145,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getSocial()
     {
@@ -153,7 +153,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $donotlink
+     * @param bool $donotlink
      */
     public function setDonotlink($donotlink)
     {
@@ -161,7 +161,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getDonotlink()
     {
@@ -169,15 +169,15 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $suggestion
+     * @param bool $suggestion
      */
     public function setSuggestion($suggestion)
     {
-        $this->hidden = $suggestion;
+        $this->suggestion = $suggestion;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getSuggestion()
     {
@@ -317,9 +317,9 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
+     * @param int|\Evoweb\Sessionplaner\Domain\Model\Day $day
      */
-    public function setDay(\Evoweb\Sessionplaner\Domain\Model\Day $day)
+    public function setDay($day)
     {
         $this->day = $day;
     }
@@ -333,7 +333,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param integer|\Evoweb\Sessionplaner\Domain\Model\Room $room
+     * @param int|\Evoweb\Sessionplaner\Domain\Model\Room $room
      */
     public function setRoom($room)
     {
@@ -349,7 +349,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param integer|\Evoweb\Sessionplaner\Domain\Model\Slot $slot
+     * @param int|\Evoweb\Sessionplaner\Domain\Model\Slot $slot
      */
     public function setSlot($slot)
     {

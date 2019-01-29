@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Benjamin Kott <info@bk2k.info>
+ *  (c) 2013-2019 Benjamin Kott <info@bk2k.info>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,9 +24,6 @@ namespace Evoweb\Sessionplaner\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * Session Controller
- */
 class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
@@ -39,31 +36,16 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository
-     *
-     * @return void
-     */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository)
     {
         $this->dayRepository = $dayRepository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     *
-     * @return void
-     */
     public function listAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         if ($session) {
@@ -79,13 +61,6 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->view->assign('sessions', $sessions);
     }
 
-    /**
-     * action show
-     *
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     *
-     * @return void
-     */
     public function showAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         if ($session === null) {
@@ -97,7 +72,7 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     /**
      * Disable error flash message
      *
-     * @return boolean
+     * @return bool
      */
     protected function getErrorFlashMessage()
     {

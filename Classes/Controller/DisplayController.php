@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Sebastian Fischer <typo3@evoweb.de>
+ *  (c) 2013-2019 Sebastian Fischer <typo3@evoweb.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,9 +24,6 @@ namespace Evoweb\Sessionplaner\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * An display controller
- */
 class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
@@ -39,59 +36,34 @@ class DisplayController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository
-     *
-     * @return void
-     */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository)
     {
         $this->dayRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @return void
-     */
     public function listDaysAction()
     {
         $days = $this->dayRepository->findAll();
         $this->view->assign('days', $days);
     }
 
-    /**
-     * @return void
-     */
     public function showDay()
     {
     }
 
-    /**
-     * @return void
-     */
     public function showRoom()
     {
     }
 
-    /**
-     * @return void
-     */
     public function listSessions()
     {
     }
 
-    /**
-     * @return void
-     */
     public function screenAction()
     {
     }

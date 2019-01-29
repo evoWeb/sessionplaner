@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Sebastian Fischer <typo3@evoweb.de>
+ *  (c) 2013-2019 Sebastian Fischer <typo3@evoweb.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -36,7 +36,7 @@ class DayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * @param string $uids
      *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     * @return array
      */
     public function findByUidsRaw($uids)
     {

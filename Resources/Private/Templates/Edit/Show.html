@@ -1,5 +1,7 @@
-{namespace sp=Evoweb\Sessionplaner\ViewHelpers}
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+			xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+			xmlns:sp="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers"
+			data-namespace-typo3-fluid="true">
 <head>
 	<title>Edit form</title>
 </head>
@@ -12,9 +14,12 @@
 	<f:be.menus.actionMenu>
 		<f:for each="{days}" as="day">
 			<sp:be.menus.actionMenuItem
-				label="{day.name}" controller="Edit" action="show"
+				label="{day.name}"
+				controller="Edit"
+				action="show"
 				arguments="{day: day.uid}"
-				current="{currentDay.uid}" currentArgumentKey="day"/>
+				current="{currentDay.uid}"
+				currentArgumentKey="day"/>
 		</f:for>
 	</f:be.menus.actionMenu>
 </f:if>
@@ -22,7 +27,12 @@
 
 <f:section name="iconLeftButtons">
 	<f:format.raw>
-		<sp:be.buttons.icon uri="#" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm"/>
+		<sp:be.buttons.icon
+			uri="#"
+			id="actions-document-new"
+			iconKey="actions-document-new"
+			title="{f:translate(key: 'session-new')}"
+			class="btn btn-default btn-sm t3js-page-new-ce"/>
 	</f:format.raw>
 </f:section>
 
@@ -31,31 +41,39 @@
 		<span class="btn btn-default btn-sm">
 			<f:be.buttons.shortcut />
 		</span>
-		<sp:be.buttons.icon uri="#" iconKey="actions-window-open" title="{f:translate(key: 'LLL:EXT:lang/locallang_core.xlf:labels.openInNewWindow')}"
+		<sp:be.buttons.icon
+			uri="#"
+			iconKey="actions-window-open"
+			title="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.openInNewWindow')}"
 			onclick="sessionplanerWin=window.open(location.href, 'Sessionplaner', 'width=790,status=0,menubar=0,resizable=1,location=0,scrollbars=1,toolbar=0'); return false;"
 			class="btn btn-default btn-sm"/>
 	</f:format.raw>
 </f:section>
 
 <f:section name="content">
+	<div id="t3js-ui-block" class="ui-block hidden">
+		<core:icon identifier="spinner-circle-light" size="large" />
+	</div>
+
 <f:if condition="{roomCount}">
 	<f:then>
 		<f:for each="{days}" as="day">
 			<f:if condition="{day} == {currentDay}">
 				<div id="sessionplaner">
-				<h1>{day.name}</h1>
+					<h1>{day.name}</h1>
 
-				<div id="stash">
-					<f:for each="{unassignedSessions}" as="session">
-						<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
-					</f:for>
-				</div>
+					<div id="stash" class="t3-page-ce-dropzone-available t3js-page-ce-dropzone-available">
+						<f:for each="{unassignedSessions}" as="session">
+							<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
+						</f:for>
+					</div>
 
-				<f:render partial="Grid" section="Main" arguments="{day: day}"/>
+					<f:render partial="Grid" section="Main" arguments="{day: day}"/>
 				</div>
 			</f:if>
 		</f:for>
 		<f:render partial="SessionForm" section="Main" arguments="{day: currentDay}"/>
+
 		<script type="text/template" id="sessionCardTemplate">
 		<f:render partial="SessionCard" section="Main" arguments="{session: session}"/>
 		</script>

@@ -1,14 +1,13 @@
 <?php
 defined('TYPO3_MODE') || die('Access denied.');
 
-
 call_user_func(function () {
     /**
      * Default PageTS
      */
-    /** @noinspection PhpUndefinedVariableInspection */
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE:EXT:'
-        . 'sessionplaner/Configuration/PageTS/ModWizards.ts">');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+        '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.ts">'
+    );
 
     /**
      * Configure Frontend Plugin
@@ -18,8 +17,7 @@ call_user_func(function () {
         'Display',
         [
             'Display' => 'listDays, showDay, showRoom, listSessions, screen',
-        ],
-        []
+        ]
     );
 
     /**
@@ -44,8 +42,7 @@ call_user_func(function () {
         'Session',
         [
             'Session' => 'list, show',
-        ],
-        []
+        ]
     );
 
     /**
@@ -56,8 +53,7 @@ call_user_func(function () {
         'Sessionplan',
         [
             'Sessionplan' => 'display',
-        ],
-        []
+        ]
     );
 
     /**

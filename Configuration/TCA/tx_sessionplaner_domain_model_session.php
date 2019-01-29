@@ -11,7 +11,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY topic',
-        'dividers2tabs' => true,
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
@@ -111,7 +110,7 @@ return [
             'exclude' => 0,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-type',
             'config' => [
-                'type' => 'select',
+                'type' => 'check',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
@@ -128,7 +127,7 @@ return [
             'exclude' => 0,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
             'config' => [
-                'type' => 'select',
+                'type' => 'check',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
@@ -145,18 +144,14 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID###
+                ORDER BY tx_sessionplaner_domain_model_day.date',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
                 'items' => [
                     '0' => [
                         '0' => $languageFile . 'notassigned',
-                    ],
-                ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
                     ],
                 ],
             ],
@@ -177,11 +172,6 @@ return [
                         '0' => $languageFile . 'notassigned',
                     ],
                 ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
             ],
         ],
         'slot' => [
@@ -200,11 +190,6 @@ return [
                         '0' => $languageFile . 'notassigned',
                     ],
                 ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
             ],
         ],
         'tags' => [
@@ -221,35 +206,29 @@ return [
                 'size' => 5,
                 'minitems' => 0,
                 'maxitems' => 100,
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
             ],
         ],
     ],
     'types' => [
         '0' => [
             'showitem' => '
-            hidden,
-            suggestion,
-            social,
-            donotlink,
-            topic,
-            speaker,
-            twitter,
-            attendees,
-            documents,
-            description,
-            --div--;
-            Relations,
-            type,
-            level,
-            day,
-            room,
-            slot,
-            tags
+                hidden,
+                suggestion,
+                social,
+                donotlink,
+                topic,
+                speaker,
+                twitter,
+                attendees,
+                documents,
+                description,
+                --div--;Relations,
+                type,
+                level,
+                day,
+                room,
+                slot,
+                tags
             '
         ]
     ],

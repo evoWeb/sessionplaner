@@ -1,128 +1,84 @@
-.new-session {
-	dl {
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-	}
-
-	dt {
-		width: 150px;
-		clear: left;
-		float: left;
-		padding: 0 0 5px 0;
-	}
-
-	dd {
-		float: left;
-		padding: 0 0 5px 0;
-	}
+.t3js-page-ce-dropzone-available.active {
+    height: auto;
 }
 
-.sessionCard {
-	background-color: #fff;
-	border: 1px solid #f1f1f1;
-	width: 197px;
-
-	&:hover,
-	&.ui-draggable-dragging {
-		border: 1px solid #666;
-
-		.topic {
-			background-color: #666;
-		}
-	}
-
-	.uid { display: none; }
-	.topic {
-		background-color: #cacaca;
-		padding: 7px;
-	}
-	.speaker {
-		padding: 7px;
-	}
-	.description { display: none; }
-	.twitter { display: none; }
-	.attendees { display: none; }
-	.type { display: none; }
-	.level { display: none; }
-	.day { display: none; }
-	.room { display: none; }
-	.slot { display: none; }
+.topic,
+.speaker {
+    font-weight: 700;
 }
 
-#grid {
-	margin-left: 223px;
+.t3-grid-container {
+    margin-left: 210px;
 
-	table {
-		border-collapse: collapse;
-		width: 100%;
+    table {
+        width: 100%;
+    }
 
-		th.time,
-		td.time,
-		th.room,
-		td.room {
-			border-left: 12px solid #fff;
-			border-right: 12px solid #fff;
-		}
-	}
+    tbody {
+        th {
+            vertical-align: top;
+            border-bottom: 1px solid #cdcdcd;
+        }
 
-	thead {
-		th {
-			border-bottom: 1px solid #cdcdcd;
-			color: #999999;
-			font-size: 13px;
-			padding: 6px 20px 6px 10px;
-		}
-	}
+        th, td {
+            &.t3js-page-ce-dropzone-available.active {
+                background-color: #fbefdd;
+            }
 
-	tbody {
-		th {
-			vertical-align: middle;
-		}
+            &.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
+                background-color: #d1e2bd;
+            }
+        }
 
-		th, td {
-			background-color: #f1f1f1;
-			border-bottom: 12px solid #fff;
-		}
+        tr.break th,
+        tr.break td {
+            background-color: #d1d1d1;
+        }
 
-		tr.break th,
-		tr.break td {
-			background-color: #d1d1d1;
-		}
+        .time,
+        .room {
+            min-height: 94px;
+        }
 
-		th.time,
-		td.time,
-		th.room,
-		td.room {
-			height: 66px;
-		}
+        .time {
+            padding: 10px;
+        }
+    }
 
-		th.time,
-		td.time {
-			padding: 6px 20px 6px 10px;
-		}
-
-		th.room,
-		td.room {
-			min-width: 199px;
-			padding: 12px;
-		}
-	}
-
-	.sessionCard {
-		width: inherit;
-	}
+    .t3js-page-ce {
+        width: inherit;
+        margin: 10px;
+    }
 }
 
 #stash {
-	background-color: #f1f1f1;
-	border-top: 1px solid #cdcdcd;
-	float: left;
-	margin-top: 30px;
-	padding: 12px;
-	width: 199px;
+    background-color: #fafafa;
+    border-top: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+    float: left;
+    margin-top: 27px;
+    width: 200px;
+    min-height: 30px;
 
-	.sessionCard {
-		margin-bottom: 10px;
-	}
+    &.t3js-page-ce-dropzone-available.active {
+        background-color: #fbefdd;
+    }
+
+    &.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
+        background-color: #d1e2bd;
+    }
+
+    .t3js-page-ce {
+        margin: 10px;
+    }
+}
+
+.t3-grid-cell #actions-document-new-in-grid {
+    display: block;
+    width: 26px;
+    margin: 0 auto;
+}
+
+#sessionplaner .t3-page-ce-header {
+    min-width: auto;
 }

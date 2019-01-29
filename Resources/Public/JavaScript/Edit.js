@@ -1,1 +1,450 @@
-define(["jquery"],function(a){"use strict";function b(b){return a(a("#"+b).html().replace(/^\s+|\s+$/g,""))}function c(b){var c={};return a.each(b,function(a,b){c[b.name]=b.value}),c}function d(b,c){return a.each(c,function(c,d){var e=a("dd ."+c+":first",b);e.length>0&&e.val(d)}),b}function e(b,c){return a.each(c,function(c,d){var e=a("."+c,b);e.data("value",d),e.children().length<2&&e.text(d)}),b}function f(b,c){var d=a(c).parent();return"stash"===d.attr("id")?(b.slot=0,b.room=0):(b.slot=d.data("slot"),b.room=d.data("room")),b}function g(a){var c=b("sessionCardTemplate");return c=e(c,a)}function h(b){var c=a('.uid[data-value="'+b.uid+'"]',".sessionCard").parent();e(c,b)}function i(){a(this).dialog("close").remove()}function j(b){var c={};return a(b).children().each(function(){var b=a(this);c[b.attr("class")]=b.data("value")}),c}function k(a){z.uid=a.data.uid,x.append(g(z)),i.apply(this)}function l(){h(z),i.apply(this)}function m(){}function n(){var b=!0;return A?b=!1:(A=!0,y=a('<div class="t3-mask-loading"><div class="ext-el-mask"></div></div>'),y.appendTo(document.body)),b}function o(){A=!1,"object"==typeof y&&y.remove()}function p(){var b=c(a("form",v).serializeArray());z=b,a.ajax({type:"POST",url:"ajax.php",context:this,params:{},data:{ajaxID:"Sessionplaner",id:a.getUrlVar("id"),tx_sessionplaner:{action:"addSession",session:b}},beforeSend:n,complete:o,success:k})}function q(){var b=c(a("form",w).serializeArray());b.uid=z.uid,z=b,a.ajax({type:"POST",url:"ajax.php",context:this,params:{},data:{ajaxID:"Sessionplaner",id:a.getUrlVar("id"),tx_sessionplaner:{action:"updateSession",session:b}},beforeSend:n,complete:o,success:l})}function r(){var b=j(this);b=f(b,this),z=b,a.ajax({type:"POST",url:"ajax.php",context:this,params:{},data:{ajaxID:"Sessionplaner",id:a.getUrlVar("id"),tx_sessionplaner:{action:"updateSession",session:b}},beforeSend:n,complete:o,success:m})}function s(){v=b("session"),v.dialog({width:440,height:330,modal:!0,buttons:{"Create a session":p,Cancel:i}})}function t(){z=j(this),w=d(b("session"),z),w.dialog({width:440,height:330,modal:!0,buttons:{"Update session":q,Cancel:i}})}function u(){a("#stash, .active td.room").droppable({scope:"sessions",drop:function(b,c){a(c.draggable).css({top:0,left:0}).appendTo(a(this)),r.apply(c.draggable[0])}}),a(".sessionCard").disableSelection().draggable({scope:"sessions",connectToSortable:"#stash",snap:!0,revert:"invalid"})}a.extend({getUrlVars:function(){for(var a,b=[],c=window.location.href.slice(window.location.href.indexOf("?")+1).split("&"),d=0;d<c.length;d++)a=c[d].split("="),b.push(a[0]),b[a[0]]=a[1];return b},getUrlVar:function(b){return a.getUrlVars()[b]}});var v,w,x,y,z={},A=!1;a(document).ready(function(){a("#actions-document-new").click(s),a(document).on("dblclick",".sessionCard",t),u()})});
+/* globals jQuery, parseInt */
+define([
+	'jquery',
+	'TYPO3/CMS/Sessionplaner/DragDrop',
+	'TYPO3/CMS/Backend/Modal',
+	'TYPO3/CMS/Backend/Severity'
+], function ($, dragDrop, modal, Severity) {
+	'use strict';
+
+	function Sessionplaner() {
+		this.pageId = 0;
+		this.uiBlock = null;
+		this.stash = null;
+		this.gridButtonGroup = null;
+		this.gridNewSessionButton = null;
+		this.sessionData = {};
+		this.ajaxActive = false;
+		this.dragActive = false;
+
+		this.initialize();
+	}
+
+	Sessionplaner.prototype.setPageId = function (pageId) {
+		this.pageId = pageId;
+	};
+
+	/**
+	 * @param {string} id
+	 *
+	 * @return {object}
+	 */
+	Sessionplaner.prototype.getTemplateElement = function (id) {
+		return $($('#' + id).html().replace(/^\s+|\s+$/g, ''));
+	};
+
+	/**
+	 * @param {object} serializedData
+	 *
+	 * @return {object}
+	 */
+	Sessionplaner.prototype.prepareData = function (serializedData) {
+		let data = {};
+
+		$.each(serializedData, function(index, fieldNameAndValue) {
+			if (fieldNameAndValue.name === 'attendees'
+				|| fieldNameAndValue.name === 'type'
+				|| fieldNameAndValue.name === 'level'
+				|| fieldNameAndValue.name === 'day'
+				|| fieldNameAndValue.name === 'room'
+				|| fieldNameAndValue.name === 'slot'
+			) {
+				fieldNameAndValue.value = parseInt(fieldNameAndValue.value) || 0;
+			}
+			data[fieldNameAndValue.name] = fieldNameAndValue.value;
+		});
+
+		return data;
+	};
+
+	/**
+	 * @param {object} $form
+	 * @param {object} sessionData
+	 *
+	 * @returns {object}
+	 */
+	Sessionplaner.prototype.applySessionValuesToForm = function ($form, sessionData) {
+		$.each(sessionData, function(index, value) {
+			let $element = $('input.' + index + ':first', $form);
+			if ($element.length > 0) {
+				$element.val(value);
+			}
+		});
+
+		return $form;
+	};
+
+	/**
+	 * @param {object} $card
+	 * @param {object} sessionData
+	 *
+	 * @return {object}
+	 */
+	Sessionplaner.prototype.applySessionValuesToCard = function ($card, sessionData) {
+		let $sessionCard = $card.find('.t3-page-ce-body-inner');
+
+		$.each(sessionData, function(index, value) {
+			$('.' + index, $sessionCard)
+				.data('value', value)
+				.text(value);
+		});
+
+		return $card;
+	};
+
+	/**
+	 * @param {object} sessionData
+	 * @param {object} $cardParent
+	 *
+	 * @returns {object}
+	 */
+	Sessionplaner.prototype.addValuesFromParent = function (sessionData, $cardParent) {
+		if ($cardParent.attr('id') === 'stash') {
+			sessionData.slot = 0;
+			sessionData.room = 0;
+		} else {
+			sessionData.slot = $cardParent.data('slot');
+			sessionData.room = $cardParent.data('room');
+		}
+
+		return sessionData;
+	};
+
+	/**
+	 * Create session card
+	 *
+	 * @param {object} sessionData
+	 *
+	 * @return {object}
+	 */
+	Sessionplaner.prototype.createSessionCard = function (sessionData) {
+		let $card = this.getTemplateElement('sessionCardTemplate');
+
+		return this.applySessionValuesToCard($card, sessionData);
+	};
+
+	/**
+	 * @param {object} sessionData
+	 */
+	Sessionplaner.prototype.updateSessionCard = function (sessionData) {
+		let $card = $('.uid[data-value="' + sessionData.uid + '"]', '.t3js-page-ce').parents('.t3js-page-ce');
+
+		this.applySessionValuesToCard($card, sessionData);
+	};
+
+	/**
+	 * @param {object} card
+	 *
+	 * @returns {object}
+	 */
+	Sessionplaner.prototype.getDataFromCard = function (card) {
+		let $sessionCard = $(card).find('.t3-page-ce-body-inner'),
+			data = {};
+
+		$sessionCard.find('.property').each(function() {
+			let $element = $(this);
+			data[$element.data('name')] = $element.data('value');
+		});
+
+		return data;
+	};
+
+
+	/**
+	 * @param {object} response
+	 */
+	Sessionplaner.prototype.createSessionSuccess = function (response) {
+		this.sessionData.uid = response.data.uid;
+
+		let $card = this.createSessionCard(this.sessionData);
+		if (this.sessionData.room && this.sessionData.slot) {
+			$('[data-room="' + this.sessionData.room + '"][data-slot="' + this.sessionData.slot + '"]').prepend($card);
+		} else {
+			this.stash.prepend($card);
+		}
+
+		dragDrop.initializeDraggable($card);
+	};
+
+	Sessionplaner.prototype.updateSessionSuccess = function () {
+		this.updateSessionCard(this.sessionData);
+	};
+
+	Sessionplaner.prototype.movedSessionSuccess = function () {
+	};
+
+	Sessionplaner.prototype.deleteSessionSuccess = function () {
+		let self = this;
+		$('[data-name="uid"]').each(function () {
+			let $element = $(this);
+			if (parseInt($element.data('value')) === self.sessionData.uid) {
+				$element.parents('.t3-page-ce').remove();
+			}
+		});
+	};
+
+
+	/**
+	 * @return {boolean}
+	 */
+	Sessionplaner.prototype.beforeSend = function () {
+		let result = true;
+
+		if (!this.ajaxActive) {
+			this.ajaxActive = true;
+
+			this.uiBlock.removeClass('hidden');
+		} else {
+			result = false;
+		}
+
+		return result;
+	};
+
+	Sessionplaner.prototype.afterSend = function () {
+		this.uiBlock.addClass('hidden');
+
+		this.ajaxActive = false;
+	};
+
+	Sessionplaner.prototype.sendAjaxRequest = function (ajaxUrlKey, sessionData, doneCallback) {
+		let self = this;
+
+		$.ajax(TYPO3.settings.ajaxUrls[ajaxUrlKey], {
+			method: 'post',
+			beforeSend: function () { self.beforeSend(); },
+			complete: function () { self.afterSend(); },
+			data: {
+				id: self.pageId,
+				tx_sessionplaner: {
+					session: sessionData
+				}
+			}
+		}).done(doneCallback);
+	};
+
+	/**
+	 * @param {object} event
+	 */
+	Sessionplaner.prototype.createSession = function (event) {
+		let self = this;
+		this.sessionData = this.prepareData($('form', event.target).serializeArray());
+
+		this.sendAjaxRequest(
+			'evoweb_sessionplaner_create',
+			this.sessionData,
+			function (data) {
+				self.createSessionSuccess(data);
+			}
+		);
+	};
+
+	/**
+	 * @param {object} event
+	 */
+	Sessionplaner.prototype.updateSession = function (event) {
+		let self = this,
+			updateSessionData = this.prepareData($('form', event.target).serializeArray());
+		updateSessionData.uid = this.sessionData.uid;
+		this.sessionData = updateSessionData;
+
+		this.sendAjaxRequest(
+			'evoweb_sessionplaner_update',
+			this.sessionData,
+			function (data) {
+				self.updateSessionSuccess(data);
+			}
+		);
+	};
+
+	/**
+	 * @param {object} element
+	 */
+	Sessionplaner.prototype.deleteSession = function (element) {
+		let self = this;
+		this.sessionData = { uid: $(element).parents('.t3-page-ce').find('.uid').data('value') };
+
+		this.sendAjaxRequest(
+			'evoweb_sessionplaner_delete',
+			this.sessionData,
+			function (data) {
+				self.deleteSessionSuccess(data);
+			}
+		);
+	};
+
+	/**
+	 * @param {object} $movedElement
+	 * @param {object} $droppedOnElement
+	 */
+	Sessionplaner.prototype.movedSession = function ($movedElement, $droppedOnElement) {
+		let self = this,
+			movedSessionData = this.getDataFromCard($movedElement);
+		this.sessionData = this.addValuesFromParent(movedSessionData, $droppedOnElement);
+
+		this.sendAjaxRequest(
+			'evoweb_sessionplaner_update',
+			this.sessionData,
+			function (data) {
+				self.movedSessionSuccess(data);
+			}
+		);
+	};
+
+
+	Sessionplaner.prototype.createNewSessionForm = function () {
+		let self = this;
+		this.sessionData = {};
+
+		modal.confirm(
+			'Create session',
+			this.applySessionValuesToForm(
+				this.getTemplateElement('sessionFormTemplate'),
+				this.sessionData
+			),
+			Severity.ok,
+			[
+				{
+					text: 'Create session',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'ok'
+				},
+				{
+					text: 'Cancel',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'cancel'
+				}
+			]
+		).on('button.clicked', function() {
+			modal.dismiss();
+		}).on('confirm.button.ok', function (event) { self.createSession(event); });
+	};
+
+	Sessionplaner.prototype.createNewSessionFormInGrid = function () {
+		let self = this;
+
+		modal.confirm(
+			'Create session',
+			this.applySessionValuesToForm(
+				this.getTemplateElement('sessionFormTemplate'),
+				this.sessionData
+			),
+			Severity.ok,
+			[
+				{
+					text: 'Create session',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'ok'
+				},
+				{
+					text: 'Cancel',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'cancel'
+				}
+			]
+		).on('button.clicked', function() {
+			modal.dismiss();
+		}).on('confirm.button.ok', function (event) { self.createSession(event); });
+	};
+
+	Sessionplaner.prototype.editSession = function (element) {
+		let self = this;
+		this.sessionData = this.getDataFromCard(element);
+
+		modal.confirm(
+			'Edit session',
+			this.applySessionValuesToForm(
+				this.getTemplateElement('sessionFormTemplate'),
+				this.sessionData
+			),
+			Severity.ok,
+			[
+				{
+					text: 'Update session',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'ok'
+				},
+				{
+					text: 'Cancel',
+					active: true,
+					btnClass: 'btn-default',
+					name: 'cancel'
+				}
+			]
+		).on('button.clicked', function() {
+			modal.dismiss();
+		}).on('confirm.button.ok', function (event) { self.updateSession(event); });
+	};
+
+	Sessionplaner.prototype.mouseOver = function (element) {
+		let $element = $(element);
+		this.sessionData = {
+			room: $element.data('room'),
+			slot: $element.data('slot')
+		};
+		if (!this.dragActive && $element.children().length === 0) {
+			this.gridNewSessionButton.appendTo($element);
+		}
+	};
+
+	Sessionplaner.prototype.mouseOut = function (element, event) {
+		let e = event.toElement || event.relatedTarget;
+		if (e === null
+			|| e === element
+			|| e.parentNode === element
+			|| e.parentNode.parentNode === element
+			|| e.parentNode.parentNode.parentNode === element
+			|| e.parentNode.parentNode.parentNode.parentNode === element) {
+			return;
+		}
+		this.gridNewSessionButton.appendTo(this.gridButtonGroup);
+	};
+
+	/**
+	 * Hook into drop stop to store moving the session
+	 */
+	Sessionplaner.prototype.initializeDragAndDrop = function () {
+		let self = this,
+			originalDragStart = dragDrop.onDragStart,
+			originalDrop = dragDrop.onDrop;
+
+		dragDrop.onDragStart = function ($draggableElement) {
+			self.dragActive = true;
+			originalDragStart($draggableElement);
+		};
+
+		dragDrop.onDrop = function ($draggableElement, $dropAbleElement, event) {
+			self.movedSession($draggableElement, $dropAbleElement);
+			originalDrop($draggableElement, $dropAbleElement, event);
+			self.dragActive = false;
+		}
+	};
+
+	Sessionplaner.prototype.initialize = function () {
+		let self = this;
+
+		this.uiBlock = $('#t3js-ui-block');
+		this.stash = $('#stash');
+		this.gridButtonGroup = $('#gridButtonGroup');
+		this.gridNewSessionButton = this.gridButtonGroup.find('#actions-document-new-in-grid');
+
+		$(document)
+			.on('click', '#actions-document-new', function () { self.createNewSessionForm(); })
+			.on('click', '#actions-document-new-in-grid', function () { self.createNewSessionFormInGrid(); })
+			.on('click', '.icon-actions-edit-delete', function () { self.deleteSession(this); })
+			.on('dblclick', '.t3js-page-ce', function () { self.editSession(this); })
+			.on('mouseover', '.t3js-grid-cell', function () { self.mouseOver(this); })
+			.on('mouseout', '.t3js-grid-cell', function (event) { self.mouseOut(this, event); });
+
+		this.initializeDragAndDrop();
+	};
+
+	return new Sessionplaner();
+});
+
+//# sourceMappingURL=Edit.js.map

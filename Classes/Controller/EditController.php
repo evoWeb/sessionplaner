@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Sebastian Fischer <typo3@evoweb.de>
+ *  (c) 2013-2019 Sebastian Fischer <typo3@evoweb.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,9 +27,6 @@ namespace Evoweb\Sessionplaner\Controller;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * An display controller
- */
 class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
@@ -42,39 +39,25 @@ class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository
-     *
-     * @return void
-     */
     public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository)
     {
         $this->dayRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @return void
-     */
     protected function initializeAction()
     {
         /** @var \TYPO3\CMS\Core\Page\PageRenderer::class $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Sessionplaner/Edit');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Sessionplaner/Edit', 'function(sessionplaner) {
+            sessionplaner.setPageId(' . (int)GeneralUtility::_GP('id') . ');
+        }');
     }
 
-    /**
-     * @return void
-     */
     public function showAction()
     {
         if ($this->request->hasArgument('day')) {
@@ -93,7 +76,7 @@ class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * Disable error flash message
      *
-     * @return boolean
+     * @return bool
      */
     protected function getErrorFlashMessage()
     {

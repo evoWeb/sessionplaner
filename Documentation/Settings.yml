@@ -4,8 +4,8 @@
 
 ---
 conf.py:
-  copyright: 2014
-  project: extender
-  version: 6.0
-  release: 6.0.0
+  copyright: 2019
+  project: sessionplaner
+  version: 1.0
+  release: 1.0.0
 ...

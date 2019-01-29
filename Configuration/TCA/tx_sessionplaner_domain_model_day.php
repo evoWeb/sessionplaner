@@ -12,7 +12,6 @@ return [
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'dividers2tabs' => true,
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY date',
         'enablecolumns' => [
@@ -39,9 +38,9 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 20,
-                'eval' => 'date',
-                'max'  => 256,
+                'eval' => 'date'
             ],
         ],
         'rooms' => [

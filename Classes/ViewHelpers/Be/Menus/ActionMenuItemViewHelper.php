@@ -45,6 +45,11 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
 class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\ActionMenuItemViewHelper
 {
     /**
+     * @var \TYPO3\CMS\Fluid\Core\Rendering\RenderingContext
+     */
+    protected $renderingContext;
+
+    /**
      * Initialize arguments.
      */
     public function initializeArguments()
@@ -70,7 +75,7 @@ class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\Act
         $currentArgumentKey = $this->arguments['currentArgumentKey'];
 
         /** @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder */
-        $uriBuilder = $this->controllerContext->getUriBuilder();
+        $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uri = $uriBuilder->reset()->uriFor($action, $arguments, $controller);
         $this->tag->addAttribute('value', $uri);
         if ($this->isSelected($controller, $action, $arguments, $current, $currentArgumentKey)) {
@@ -92,7 +97,7 @@ class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\Act
     public function isSelected($controller, $action, $arguments, $current, $currentArgumentKey)
     {
         if ($current === '' && $currentArgumentKey === '') {
-            $currentRequest = $this->controllerContext->getRequest();
+            $currentRequest = $this->renderingContext->getControllerContext()->getRequest();
             $currentController = $currentRequest->getControllerName();
             $currentAction = $currentRequest->getControllerActionName();
 

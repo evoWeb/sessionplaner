@@ -45,19 +45,14 @@ return [
                 'size' => 5,
                 'minitems' => 0,
                 'maxitems' => 100,
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
             ],
         ],
     ],
     'types' => [
         '0' => [
             'showitem' => '
-            label,
-            sessions
+                label,
+                sessions
             '
         ]
     ],

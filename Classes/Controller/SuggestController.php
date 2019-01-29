@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Benjamin Kott <info@bk2k.info>
+ *  (c) 2013-2019 Benjamin Kott <info@bk2k.info>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,11 +24,9 @@ namespace Evoweb\Sessionplaner\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
-/**
- * Session Suggest Controller
- */
 class SuggestController extends ActionController
 {
     /**
@@ -36,21 +34,11 @@ class SuggestController extends ActionController
      */
     protected $sessionRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository
-     *
-     * @return void
-     */
     public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
     {
         $this->sessionRepository = $repository;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session|null $session
-     *
-     * @return void
-     */
     public function newAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         // Has a session been submitted?
@@ -61,11 +49,6 @@ class SuggestController extends ActionController
         $this->view->assign('session', $session);
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Session $session
-     *
-     * @return void
-     */
     public function createAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
     {
         if ($session === null) {
@@ -73,9 +56,9 @@ class SuggestController extends ActionController
             $this->redirect('form');
         }
 
-        $session->setHidden(true);
-        $session->setSuggestion(true);
+        $session = $this->setDefaultValues($session);
         $this->sessionRepository->add($session);
+
         $title = null;
         $message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('yourSessionIsSaved', 'sessionplaner');
         $this->addFlashMessage($message, $title);
@@ -84,10 +67,50 @@ class SuggestController extends ActionController
         $this->redirect('new');
     }
 
+    protected function setDefaultValues(
+        \Evoweb\Sessionplaner\Domain\Model\Session $session
+    ): \Evoweb\Sessionplaner\Domain\Model\Session {
+        if (isset($this->settings['default'])
+            && is_array($this->settings['default'])
+            && !empty($this->settings['default'])) {
+            foreach ($this->settings['default'] as $field => $value) {
+                $value = $this->getDefaultValues($field, $value);
+
+                $setter = 'set' . ucfirst($field);
+                if (method_exists($session, $setter)) {
+                    call_user_func([$session, $setter], $value);
+                }
+            }
+        }
+
+        return $session;
+    }
+
+    /**
+     * @param string $field
+     * @param mixed $value
+     *
+     * @return mixed
+     */
+    protected function getDefaultValues($field, $value)
+    {
+        switch ($field) {
+            case 'day':
+                if (!empty($value) && intval($value) > 0) {
+                    /** @var DayRepository $dayRepository */
+                    $dayRepository = $this->objectManager->get(DayRepository::class);
+                    $value = $dayRepository->findByUid($value);
+                }
+                break;
+        }
+
+        return $value;
+    }
+
     /**
      * Disable error flash message
      *
-     * @return boolean
+     * @return bool
      */
     protected function getErrorFlashMessage()
     {
