@@ -4,7 +4,7 @@ namespace Evoweb\Sessionplaner\ViewHelpers;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Benjamin Kott <info@bk2k.info>
+ *  (c) 2013-2019 Benjamin Kott <info@bk2k.info>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is

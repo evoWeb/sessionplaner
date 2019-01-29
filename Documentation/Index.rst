@@ -23,7 +23,7 @@ sessionplaner: TYPO3Camp Session planer
 	TYPO3camp session planing inside TYPO3
 
 :Copyright:
-	2013
+	2013-2019
 
 :Author:
 	Sebastian Fischer, Benjamin Kott
