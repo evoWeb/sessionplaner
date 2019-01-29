@@ -88,7 +88,7 @@ jobs:
             echo -e "Preparing upload of release ${TRAVIS_TAG} to TER\n";
 
             # Install requirements
-            composer require --dev helhum/ter-client dev-master
+            composer global require helhum/ter-client dev-master
 
             # Cleanup before we upload
             git reset --hard HEAD && git clean -fx
