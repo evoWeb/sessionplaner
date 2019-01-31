@@ -6,7 +6,7 @@ call_user_func(function () {
      * Default PageTS
      */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-        '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.ts">'
+        '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig">'
     );
 
     /**
@@ -83,4 +83,14 @@ call_user_func(function () {
             ],
         ],
     ];
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
+    config.pageTitleProviders {
+        event {
+            provider = Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider
+            before = record
+            after = altPageTitle
+        }
+    }
+'));
 });

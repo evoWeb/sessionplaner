@@ -30,7 +30,7 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim,required',
-                'max'  => 256,
+                'max' => 256,
             ],
         ],
         'date' => [

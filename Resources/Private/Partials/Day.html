@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
 <head>
 	<title>Edit form</title>
 </head>
 <body>
 <f:section name="Main">
 
-<h2>{day.name}</h2>
-<ul>
-	<f:for each="{day.rooms}" as="room">
-	<li class="room">
-		<h4>{room.name}</h4>
-		<ul>
-		<f:for each="{room.slots}" as="slot">
-			<li class="slot">
-				<span class="time"><f:format.date date="{slot.start}" format="H:i"/></span>
-				<f:for each="{room.sessions}" as="session">
-				<f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
-				<section>
-					<strong>{session.topic}</strong><br/>
-					<f:translate key="by"/> {session.speaker}
-					{session.twitter}
-					{session.attendees}
-					{session.type}
-					{session.level}
-					{session.description}
-					{session.download}
-				</section>
-				</f:if>
-				</f:for>
+	<h2>{day.name}</h2>
+	<ul>
+		<f:for each="{day.rooms}" as="room">
+			<li class="room">
+				<h4>{room.name}</h4>
+				<ul>
+					<f:for each="{room.slots}" as="slot">
+						<li class="slot">
+							<span class="time"><f:format.date date="{slot.start}" format="H:i"/></span>
+							<f:for each="{room.sessions}" as="session">
+								<f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
+									<section>
+										<strong>{session.topic}</strong><br/>
+										<f:translate key="by"/>
+										{session.speaker}
+										{session.twitter}
+										{session.attendees}
+										{session.type}
+										{session.level}
+										{session.description}
+										{session.download}
+									</section>
+								</f:if>
+							</f:for>
+						</li>
+					</f:for>
+				</ul>
 			</li>
 		</f:for>
-		</ul>
-	</li>
-	</f:for>
-</ul>
+	</ul>
 
 </f:section>
 </body>

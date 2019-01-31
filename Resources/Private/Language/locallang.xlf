@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z"
+		  product-name="sessionplaner">
 		<header/>
 		<body>
 			<trans-unit id="minutes">
@@ -28,7 +29,8 @@
 			</trans-unit>
 			<trans-unit id="filter-comment">
 				<source>Entries are marked and stored in a cookie by double click an item.
-					Filter are list after a reload.</source>
+					Filter are list after a reload.
+				</source>
 			</trans-unit>
 			<trans-unit id="by">
 				<source>von</source>
@@ -86,6 +88,15 @@
 			</trans-unit>
 			<trans-unit id="tags">
 				<source>Tags</source>
+			</trans-unit>
+			<trans-unit id="back-to-overview">
+				<source>Back to overview</source>
+			</trans-unit>
+			<trans-unit id="tweet">
+				<source>Tweet</source>
+			</trans-unit>
+			<trans-unit id="documents">
+				<source>Documents</source>
 			</trans-unit>
 			<trans-unit id="suggest">
 				<source>submit suggestion</source>
