@@ -7,3 +7,4 @@ composer.*
 node_modules
 .sass-cache
 *.unminified.js
+.php_cs.cache

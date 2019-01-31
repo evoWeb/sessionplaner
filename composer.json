@@ -8,8 +8,8 @@
 		"GPL-2.0-or-later"
 	],
 
-	"support" : {
-		"issues" : "https://github.com/evoWeb/sessionplaner/issues"
+	"support": {
+		"issues": "https://github.com/evoWeb/sessionplaner/issues"
 	},
 
 	"keywords": [
@@ -20,6 +20,9 @@
 
 	"require": {
 		"typo3/cms-core": "^9.5"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.13"
 	},
 
 	"autoload": {

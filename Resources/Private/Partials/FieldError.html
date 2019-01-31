@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+			xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
 <head>
 	<title>Partial field error template of registration</title>
 </head>
@@ -12,9 +12,11 @@
 				<f:if condition="{propertyPath}=={field}">
 					<f:for each="{propertyErrors}" as="propertyError">
 						<div class="error error-message error-field error-field-{propertyPath} error-code-{propertyError.code}">
-							<f:if condition="{f:translate(key: 'field_{propertyError.code}') -> f:format.printf(arguments: {field: '{f:translate(key: \'{propertyPath}\')}'})}">
+							<f:if
+								condition="{f:translate(key: 'field_{propertyError.code}') -> f:format.printf(arguments: {field: '{f:translate(key: \'{propertyPath}\')}'})}">
 								<f:then>
-									{f:translate(key: 'field_{propertyError.code}') -> f:format.printf(arguments: {field: '{f:translate(key: \'{propertyPath}\')}'})}
+									{f:translate(key: 'field_{propertyError.code}') -> f:format.printf(arguments: {field:
+									'{f:translate(key: \'{propertyPath}\')}'})}
 								</f:then>
 								<f:else>
 									{propertyError.message}

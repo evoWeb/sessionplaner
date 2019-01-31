@@ -1,5 +1,5 @@
 <?php
-namespace Evoweb\Sessionplaner\Domain\Repository;
+namespace Evoweb\Sessionplaner\TitleTagProvider;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -12,6 +12,15 @@ namespace Evoweb\Sessionplaner\Domain\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-class SlotRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
+
+class EventTitleTagProvider extends AbstractPageTitleProvider
 {
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+    }
 }
