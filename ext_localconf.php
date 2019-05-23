@@ -13,6 +13,9 @@
 
 defined('TYPO3_MODE') || die('Access denied.');
 
+// Register "sessionplannervh" as global fluid namespace
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] = 'Evoweb\\Sessionplaner\\ViewHelpers';
+
 call_user_func(function () {
     /**
      * Default PageTS

@@ -1,120 +1,110 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<head>
-	<title>List days</title>
-</head>
-<body>
-
 <f:layout name="Frontend" />
-
 <f:section name="content">
 
-<f:flashMessages as="flashMessages">
-    <f:for each="{flashMessages}" as="flashMessage">
-        <div class="alert success">{flashMessage.message}</div>
-    </f:for>
-</f:flashMessages>
+    <f:flashMessages as="flashMessages">
+        <f:for each="{flashMessages}" as="flashMessage">
+            <div class="alert success">{flashMessage.message}</div>
+        </f:for>
+    </f:flashMessages>
 
-<f:form action="create" name="session" object="{session}" class="form-horizontal">
-
-	<f:render partial="FormErrors" section="Main" arguments="{for: 'session'}" />
-	<div class="csc-frame-section">
-		<div class="row">
-			<div class="four columns">
-				<label for="input_topic">
-					<f:translate key="topic"/>*
-				</label>
-			</div>
-			<div class="eight columns">
-				<div class="field<f:form.validationResults for='session.topic'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
-					<f:form.textfield property="topic" id="input_topic" class="input text"/>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns">
-				<label for="input_description">
-					<f:translate key="description"/>*
-				</label>
-			</div>
-			<div class="eight columns">
-				<div class="field<f:form.validationResults for='session.description'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
-					<f:form.textarea property="description" id="input_description" class="input textarea"/>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns">
-				<label for="input_speaker">
-					<f:translate key="speaker"/>*
-				</label>
-			</div>
-			<div class="eight columns">
-				<div class="field<f:form.validationResults for='session.speaker'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
-					<f:form.textfield property="speaker" id="input_speaker" class="input text"/>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns">
-				<label for="input_twitter">
-					<f:translate key="twitter"/>*
-				</label>
-			</div>
-			<div class="eight columns">
-				<div class="field prepend<f:form.validationResults for='session.twitter'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
-					<span class="adjoined">@</span>
-					<f:form.textfield property="twitter" id="input_twitter" class="input wide text"/>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns">
-				<label for="type">
-					<f:translate key="type"/>*
-				</label>
-			</div>
-			<div class="eight columns">
-				<div class="field<f:form.validationResults for='session.type'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
-					<div class="picker">
-						<f:form.select property="type" options="{
-							1: '{f:translate(key: \'type-talk\')}',
-							2: '{f:translate(key: \'type-tutorial\')}',
-							3: '{f:translate(key: \'type-workshop\')}',
-							6: '{f:translate(key: \'type-wish\')}',
-							4: '{f:translate(key: \'type-other\')}'
-						}" id="type"/>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns">
-				<label for="level">
-					<f:translate key="level"/>*
-				</label>
-			</div>
-			<div class="eight columns">
-				<div class="field<f:form.validationResults for='session.level'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
-					<div class="picker">
-						<f:form.select property="level" options="{
-							1: '{f:translate(key: \'level-starter\')}',
-							2: '{f:translate(key: \'level-advanced\')}',
-							3: '{f:translate(key: \'level-pro\')}'
-						}" id="level"/>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="eight push_four columns">
-				<div class="medium primary btn">
-					<f:form.submit value="{f:translate(key: 'suggest')}"/>
-				</div>
-			</div>
-		</div>
-	</div>
-</f:form>
+    <f:form action="create" name="session" object="{session}" class="form-horizontal">
+        <f:render partial="FormErrors" section="Main" arguments="{for: 'session'}" />
+        <div class="csc-frame-section">
+            <div class="row">
+                <div class="four columns">
+                    <label for="input_topic">
+                        <f:translate key="topic" />*
+                    </label>
+                </div>
+                <div class="eight columns">
+                    <div class="field<f:form.validationResults for='session.topic'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+                        <f:form.textfield property="topic" id="input_topic" class="input text" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <label for="input_description">
+                        <f:translate key="description" />*
+                    </label>
+                </div>
+                <div class="eight columns">
+                    <div class="field<f:form.validationResults for='session.description'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+                        <f:form.textarea property="description" id="input_description" class="input textarea" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <label for="input_speaker">
+                        <f:translate key="speaker" />*
+                    </label>
+                </div>
+                <div class="eight columns">
+                    <div class="field<f:form.validationResults for='session.speaker'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+                        <f:form.textfield property="speaker" id="input_speaker" class="input text" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <label for="input_twitter">
+                        <f:translate key="twitter" />*
+                    </label>
+                </div>
+                <div class="eight columns">
+                    <div class="field prepend<f:form.validationResults for='session.twitter'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+                        <span class="adjoined">@</span>
+                        <f:form.textfield property="twitter" id="input_twitter" class="input wide text" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <label for="type">
+                        <f:translate key="type" />*
+                    </label>
+                </div>
+                <div class="eight columns">
+                    <div class="field<f:form.validationResults for='session.type'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+                        <div class="picker">
+                            <f:form.select property="type" options="{
+                                1: '{f:translate(key: \'type-talk\')}',
+                                2: '{f:translate(key: \'type-tutorial\')}',
+                                3: '{f:translate(key: \'type-workshop\')}',
+                                6: '{f:translate(key: \'type-wish\')}',
+                                4: '{f:translate(key: \'type-other\')}'
+                            }" id="type" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns">
+                    <label for="level">
+                        <f:translate key="level" />*
+                    </label>
+                </div>
+                <div class="eight columns">
+                    <div class="field<f:form.validationResults for='session.level'>{f:if(condition: '{validationResults.flattenedErrors}', then: ' danger')}</f:form.validationResults>">
+                        <div class="picker">
+                            <f:form.select property="level" options="{
+                                1: '{f:translate(key: \'level-starter\')}',
+                                2: '{f:translate(key: \'level-advanced\')}',
+                                3: '{f:translate(key: \'level-pro\')}'
+                            }" id="level" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="eight push_four columns">
+                    <div class="medium primary btn">
+                        <f:form.submit value="{f:translate(key: 'suggest')}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:form>
 
 </f:section>
-</body>
-</html>

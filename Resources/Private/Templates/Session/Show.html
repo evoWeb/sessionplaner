@@ -1,15 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en"
-	  xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-<head>
-	<title>Show Session</title>
-</head>
-<body>
-
 <f:layout name="Frontend" />
 <f:section name="content">
-    <f:if condition="{session}">
 
+    <f:if condition="{session}">
         <div class="session">
             <div class="session-title">
                 <h1>{session.topic}</h1>
@@ -36,43 +28,41 @@
                 </p>
             </div>
             <f:if condition="{session.speaker}">
-            <div class="session-speaker">
-                <p>
-                    <span class="session-speaker-item session-speaker-name">{session.speaker}</span>
-                    <f:if condition="{session.twitter}"><span class="session-speaker-item session-speaker-twitter"><a href="https://www.twitter.com/{session.twitter}" title="@{session.twitter}" target="_blank"/>@{session.twitter}</a></span></f:if>
-                </p>
-            </div>
+                <div class="session-speaker">
+                    <p>
+                        <span class="session-speaker-item session-speaker-name">{session.speaker}</span>
+                        <f:if condition="{session.twitter}">
+                            <span class="session-speaker-item session-speaker-twitter">
+                                <a href="https://www.twitter.com/{session.twitter}" title="@{session.twitter}" target="_blank">@{session.twitter}</a>
+                            </span>
+                        </f:if>
+                    </p>
+                </div>
             </f:if>
-
-
-	    <f:if condition="{session.documents}">
-		<div class="session-files">
-		    <h4>{f:translate(key: 'documents')}</h4>
-		    <table>
-			<tbody>
-			    <f:for each="{session.documents}" as="document">
-			    <tr>
-				<td><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></td>
-			    </tr>
-			    </f:for>
-			</tbody>
-		    </table>
-		</div>
-	    </f:if>
-
+            <f:if condition="{session.documents}">
+                <div class="session-files">
+                    <h4>{f:translate(key: 'documents')}</h4>
+                    <table>
+                        <tbody>
+                            <f:for each="{session.documents}" as="document">
+                                <tr>
+                                    <td><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></td>
+                                </tr>
+                            </f:for>
+                        </tbody>
+                    </table>
+                </div>
+            </f:if>
         </div>
-
         <div class="session-backlink">
             <div class="medium primary btn">
                 <f:link.action action="list">{f:translate(key: 'back-to-overview')}</f:link.action>
             </div>
         </div>
-
         <div class="session-social">
             <div class="session-social-item">
                 <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true"></div>
             </div>
-
             <div class="session-social-item">
                 <f:if condition="{session.twitter}">
                     <f:then>
@@ -81,18 +71,15 @@
                     <f:else>
                         <a href="https://twitter.com/share" class="twitter-share-button" data-via="{settings.twitter.account}" data-hashtags="{settings.twitter.hashtag}">{f:translate(key: 'tweet')}</a>
                     </f:else>
-
                 </f:if>
             </div>
         </div>
-
         <f:if condition="{settings.disqusShortname}">
             <div class="session-comments-disqus">
                 <div id="disqus_thread"></div>
                 <script type="text/javascript">
                     var disqus_shortname = '{settings.disqusShortname}';
-
-                    (function() {
+                    (function () {
                         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
                         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -105,5 +92,3 @@
     </f:if>
 
 </f:section>
-</body>
-</html>
