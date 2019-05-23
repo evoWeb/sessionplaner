@@ -1,5 +1,4 @@
 <?php
-namespace Evoweb\Sessionplaner\Controller;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -9,8 +8,10 @@ namespace Evoweb\Sessionplaner\Controller;
  * of the License, or any later version.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace Evoweb\Sessionplaner\Controller;
 
 use Evoweb\Sessionplaner\Domain\Model\Day;
 use Evoweb\Sessionplaner\Domain\Model\Room;
@@ -114,7 +115,6 @@ class AjaxController
         }
         return true;
     }
-
 
     protected function render(): ResponseInterface
     {

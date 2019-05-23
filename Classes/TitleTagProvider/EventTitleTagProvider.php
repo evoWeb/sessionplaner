@@ -1,5 +1,4 @@
 <?php
-namespace Evoweb\Sessionplaner\TitleTagProvider;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -9,8 +8,10 @@ namespace Evoweb\Sessionplaner\TitleTagProvider;
  * of the License, or any later version.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace Evoweb\Sessionplaner\TitleTagProvider;
 
 use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
 

@@ -1,5 +1,4 @@
 <?php
-namespace Evoweb\Sessionplaner\ViewHelpers;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -9,8 +8,10 @@ namespace Evoweb\Sessionplaner\ViewHelpers;
  * of the License, or any later version.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
+ * LICENSE file that was distributed with this source code.
  */
+
+namespace Evoweb\Sessionplaner\ViewHelpers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
