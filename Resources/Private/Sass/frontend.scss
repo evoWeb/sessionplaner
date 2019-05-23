@@ -1,165 +1,83 @@
-
-.sessionplaner {
-    background-color: #FF0000;
-}
-
-.sessionplaner-day {
-
-}
+$session-breakpoint-sm: 576px !default;
+$session-breakpoint-md: 768px !default;
+$session-breakpoint-lg: 992px !default;
+$session-breakpoint-xl: 1200px !default;
+$session-row-border-color: rgba(0,0,0,0.15) !default;
+$session-col-padding: 1rem !default;
+$session-slot-time-bg: #313131 !default;
+$session-slot-time-color: #ffffff !default;
 
 .sessionplaner-row {
-    display: block;
-    *zoom: 1;
-    margin-left: -2px;
-    padding-left: 62px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 5rem;
+    min-height: 6rem;
+    border-top: 1px solid $session-row-border-color;
 }
-
-.sessionplaner-row:before,
-.sessionplaner-row:after {
-    content: "";
-    display: table;
+.sessionplaner-row-header {
+    display: none;
 }
-
-.sessionplaner-row:after {
-    clear: both;
-}
-
 
 .sessionplaner-col {
-    float: left;
-    border: 1px solid #DDDDDD;
-    overflow: hidden;
+    flex-shrink: 0;
+    width: 100%;
+    padding: $session-col-padding;
 }
-
-.sessionplaner-col-header.sessionplaner-col-header {
-    border: none;
-    padding: 10px;
-}
-
-.sessionplaner-session-speaker,
-.sessionplaner-session-topic {
-    line-height: 1.2em;
-    margin-bottom: 0.5em;
-}
-
-
 .sessionplaner-slot-time {
-    float: left;
-    padding: 10px;
-    width: 60px;
-    margin-left: -62px;
     text-align: center;
-    background-color: #333333;
-    border: none;
-    color: #FFFFFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 5rem;
+    padding: $session-col-padding;
+    color: $session-slot-time-color;
+    background-color: $session-slot-time-bg;
 }
 
-.sessionplaner-slot-session {
-    height: 160px;
-}
-
-.sessionplaner-slot-session-room {
-    display: none;
-    padding: 5px 9px;
-    border-bottom: 1px solid #DDDDDD;
-    background-color: #FAFAFA;
-    color: #999999;
-}
-
-
-.sessionplaner-slot-session-info {
-    padding: 9px;
-}
-
-.sessionplaner-slot-selected {
-    border-color: #e48213;
-    background-color: #ff8700;
-    color: #FFFFFF;
-}
-
-.sessionplaner-slot-selected .sessionplaner-slot-session-room {
-    background-color: #ffa540;
-    color: #FFFFFF;
-    border-color: #e48213;
-}
-
-
-.sessionplaner-slot-room,
-.sessionplaner-slot-session {
-    margin-left: 0.5%;
-    margin-bottom: 0.5%;
-    width: 16.15%;
-}
-
-@media only screen and (max-width: 959px) {
-    .sessionplaner-row-header {
-        display: none;
-    }
-
-    .sessionplaner-slot-session-room {
-        display: block;
-    }
-
-    .sessionplaner-slot-time {
-        padding: 6px;
-    }
-
-    .sessionplaner-slot-session {
-        height: 180px;
-        width: 32.8%;
+// Variants
+[data-sessionplaner-columns="2"] {
+    @media only screen and (min-width: $session-breakpoint-sm) {
+        &.sessionplaner-row-header {
+            display: flex;
+        }
+        .sessionplaner-slot-session-room {
+            display: none;
+        }
+        .sessionplaner-col {
+            width: calc(100% / 2);
+        }
     }
 }
-
-@media only screen and (max-width: 640px) {
-    .sessionplaner-slot-session {
-        width: 49.5%;
+[data-sessionplaner-columns="3"] {
+    @media only screen and (min-width: $session-breakpoint-md) {
+        &.sessionplaner-row-header {
+            display: flex;
+        }
+        .sessionplaner-slot-session-room {
+            display: none;
+        }
+        .sessionplaner-col {
+            width: calc(100% / 3);
+        }
     }
 }
-
-@media only screen and (max-width: 500px) {
-    .sessionplaner-slot-session {
-        width: 99%;
-        margin-left: 1%;
-        margin-bottom: 5px;
-        flaot: none;
+[data-sessionplaner-columns="4"] {
+    @media only screen and (min-width: $session-breakpoint-sm) {
+        .sessionplaner-col {
+            width: calc(100% / 2);
+        }
     }
-
-    .sessionplaner-slot-session {
-        height: auto;
+    @media only screen and (min-width: $session-breakpoint-md) {
+        &.sessionplaner-row-header {
+            display: flex;
+        }
+        .sessionplaner-slot-session-room {
+            display: none;
+        }
+        .sessionplaner-col {
+            width: calc(100% / 4);
+        }
     }
-}
-
-@media only screen and (max-width: 380px) {
-    .sessionplaner-row {
-        padding-left: 0px;
-        margin-bottom: 30px;
-    }
-
-    .sessionplaner-slot-time {
-        margin-left: 0;
-        margin-bottom: 5px;
-        float: none;
-        width: auto;
-    }
-
-    .sessionplaner-slot-session {
-        width: 100%;
-        height: auto;
-        margin: 0px;
-        margin-bottom: 5px;
-    }
-}
-
-.cf {
-    *zoom: 1;
-}
-
-.cf:before,
-.cf:after {
-    content: "";
-    display: table;
-}
-
-.cf:after {
-    clear: both;
 }

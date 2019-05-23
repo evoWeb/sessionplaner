@@ -8,28 +8,24 @@
                 <f:format.date format="d.m.Y">@{day.date}</f:format.date>
             </h1>
             <f:if condition="{day.rooms}">
-                <div class="sessionplaner-row sessionplaner-row-header">
+                <div class="sessionplaner-row sessionplaner-row-header" data-sessionplaner-columns="{day.rooms -> f:count()}">
                     <f:for each="{day.rooms}" as="room">
                         <div class="sessionplaner-col sessionplaner-col-header sessionplaner-slot-room">
                             <f:if condition="{room.logo}">
-                                <f:then>
-                                    <f:image class="sessionplaner-col-header-room-logo" src="{room.logo.uid}" treatIdAsReference="true" title="{room.logo.OriginalResource.title}" alt="{room.logo.OriginalResource.alternative}" width="148c" />
-                                </f:then>
-                                <f:else>
-                                    {room.name}
-                                </f:else>
+                                <f:image class="sessionplaner-col-header-room-logo" src="{room.logo.uid}" treatIdAsReference="true" title="{room.logo.OriginalResource.title}" alt="{room.logo.OriginalResource.alternative}" width="148c" />
                             </f:if>
+                            {room.name}
                         </div>
                     </f:for>
                 </div>
             </f:if>
             <f:for each="{day.slots}" as="slot">
-                <div class="sessionplaner-row">
+                <div class="sessionplaner-row" data-sessionplaner-columns="{day.rooms -> f:count()}">
                     <div class="sessionplaner-slot-time">
                         <f:format.date format="H:i">{slot.start}</f:format.date>
                     </div>
                     <f:for each="{day.rooms}" as="room">
-                        <div class="sessionplaner-col sessionplaner-slot-session" data-slot="{day.uid}-{slot.uid}" data-room="{room.uid}">
+                        <div class="sessionplaner-col sessionplaner-slot-session" data-sessionplaner-slot="{day.uid}-{slot.uid}" data-sessionplaner-room="{room.uid}">
                             <div class="sessionplaner-slot-session-room">
                                 {room.name}
                             </div>
