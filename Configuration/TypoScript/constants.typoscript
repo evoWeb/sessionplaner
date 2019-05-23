@@ -1,23 +1,30 @@
+# customsubcategory=100_SPTEMPLATE=Template
+# customsubcategory=110_SPPERSISTENCE=Persistence
+# customsubcategory=120_SPSETTINGS=Settings
+
 plugin.tx_sessionplaner {
     view {
-        # cat=plugin.tx_sessionplaner/file; type=string; label=Path to template root (FE)
+        # cat=plugin.sessionplaner/100_SPTEMPLATE/templateRootPath; type=string; label=Path to template root (FE)
         templateRootPath = EXT:sessionplaner/Resources/Private/Templates/
-        # cat=plugin.tx_sessionplaner/file; type=string; label=Path to template partials (FE)
+        # cat=plugin.sessionplaner/100_SPTEMPLATE/partialRootPath; type=string; label=Path to template partials (FE)
         partialRootPath = EXT:sessionplaner/Resources/Private/Partials/
-        # cat=plugin.tx_sessionplaner/file; type=string; label=Path to template layouts (FE)
+        # cat=plugin.sessionplaner/100_SPTEMPLATE/layoutRootPath; type=string; label=Path to template layouts (FE)
         layoutRootPath = EXT:sessionplaner/Resources/Private/Layouts/
     }
 
     persistence {
-        # cat=plugin.sessionplaner//a; type=string; label=Default storage PID
+        # cat=plugin.sessionplaner/110_SPPERSISTENCE/storagePid; type=string; label=Default storage PID
         storagePid =
     }
 
     settings {
-        cssFile = typo3conf/ext/sessionplaner/Resources/Public/Stylesheets/frontend.css
+        # cat=plugin.sessionplaner/120_SPSETTINGS/cssFile; type=string; label=CSS File
+        cssFile = EXT:sessionplaner/Resources/Public/Stylesheets/frontend.css
+        # cat=plugin.sessionplaner/120_SPSETTINGS/disqusShortname; type=string; label=Disqus Shortname
         disqusShortname =
-
+        # cat=plugin.sessionplaner/120_SPSETTINGS/twitterHashtag; type=string; label=Twitter Hashtag
         twitterHashtag = TYPO3
+        # cat=plugin.sessionplaner/120_SPSETTINGS/twitterAccount; type=string; label=Twitter Account
         twitterAccount = typo3
     }
 }
