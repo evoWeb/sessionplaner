@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file t3:id="1557352034" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
+    <file t3:id="1558692599" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
         <header/>
         <body>
             <trans-unit id="minutes">
@@ -18,7 +18,7 @@
                 <source>Tags</source>
             </trans-unit>
             <trans-unit id="filter-user">
-                <source>Slideshare verfügbar</source>
+                <source>Slideshare available</source>
             </trans-unit>
             <trans-unit id="filter-time">
                 <source>Current time</source>
@@ -78,7 +78,7 @@
                 <source>Starter / Overview</source>
             </trans-unit>
             <trans-unit id="level-advanced">
-                <source>Advanced / Basic knowleg</source>
+                <source>Advanced / Basic knowledge</source>
             </trans-unit>
             <trans-unit id="level-pro">
                 <source>Pro / Detailed</source>

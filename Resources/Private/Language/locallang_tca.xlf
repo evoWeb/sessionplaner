@@ -118,7 +118,7 @@
                 <source>Starter / Overview</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-level-advanced" xml:space="preserve">
-                <source>Advanced / Basic knowleg</source>
+                <source>Advanced / Basic knowledge</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-level-pro" xml:space="preserve">
                 <source>Pro / Detailed</source>
