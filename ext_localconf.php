@@ -89,34 +89,6 @@ call_user_func(function () {
         ]
     );
 
-    /**
-     * Default realurl configuration
-     */
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT']['suggest'] = [
-        [
-            'GETvar' => 'tx_sessionplaner_suggest[action]',
-        ]
-    ];
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT']['session'] = [
-        [
-            'GETvar' => 'tx_sessionplaner_session[action]',
-        ],
-        [
-            'GETvar' => 'tx_sessionplaner_session[session]',
-            'lookUpTable' => [
-                'table' => 'tx_sessionplaner_domain_model_session',
-                'id_field' => 'uid',
-                'alias_field' => 'topic',
-                'addWhereClause' => ' AND NOT deleted',
-                'useUniqueCache' => '1',
-                'useUniqueCache_conf' => [
-                    'strtolower' => '1',
-                    'spaceCharacter' => '-',
-                ],
-            ],
-        ],
-    ];
-
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
     config.pageTitleProviders {
         event {
