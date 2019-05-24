@@ -23,6 +23,7 @@ class Tca
         $record = BackendUtility::getRecord($parameters['table'], $parameters['row']['uid']);
         $start = TimeFormatUtility::getFormattedTime((int) $record['start']);
         $end = TimeFormatUtility::getFormattedTime((int) $record['start'] + ((int) $record['duration'] * 60));
-        $parameters['title'] = $start . ' - ' . $end;
+        $breakinfo = $record['break'] === 1 ? ' - BREAK' : '';
+        $parameters['title'] = $start . ' - ' . $end . $breakinfo;
     }
 }
