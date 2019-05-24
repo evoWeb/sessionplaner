@@ -121,7 +121,7 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-type',
             'config' => [
-                'type' => 'check',
+                'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
@@ -132,13 +132,16 @@ return [
                     [$languageFile . 'tx_sessionplaner_domain_model_session-type-other', 4],
                     [$languageFile . 'tx_sessionplaner_domain_model_session-type-break', 5],
                 ],
+                'minitems' => 0,
+                'maxitems' => 1,
+                'maxitems' => 1,
             ],
         ],
         'level' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
             'config' => [
-                'type' => 'check',
+                'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
@@ -146,6 +149,9 @@ return [
                     [$languageFile . 'tx_sessionplaner_domain_model_session-level-advanced', 2],
                     [$languageFile . 'tx_sessionplaner_domain_model_session-level-pro', 3],
                 ],
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'day' => [
