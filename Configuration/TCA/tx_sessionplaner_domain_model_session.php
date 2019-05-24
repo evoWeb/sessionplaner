@@ -154,17 +154,17 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_sessionplaner_domain_model_day',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID###
-                ORDER BY tx_sessionplaner_domain_model_day.date',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
                 'items' => [
-                    '0' => [
-                        '0' => $languageFile . 'notassigned',
+                    [
+                        $languageFile . 'notassigned',
+                        0,
                     ],
                 ],
+                'foreign_table' => 'tx_sessionplaner_domain_model_day',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID### ORDER BY tx_sessionplaner_domain_model_day.date',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'room' => [
@@ -173,16 +173,17 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_sessionplaner_domain_model_room',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
                 'items' => [
-                    '0' => [
-                        '0' => $languageFile . 'notassigned',
+                    [
+                        $languageFile . 'notassigned',
+                        0,
                     ],
                 ],
+                'foreign_table' => 'tx_sessionplaner_domain_model_room',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'slot' => [
@@ -191,16 +192,17 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
                 'items' => [
-                    '0' => [
-                        '0' => $languageFile . 'notassigned',
+                    [
+                        $languageFile . 'notassigned',
+                        0,
                     ],
                 ],
+                'foreign_table' => 'tx_sessionplaner_domain_model_slot',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'tags' => [
