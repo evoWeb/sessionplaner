@@ -24,7 +24,7 @@
                 <f:for each="{day.slots}" as="slot">
                     <tr class="{f:if(condition: slot.break, then: 'break', else: 'active')}">
                         <th class="t3-grid-cell time">
-                            <f:format.date date="{slot.start}" format="H:i" />
+                            <sessionplanervh:format.time value="{slot.start}" />
                             <br>
                             {slot.duration}
                             <f:translate key="minutes" />

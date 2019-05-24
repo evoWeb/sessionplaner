@@ -18,9 +18,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * @var \DateTime
+     * @var int
      */
-    protected $start = '';
+    protected $start = 0;
 
     /**
      * @var int
@@ -63,7 +63,7 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \DateTime $start
+     * @param int $start
      */
     public function setStart($start)
     {
@@ -71,7 +71,7 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return \DateTime
+     * @return int
      */
     public function getStart()
     {

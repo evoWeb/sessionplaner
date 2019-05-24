@@ -38,8 +38,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
-                'size' => 20,
-                'eval' => 'time,required'
+                'eval' => 'time,required',
             ],
         ],
         'duration' => [

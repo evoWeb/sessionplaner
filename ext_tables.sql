@@ -58,7 +58,7 @@ CREATE TABLE tx_sessionplaner_domain_model_slot
     deleted        tinyint(4) unsigned DEFAULT '0' NOT NULL,
     hidden         tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-    start          varchar(255) DEFAULT '' NOT NULL,
+    start          int(11) DEFAULT '0' NOT NULL,
     duration       int(11) unsigned DEFAULT '45' NOT NULL,
     break          tinyint(4) unsigned DEFAULT '0' NOT NULL,
     no_break_after tinyint(4) unsigned DEFAULT '0' NOT NULL,

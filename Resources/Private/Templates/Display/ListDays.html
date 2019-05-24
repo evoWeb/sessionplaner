@@ -11,7 +11,8 @@
                         <f:for each="{room.slots}" as="slot">
                             <li class="slot">
                                 <span class="time">
-                                    <f:format.date date="{slot.start}" format="H:i" /></span>
+                                    <sessionplanervh:format.time value="{slot.start}" />
+                                </span>
                                 <f:for each="{room.sessions}" as="session">
                                     <f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
                                         <section>
