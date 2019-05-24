@@ -48,7 +48,5 @@ a GNU/GPL CMS/Framework available from www.typo3.org_
    :titlesonly:
    :glob:
 
-   Licences/Index
-
 .. _License: http://www.opencontent.org/opl.shtml
 .. _www.typo3.org: http://www.typo3.org/

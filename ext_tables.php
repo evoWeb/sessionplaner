@@ -24,7 +24,7 @@ call_user_func(function () {
         ],
         [
             'access' => 'user,group',
-            'icon' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4.svg',
+            'icon' => 'EXT:sessionplaner/Resources/Public/Icons/module-sessionplaner.svg',
             'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xlf',
         ]
     );

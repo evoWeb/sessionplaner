@@ -28,7 +28,9 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg'
+        'typeicon_classes' => [
+            'default' => 'sessionplaner-record-day'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'name'

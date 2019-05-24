@@ -20,7 +20,7 @@ defined('TYPO3_MODE') || die('Access denied.');
     'Evoweb.sessionplaner',
     'Suggest',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest',
-    'EXT:sessionplaner/Resources/Public/Icons/Extension.gif'
+    'sessionplaner-plugin-suggest'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_suggest'] =
     'layout, select_key';
@@ -32,7 +32,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionp
     'Evoweb.sessionplaner',
     'Session',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session',
-    'EXT:sessionplaner/Resources/Public/Icons/Extension.gif'
+    'sessionplaner-plugin-session'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_session'] =
     'layout, select_key';
@@ -49,7 +49,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
     'Evoweb.sessionplaner',
     'Sessionplan',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan',
-    'EXT:sessionplaner/Resources/Public/Icons/Extension.gif'
+    'sessionplaner-plugin-display'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_sessionplan'] =
     'layout, select_key';

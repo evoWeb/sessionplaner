@@ -3,6 +3,9 @@
     <file t3:id="1558692596" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:33Z" product-name="sessionplaner">
         <header/>
         <body>
+            <trans-unit id="wizard.group.sessionplaner" xml:space="preserve">
+                <source>Session Planer</source>
+            </trans-unit>
             <trans-unit id="tt_content.list_type_display" xml:space="preserve">
                 <source>Sessionplan display</source>
             </trans-unit>

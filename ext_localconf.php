@@ -16,14 +16,32 @@ defined('TYPO3_MODE') || die('Access denied.');
 // Register "sessionplannervh" as global fluid namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] = 'Evoweb\\Sessionplaner\\ViewHelpers';
 
-call_user_func(function () {
-    /**
-     * Default PageTS
-     */
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-        '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig">'
+// Register Icons
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$icons = [
+    'plugin-display',
+    'plugin-session',
+    'plugin-suggest',
+    'record-day',
+    'record-room',
+    'record-session',
+    'record-slot',
+    'record-tag',
+];
+foreach ($icons as $icon) {
+    $iconRegistry->registerIcon(
+        'sessionplaner-' . $icon,
+        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        ['source' => 'EXT:sessionplaner/Resources/Public/Icons/' . $icon . '.svg']
     );
+}
 
+// Add default PageTsConfig
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig">'
+);
+
+call_user_func(function () {
     /**
      * Configure Frontend Plugin
      */
