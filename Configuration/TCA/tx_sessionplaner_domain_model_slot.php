@@ -19,6 +19,7 @@ return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_slot',
         'label' => 'start',
+        'label_userFunc' => Evoweb\Sessionplaner\Userfuncs\Tca::class . '->slotLabel',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY start',
