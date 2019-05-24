@@ -6,6 +6,6 @@
 conf.py:
   copyright: 2019
   project: sessionplaner
-  version: 1.0
-  release: 1.0.0
+  version: 2.0.0-dev
+  release: 2.0.0-dev
 ...
