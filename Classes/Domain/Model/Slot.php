@@ -39,9 +39,9 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Day>
+     * @var \Evoweb\Sessionplaner\Domain\Model\Day
      */
-    protected $days;
+    protected $day;
 
     /**
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
@@ -57,7 +57,6 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     public function __construct()
     {
-        $this->days = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
         $this->rooms = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
         $this->sessions = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
     }
@@ -127,19 +126,19 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $days
+     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
      */
-    public function setDays(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $days)
+    public function setDay(\Evoweb\Sessionplaner\Domain\Model\Day $day)
     {
-        $this->days = $days;
+        $this->day = $day;
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @return \Evoweb\Sessionplaner\Domain\Model\Day
      */
-    public function getDays()
+    public function getDay()
     {
-        return $this->days;
+        return $this->day;
     }
 
     /**

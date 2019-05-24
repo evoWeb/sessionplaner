@@ -20,6 +20,7 @@ return [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_slot',
         'label' => 'start',
         'label_userFunc' => Evoweb\Sessionplaner\Userfuncs\Tca::class . '->slotLabel',
+        'hideTable' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY start',
@@ -35,6 +36,18 @@ return [
         'showRecordFieldList' => 'start'
     ],
     'columns' => [
+        'day' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-day',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_sessionplaner_domain_model_day',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid=###CURRENT_PID###',
+                'maxitems' => 1,
+                'default' => 0,
+            ],
+        ],
         'start' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-start',
@@ -62,22 +75,6 @@ return [
                 'type' => 'check',
             ],
         ],
-        'days' => [
-            'exclude' => false,
-            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-days',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
-                'foreign_table' => 'tx_sessionplaner_domain_model_day',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID###',
-                'MM' => 'tx_sessionplaner_day_slot_mm',
-                'MM_opposite_field' => 'slots',
-                'size' => 5,
-                'minitems' => 0,
-                'maxitems' => 100,
-                'autoSizeMax' => 20,
-            ],
-        ],
         'rooms' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-rooms',
@@ -98,10 +95,10 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
+            day,
             start,
             duration,
             break,
-            days,
             rooms
             '
         ]

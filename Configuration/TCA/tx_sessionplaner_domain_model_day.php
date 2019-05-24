@@ -75,16 +75,13 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-slots',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###
-                    ORDER BY tx_sessionplaner_domain_model_slot.start',
-                'MM' => 'tx_sessionplaner_day_slot_mm',
-                'size' => 10,
-                'minitems' => 0,
-                'maxitems' => 100,
-                'autoSizeMax' => 100,
+                'foreign_field' => 'day',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                ]
             ],
         ],
     ],

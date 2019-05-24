@@ -58,12 +58,12 @@ CREATE TABLE tx_sessionplaner_domain_model_slot
     deleted        tinyint(4) unsigned DEFAULT '0' NOT NULL,
     hidden         tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
+    day            int(11) unsigned DEFAULT '0' NOT NULL,
     start          int(11) DEFAULT '0' NOT NULL,
     duration       int(11) unsigned DEFAULT '45' NOT NULL,
     break          tinyint(4) unsigned DEFAULT '0' NOT NULL,
     no_break_after tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
-    days           int(11) unsigned DEFAULT '0' NOT NULL,
     rooms          int(11) unsigned DEFAULT '0' NOT NULL,
     sessions       int(11) unsigned DEFAULT '0' NOT NULL,
 
@@ -131,21 +131,6 @@ CREATE TABLE tx_sessionplaner_domain_model_tag
 # Table structure for table 'tx_sessionplaner_day_room_mm'
 #
 CREATE TABLE tx_sessionplaner_day_room_mm
-(
-    uid_local       int(11) DEFAULT '0' NOT NULL,
-    uid_foreign     int(11) DEFAULT '0' NOT NULL,
-    sorting         int(11) DEFAULT '0' NOT NULL,
-    sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    tablenames      varchar(255) DEFAULT '' NOT NULL,
-
-    KEY             uid_local (uid_local),
-    KEY             uid_foreign (uid_foreign)
-);
-
-#
-# Table structure for table 'tx_sessionplaner_day_slot_mm'
-#
-CREATE TABLE tx_sessionplaner_day_slot_mm
 (
     uid_local       int(11) DEFAULT '0' NOT NULL,
     uid_foreign     int(11) DEFAULT '0' NOT NULL,
