@@ -35,7 +35,7 @@ return [
     ],
     'columns' => [
         'name' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-name',
             'config' => [
                 'type' => 'input',
@@ -45,7 +45,7 @@ return [
             ],
         ],
         'date' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
             'config' => [
                 'type' => 'input',
@@ -55,7 +55,7 @@ return [
             ],
         ],
         'rooms' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-rooms',
             'config' => [
                 'type' => 'select',
@@ -70,7 +70,7 @@ return [
             ],
         ],
         'slots' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-slots',
             'config' => [
                 'type' => 'select',

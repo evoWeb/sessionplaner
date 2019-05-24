@@ -33,7 +33,7 @@ return [
     ],
     'columns' => [
         'start' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-start',
             'config' => [
                 'type' => 'input',
@@ -42,6 +42,7 @@ return [
             ],
         ],
         'duration' => [
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-duration',
             'config' => [
                 'type' => 'input',
@@ -52,13 +53,14 @@ return [
             ]
         ],
         'break' => [
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-break',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'days' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-days',
             'config' => [
                 'type' => 'select',
@@ -74,7 +76,7 @@ return [
             ],
         ],
         'rooms' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-rooms',
             'config' => [
                 'type' => 'select',

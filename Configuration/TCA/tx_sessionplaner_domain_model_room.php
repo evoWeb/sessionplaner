@@ -33,7 +33,7 @@ return [
     ],
     'columns' => [
         'name' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-name',
             'config' => [
                 'type' => 'input',
@@ -43,7 +43,7 @@ return [
             ],
         ],
         'logo' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-logo',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'logo',
@@ -52,7 +52,7 @@ return [
             ),
         ],
         'seats' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-seats',
             'config' => [
                 'type' => 'input',
@@ -62,7 +62,7 @@ return [
             ],
         ],
         'days' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-days',
             'config' => [
                 'type' => 'select',
@@ -78,7 +78,7 @@ return [
             ],
         ],
         'slots' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-slots',
             'config' => [
                 'type' => 'select',
@@ -94,7 +94,7 @@ return [
             ],
         ],
         'sessions' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-sessions',
             'config' => [
                 'type' => 'select',

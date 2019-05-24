@@ -33,21 +33,21 @@ return [
     ],
     'columns' => [
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'suggestion' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-suggestion',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'social' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-social',
             'config' => [
                 'type' => 'check',
@@ -55,14 +55,14 @@ return [
             ],
         ],
         'donotlink' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-donotlink',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'topic' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-topic',
             'config' => [
                 'type' => 'input',
@@ -72,7 +72,7 @@ return [
             ],
         ],
         'speaker' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
             'config' => [
                 'type' => 'input',
@@ -82,7 +82,7 @@ return [
             ],
         ],
         'twitter' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-twitter',
             'config' => [
                 'type' => 'input',
@@ -92,7 +92,7 @@ return [
             ],
         ],
         'attendees' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-attendees',
             'config' => [
                 'type' => 'input',
@@ -102,14 +102,14 @@ return [
             ],
         ],
         'description' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-description',
             'config' => [
                 'type' => 'text'
             ],
         ],
         'documents' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-download',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'documents',
@@ -118,7 +118,7 @@ return [
             ),
         ],
         'type' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-type',
             'config' => [
                 'type' => 'check',
@@ -135,7 +135,7 @@ return [
             ],
         ],
         'level' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
             'config' => [
                 'type' => 'check',
@@ -149,7 +149,7 @@ return [
             ],
         ],
         'day' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-day',
             'config' => [
                 'type' => 'select',
@@ -168,7 +168,7 @@ return [
             ],
         ],
         'room' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-room',
             'config' => [
                 'type' => 'select',
@@ -187,7 +187,7 @@ return [
             ],
         ],
         'slot' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-slot',
             'config' => [
                 'type' => 'select',
@@ -206,7 +206,7 @@ return [
             ],
         ],
         'tags' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-tags',
             'config' => [
                 'type' => 'group',

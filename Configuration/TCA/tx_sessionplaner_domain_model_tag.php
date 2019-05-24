@@ -33,7 +33,7 @@ return [
     ],
     'columns' => [
         'label' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-label',
             'config' => [
                 'type' => 'input',
@@ -43,6 +43,7 @@ return [
             ],
         ],
         'sessions' => [
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-sessions',
             'config' => [
                 'type' => 'group',
