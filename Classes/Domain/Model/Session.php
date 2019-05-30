@@ -49,10 +49,14 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @var \Evoweb\Sessionplaner\Domain\Model\Speaker
+     */
+    protected $speaker;
+
+    /**
      * @var string
      */
-    protected $speaker = '';
+    protected $speakerFree = '';
 
     /**
      * @var string
@@ -206,19 +210,35 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param string $speaker
+     * @return Speaker||null
      */
-    public function setSpeaker($speaker)
+    public function getSpeaker(): ?Speaker
+    {
+        return $this->speaker;
+    }
+
+    /**
+     * @param Speaker $speaker
+     */
+    public function setSpeaker(Speaker $speaker): void
     {
         $this->speaker = $speaker;
     }
 
     /**
+     * @param string $speakerFree
+     */
+    public function setSpeakerFree($speakerFree)
+    {
+        $this->speakerFree = $speakerFree;
+    }
+
+    /**
      * @return string
      */
-    public function getSpeaker()
+    public function getSpeakerFree()
     {
-        return $this->speaker;
+        return $this->speakerFree;
     }
 
     /**

@@ -1,0 +1,30 @@
+<div class="speaker">
+    <div class="speaker-title">
+        <h1>{speaker.name}</h1>
+    </div>
+    <div class="speaker-company">{speaker.company}</div>
+    <div class="speaker-picture">
+        <f:if condition="{speaker.picture}">
+            <f:then>
+                <f:image image="{speaker.picture}" width="500" height="500" />
+            </f:then>
+            <f:else>
+                <f:image src="EXT:sessionplaner/Resources/Public/Images/speaker-placeholder.png" height="500" width="500" />
+            </f:else>
+        </f:if>
+    </div>
+    <div class="speaker-bio">
+        {speaker.bio}
+    </div>
+    <div class="speaker-sessions">
+        <f:if condition="{speaker.sessions}">
+            <ul>
+                <f:for each="{speaker.sessions}" as="session">
+                    <li>
+                        <f:link.action pageUid="{settings.sessionSinglePid}" controller="Session" action="show" arguments="{session:session}">{session.topic}</f:link.action> - {session.day.name} - {session.room.name}
+                    </li>
+                </f:for>
+            </ul>
+        </f:if>
+    </div>
+</div>

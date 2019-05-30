@@ -29,6 +29,15 @@ mod.wizards.newContentElement.wizardItems.sessionplaner {
                 list_type = sessionplaner_session
             }
         }
+        sessionplaner_speaker {
+            iconIdentifier = sessionplaner-plugin-speaker
+            title = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker
+            description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker_description
+            tt_content_defValues {
+                CType = list
+                list_type = sessionplaner_speaker
+            }
+        }
     }
     show = *
 }

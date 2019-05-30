@@ -73,15 +73,25 @@ return [
                 'max' => 256,
             ],
         ],
-        'speaker' => [
+        'path_segment' => [
+            'exclude' => true,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-path_segment',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'required,nospace,alphanum_x,lower,unique',
+            ]
+        ],
+        'speaker_free' => [
             'exclude' => false,
-            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speakerfree',
             'config' => [
                 'type' => 'input',
                 'size' => 40,
                 'eval' => 'trim,required',
                 'max' => 256,
             ],
+            'displayCond' => 'FIELD:speaker:=:0'
         ],
         'twitter' => [
             'exclude' => false,
@@ -229,6 +239,26 @@ return [
                 'maxitems' => 100,
             ],
         ],
+        'speaker' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    [
+                        $languageFile . 'free',
+                        0,
+                    ],
+                ],
+                'foreign_table' => 'tx_sessionplaner_domain_model_speaker',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### ORDER BY tx_sessionplaner_domain_model_speaker.name',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
+            ],
+            'onChange' => 'reload'
+        ],
     ],
     'types' => [
         '0' => [
@@ -238,7 +268,9 @@ return [
                 social,
                 donotlink,
                 topic,
+                path_segment,
                 speaker,
+                speaker_free,
                 twitter,
                 attendees,
                 documents,
