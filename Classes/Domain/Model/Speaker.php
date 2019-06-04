@@ -13,9 +13,11 @@
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Speaker extends AbstractEntity
 {
     /**
      * @var string
@@ -58,7 +60,7 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $picture;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      */
     protected $sessions;
@@ -73,7 +75,7 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->sessions = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->sessions = new ObjectStorage();
     }
 
     /**
@@ -95,7 +97,7 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sessions
      */
-    public function setSessions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sessions): void
+    public function setSessions(ObjectStorage $sessions): void
     {
         $this->sessions = $sessions;
     }

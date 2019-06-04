@@ -109,11 +109,11 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
+                'multiple' => 0,
                 'foreign_table' => 'tx_sessionplaner_domain_model_session',
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID###',
-                'foreign_field' => 'speaker',
-                'size' => 5,
-                'autoSizeMax' => 20,
+                'MM' => 'tx_sessionplaner_session_speaker_mm',
+                'MM_opposite_field' => 'speakers',
             ],
         ],
         'detail_page' => [
