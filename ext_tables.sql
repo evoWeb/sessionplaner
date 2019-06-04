@@ -87,7 +87,7 @@ CREATE TABLE tx_sessionplaner_domain_model_session
     # references
     topic           varchar (255) DEFAULT '' NOT NULL,
     path_segment    varchar(2048),
-    speaker_free    varchar(255) DEFAULT '' NOT NULL,
+    speaker         varchar(255) DEFAULT '' NOT NULL,
     twitter         varchar(255) DEFAULT '' NOT NULL,
     attendees       int(11) unsigned DEFAULT '0' NOT NULL,
     suggestion      tinyint(4) unsigned DEFAULT '0' NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE tx_sessionplaner_domain_model_session
     description     text,
     documents       int(11) unsigned DEFAULT '0' NOT NULL,
 
-    speaker         int(11) unsigned DEFAULT '0' NOT NULL,
+    speakers        int(11) unsigned DEFAULT '0' NOT NULL,
     day             int(11) unsigned DEFAULT '0' NOT NULL,
     room            int(11) unsigned DEFAULT '0' NOT NULL,
     slot            int(11) unsigned DEFAULT '0' NOT NULL,
@@ -128,6 +128,19 @@ CREATE TABLE tx_sessionplaner_domain_model_tag
     KEY      parent (pid),
     KEY      enable (deleted,hidden)
 );
+
+#
+# Table structure for table 'tx_sessionplaner_session_speaker_mm'
+#
+CREATE TABLE tx_sessionplaner_session_speaker_mm (
+    uid_local       int(11) unsigned DEFAULT '0' NOT NULL,
+    uid_foreign     int(11) unsigned DEFAULT '0' NOT NULL,
+    sorting         int(11) unsigned DEFAULT '0' NOT NULL,
+    sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+    KEY             uid_local (uid_local),
+    KEY             uid_foreign (uid_foreign)
+);
+
 
 #
 # Table structure for table 'tx_sessionplaner_domain_model_speaker'

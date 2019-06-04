@@ -13,9 +13,11 @@
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Session extends AbstractEntity
 {
     /**
      * @var bool
@@ -38,7 +40,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $donotlink = false;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      * @var string
      */
     protected $topic = '';
@@ -49,14 +51,15 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Model\Speaker
-     */
-    protected $speaker;
-
-    /**
      * @var string
      */
-    protected $speakerFree = '';
+    protected $speaker = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
+     * @Extbase\ORM\Lazy
+     */
+    protected $speakers;
 
     /**
      * @var string
@@ -80,6 +83,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @Extbase\ORM\Lazy
      */
     protected $documents;
 
@@ -99,8 +103,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $slot;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
+     * @Extbase\ORM\Lazy
      */
     protected $tags;
 
@@ -109,8 +113,9 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->documents = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
-        $this->tags = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->speakers = new ObjectStorage();
+        $this->documents = new ObjectStorage();
+        $this->tags = new ObjectStorage();
     }
 
     /**
@@ -210,35 +215,51 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return Speaker||null
+     * @param Speaker $speaker
      */
-    public function getSpeaker(): ?Speaker
+    public function addSpeaker(Speaker $speaker)
     {
-        return $this->speaker;
+        $this->speakers->attach($speaker);
     }
 
     /**
-     * @param Speaker $speaker
+     * @param Speaker $author
      */
-    public function setSpeaker(Speaker $speaker): void
+    public function removeSpeaker(Speaker $speaker)
+    {
+        $this->speakers->detach($author);
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getSpeakers(): ObjectStorage
+    {
+        return $this->speakers;
+    }
+
+    /**
+     * @param ObjectStorage $speaker
+     */
+    public function setSpeakers(ObjectStorage $speaker)
+    {
+        $this->speakers = $speakers;
+    }
+
+    /**
+     * @param string $speaker
+     */
+    public function setSpeaker($speaker)
     {
         $this->speaker = $speaker;
     }
 
     /**
-     * @param string $speakerFree
-     */
-    public function setSpeakerFree($speakerFree)
-    {
-        $this->speakerFree = $speakerFree;
-    }
-
-    /**
      * @return string
      */
-    public function getSpeakerFree()
+    public function getSpeaker()
     {
-        return $this->speakerFree;
+        return $this->speaker;
     }
 
     /**

@@ -74,7 +74,7 @@ return [
             ],
         ],
         'path_segment' => [
-            'exclude' => true,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-path_segment',
             'config' => [
                 'type' => 'input',
@@ -82,16 +82,16 @@ return [
                 'eval' => 'required,nospace,alphanum_x,lower,unique',
             ]
         ],
-        'speaker_free' => [
+        'speaker' => [
             'exclude' => false,
-            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speakerfree',
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
             'config' => [
                 'type' => 'input',
                 'size' => 40,
                 'eval' => 'trim,required',
                 'max' => 256,
             ],
-            'displayCond' => 'FIELD:speaker:=:0'
+            'displayCond' => 'FIELD:speakers:REQ:false'
         ],
         'twitter' => [
             'exclude' => false,
@@ -102,6 +102,20 @@ return [
                 'eval' => 'trim',
                 'max' => 256,
             ],
+            'displayCond' => 'FIELD:speakers:REQ:false'
+        ],
+        'speakers' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speakers',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'multiple' => 0,
+                'foreign_table' => 'tx_sessionplaner_domain_model_speaker',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### ORDER BY tx_sessionplaner_domain_model_speaker.name',
+                'MM' => 'tx_sessionplaner_session_speaker_mm',
+            ],
+            'onChange' => 'reload'
         ],
         'attendees' => [
             'exclude' => false,
@@ -239,49 +253,42 @@ return [
                 'maxitems' => 100,
             ],
         ],
-        'speaker' => [
-            'exclude' => false,
-            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
-            'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'items' => [
-                    [
-                        $languageFile . 'free',
-                        0,
-                    ],
-                ],
-                'foreign_table' => 'tx_sessionplaner_domain_model_speaker',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### ORDER BY tx_sessionplaner_domain_model_speaker.name',
-                'minitems' => 0,
-                'maxitems' => 1,
-                'default' => 0,
-            ],
-            'onChange' => 'reload'
-        ],
     ],
-    'types' => [
-        '0' => [
+    'palettes' => [
+        'options' => [
             'showitem' => '
                 hidden,
                 suggestion,
                 social,
                 donotlink,
-                topic,
-                path_segment,
+            '
+        ],
+        'speaker_free' => [
+            'showitem' => '
                 speaker,
-                speaker_free,
                 twitter,
-                attendees,
-                documents,
-                description,
+            '
+        ],
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => '
+                --div--;General,
+                    --palette--;' . $languageFile . 'tx_sessionplaner_domain_model_session.palettes.options;options,
+                    topic,
+                    path_segment,
+                    description,
+                    --palette--;' . $languageFile . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
+                    speakers,
+                    attendees,
+                    documents,
                 --div--;Relations,
-                type,
-                level,
-                day,
-                room,
-                slot,
-                tags
+                    type,
+                    level,
+                    day,
+                    room,
+                    slot,
+                    tags,
             '
         ]
     ],

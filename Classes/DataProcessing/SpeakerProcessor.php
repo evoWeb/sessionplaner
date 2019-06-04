@@ -53,5 +53,4 @@ class SpeakerProcessor implements \TYPO3\CMS\Frontend\ContentObject\DataProcesso
 
         return $processedData;
     }
-
 }

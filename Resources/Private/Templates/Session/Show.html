@@ -27,28 +27,30 @@
                     </span>
                 </p>
             </div>
-            <f:if condition="{session.speaker}">
+            <f:if condition="{session.speakers}">
                 <f:then>
-                    <div class="session-speaker">
-                        <p>
-                            <f:render section="speakerLinkWrap" contentAs="content" arguments="{settings: settings, speaker: session.speaker}">
-                                <span class="session-speaker-item session-speaker-name">{session.speaker.name}</span>
-                            </f:render>
-
+                    <f:for each="{session.speakers}" as="speaker">
+                        <div class="session-speaker">
+                            <span class="session-speaker-item session-speaker-name">
+                                <f:render section="speakerLinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">{speaker.name}</f:render>
+                            </span>
+                            <f:if condition="{speaker.twitter}">
+                                <span class="session-speaker-item session-speaker-twitter">
+                                    <a href="https://www.twitter.com/{speaker.twitter}" title="@{speaker.twitter}" target="_blank">@{speaker.twitter}</a>
+                                </span>
+                            </f:if>
+                        </div>
+                    </f:for>
+                </f:then>
+                <f:else>
+                    <f:if condition="{session.speaker}">
+                        <div class="session-speaker">
+                            <span class="session-speaker-item session-speaker-name">{session.speaker}</span>
                             <f:if condition="{session.twitter}">
                                 <span class="session-speaker-item session-speaker-twitter">
                                     <a href="https://www.twitter.com/{session.twitter}" title="@{session.twitter}" target="_blank">@{session.twitter}</a>
                                 </span>
                             </f:if>
-                        </p>
-                    </div>
-                </f:then>
-                <f:else>
-                    <f:if condition="{session.speakerFree}">
-                        <div class="session-speaker">
-                            <p>
-                                <span class="session-speaker-item session-speaker-name">{session.speakerFree}</span>
-                            </p>
                         </div>
                     </f:if>
                 </f:else>
@@ -124,7 +126,6 @@
                     <f:variable name="detailPid" value="" />
                 </f:else>
             </f:if>
-
             <f:link.action controller="Speaker" action="show" arguments="{speaker:speaker}" title="{speaker.name}" pageUid="{detailPid}">
                 {content -> f:format.raw()}
             </f:link.action>

@@ -17,9 +17,18 @@ use Evoweb\Sessionplaner\Domain\Model\Day;
 use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\Domain\Model\Slot;
+use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
+use Evoweb\Sessionplaner\Domain\Repository\RoomRepository;
+use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
+use Evoweb\Sessionplaner\Domain\Repository\SlotRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Property\PropertyMapper;
 
 class AjaxController
 {
@@ -90,11 +99,8 @@ class AjaxController
     {
         $this->backendUser = $GLOBALS['BE_USER'];
         $this->moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration']['web_SessionplanerTxSessionplanerM1'];
-
-        $this->objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
-        $this->configurationManager = $this->objectManager->get(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManager::class
-        );
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->configurationManager = $this->objectManager->get(ConfigurationManager::class);
     }
 
     protected function initializeAction(ServerRequestInterface $request)
@@ -106,9 +112,7 @@ class AjaxController
             return false;
         }
 
-        $configuration = $this->configurationManager->getConfiguration(
-            \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-        );
+        $configuration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         if (empty($configuration['persistence']['storagePid'])) {
             $currentPid['persistence']['storagePid'] = $request->getParsedBody()['id'];
             $this->configurationManager->setConfiguration(array_merge($configuration, $currentPid));
@@ -135,9 +139,7 @@ class AjaxController
 
     protected function initializeCreateSessionAction()
     {
-        $this->sessionRepository = $this->objectManager->get(
-            \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
-        );
+        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
     }
 
     public function createSessionAction(ServerRequestInterface $request): ResponseInterface
@@ -163,18 +165,10 @@ class AjaxController
 
     protected function initializeUpdateSessionAction()
     {
-        $this->sessionRepository = $this->objectManager->get(
-            \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
-        );
-        $this->dayRepository = $this->objectManager->get(
-            \Evoweb\Sessionplaner\Domain\Repository\DayRepository::class
-        );
-        $this->roomRepository = $this->objectManager->get(
-            \Evoweb\Sessionplaner\Domain\Repository\RoomRepository::class
-        );
-        $this->slotRepository = $this->objectManager->get(
-            \Evoweb\Sessionplaner\Domain\Repository\SlotRepository::class
-        );
+        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
+        $this->dayRepository = $this->objectManager->get(DayRepository::class);
+        $this->roomRepository = $this->objectManager->get(RoomRepository::class);
+        $this->slotRepository = $this->objectManager->get(SlotRepository::class);
     }
 
     public function updateSessionAction(ServerRequestInterface $request): ResponseInterface
@@ -202,9 +196,7 @@ class AjaxController
 
     protected function initializeDeleteSessionAction()
     {
-        $this->sessionRepository = $this->objectManager->get(
-            \Evoweb\Sessionplaner\Domain\Repository\SessionRepository::class
-        );
+        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
     }
 
     public function deleteSessionAction(ServerRequestInterface $request): ResponseInterface
@@ -231,7 +223,7 @@ class AjaxController
     protected function getSessionFromRequest()
     {
         return $this->objectManager
-            ->get(\TYPO3\CMS\Extbase\Property\PropertyMapper::class)
+            ->get(PropertyMapper::class)
             ->convert(
                 $this->parameter['session'],
                 Session::class
@@ -288,9 +280,7 @@ class AjaxController
     protected function persistAll()
     {
         /** @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
-        $persistenceManager = $this->objectManager->get(
-            \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager::class
-        );
+        $persistenceManager = $this->objectManager->get(PersistenceManager::class);
         $persistenceManager->persistAll();
     }
 }
