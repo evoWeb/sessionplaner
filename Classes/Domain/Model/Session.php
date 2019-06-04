@@ -13,9 +13,11 @@
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Session extends AbstractEntity
 {
     /**
      * @var bool
@@ -38,7 +40,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $donotlink = false;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      * @var string
      */
     protected $topic = '';
@@ -49,7 +51,6 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @var string
      */
     protected $speaker = '';
@@ -76,6 +77,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @Extbase\ORM\Lazy
      */
     protected $documents;
 
@@ -95,8 +97,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $slot;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
+     * @Extbase\ORM\Lazy
      */
     protected $tags;
 
@@ -105,8 +107,8 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->documents = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
-        $this->tags = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->documents = new ObjectStorage();
+        $this->tags = new ObjectStorage();
     }
 
     /**

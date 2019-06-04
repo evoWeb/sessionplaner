@@ -20,6 +20,8 @@ use Evoweb\Sessionplaner\Domain\Model\Slot;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 
 class AjaxController
 {
@@ -146,11 +148,10 @@ class AjaxController
         $this->initializeCreateSessionAction();
 
         $session = $this->getSessionFromRequest();
-        if ($session instanceof Session) {
+        $validationResults = $this->validateSession($session);
+        if (!$validationResults->hasErrors()) {
             $this->sessionRepository->add($session);
-
             $this->persistAll();
-
             $this->message = 'Session ' . $session->getTopic() . ' saved';
             $this->data = ['uid' => $session->getUid()];
         } else {
@@ -185,11 +186,10 @@ class AjaxController
         /** @var Session $session */
         $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
         $this->updateSessionFromRequest($session);
-        if ($session instanceof Session) {
+        $validationResults = $this->validateSession($session);
+        if (!$validationResults->hasErrors()) {
             $this->sessionRepository->update($session);
-
             $this->persistAll();
-
             $this->message = 'Session ' . $session->getTopic() . ' updated';
             $this->data = ['uid' => $session->getUid()];
         } else {
@@ -214,11 +214,10 @@ class AjaxController
 
         /** @var Session $session */
         $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
-        if ($session instanceof Session) {
+        $validationResults = $this->validateSession($session);
+        if (!$validationResults->hasErrors()) {
             $this->sessionRepository->remove($session);
-
             $this->persistAll();
-
             $this->message = 'Session ' . $session->getTopic() . ' deleted';
         } else {
             $this->status = 'error';
@@ -283,6 +282,12 @@ class AjaxController
                     $session->{'set' . GeneralUtility::underscoredToUpperCamelCase($field)}($value);
             }
         }
+    }
+
+    protected function validateSession(Session $session)
+    {
+        $validator = $this->objectManager->get(ValidatorResolver::class)->getBaseValidatorConjunction(Session::class);
+        return $validator->validate($session);
     }
 
     protected function persistAll()
