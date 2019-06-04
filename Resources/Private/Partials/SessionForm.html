@@ -22,62 +22,62 @@
 
         <div>
             <form class="new-session">
-                <f:form.hidden name="day" value="{day.uid}"/>
-                <f:form.hidden class="room" name="room" value="0"/>
-                <f:form.hidden class="slot" name="slot" value="0"/>
+                <f:form.hidden id="session-form-day" name="day" value="{day.uid}" />
+                <f:form.hidden id="session-form-room" name="room" value="0" />
+                <f:form.hidden id="session-form-slot" name="slot" value="0" />
                 <dl>
                     <dt>
-                        <label for="topic">
+                        <label for="session-form-topic">
                             <f:translate key="topic"/>*
                         </label>
                     </dt>
                     <dd>
-                        <f:form.textfield id="topic" name="topic" class="topic"/>
+                        <f:form.textfield id="session-form-topic" name="topic" />
                     </dd>
 
                     <dt>
-                        <label for="speaker">
+                        <label for="session-form-speaker">
                             <f:translate key="speaker"/>
                         </label>
                     </dt>
                     <dd>
-                        <f:form.textfield id="speaker" name="speaker" class="speaker"/>
+                        <f:form.textfield id="session-form-speaker" name="speaker" />
                     </dd>
 
                     <dt>
-                        <label for="attendees">
+                        <label for="session-form-attendees">
                             <f:translate key="attendees"/>
                         </label>
                     </dt>
                     <dd>
-                        <f:form.textfield id="attendees" name="attendees" class="attendees"/>
+                        <f:form.textfield id="session-form-attendees" name="attendees" />
                     </dd>
 
                     <dt>
-                        <label for="description">
-                            <f:translate key="description"/>*
+                        <label for="session-form-description">
+                            <f:translate key="description"/>
                         </label>
                     </dt>
                     <dd>
-                        <f:form.textarea id="description" name="description" class="description"/>
+                        <f:form.textarea id="session-form-description" name="description" />
                     </dd>
 
                     <dt>
-                        <label for="twitter">
+                        <label for="session-form-twitter">
                             <f:translate key="twitter"/>
                         </label>
                     </dt>
                     <dd>
-                        <f:form.textfield id="twitter" name="twitter" class="twitter"/>
+                        <f:form.textfield id="session-form-twitter" name="twitter" />
                     </dd>
 
                     <dt>
-                        <label for="type">
+                        <label for="session-form-type">
                             <f:translate key="type"/>
                         </label>
                     </dt>
                     <dd>
-                        <f:form.select id="type" name="type" class="type" options="{
+                        <f:form.select id="session-form-type" name="type" options="{
                             1: '{f:translate(key: \'type-talk\')}',
                             2: '{f:translate(key: \'type-tutorial\')}',
                             3: '{f:translate(key: \'type-workshop\')}',
@@ -86,12 +86,12 @@
                     </dd>
 
                     <dt>
-                        <label for="level">
+                        <label for="session-form-level">
                             <f:translate key="level"/>
                         </label>
                     </dt>
                     <dd>
-                        <f:form.select id="level" name="level" class="level" options="{
+                        <f:form.select id="session-form-level" name="level" class="level" options="{
                             1: '{f:translate(key: \'level-starter\')}',
                             2: '{f:translate(key: \'level-advanced\')}',
                             3: '{f:translate(key: \'level-pro\')}'
