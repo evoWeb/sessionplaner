@@ -116,8 +116,8 @@
             <trans-unit id="tx_sessionplaner_domain_model_session-topic" xml:space="preserve">
                 <source>Topic</source>
             </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session.palettes.speaker_free" xml:space="preserve">
-                <source>Speaker (free input)</source>
+            <trans-unit id="tx_sessionplaner_domain_model_session-path_segment" xml:space="preserve">
+                <source>Path Segment</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-speaker" xml:space="preserve">
                 <source>Speaker Name</source>

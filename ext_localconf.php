@@ -43,6 +43,10 @@ foreach ($icons as $icon) {
     '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig">'
 );
 
+// Register Update Wizards
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class]
+    = \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class;
+
 call_user_func(function () {
     /**
      * Configure Frontend Plugin

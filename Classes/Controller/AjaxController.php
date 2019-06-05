@@ -148,7 +148,7 @@ class AjaxController
         $this->initializeAction($request);
         $this->initializeCreateSessionAction();
 
-        $session = $this->getSessionFromRequest();
+        $session = $this->getSessionFromRequest($request);
         $validationResults = $this->validateSession($session);
         if (!$validationResults->hasErrors()) {
             $this->sessionRepository->add($session);
@@ -218,14 +218,16 @@ class AjaxController
         return $this->render();
     }
 
-    protected function getSessionFromRequest()
+    protected function getSessionFromRequest(ServerRequestInterface $request)
     {
-        return $this->objectManager
+        $session = $this->objectManager
             ->get(PropertyMapper::class)
             ->convert(
                 $this->parameter['session'],
                 Session::class
             );
+        $session->setPid($request->getParsedBody()['id']);
+        return $session;
     }
 
     protected function updateSessionFromRequest(Session $session)

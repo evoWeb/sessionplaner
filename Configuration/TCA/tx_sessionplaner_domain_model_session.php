@@ -77,9 +77,16 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-path_segment',
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'required,nospace,alphanum_x,lower,unique',
+                'type' => 'slug',
+                'generatorOptions' => [
+                    'fields' => ['topic'],
+                    'replacements' => [
+                        '/' => ''
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
             ]
         ],
         'speaker' => [
@@ -88,7 +95,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 40,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
                 'max' => 256,
             ],
             'displayCond' => 'FIELD:speakers:REQ:false'
