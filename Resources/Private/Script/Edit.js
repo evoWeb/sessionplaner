@@ -84,7 +84,7 @@ define([
 
         $.each(sessionData, function (index, value) {
             $('.' + index, $sessionCard)
-                .data('value', value)
+                .attr('data-value', value)
                 .text(value);
         });
 
