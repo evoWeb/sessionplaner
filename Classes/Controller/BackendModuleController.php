@@ -16,7 +16,7 @@ namespace Evoweb\Sessionplaner\Controller;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class EditController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
      * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
