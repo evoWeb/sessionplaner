@@ -44,6 +44,22 @@ return [
                 'max' => 256,
             ],
         ],
+        'path_segment' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-path_segment',
+            'config' => [
+                'type' => 'slug',
+                'generatorOptions' => [
+                    'fields' => ['name'],
+                    'replacements' => [
+                        '/' => ''
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
+            ]
+        ],
         'company' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-company',
@@ -127,15 +143,6 @@ return [
                 'maxitems' => 1,
                 'internal_type' => 'db',
                 'allowed' => 'pages'
-            ]
-        ],
-        'path_segment' => [
-            'exclude' => true,
-            'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-path_segment',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'required,nospace,alphanum_x,lower,unique',
             ]
         ],
         'bio' => [
