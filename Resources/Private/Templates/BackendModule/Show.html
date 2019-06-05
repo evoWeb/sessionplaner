@@ -10,9 +10,11 @@
 </f:section>
 
 <f:section name="iconLeftButtons">
-    <f:format.raw>
-        <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
-    </f:format.raw>
+    <f:if condition="{roomCount}">
+        <f:format.raw>
+            <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
+        </f:format.raw>
+    </f:if>
 </f:section>
 
 <f:section name="iconRightButtons">
