@@ -39,22 +39,21 @@ abstract class AbstractSlugEntity extends AbstractEntity
      */
     public function _isNew()
     {
-        if (empty($this->slugField)) {
-            throw new NoSuchArgumentException('The property "slugField" can not be empty', 1559731500);
-        }
-        $slugSetter = 'set' . GeneralUtility::underscoredToUpperCamelCase($this->slugField);
-        if (!method_exists($this, $slugSetter)) {
-            throw new NoSuchArgumentException('The method "' . $slugSetter . '" must exist in your entity', 1559731501);
-        }
-        if (empty($this->tablename)) {
-            throw new NoSuchArgumentException('The property "tablename" can not be empty', 1559731502);
-        }
-        if (!$this->getPid()) {
-            throw new NoSuchArgumentException('The property "pid" can not be empty', 1559731503);
-        }
-
         $isnew = parent::_isNew();
         if ($isnew) {
+            if (empty($this->slugField)) {
+                throw new NoSuchArgumentException('The property "slugField" can not be empty', 1559731500);
+            }
+            $slugSetter = 'set' . GeneralUtility::underscoredToUpperCamelCase($this->slugField);
+            if (!method_exists($this, $slugSetter)) {
+                throw new NoSuchArgumentException('The method "' . $slugSetter . '" must exist in your entity', 1559731501);
+            }
+            if (empty($this->tablename)) {
+                throw new NoSuchArgumentException('The property "tablename" can not be empty', 1559731502);
+            }
+            if (!$this->getPid()) {
+                throw new NoSuchArgumentException('The property "pid" can not be empty', 1559731503);
+            }
             $this->{$slugSetter}($this->generateSlug());
         }
 
