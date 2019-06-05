@@ -33,7 +33,7 @@
                             <td class="t3-grid-cell t3-page-ce-dropzone-available t3js-page-ce-dropzone-available t3js-grid-cell" data-day="{day.uid}" data-room="{room.uid}" data-slot="{slot.uid}">
                                 <f:for each="{room.sessions}" as="session">
                                     <f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
-                                        <f:render partial="SessionCard" section="Main" arguments="{session: session}" />
+                                        <f:render partial="BackendModule/SessionCard" section="Main" arguments="{session: session}" />
                                     </f:if>
                                 </f:for>
                             </td>

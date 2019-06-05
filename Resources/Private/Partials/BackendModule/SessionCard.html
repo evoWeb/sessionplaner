@@ -1,0 +1,32 @@
+<f:section name="Main">
+    <div class="t3-page-ce t3js-page-ce">
+        <div class="t3-page-ce-dragitem">
+            <div class="t3-page-ce-header t3-page-ce-header-draggable t3js-page-ce-draghandle">
+                <div class="t3-page-ce-header-icons-right">
+                    <div class="btn-group btn-group-sm" role="group">
+                        <a class="btn btn-default" href="#" title="Delete">
+                            <f:format.raw>
+                                <sessionplanervh:be.buttons.icon uri="" iconKey="actions-edit-delete" class="btn btn-default btn-sm" />
+                            </f:format.raw>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="t3-page-ce-body">
+                <div class="t3-page-ce-body-inner">
+                    <div class="hidden property uid" data-name="uid" data-value="{session.uid}">{session.uid}</div>
+                    <div class="property topic" data-name="topic" data-value="{session.topic}">{session.topic}</div>
+                    <div class="property speaker" data-name="speaker" data-value="{session.speaker}">{session.speaker}</div>
+                    <div class="hidden property description" data-name="description" data-value="{session.description}">{session.description}</div>
+                    <div class="hidden property twitter" data-name="twitter" data-value="{session.twitter}">{session.twitter}</div>
+                    <div class="hidden property attendees" data-name="attendees" data-value="{session.attendees}">{session.attendees}</div>
+                    <div class="hidden property type" data-name="type" data-value="{session.type}">{session.type}</div>
+                    <div class="hidden property level" data-name="level" data-value="{session.level}">{session.level}</div>
+                    <div class="hidden property day" data-name="day" data-value="{session.day.uid}">{session.day.uid}</div>
+                    <div class="hidden property room" data-name="room" data-value="{session.room.uid}">{session.room.uid}</div>
+                    <div class="hidden property slot" data-name="slot" data-value="{session.slot.uid}">{session.slot.uid}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</f:section>
