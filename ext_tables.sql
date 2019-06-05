@@ -96,6 +96,7 @@ CREATE TABLE tx_sessionplaner_domain_model_session
     level           int(11) unsigned DEFAULT '0' NOT NULL,
     description     text,
     documents       int(11) unsigned DEFAULT '0' NOT NULL,
+    path_segment    varchar(2048),
 
     day             int(11) unsigned DEFAULT '0' NOT NULL,
     room            int(11) unsigned DEFAULT '0' NOT NULL,

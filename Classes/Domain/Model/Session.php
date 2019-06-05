@@ -14,10 +14,9 @@
 namespace Evoweb\Sessionplaner\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Session extends AbstractEntity
+class Session extends AbstractSlugEntity
 {
     /**
      * @var bool
@@ -44,6 +43,11 @@ class Session extends AbstractEntity
      * @var string
      */
     protected $topic = '';
+
+    /**
+     * @var string
+     */
+    protected $pathSegment = '';
 
     /**
      * @var string
@@ -107,6 +111,8 @@ class Session extends AbstractEntity
      */
     public function __construct()
     {
+        $this->slugField = 'path_segment';
+        $this->tablename = 'tx_sessionplaner_domain_model_session';
         $this->documents = new ObjectStorage();
         $this->tags = new ObjectStorage();
     }
@@ -189,6 +195,22 @@ class Session extends AbstractEntity
     public function getTopic()
     {
         return $this->topic;
+    }
+
+    /**
+     * @param string $pathSegment
+     */
+    public function setPathSegment($pathSegment)
+    {
+        $this->pathSegment = $pathSegment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPathSegment()
+    {
+        return $this->pathSegment;
     }
 
     /**

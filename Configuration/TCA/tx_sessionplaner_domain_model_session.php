@@ -73,6 +73,22 @@ return [
                 'max' => 256,
             ],
         ],
+        'path_segment' => [
+            'exclude' => 0,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-path_segment',
+            'config' => [
+                'type' => 'slug',
+                'generatorOptions' => [
+                    'fields' => ['topic'],
+                    'replacements' => [
+                        '/' => ''
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
+            ]
+        ],
         'speaker' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
@@ -238,6 +254,7 @@ return [
                 social,
                 donotlink,
                 topic,
+                path_segment,
                 speaker,
                 twitter,
                 attendees,

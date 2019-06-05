@@ -1,0 +1,2 @@
+imports:
+    - { resource: "EXT:sessionplaner/Configuration/Routes/Session.yaml" }
