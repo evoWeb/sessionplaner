@@ -13,6 +13,7 @@
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -88,17 +89,17 @@ class Session extends AbstractSlugEntity
     /**
      * @var \Evoweb\Sessionplaner\Domain\Model\Day
      */
-    protected $day;
+    protected $day = null;
 
     /**
      * @var \Evoweb\Sessionplaner\Domain\Model\Room
      */
-    protected $room;
+    protected $room = null;
 
     /**
      * @var \Evoweb\Sessionplaner\Domain\Model\Slot
      */
-    protected $slot;
+    protected $slot = null;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
@@ -329,52 +330,49 @@ class Session extends AbstractSlugEntity
         return $result;
     }
 
-    /**
-     * @param int|\Evoweb\Sessionplaner\Domain\Model\Day $day
-     */
-    public function setDay($day)
+    public function setDay(?Day $day)
     {
-        $this->day = $day;
+        $this->day = $day ?? 0;
     }
 
-    /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Day
-     */
-    public function getDay()
+    public function getDay(): ?Day
     {
-        return $this->day;
+        $day = $this->day;
+        if (!empty($day) && $day !== 0) {
+            return $day;
+        } else {
+            return null;
+        }
     }
 
-    /**
-     * @param int|\Evoweb\Sessionplaner\Domain\Model\Room $room
-     */
-    public function setRoom($room)
+    public function setRoom(?Room $room)
     {
-        $this->room = $room;
+        $this->room = $room ?? 0;
     }
 
-    /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Room
-     */
-    public function getRoom()
+    public function getRoom(): ?Room
     {
-        return $this->room;
+        $room = $this->room;
+        if (!empty($room) && $room !== 0) {
+            return $room;
+        } else {
+            return null;
+        }
     }
 
-    /**
-     * @param int|\Evoweb\Sessionplaner\Domain\Model\Slot $slot
-     */
-    public function setSlot($slot)
+    public function setSlot(?Slot $slot)
     {
-        $this->slot = $slot;
+        $this->slot = $slot ?? 0;
     }
 
-    /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Slot
-     */
-    public function getSlot()
+    public function getSlot(): ?Slot
     {
-        return $this->slot;
+        $slot = $this->slot;
+        if (!empty($slot) && $slot !== 0) {
+            return $slot;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -391,5 +389,18 @@ class Session extends AbstractSlugEntity
     public function getTags()
     {
         return $this->tags;
+    }
+
+    public function toArray(): array
+    {
+        $data = [];
+        $properties = $this->_getProperties();
+        foreach ($properties as $key => $value) {
+            $field = GeneralUtility::camelCaseToLowerCaseUnderscored($key);
+            $value = \is_object($value) && \method_exists($value, 'getUid') ? $value->getUid() :  $value;
+            $data[$field] = $value;
+        }
+
+        return $data;
     }
 }

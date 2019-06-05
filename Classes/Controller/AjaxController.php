@@ -13,10 +13,7 @@
 
 namespace Evoweb\Sessionplaner\Controller;
 
-use Evoweb\Sessionplaner\Domain\Model\Day;
-use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Session;
-use Evoweb\Sessionplaner\Domain\Model\Slot;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\RoomRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
@@ -59,11 +56,6 @@ class AjaxController
     protected $parameter = [];
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
-     */
-    protected $sessionRepository;
-
-    /**
      * @var string
      */
     protected $status = 'success';
@@ -77,6 +69,11 @@ class AjaxController
      * @var array
      */
     protected $data = [];
+
+    /**
+     * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
+     */
+    protected $sessionRepository;
 
     /**
      * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
@@ -102,6 +99,11 @@ class AjaxController
         $this->moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration']['web_SessionplanerTxSessionplanerM1'];
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $this->configurationManager = $this->objectManager->get(ConfigurationManager::class);
+
+        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
+        $this->dayRepository = $this->objectManager->get(DayRepository::class);
+        $this->roomRepository = $this->objectManager->get(RoomRepository::class);
+        $this->slotRepository = $this->objectManager->get(SlotRepository::class);
     }
 
     protected function initializeAction(ServerRequestInterface $request)
@@ -127,7 +129,7 @@ class AjaxController
             [
                 'status' => $this->status,
                 'message' => $this->message,
-                'data' => $this->data
+                'data' => $this->data,
             ]
         );
     }
@@ -138,15 +140,9 @@ class AjaxController
         $this->message = 'No access granted';
     }
 
-    protected function initializeCreateSessionAction()
-    {
-        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
-    }
-
     public function createSessionAction(ServerRequestInterface $request): ResponseInterface
     {
         $this->initializeAction($request);
-        $this->initializeCreateSessionAction();
 
         $session = $this->getSessionFromRequest($request);
         $validationResults = $this->validateSession($session);
@@ -154,37 +150,29 @@ class AjaxController
             $this->sessionRepository->add($session);
             $this->persistAll();
             $this->message = 'Session ' . $session->getTopic() . ' saved';
-            $this->data = ['uid' => $session->getUid()];
+            $this->data = $session->toArray();
         } else {
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
         }
 
         return $this->render();
-    }
-
-    protected function initializeUpdateSessionAction()
-    {
-        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
-        $this->dayRepository = $this->objectManager->get(DayRepository::class);
-        $this->roomRepository = $this->objectManager->get(RoomRepository::class);
-        $this->slotRepository = $this->objectManager->get(SlotRepository::class);
     }
 
     public function updateSessionAction(ServerRequestInterface $request): ResponseInterface
     {
         $this->initializeAction($request);
-        $this->initializeUpdateSessionAction();
 
         /** @var Session $session */
         $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
         $this->updateSessionFromRequest($session);
+
         $validationResults = $this->validateSession($session);
         if (!$validationResults->hasErrors()) {
             $this->sessionRepository->update($session);
             $this->persistAll();
             $this->message = 'Session ' . $session->getTopic() . ' updated';
-            $this->data = ['uid' => $session->getUid()];
+            $this->data = $session->toArray();
         } else {
             $this->status = 'error';
             $this->message = 'Request did not contain valid data';
@@ -193,15 +181,9 @@ class AjaxController
         return $this->render();
     }
 
-    protected function initializeDeleteSessionAction()
-    {
-        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
-    }
-
     public function deleteSessionAction(ServerRequestInterface $request): ResponseInterface
     {
         $this->initializeAction($request);
-        $this->initializeDeleteSessionAction();
 
         /** @var Session $session */
         $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
@@ -236,41 +218,19 @@ class AjaxController
         unset($sessionData['uid']);
 
         foreach ($sessionData as $field => $value) {
-            switch (true) {
-                // the following lines are needed to move the session back to stash
-                case $field == 'room' && $value == 0:
-                    $session->setRoom(0);
-                    break;
-
-                case $field == 'room':
-                    // get room model and set
-                    /** @var Room $room */
-                    $room = $this->roomRepository->findByUid($value);
+            switch ($field) {
+                case 'room':
+                    $room = $this->roomRepository->findByUid((int) $value);
                     $session->setRoom($room);
                     break;
-
-                case $field == 'slot' && $value == 0:
-                    $session->setSlot(0);
-                    break;
-
-                case $field == 'slot':
-                    // get slot model and set
-                    /** @var Slot $slot */
-                    $slot = $this->slotRepository->findByUid($value);
+                case 'slot':
+                    $slot = $this->slotRepository->findByUid((int) $value);
                     $session->setSlot($slot);
                     break;
-
-                case $field == 'day' && $value == 0:
-                    $session->setDay(0);
-                    break;
-
-                case $field == 'day':
-                    // get day model and set
-                    /** @var Day $day */
-                    $day = $this->dayRepository->findByUid($value);
+                case 'day':
+                    $day = $this->dayRepository->findByUid((int) $value);
                     $session->setDay($day);
                     break;
-
                 default:
                     $session->{'set' . GeneralUtility::underscoredToUpperCamelCase($field)}($value);
             }
