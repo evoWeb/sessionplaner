@@ -3,7 +3,7 @@
     <f:if condition="{roomCount}">
         <f:be.menus.actionMenu>
             <f:for each="{days}" as="day">
-                <sessionplanervh:be.menus.actionMenuItem label="{day.name}" controller="Edit" action="show" arguments="{day: day.uid}" current="{currentDay.uid}" currentArgumentKey="day" />
+                <sessionplanervh:be.menus.actionMenuItem label="{day.name}" controller="BackendModule" action="show" arguments="{day: day.uid}" current="{currentDay.uid}" currentArgumentKey="day" />
             </f:for>
         </f:be.menus.actionMenu>
     </f:if>
