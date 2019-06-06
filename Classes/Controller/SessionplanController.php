@@ -40,11 +40,8 @@ class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function displayAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
+    public function displayAction()
     {
-        if ($session) {
-            $this->forward('show');
-        }
         $day = $this->dayRepository->findByUid($this->settings['day']);
         $sessions = $this->sessionRepository->findByDay($this->settings['day']);
         $this->view->assign('day', $day);
