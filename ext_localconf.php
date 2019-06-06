@@ -13,10 +13,14 @@
 
 defined('TYPO3_MODE') || die('Access denied.');
 
-// Register "sessionplannervh" as global fluid namespace
+/**
+ * Register "sessionplannervh" as global fluid namespace
+ */
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] = 'Evoweb\\Sessionplaner\\ViewHelpers';
 
-// Register Icons
+/**
+ * Register Icons
+ */
 $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
 $icons = [
     'plugin-display',
@@ -38,75 +42,78 @@ foreach ($icons as $icon) {
     );
 }
 
-// Add default PageTsConfig
+/**
+ * Add default PageTsConfig
+ */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
     '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig">'
 );
 
-// Register Update Wizards
+/**
+ * Register Update Wizards
+ */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class]
     = \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class;
 
-call_user_func(function () {
-    /**
-     * Configure Frontend Plugin
-     */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Evoweb.sessionplaner',
-        'Display',
-        [
-            'Display' => 'listDays, showDay, showRoom, listSessions, screen',
-        ]
-    );
+/**
+ * Configure Frontend Plugin
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Evoweb.sessionplaner',
+    'Display',
+    [
+        'Display' => 'listDays, showDay, showRoom, listSessions, screen',
+    ]
+);
 
-    /**
-     * Configure Suggest Frontend Plugin
-     */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Evoweb.sessionplaner',
-        'Suggest',
-        [
-            'Suggest' => 'new, create',
-        ],
-        [
-            'Suggest' => 'new, create',
-        ]
-    );
+/**
+ * Configure Suggest Frontend Plugin
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Evoweb.sessionplaner',
+    'Suggest',
+    [
+        'Suggest' => 'new, create',
+    ],
+    [
+        'Suggest' => 'new, create',
+    ]
+);
 
-    /**
-     * Configure Session Frontend Plugin
-     */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Evoweb.sessionplaner',
-        'Session',
-        [
-            'Session' => 'list, show',
-        ]
-    );
+/**
+ * Configure Session Frontend Plugin
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Evoweb.sessionplaner',
+    'Session',
+    [
+        'Session' => 'list, show',
+    ]
+);
 
-    /**
-     * Configure Sessionplan Frontend Plugin
-     */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Evoweb.sessionplaner',
-        'Sessionplan',
-        [
-            'Sessionplan' => 'display',
-        ]
-    );
+/**
+ * Configure Sessionplan Frontend Plugin
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Evoweb.sessionplaner',
+    'Sessionplan',
+    [
+        'Sessionplan' => 'display',
+    ]
+);
 
-    /**
-     * Configure Speaker Frontend Plugin
-     */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Evoweb.sessionplaner',
-        'Speaker',
-        [
-            'Speaker' => 'list, show',
-        ]
-    );
+/**
+ * Configure Speaker Frontend Plugin
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'Evoweb.sessionplaner',
+    'Speaker',
+    [
+        'Speaker' => 'list, show',
+    ]
+);
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
     config.pageTitleProviders {
         event {
             provider = Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider
@@ -115,4 +122,3 @@ call_user_func(function () {
         }
     }
 '));
-});
