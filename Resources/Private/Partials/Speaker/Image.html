@@ -1,0 +1,17 @@
+<f:if condition="{speaker} && {size}">
+    <f:if condition="{speaker.picture}">
+        <f:then>
+            <f:image image="{speaker.picture}" width="{size}" height="{size}" />
+        </f:then>
+        <f:else>
+            <f:if condition="{speaker.email}">
+                <f:then>
+                    <sessionplanervh:gravatar email="{speaker.email}" size="{size}" />
+                </f:then>
+                <f:else>
+                    <f:image src="EXT:sessionplaner/Resources/Public/Images/speaker-placeholder.png" height="{size}" width="{size}" />
+                </f:else>
+            </f:if>
+        </f:else>
+    </f:if>
+</f:if>

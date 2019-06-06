@@ -4,14 +4,7 @@
     </div>
     <div class="speaker-company">{speaker.company}</div>
     <div class="speaker-picture">
-        <f:if condition="{speaker.picture}">
-            <f:then>
-                <f:image image="{speaker.picture}" width="500" height="500" />
-            </f:then>
-            <f:else>
-                <f:image src="EXT:sessionplaner/Resources/Public/Images/speaker-placeholder.png" height="500" width="500" />
-            </f:else>
-        </f:if>
+        <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 250}" />
     </div>
     <div class="speaker-bio">
         <f:format.html>{speaker.bio}</f:format.html>

@@ -1,0 +1,12 @@
+<f:if condition="{speaker.detailPage}">
+    <f:then>
+        <f:link.page title="{speaker.name}" pageUid="{speaker.detailPage}">
+            {content -> f:format.raw()}
+        </f:link.page>
+    </f:then>
+    <f:else>
+        <f:link.action action="show" arguments="{speaker: speaker}" title="{speaker.name}">
+            {content -> f:format.raw()}
+        </f:link.action>
+    </f:else>
+</f:if>

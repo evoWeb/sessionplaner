@@ -5,20 +5,13 @@
             <f:for each="{speakers}" as="speaker">
                 <div class="speaker">
                     <div class="speaker-image">
-                        <f:render section="linkWrap" contentAs="content" arguments="{speaker: speaker}">
-                            <f:if condition="{speaker.picture}">
-                                <f:then>
-                                   <f:image image="{speaker.picture}" width="250" height="250" />
-                                </f:then>
-                                <f:else>
-                                    <f:image src="EXT:sessionplaner/Resources/Public/Images/speaker-placeholder.png" height="250" width="250" />
-                                </f:else>
-                            </f:if>
+                        <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{speaker: speaker}">
+                            <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 250}" />
                         </f:render>
                     </div>
                     <div class="speaker-body">
                         <h3 class="speaker-title">
-                            <f:render section="linkWrap" contentAs="content" arguments="{speaker: speaker}">
+                            <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{speaker: speaker}">
                                 {speaker.name}
                             </f:render>
                         </h3>
@@ -27,29 +20,5 @@
                 </div>
             </f:for>
         </div>
-    </f:if>
-</f:section>
-
-<f:section name="linkWrap">
-    <f:if condition="{speaker.detailPage}">
-        <f:then>
-            <f:link.page title="{speaker.name}" pageUid="{speaker.detailPage}">
-                {content -> f:format.raw()}
-            </f:link.page>
-        </f:then>
-        <f:else>
-            <f:if condition="{settings.singlePid}">
-                <f:then>
-                    <f:variable name="detailPid" value="{settings.singlePid}" />
-                </f:then>
-                <f:else>
-                    <f:variable name="detailPid" value="" />
-                </f:else>
-            </f:if>
-
-            <f:link.action action="show" arguments="{speaker:speaker}" title="{speaker.name}" pageUid="{detailPid}">
-                {content -> f:format.raw()}
-            </f:link.action>
-        </f:else>
     </f:if>
 </f:section>
