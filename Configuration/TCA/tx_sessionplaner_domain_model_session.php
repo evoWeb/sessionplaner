@@ -248,16 +248,12 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-tags',
             'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'tx_sessionplaner_domain_model_tag',
-                // needed for extbase query
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_tag',
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_tag.pid = ###CURRENT_PID###',
                 'MM' => 'tx_sessionplaner_session_tag_mm',
-                'size' => 5,
                 'minitems' => 0,
-                'maxitems' => 100,
             ],
         ],
     ],
