@@ -1,0 +1,23 @@
+//
+// Tracks
+//
+.sessionplaner-track {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .sessionplaner-slot-track-break & {
+        justify-content: center;
+    }
+}
+.sessionplaner-track-header {
+    font-size: .75rem;
+    font-weight: bold;
+}
+.sessionplaner-track-description {
+    > *:first-child {
+        margin-top: 0;
+    }
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,24 @@
+//
+// Variables
+//
+$session-tag-bg: #999999 !default;
+$session-tag-color: #ffffff !default;
+$session-tag-border-radius: 4px !default;
+
+
+//
+// Tag
+//
+.sessionplaner-tag-list {
+    margin: -2px;
+}
+.sessionplaner-tag {
+    text-transform: uppercase;
+    font-size: .75rem;
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    color: $session-tag-color;
+    background-color: $session-tag-bg;
+    border-radius: $session-tag-border-radius;
+    margin: 2px;
+}
