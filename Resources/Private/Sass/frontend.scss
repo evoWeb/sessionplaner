@@ -19,6 +19,19 @@ $session-slot-track-type-side-color: $session-slot-track-type-main-color;
 
 
 //
+// Day
+//
+.sessionplaner-day-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.sessionplaner-day-title {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+
+//
 // Tag
 //
 .sessionplaner-tag-list {

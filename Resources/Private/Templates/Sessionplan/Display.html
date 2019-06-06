@@ -3,7 +3,14 @@
 
     <f:if condition="{day}">
         <article class="sessionplaner-day">
-            <h1 class="sessionplaner-day-header">{day.name} <f:format.date format="d.m.Y">@{day.date}</f:format.date></h1>
+            <div class="sessionplaner-day-header">
+                <h1 class="sessionplaner-day-title">
+                    {day.name}
+                </h1>
+                <div class="sessionplaner-day-date">
+                    <f:format.date format="d.m.Y">@{day.date}</f:format.date>
+                </div>
+            </div>
             <f:if condition="{day.rooms} && {day.slots}">
                 <div class="sessionplaner-day-schedule">
                     <div class="sessionplaner-slot sessionplaner-slot-header" data-sessionplaner-columns="{day.rooms -> f:count()}">
