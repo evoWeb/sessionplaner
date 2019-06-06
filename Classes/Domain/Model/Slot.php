@@ -38,11 +38,6 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description;
 
     /**
-     * @var bool
-     */
-    protected $noBreakAfter = false;
-
-    /**
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \Evoweb\Sessionplaner\Domain\Model\Day
      */
@@ -130,22 +125,6 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    /**
-     * @param bool $noBreakAfter
-     */
-    public function setNoBreakAfter($noBreakAfter)
-    {
-        $this->noBreakAfter = $noBreakAfter;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getNoBreakAfter()
-    {
-        return $this->noBreakAfter;
     }
 
     /**
