@@ -66,7 +66,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
     'Evoweb.sessionplaner',
     'Speaker',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker',
-    'sessionplaner-plugin-display'
+    'sessionplaner-plugin-speaker'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_speaker'] =
     'layout, select_key';

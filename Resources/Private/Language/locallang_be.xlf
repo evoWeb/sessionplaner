@@ -75,21 +75,6 @@
             <trans-unit id="display_flexform.switchableControllerAction" xml:space="preserve">
                 <source>Display</source>
             </trans-unit>
-            <trans-unit id="display_flexform.switchableControllerAction.listDays" xml:space="preserve">
-                <source>List days</source>
-            </trans-unit>
-            <trans-unit id="display_flexform.switchableControllerAction.showDay" xml:space="preserve">
-                <source>Show day</source>
-            </trans-unit>
-            <trans-unit id="display_flexform.switchableControllerAction.showRoom" xml:space="preserve">
-                <source>List room</source>
-            </trans-unit>
-            <trans-unit id="display_flexform.switchableControllerAction.listSessions" xml:space="preserve">
-                <source>List sessions</source>
-            </trans-unit>
-            <trans-unit id="display_flexform.switchableControllerAction.screen" xml:space="preserve">
-                <source>Overview</source>
-            </trans-unit>
             <trans-unit id="edit_flexform.switchableControllerAction.suggest" xml:space="preserve">
                 <source>Suggest</source>
             </trans-unit>

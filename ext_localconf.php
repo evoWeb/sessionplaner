@@ -56,17 +56,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\Evoweb\Sessi
     = \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class;
 
 /**
- * Configure Frontend Plugin
- */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Evoweb.sessionplaner',
-    'Display',
-    [
-        'Display' => 'listDays, showDay, showRoom, listSessions, screen',
-    ]
-);
-
-/**
  * Configure Suggest Frontend Plugin
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(

@@ -2,7 +2,7 @@ mod.wizards.newContentElement.wizardItems.sessionplaner {
     after = common, menu, special, forms, plugins
     header = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:wizard.group.sessionplaner
     elements {
-        sessionplaner_display {
+        sessionplaner_sessionplan {
             iconIdentifier = sessionplaner-plugin-display
             title = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan
             description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan_description
