@@ -1,5 +1,5 @@
 <f:layout name="Frontend" />
-<f:section name="content">
+<f:section name="Content">
 
     <f:if condition="{session}">
         <div class="session">
@@ -32,7 +32,9 @@
                     <f:for each="{session.speakers}" as="speaker">
                         <div class="session-speaker">
                             <span class="session-speaker-item session-speaker-name">
-                                <f:render section="speakerLinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">{speaker.name}</f:render>
+                                <f:render section="SpeakerLinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">
+                                    {speaker.name}
+                                </f:render>
                             </span>
                             <f:if condition="{speaker.twitter}">
                                 <span class="session-speaker-item session-speaker-twitter">
@@ -110,7 +112,7 @@
 </f:section>
 
 
-<f:section name="speakerLinkWrap">
+<f:section name="SpeakerLinkWrap">
     <f:if condition="{speaker.detailPage}">
         <f:then>
             <f:link.page title="{speaker.name}" pageUid="{speaker.detailPage}">

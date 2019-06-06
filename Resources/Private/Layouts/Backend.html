@@ -1,11 +1,12 @@
 <f:be.pageRenderer includeCssFiles="{0: '{f:uri.resource(path: \'Stylesheets/backend.css\')}'}" />
 <f:be.container>
+
     <div class="module" data-module-id="{moduleId}" data-module-name="{moduleName}">
         <div class="module-loading-indicator"></div>
         <div class="module-docheader t3js-module-docheader">
             <div class="module-docheader-bar module-docheader-bar-navigation t3js-module-docheader-bar t3js-module-docheader-bar-navigation row">
                 <div class="module-docheader-bar-column-left col-xs-12 col-sm-3">
-                    <f:render section="iconFunctions" />
+                    <f:render section="IconFunctions" />
                 </div>
                 <div class="module-docheader-bar-column-right col-xs-12 col-sm-9 text-right">
                     <f:be.pagePath />
@@ -14,12 +15,12 @@
             <div class="module-docheader-bar module-docheader-bar-buttons t3js-module-docheader-bar t3js-module-docheader-bar-buttons">
                 <div class="module-docheader-bar-column-left">
                     <div class="btn-toolbar" role="toolbar">
-                        <f:render section="iconLeftButtons" />
+                        <f:render section="IconLeftButtons" />
                     </div>
                 </div>
                 <div class="module-docheader-bar-column-right">
                     <div class="btn-toolbar" role="toolbar">
-                        <f:render section="iconRightButtons" />
+                        <f:render section="IconRightButtons" />
                     </div>
                 </div>
             </div>
@@ -27,8 +28,9 @@
         <div class="module-body t3js-module-body">
             <f:flashMessages />
             <f:format.raw>
-                <f:render section="content" />
+                <f:render section="Content" />
             </f:format.raw>
         </div>
     </div>
+
 </f:be.container>

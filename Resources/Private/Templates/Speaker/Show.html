@@ -1,23 +1,28 @@
-<div class="speaker">
-    <div class="speaker-title">
-        <h1>{speaker.name}</h1>
+<f:layout name="Frontend" />
+<f:section name="Content">
+
+    <div class="speaker">
+        <div class="speaker-title">
+            <h1>{speaker.name}</h1>
+        </div>
+        <div class="speaker-company">{speaker.company}</div>
+        <div class="speaker-picture">
+            <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 250}" />
+        </div>
+        <div class="speaker-bio">
+            <f:format.html>{speaker.bio}</f:format.html>
+        </div>
+        <div class="speaker-sessions">
+            <f:if condition="{speaker.sessions}">
+                <ul>
+                    <f:for each="{speaker.sessions}" as="session">
+                        <li>
+                            <f:link.action pageUid="{settings.sessionSinglePid}" controller="Session" action="show" arguments="{session:session}">{session.topic}</f:link.action> - {session.day.name} - {session.room.name}
+                        </li>
+                    </f:for>
+                </ul>
+            </f:if>
+        </div>
     </div>
-    <div class="speaker-company">{speaker.company}</div>
-    <div class="speaker-picture">
-        <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 250}" />
-    </div>
-    <div class="speaker-bio">
-        <f:format.html>{speaker.bio}</f:format.html>
-    </div>
-    <div class="speaker-sessions">
-        <f:if condition="{speaker.sessions}">
-            <ul>
-                <f:for each="{speaker.sessions}" as="session">
-                    <li>
-                        <f:link.action pageUid="{settings.sessionSinglePid}" controller="Session" action="show" arguments="{session:session}">{session.topic}</f:link.action> - {session.day.name} - {session.room.name}
-                    </li>
-                </f:for>
-            </ul>
-        </f:if>
-    </div>
-</div>
+
+</f:section>

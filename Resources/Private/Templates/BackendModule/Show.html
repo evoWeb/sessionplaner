@@ -1,5 +1,6 @@
 <f:layout name="Backend" />
-<f:section name="iconFunctions">
+<f:section name="IconFunctions">
+
     <f:if condition="{roomCount}">
         <f:be.menus.actionMenu>
             <f:for each="{days}" as="day">
@@ -7,26 +8,29 @@
             </f:for>
         </f:be.menus.actionMenu>
     </f:if>
-</f:section>
 
-<f:section name="iconLeftButtons">
+</f:section>
+<f:section name="IconLeftButtons">
+
     <f:if condition="{roomCount}">
         <f:format.raw>
             <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
         </f:format.raw>
     </f:if>
-</f:section>
 
-<f:section name="iconRightButtons">
+</f:section>
+<f:section name="IconRightButtons">
+
     <f:format.raw>
         <span class="btn btn-default btn-sm">
             <f:be.buttons.shortcut />
         </span>
         <sessionplanervh:be.buttons.icon uri="#" iconKey="actions-window-open" title="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.openInNewWindow')}" onclick="sessionplanerWin=window.open(location.href, 'Sessionplaner', 'width=790,status=0,menubar=0,resizable=1,location=0,scrollbars=1,toolbar=0'); return false;" class="btn btn-default btn-sm" />
     </f:format.raw>
-</f:section>
 
-<f:section name="content">
+</f:section>
+<f:section name="Content">
+
     <div id="t3js-ui-block" class="ui-block hidden">
         <core:icon identifier="spinner-circle-light" size="large" />
     </div>
@@ -56,4 +60,5 @@
             </f:format.raw>
         </f:else>
     </f:if>
+
 </f:section>
