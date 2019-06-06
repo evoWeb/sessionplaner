@@ -91,6 +91,9 @@
             <trans-unit id="tx_sessionplaner_domain_model_slot-break" xml:space="preserve">
                 <source>Break</source>
             </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_slot-description" xml:space="preserve">
+                <source>Description</source>
+            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_slot-days" xml:space="preserve">
                 <source>Days</source>
             </trans-unit>

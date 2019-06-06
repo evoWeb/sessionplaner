@@ -75,6 +75,19 @@ return [
                 'type' => 'check',
             ],
         ],
+        'description' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-description',
+            'config' => [
+                'type' => 'text',
+                'cols' => '80',
+                'rows' => '15',
+                'softref' => 'typolink_tag,images,email[subst],url',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default'
+            ],
+            'displayCond' => 'FIELD:break:REQ:true'
+        ],
         'rooms' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-rooms',
@@ -95,11 +108,12 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-            day,
-            start,
-            duration,
-            break,
-            rooms
+                day,
+                start,
+                duration,
+                break,
+                description,
+                rooms,
             '
         ]
     ],
