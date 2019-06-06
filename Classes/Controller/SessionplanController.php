@@ -13,30 +13,29 @@
 
 namespace Evoweb\Sessionplaner\Controller;
 
-use Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider;
-use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
+use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
-class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class SessionplanController extends ActionController
 {
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
+     * @var DayRepository
      */
     protected $dayRepository;
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
+     * @var SessionRepository
      */
     protected $sessionRepository;
 
-    public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository)
+    public function injectDayRepository(DayRepository $dayRepository)
     {
         $this->dayRepository = $dayRepository;
     }
 
-    public function injectSessionRepository(
-        \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $sessionRepository
-    ) {
+    public function injectSessionRepository(SessionRepository $sessionRepository)
+    {
         $this->sessionRepository = $sessionRepository;
     }
 
@@ -46,15 +45,5 @@ class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $sessions = $this->sessionRepository->findByDay($this->settings['day']);
         $this->view->assign('day', $day);
         $this->view->assign('sessions', $sessions);
-    }
-
-    /**
-     * Disable error flash message
-     *
-     * @return bool
-     */
-    protected function getErrorFlashMessage()
-    {
-        return false;
     }
 }
