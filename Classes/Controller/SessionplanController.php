@@ -51,20 +51,6 @@ class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->view->assign('sessions', $sessions);
     }
 
-    public function showAction(\Evoweb\Sessionplaner\Domain\Model\Session $session)
-    {
-        $provider = GeneralUtility::makeInstance(EventTitleTagProvider::class);
-        $provider->setTitle($session->getTopic());
-
-        $ogMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('og:title');
-        $ogMetaTagManager->addProperty('og:title', $session->getTopic());
-
-        $twitterMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('twitter:title');
-        $twitterMetaTagManager->addProperty('twitter:title', $session->getTopic());
-
-        $this->view->assign('session', $session);
-    }
-
     /**
      * Disable error flash message
      *
