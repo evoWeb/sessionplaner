@@ -33,6 +33,7 @@ CREATE TABLE tx_sessionplaner_domain_model_room
     deleted         tinyint(4) unsigned DEFAULT '0' NOT NULL,
     hidden          tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
+    type            varchar(255) DEFAULT '' NOT NULL,
     name            varchar(255) DEFAULT '' NOT NULL,
     logo            int(11) unsigned DEFAULT '0' NOT NULL,
     seats           int(11) unsigned DEFAULT '0' NOT NULL,
