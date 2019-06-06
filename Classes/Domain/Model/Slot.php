@@ -94,6 +94,14 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * @return int
+     */
+    public function getEnd()
+    {
+        return $this->start + ($this->getDuration() * 60);
+    }
+
+    /**
      * @param bool $break
      */
     public function setBreak($break)
