@@ -112,13 +112,11 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-sessions',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'inline',
+                'foreign_selector' => 'uid',
                 'foreign_table' => 'tx_sessionplaner_domain_model_session',
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID###',
-                'foreign_field' => 'room',
-                'size' => 5,
-                'autoSizeMax' => 20,
+                'foreign_field' => 'room'
             ],
         ],
     ],
@@ -131,7 +129,6 @@ return [
             seats,
             days,
             slots,
-            sessions,
             '
         ]
     ],
