@@ -95,14 +95,4 @@ class SuggestController extends ActionController
 
         return $value;
     }
-
-    /**
-     * Disable error flash message
-     *
-     * @return bool
-     */
-    protected function getErrorFlashMessage()
-    {
-        return false;
-    }
 }

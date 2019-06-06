@@ -70,14 +70,4 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $this->view->assign('session', $session);
     }
-
-    /**
-     * Disable error flash message
-     *
-     * @return bool
-     */
-    protected function getErrorFlashMessage()
-    {
-        return false;
-    }
 }
