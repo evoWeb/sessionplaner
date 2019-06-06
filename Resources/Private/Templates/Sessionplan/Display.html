@@ -2,57 +2,107 @@
 <f:section name="content">
 
     <f:if condition="{day}">
-        <div class="sessionplaner-day">
-            <h1>
-                {day.name}
-                <f:format.date format="d.m.Y">@{day.date}</f:format.date>
-            </h1>
-            <f:if condition="{day.rooms}">
-                <div class="sessionplaner-row sessionplaner-row-header" data-sessionplaner-columns="{day.rooms -> f:count()}">
-                    <f:for each="{day.rooms}" as="room">
-                        <div class="sessionplaner-col sessionplaner-col-header sessionplaner-slot-room">
-                            <f:if condition="{room.logo}">
-                                <f:image class="sessionplaner-col-header-room-logo" src="{room.logo.uid}" treatIdAsReference="true" title="{room.logo.OriginalResource.title}" alt="{room.logo.OriginalResource.alternative}" width="148c" />
+        <article class="sessionplaner-day">
+            <h1 class="sessionplaner-day-header">{day.name} <f:format.date format="d.m.Y">@{day.date}</f:format.date></h1>
+            <f:if condition="{day.rooms} && {day.slots}">
+                <div class="sessionplaner-day-schedule">
+                    <div class="sessionplaner-slot sessionplaner-slot-header" data-sessionplaner-columns="{day.rooms -> f:count()}">
+                        <f:for each="{day.rooms}" as="room">
+                            <div class="sessionplaner-slot-track{f:if(condition: room.type, then: ' sessionplaner-slot-track-type-{room.type}')}">
+                                <div class="sessionplaner-room-header">
+                                    <f:if condition="{room.logo}">
+                                        <div class="sessionplaner-room-header-logo">
+                                            <f:image image="{room.logo}" title="{room.logo.OriginalResource.title}" alt="{room.logo.OriginalResource.alternative}" />
+                                        </div>
+                                    </f:if>
+                                    <div class="sessionplaner-room-header-title">
+                                        {room.name}
+                                    </div>
+                                </div>
+                            </div>
+                        </f:for>
+                    </div>
+                    <f:for each="{day.slots}" as="slot">
+                        <div class="sessionplaner-slot" data-sessionplaner-columns="{day.rooms -> f:count()}">
+                            <div class="sessionplaner-slot-time">
+                                <div class="sessionplaner-slot-time-start">
+                                    <sessionplanervh:format.time value="{slot.start}" />
+                                </div>
+                                <div class="sessionplaner-slot-time-end">
+                                    <sessionplanervh:format.time value="{slot.end}" />
+                                </div>
+                            </div>
+                            <f:if condition="{slot.break}">
+                                <f:then>
+                                    <div class="sessionplaner-slot-track sessionplaner-slot-track-break">
+                                        <div class="sessionplaner-track">
+                                            <f:if condition="{slot.description">
+                                                <div class="sessionplaner-track-description">
+                                                    <f:format.html>{slot.description}</f:format.html>
+                                                </div>
+                                            </f:if>
+                                        </div>
+                                    </div>
+                                </f:then>
+                                <f:else>
+                                    <f:for each="{day.rooms}" as="room">
+
+                                        <f:variable name="hasSessions" value="0" />
+                                        <f:for each="{room.sessions}" as="session">
+                                            <f:if condition="{session.day} == {day} && {session.slot} == {slot}">
+                                                <f:variable name="hasSessions" value="1" />
+                                            </f:if>
+                                        </f:for>
+                                        <div class="sessionplaner-slot-track{f:if(condition: '!{hasSessions}', then: ' sessionplaner-slot-track-empty')}" data-sessionplaner-slot="{day.uid}-{slot.uid}" data-sessionplaner-room="{room.uid}">
+                                            <f:if condition="{room.sessions}">
+                                                <div class="sessionplaner-track">
+                                                    <f:if condition="{hasSessions}">
+                                                        <div class="sessionplaner-track-header">
+                                                            {room.name}
+                                                        </div>
+                                                        <div class="sessionplaner-track-sessions">
+                                                            <f:for each="{room.sessions}" as="session">
+                                                                <f:if condition="{session.day} == {day} && {session.slot} == {slot}">
+                                                                    <div class="sessionplaner-sessionbox">
+                                                                        <div class="sessionplaner-sessionbox-topic">
+                                                                            <f:if condition="{session.donotlink}">
+                                                                                <f:then>
+                                                                                    {session.topic}
+                                                                                </f:then>
+                                                                                <f:else>
+                                                                                    <f:link.action controller="Session" action="show" pluginName="Session" pageUid="{settings.singlePid}" arguments="{session:session}">{session.topic}</f:link.action>
+                                                                                </f:else>
+                                                                            </f:if>
+                                                                        </div>
+                                                                        <f:if condition="{session.speaker}">
+                                                                            <div class="sessionplaner-sessionbox-speaker">{session.speaker}</div>
+                                                                        </f:if>
+                                                                        <f:if condition="{session.tags}">
+                                                                            <div class="sessionplaner-sessionbox-tags">
+                                                                                <div class="sessionplaner-tag-list">
+                                                                                    <f:for each="{session.tags}" as="tag">
+                                                                                        <span class="sessionplaner-tag">{tag.label}</span>
+                                                                                    </f:for>
+                                                                                </div>
+                                                                            </div>
+                                                                        </f:if>
+                                                                    </div>
+                                                                </f:if>
+                                                            </f:for>
+                                                        </div>
+                                                    </f:if>
+                                                </div>
+                                            </f:if>
+
+                                        </div>
+                                    </f:for>
+                                </f:else>
                             </f:if>
-                            {room.name}
                         </div>
                     </f:for>
                 </div>
             </f:if>
-            <f:for each="{day.slots}" as="slot">
-                <div class="sessionplaner-row" data-sessionplaner-columns="{day.rooms -> f:count()}">
-                    <div class="sessionplaner-slot-time">
-                        <sessionplanervh:format.time value="{slot.start}" />
-                    </div>
-                    <f:for each="{day.rooms}" as="room">
-                        <div class="sessionplaner-col sessionplaner-slot-session" data-sessionplaner-slot="{day.uid}-{slot.uid}" data-sessionplaner-room="{room.uid}">
-                            <div class="sessionplaner-slot-session-room">
-                                {room.name}
-                            </div>
-                            <f:for each="{room.sessions}" as="session">
-                                <f:if condition="{session.day} == {day} && {session.slot} == {slot}">
-                                    <div class="sessionplaner-slot-session-info">
-                                        <div class="sessionplaner-session-topic">
-                                            <f:if condition="{session.donotlink}">
-                                                <f:then>
-                                                    <strong>{session.topic}</strong>
-                                                </f:then>
-                                                <f:else>
-                                                    <f:link.action controller="Session" action="show" pluginName="Session" pageUid="{settings.singlePid}" arguments="{session:session}"><strong>{session.topic}</strong></f:link.action>
-                                                </f:else>
-                                            </f:if>
-                                        </div>
-                                        <f:if condition="{session.speaker}">
-                                            <div class="sessionplaner-session-speaker">{session.speaker}</div>
-                                        </f:if>
-                                    </div>
-                                </f:if>
-                            </f:for>
-                        </div>
-                    </f:for>
-                </div>
-            </f:for>
-        </div>
+        </article>
     </f:if>
 
 </f:section>
