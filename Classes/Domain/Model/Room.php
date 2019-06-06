@@ -20,6 +20,11 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @var string
      */
+    protected $type;
+
+    /**
+     * @var string
+     */
     protected $name = '';
 
     /**
@@ -58,6 +63,16 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->days = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
         $this->slots = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
         $this->sessions = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+    }
+
+    public function setType(string $type)
+    {
+        $this->type = $type;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
     }
 
     /**

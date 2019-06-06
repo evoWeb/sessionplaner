@@ -34,6 +34,19 @@ return [
         'showRecordFieldList' => 'name'
     ],
     'columns' => [
+        'type' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_room-type',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['', ''],
+                    [$languageFile . 'tx_sessionplaner_domain_model_room-type-main', 'main'],
+                    [$languageFile . 'tx_sessionplaner_domain_model_room-type-side', 'side'],
+                ]
+            ],
+        ],
         'name' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-name',
@@ -112,12 +125,13 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
+            type,
             name,
             logo,
             seats,
             days,
             slots,
-            sessions
+            sessions,
             '
         ]
     ],
