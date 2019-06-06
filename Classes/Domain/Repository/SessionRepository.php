@@ -13,17 +13,23 @@
 
 namespace Evoweb\Sessionplaner\Domain\Repository;
 
-class SessionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+use Evoweb\Sessionplaner\Domain\Model\Day;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
+class SessionRepository extends Repository
 {
     /**
      * Default Orderings
      */
     protected $defaultOrderings = [
-        'topic' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'topic' => QueryInterface::ORDER_ASCENDING
     ];
 
     /**
-     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     * @return array|QueryResult
      */
     public function findSuggested()
     {
@@ -41,25 +47,9 @@ class SessionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
+     * @param Day $day
      *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
-     */
-    public function findByDay($day)
-    {
-        $query = $this->createQuery();
-
-        $query->matching(
-            $query->equals('day', $day)
-        );
-
-        return $query->execute();
-    }
-
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
-     *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
+     * @return array|QueryResult
      */
     public function findByDayAndEmptySlot($day)
     {
@@ -80,11 +70,11 @@ class SessionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * @param string $days
      *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\Generic\QueryResult|null
+     * @return array|QueryResult|null
      */
     public function findByDayAndHasSlotHasRoom($days)
     {
-        $days = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $days);
+        $days = GeneralUtility::trimExplode(',', $days);
         if (is_array($days) && count($days) > 0) {
             $query = $this->createQuery();
 

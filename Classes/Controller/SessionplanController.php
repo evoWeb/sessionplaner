@@ -14,7 +14,6 @@
 namespace Evoweb\Sessionplaner\Controller;
 
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
-use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class SessionplanController extends ActionController
@@ -24,26 +23,14 @@ class SessionplanController extends ActionController
      */
     protected $dayRepository;
 
-    /**
-     * @var SessionRepository
-     */
-    protected $sessionRepository;
-
     public function injectDayRepository(DayRepository $dayRepository)
     {
         $this->dayRepository = $dayRepository;
     }
 
-    public function injectSessionRepository(SessionRepository $sessionRepository)
-    {
-        $this->sessionRepository = $sessionRepository;
-    }
-
     public function displayAction()
     {
         $day = $this->dayRepository->findByUid($this->settings['day']);
-        $sessions = $this->sessionRepository->findByDay($this->settings['day']);
         $this->view->assign('day', $day);
-        $this->view->assign('sessions', $sessions);
     }
 }
