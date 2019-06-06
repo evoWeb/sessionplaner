@@ -33,6 +33,11 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $break = false;
 
     /**
+     * @var string
+     */
+    protected $description;
+
+    /**
      * @var bool
      */
     protected $noBreakAfter = false;
@@ -115,6 +120,16 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getBreak()
     {
         return $this->break;
+    }
+
+    public function setDescription(?string $description)
+    {
+        $this->description = $description;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 
     /**
