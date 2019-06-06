@@ -32,7 +32,7 @@
                     <f:for each="{session.speakers}" as="speaker">
                         <div class="session-speaker">
                             <span class="session-speaker-item session-speaker-name">
-                                <f:render section="SpeakerLinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">
+                                <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">
                                     {speaker.name}
                                 </f:render>
                             </span>
@@ -109,28 +109,4 @@
         </f:if>
     </f:if>
 
-</f:section>
-
-
-<f:section name="SpeakerLinkWrap">
-    <f:if condition="{speaker.detailPage}">
-        <f:then>
-            <f:link.page title="{speaker.name}" pageUid="{speaker.detailPage}">
-                {content -> f:format.raw()}
-            </f:link.page>
-        </f:then>
-        <f:else>
-            <f:if condition="{settings.speakerSinglePid}">
-                <f:then>
-                    <f:variable name="detailPid" value="{settings.speakerSinglePid}" />
-                </f:then>
-                <f:else>
-                    <f:variable name="detailPid" value="" />
-                </f:else>
-            </f:if>
-            <f:link.action controller="Speaker" action="show" arguments="{speaker:speaker}" title="{speaker.name}" pageUid="{detailPid}">
-                {content -> f:format.raw()}
-            </f:link.action>
-        </f:else>
-    </f:if>
 </f:section>
