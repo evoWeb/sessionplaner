@@ -58,3 +58,20 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
     'sessionplaner_sessionplan',
     'FILE:EXT:sessionplaner/Configuration/FlexForms/Sessionplan.xml'
 );
+
+/**
+ * Frontend Plugin Speaker
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'Evoweb.sessionplaner',
+    'Speaker',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker',
+    'sessionplaner-plugin-display'
+);
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_speaker'] =
+    'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplaner_speaker'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'sessionplaner_speaker',
+    'FILE:EXT:sessionplaner/Configuration/FlexForms/Speaker.xml'
+);

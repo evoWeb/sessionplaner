@@ -3,6 +3,7 @@
     <file t3:id="1558692598" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:40Z" product-name="sessionplaner">
         <header/>
         <body>
+
             <trans-unit id="tx_sessionplaner_domain_model_day" xml:space="preserve">
                 <source>Day</source>
             </trans-unit>
@@ -18,6 +19,44 @@
             <trans-unit id="tx_sessionplaner_domain_model_day-slots" xml:space="preserve">
                 <source>Slots</source>
             </trans-unit>
+
+            <trans-unit id="tx_sessionplaner_domain_model_speaker" xml:space="preserve">
+                <source>Speaker</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-company" xml:space="preserve">
+                <source>Company</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-twitter" xml:space="preserve">
+                <source>Twitter profile name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-linkedin" xml:space="preserve">
+                <source>LinkedIn account name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-xing" xml:space="preserve">
+                <source>Xing account name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-email" xml:space="preserve">
+                <source>E-mailaddress</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-picture" xml:space="preserve">
+                <source>Picture</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-sessions" xml:space="preserve">
+                <source>Sessions</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-detail_page" xml:space="preserve">
+                <source>Detail page with more information about the speaker</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-path_segment" xml:space="preserve">
+                <source>Path segment</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-bio" xml:space="preserve">
+                <source>Bio</source>
+            </trans-unit>
+
             <trans-unit id="tx_sessionplaner_domain_model_room" xml:space="preserve">
                 <source>Room</source>
             </trans-unit>
@@ -39,6 +78,7 @@
             <trans-unit id="tx_sessionplaner_domain_model_room-sessions" xml:space="preserve">
                 <source>Sessions</source>
             </trans-unit>
+
             <trans-unit id="tx_sessionplaner_domain_model_slot" xml:space="preserve">
                 <source>Slot</source>
             </trans-unit>
@@ -57,8 +97,12 @@
             <trans-unit id="tx_sessionplaner_domain_model_slot-rooms" xml:space="preserve">
                 <source>Rooms</source>
             </trans-unit>
+
             <trans-unit id="tx_sessionplaner_domain_model_session" xml:space="preserve">
                 <source>Session</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session.palettes.options" xml:space="preserve">
+                <source>Options</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-suggestion" xml:space="preserve">
                 <source>Suggestion</source>
@@ -76,10 +120,16 @@
                 <source>Path Segment</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-speaker" xml:space="preserve">
-                <source>Speaker</source>
+                <source>Speaker Name</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-twitter" xml:space="preserve">
-                <source>Twitter</source>
+                <source>Speaker Twitter</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-speakers" xml:space="preserve">
+                <source>Speakers</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-path_segment" xml:space="preserve">
+                <source>Path segment</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-attendees" xml:space="preserve">
                 <source>Attendees</source>
@@ -135,6 +185,7 @@
             <trans-unit id="tx_sessionplaner_domain_model_session-download" xml:space="preserve">
                 <source>Download Link</source>
             </trans-unit>
+
             <trans-unit id="tx_sessionplaner_domain_model_tag" xml:space="preserve">
                 <source>Tag</source>
             </trans-unit>
@@ -147,6 +198,10 @@
             <trans-unit id="notassigned" xml:space="preserve">
                 <source>not assigned</source>
             </trans-unit>
+            <trans-unit id="free" xml:space="preserve">
+                <source>free input</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>

@@ -22,11 +22,13 @@ $icons = [
     'plugin-display',
     'plugin-session',
     'plugin-suggest',
+    'plugin-speaker',
     'record-day',
     'record-room',
     'record-session',
     'record-slot',
     'record-tag',
+    'record-speaker',
 ];
 foreach ($icons as $icon) {
     $iconRegistry->registerIcon(
@@ -90,6 +92,17 @@ call_user_func(function () {
         'Sessionplan',
         [
             'Sessionplan' => 'display',
+        ]
+    );
+
+    /**
+     * Configure Speaker Frontend Plugin
+     */
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Evoweb.sessionplaner',
+        'Speaker',
+        [
+            'Speaker' => 'list, show',
         ]
     );
 

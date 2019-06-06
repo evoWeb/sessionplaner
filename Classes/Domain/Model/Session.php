@@ -61,6 +61,12 @@ class Session extends AbstractSlugEntity
     protected $speaker = '';
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
+     * @Extbase\ORM\Lazy
+     */
+    protected $speakers;
+
+    /**
      * @var string
      */
     protected $twitter = '';
@@ -114,6 +120,7 @@ class Session extends AbstractSlugEntity
     {
         $this->slugField = 'path_segment';
         $this->tablename = 'tx_sessionplaner_domain_model_session';
+        $this->speakers = new ObjectStorage();
         $this->documents = new ObjectStorage();
         $this->tags = new ObjectStorage();
     }
@@ -228,6 +235,38 @@ class Session extends AbstractSlugEntity
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param Speaker $speaker
+     */
+    public function addSpeaker(Speaker $speaker)
+    {
+        $this->speakers->attach($speaker);
+    }
+
+    /**
+     * @param Speaker $author
+     */
+    public function removeSpeaker(Speaker $speaker)
+    {
+        $this->speakers->detach($author);
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getSpeakers(): ObjectStorage
+    {
+        return $this->speakers;
+    }
+
+    /**
+     * @param ObjectStorage $speaker
+     */
+    public function setSpeakers(ObjectStorage $speaker)
+    {
+        $this->speakers = $speakers;
     }
 
     /**
