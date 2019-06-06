@@ -149,7 +149,12 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-bio',
             'config' => [
-                'type' => 'text'
+                'type' => 'text',
+                'cols' => '80',
+                'rows' => '15',
+                'softref' => 'typolink_tag,images,email[subst],url',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default'
             ],
         ],
     ],
