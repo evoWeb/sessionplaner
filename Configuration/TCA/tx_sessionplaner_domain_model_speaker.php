@@ -160,7 +160,19 @@ return [
     ],
     'types' => [
         '0' => [
-            'showitem' => 'name,path_segment,biocompany,bio,picture,twitter,linkedin,xing,email,detail_page,sessions'
+            'showitem' => '
+                name,
+                path_segment,
+                company,
+                bio,
+                picture,
+                twitter,
+                linkedin,
+                xing,
+                email,
+                detail_page,
+                sessions,
+            '
         ]
     ],
 ];
