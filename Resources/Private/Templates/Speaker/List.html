@@ -2,21 +2,25 @@
 <f:section name="Content">
 
     <f:if condition="{speakers}">
-        <div class="s">
+        <div class="sessionplaner-speakerlist">
             <f:for each="{speakers}" as="speaker">
-                <div class="speaker">
-                    <div class="speaker-image">
-                        <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{speaker: speaker}">
-                            <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 250}" />
-                        </f:render>
-                    </div>
-                    <div class="speaker-body">
-                        <h3 class="speaker-title">
+                <div class="sessionplaner-speakerlist-item">
+                    <div class="sessionplaner-speaker">
+                        <div class="sessionplaner-speaker-image">
                             <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{speaker: speaker}">
-                                {speaker.name}
+                                <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 260}" />
                             </f:render>
-                        </h3>
-                        <h4 class="speaker-subtitle">{speaker.company}</h4>
+                        </div>
+                        <div class="sessionplaner-speaker-body">
+                            <h3 class="sessionplaner-speaker-name">
+                                <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{speaker: speaker}">
+                                    {speaker.name}
+                                </f:render>
+                            </h3>
+                            <f:if condition="{speaker.company}">
+                                <h4 class="sessionplaner-speaker-company">{speaker.company}</h4>
+                            </f:if>
+                        </div>
                     </div>
                 </div>
             </f:for>

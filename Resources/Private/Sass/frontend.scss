@@ -1,11 +1,18 @@
+//
+// Variables
+//
 $session-breakpoint-sm: 576px !default;
 $session-breakpoint-md: 768px !default;
 $session-breakpoint-lg: 992px !default;
 $session-breakpoint-xl: 1200px !default;
 
+//
+// Imports
+//
 @import 'frontend/day';
 @import 'frontend/tag';
 @import 'frontend/track';
 @import 'frontend/room';
 @import 'frontend/session';
 @import 'frontend/slot';
+@import 'frontend/speaker';
