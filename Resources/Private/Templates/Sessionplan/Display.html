@@ -22,7 +22,7 @@
             <f:for each="{day.slots}" as="slot">
                 <div class="sessionplaner-row" data-sessionplaner-columns="{day.rooms -> f:count()}">
                     <div class="sessionplaner-slot-time">
-                        <f:format.date format="H:i">{slot.start}</f:format.date>
+                        <sessionplanervh:format.time value="{slot.start}" />
                     </div>
                     <f:for each="{day.rooms}" as="room">
                         <div class="sessionplaner-col sessionplaner-slot-session" data-sessionplaner-slot="{day.uid}-{slot.uid}" data-sessionplaner-room="{room.uid}">

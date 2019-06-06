@@ -1,121 +1,118 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z"
-		  product-name="sessionplaner">
-		<header/>
-		<body>
-			<trans-unit id="minutes">
-				<source>min</source>
-			</trans-unit>
-			<trans-unit id="storageFolderEmpty">
-				<source><![CDATA[The selected storage folder does not contain any rooms.<br/>
-				Please create days, rooms and slots previous planing sessions.<br/>
-				For further information consult the documentation.]]></source>
-			</trans-unit>
-			<trans-unit id="session-new">
-				<source>Add new session</source>
-			</trans-unit>
-			<trans-unit id="filter-tags">
-				<source>Tags</source>
-			</trans-unit>
-			<trans-unit id="filter-user">
-				<source>Slideshare verfügbar</source>
-			</trans-unit>
-			<trans-unit id="filter-time">
-				<source>Current time</source>
-			</trans-unit>
-			<trans-unit id="filter-headline">
-				<source>Sessionfilter</source>
-			</trans-unit>
-			<trans-unit id="filter-comment">
-				<source>Entries are marked and stored in a cookie by double click an item.
-					Filter are list after a reload.
-				</source>
-			</trans-unit>
-			<trans-unit id="by">
-				<source>von</source>
-			</trans-unit>
-			<trans-unit id="sessionpool">
-				<source>Sessionpool</source>
-			</trans-unit>
-			<trans-unit id="topic">
-				<source>Topic</source>
-			</trans-unit>
-			<trans-unit id="description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="speaker">
-				<source>Speaker</source>
-			</trans-unit>
-			<trans-unit id="twitter">
-				<source>Twitter</source>
-			</trans-unit>
-			<trans-unit id="attendees">
-				<source>Attendees</source>
-			</trans-unit>
-			<trans-unit id="type">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="type-talk">
-				<source>Talk</source>
-			</trans-unit>
-			<trans-unit id="type-tutorial">
-				<source>Tutorial</source>
-			</trans-unit>
-			<trans-unit id="type-workshop">
-				<source>Workshop</source>
-			</trans-unit>
-			<trans-unit id="type-other">
-				<source>Other</source>
-			</trans-unit>
-			<trans-unit id="type-wish">
-				<source>Wish</source>
-			</trans-unit>
-			<trans-unit id="type-break">
-				<source>Break</source>
-			</trans-unit>
-			<trans-unit id="level">
-				<source>Level</source>
-			</trans-unit>
-			<trans-unit id="level-starter">
-				<source>Starter / Overview</source>
-			</trans-unit>
-			<trans-unit id="level-advanced">
-				<source>Advanced / Basic knowleg</source>
-			</trans-unit>
-			<trans-unit id="level-pro">
-				<source>Pro / Detailed</source>
-			</trans-unit>
-			<trans-unit id="tags">
-				<source>Tags</source>
-			</trans-unit>
-			<trans-unit id="back-to-overview">
-				<source>Back to overview</source>
-			</trans-unit>
-			<trans-unit id="tweet">
-				<source>Tweet</source>
-			</trans-unit>
-			<trans-unit id="documents">
-				<source>Documents</source>
-			</trans-unit>
-			<trans-unit id="suggest">
-				<source>submit suggestion</source>
-			</trans-unit>
-			<trans-unit id="mandatory">
-				<source>Mandatory fields are marked with an *</source>
-			</trans-unit>
-			<trans-unit id="slideshare_download">
-				<source>Slideshare download</source>
-			</trans-unit>
-			<trans-unit id="yourSessionIsSaved">
-				<source>Thank you for your suggestion. It will be available online after it was reviewed.</source>
-			</trans-unit>
-			<trans-unit id="field_1221560718">
-				<source>The field %s may not be empty</source>
-			</trans-unit>
-			<trans-unit id="warning-nosessionsfound">
-				<source>No Sessions found.</source>
-			</trans-unit>
-		</body>
-	</file>
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1558692599" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
+        <header/>
+        <body>
+            <trans-unit id="minutes">
+                <source>min</source>
+            </trans-unit>
+            <trans-unit id="storageFolderEmpty">
+                <source><![CDATA[The selected storage folder does not contain any rooms.<br/>
+                Please create days, rooms and slots previous planing sessions.<br/>
+                For further information consult the documentation.]]></source>
+            </trans-unit>
+            <trans-unit id="session-new">
+                <source>Add new session</source>
+            </trans-unit>
+            <trans-unit id="filter-tags">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="filter-user">
+                <source>Slideshare available</source>
+            </trans-unit>
+            <trans-unit id="filter-time">
+                <source>Current time</source>
+            </trans-unit>
+            <trans-unit id="filter-headline">
+                <source>Sessionfilter</source>
+            </trans-unit>
+            <trans-unit id="filter-comment">
+                <source>Entries are marked and stored in a cookie by double click an item. Filter are list after a reload.</source>
+            </trans-unit>
+            <trans-unit id="by">
+                <source>von</source>
+            </trans-unit>
+            <trans-unit id="sessionpool">
+                <source>Sessionpool</source>
+            </trans-unit>
+            <trans-unit id="topic">
+                <source>Topic</source>
+            </trans-unit>
+            <trans-unit id="description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="speaker">
+                <source>Speaker</source>
+            </trans-unit>
+            <trans-unit id="twitter">
+                <source>Twitter</source>
+            </trans-unit>
+            <trans-unit id="attendees">
+                <source>Attendees</source>
+            </trans-unit>
+            <trans-unit id="type">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="type-talk">
+                <source>Talk</source>
+            </trans-unit>
+            <trans-unit id="type-tutorial">
+                <source>Tutorial</source>
+            </trans-unit>
+            <trans-unit id="type-workshop">
+                <source>Workshop</source>
+            </trans-unit>
+            <trans-unit id="type-other">
+                <source>Other</source>
+            </trans-unit>
+            <trans-unit id="type-wish">
+                <source>Wish</source>
+            </trans-unit>
+            <trans-unit id="type-break">
+                <source>Break</source>
+            </trans-unit>
+            <trans-unit id="level">
+                <source>Level</source>
+            </trans-unit>
+            <trans-unit id="level-starter">
+                <source>Starter / Overview</source>
+            </trans-unit>
+            <trans-unit id="level-advanced">
+                <source>Advanced / Basic knowledge</source>
+            </trans-unit>
+            <trans-unit id="level-pro">
+                <source>Pro / Detailed</source>
+            </trans-unit>
+            <trans-unit id="tags">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="back-to-overview">
+                <source>Back to overview</source>
+            </trans-unit>
+            <trans-unit id="tweet">
+                <source>Tweet</source>
+            </trans-unit>
+            <trans-unit id="documents">
+                <source>Documents</source>
+            </trans-unit>
+            <trans-unit id="suggest">
+                <source>submit suggestion</source>
+            </trans-unit>
+            <trans-unit id="mandatory">
+                <source>Mandatory fields are marked with an *</source>
+            </trans-unit>
+            <trans-unit id="slideshare_download">
+                <source>Slideshare download</source>
+            </trans-unit>
+            <trans-unit id="yourSessionIsSaved">
+                <source>Thank you for your suggestion. It will be available online after it was reviewed.</source>
+            </trans-unit>
+            <trans-unit id="field_1221560718">
+                <source>The field %s may not be empty</source>
+            </trans-unit>
+            <trans-unit id="warning-nosessionsfound">
+                <source>No Sessions found.</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

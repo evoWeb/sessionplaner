@@ -26,14 +26,16 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg',
+        'typeicon_classes' => [
+            'default' => 'sessionplaner-record-tag'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'start'
     ],
     'columns' => [
         'label' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-label',
             'config' => [
                 'type' => 'input',
@@ -43,6 +45,7 @@ return [
             ],
         ],
         'sessions' => [
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-sessions',
             'config' => [
                 'type' => 'group',

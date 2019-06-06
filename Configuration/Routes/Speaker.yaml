@@ -1,0 +1,13 @@
+routeEnhancers:
+    SessionplanerSpeaker:
+        type: Extbase
+        extension: Sessionplaner
+        plugin: Speaker
+        defaultController: 'Speaker::list'
+        routes:
+            - { routePath: '/{speaker-title}', _controller: 'Speaker::show', _arguments: {'speaker-title': 'speaker'} }
+        aspects:
+            speaker-title:
+                type: PersistedAliasMapper
+                tableName: tx_sessionplaner_domain_model_speaker
+                routeFieldName: path_segment

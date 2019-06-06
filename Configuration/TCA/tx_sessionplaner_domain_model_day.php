@@ -28,14 +28,16 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg'
+        'typeicon_classes' => [
+            'default' => 'sessionplaner-record-day'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'name'
     ],
     'columns' => [
         'name' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-name',
             'config' => [
                 'type' => 'input',
@@ -45,7 +47,7 @@ return [
             ],
         ],
         'date' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
             'config' => [
                 'type' => 'input',
@@ -55,7 +57,7 @@ return [
             ],
         ],
         'rooms' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-rooms',
             'config' => [
                 'type' => 'select',
@@ -70,19 +72,16 @@ return [
             ],
         ],
         'slots' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-slots',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###
-                    ORDER BY tx_sessionplaner_domain_model_slot.start',
-                'MM' => 'tx_sessionplaner_day_slot_mm',
-                'size' => 10,
-                'minitems' => 0,
-                'maxitems' => 100,
-                'autoSizeMax' => 100,
+                'foreign_field' => 'day',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                ]
             ],
         ],
     ],

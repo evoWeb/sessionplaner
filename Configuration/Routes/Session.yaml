@@ -1,0 +1,14 @@
+routeEnhancers:
+    SessionplanerSession:
+        type: Extbase
+        extension: Sessionplaner
+        plugin: Session
+        defaultController: 'Session::list'
+        routes:
+            - { routePath: '/', _controller: 'Session::list' }
+            - { routePath: '/{session-title}', _controller: 'Session::show', _arguments: {'session-title': 'session'} }
+        aspects:
+            session-title:
+                type: PersistedAliasMapper
+                tableName: tx_sessionplaner_domain_model_session
+                routeFieldName: path_segment

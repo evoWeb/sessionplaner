@@ -70,7 +70,9 @@ gulp.task('uglify', gulp.series(function(cb) {
     tasks.uglify.forEach(function (file) {
         gulp.src(file.src)
             .pipe(babel())
+            .on('error', function (e) { console.log(e); })
             .pipe(uglify())
+            .on('error', function (e) { console.log(e); })
             .pipe(gulp.dest(file.dest));
     });
     cb();

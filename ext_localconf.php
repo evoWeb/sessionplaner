@@ -16,14 +16,38 @@ defined('TYPO3_MODE') || die('Access denied.');
 // Register "sessionplannervh" as global fluid namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] = 'Evoweb\\Sessionplaner\\ViewHelpers';
 
-call_user_func(function () {
-    /**
-     * Default PageTS
-     */
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
-        '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig">'
+// Register Icons
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+$icons = [
+    'plugin-display',
+    'plugin-session',
+    'plugin-suggest',
+    'plugin-speaker',
+    'record-day',
+    'record-room',
+    'record-session',
+    'record-slot',
+    'record-tag',
+    'record-speaker',
+];
+foreach ($icons as $icon) {
+    $iconRegistry->registerIcon(
+        'sessionplaner-' . $icon,
+        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        ['source' => 'EXT:sessionplaner/Resources/Public/Icons/' . $icon . '.svg']
     );
+}
 
+// Add default PageTsConfig
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig">'
+);
+
+// Register Update Wizards
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class]
+    = \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class;
+
+call_user_func(function () {
     /**
      * Configure Frontend Plugin
      */
@@ -72,32 +96,15 @@ call_user_func(function () {
     );
 
     /**
-     * Default realurl configuration
+     * Configure Speaker Frontend Plugin
      */
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT']['suggest'] = [
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Evoweb.sessionplaner',
+        'Speaker',
         [
-            'GETvar' => 'tx_sessionplaner_suggest[action]',
+            'Speaker' => 'list, show',
         ]
-    ];
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl']['_DEFAULT']['postVarSets']['_DEFAULT']['session'] = [
-        [
-            'GETvar' => 'tx_sessionplaner_session[action]',
-        ],
-        [
-            'GETvar' => 'tx_sessionplaner_session[session]',
-            'lookUpTable' => [
-                'table' => 'tx_sessionplaner_domain_model_session',
-                'id_field' => 'uid',
-                'alias_field' => 'topic',
-                'addWhereClause' => ' AND NOT deleted',
-                'useUniqueCache' => '1',
-                'useUniqueCache_conf' => [
-                    'strtolower' => '1',
-                    'spaceCharacter' => '-',
-                ],
-            ],
-        ],
-    ];
+    );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
     config.pageTitleProviders {

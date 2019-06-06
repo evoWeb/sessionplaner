@@ -14,8 +14,10 @@
 namespace Evoweb\Sessionplaner\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Session extends AbstractSlugEntity
 {
     /**
      * @var bool
@@ -38,7 +40,7 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $donotlink = false;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      * @var string
      */
     protected $topic = '';
@@ -46,13 +48,23 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @var string
      */
+    protected $pathSegment = '';
+
+    /**
+     * @var string
+     */
     protected $description = '';
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @var string
      */
     protected $speaker = '';
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
+     * @Extbase\ORM\Lazy
+     */
+    protected $speakers;
 
     /**
      * @var string
@@ -76,27 +88,28 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @Extbase\ORM\Lazy
      */
     protected $documents;
 
     /**
      * @var \Evoweb\Sessionplaner\Domain\Model\Day
      */
-    protected $day;
+    protected $day = null;
 
     /**
      * @var \Evoweb\Sessionplaner\Domain\Model\Room
      */
-    protected $room;
+    protected $room = null;
 
     /**
      * @var \Evoweb\Sessionplaner\Domain\Model\Slot
      */
-    protected $slot;
+    protected $slot = null;
 
     /**
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
+     * @Extbase\ORM\Lazy
      */
     protected $tags;
 
@@ -105,8 +118,11 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->documents = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
-        $this->tags = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->slugField = 'path_segment';
+        $this->tablename = 'tx_sessionplaner_domain_model_session';
+        $this->speakers = new ObjectStorage();
+        $this->documents = new ObjectStorage();
+        $this->tags = new ObjectStorage();
     }
 
     /**
@@ -190,6 +206,22 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * @param string $pathSegment
+     */
+    public function setPathSegment($pathSegment)
+    {
+        $this->pathSegment = $pathSegment;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPathSegment()
+    {
+        return $this->pathSegment;
+    }
+
+    /**
      * @param string $description
      */
     public function setDescription($description)
@@ -203,6 +235,38 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @param Speaker $speaker
+     */
+    public function addSpeaker(Speaker $speaker)
+    {
+        $this->speakers->attach($speaker);
+    }
+
+    /**
+     * @param Speaker $author
+     */
+    public function removeSpeaker(Speaker $speaker)
+    {
+        $this->speakers->detach($author);
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getSpeakers(): ObjectStorage
+    {
+        return $this->speakers;
+    }
+
+    /**
+     * @param ObjectStorage $speaker
+     */
+    public function setSpeakers(ObjectStorage $speaker)
+    {
+        $this->speakers = $speakers;
     }
 
     /**
@@ -305,52 +369,49 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $result;
     }
 
-    /**
-     * @param int|\Evoweb\Sessionplaner\Domain\Model\Day $day
-     */
-    public function setDay($day)
+    public function setDay(?Day $day)
     {
-        $this->day = $day;
+        $this->day = $day ?? 0;
     }
 
-    /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Day
-     */
-    public function getDay()
+    public function getDay(): ?Day
     {
-        return $this->day;
+        $day = $this->day;
+        if (!empty($day) && $day !== 0) {
+            return $day;
+        } else {
+            return null;
+        }
     }
 
-    /**
-     * @param int|\Evoweb\Sessionplaner\Domain\Model\Room $room
-     */
-    public function setRoom($room)
+    public function setRoom(?Room $room)
     {
-        $this->room = $room;
+        $this->room = $room ?? 0;
     }
 
-    /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Room
-     */
-    public function getRoom()
+    public function getRoom(): ?Room
     {
-        return $this->room;
+        $room = $this->room;
+        if (!empty($room) && $room !== 0) {
+            return $room;
+        } else {
+            return null;
+        }
     }
 
-    /**
-     * @param int|\Evoweb\Sessionplaner\Domain\Model\Slot $slot
-     */
-    public function setSlot($slot)
+    public function setSlot(?Slot $slot)
     {
-        $this->slot = $slot;
+        $this->slot = $slot ?? 0;
     }
 
-    /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Slot
-     */
-    public function getSlot()
+    public function getSlot(): ?Slot
     {
-        return $this->slot;
+        $slot = $this->slot;
+        if (!empty($slot) && $slot !== 0) {
+            return $slot;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -367,5 +428,18 @@ class Session extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getTags()
     {
         return $this->tags;
+    }
+
+    public function toArray(): array
+    {
+        $data = [];
+        $properties = $this->_getProperties();
+        foreach ($properties as $key => $value) {
+            $field = GeneralUtility::camelCaseToLowerCaseUnderscored($key);
+            $value = \is_object($value) && \method_exists($value, 'getUid') ? $value->getUid() :  $value;
+            $data[$field] = $value;
+        }
+
+        return $data;
     }
 }
