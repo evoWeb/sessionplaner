@@ -2,111 +2,31 @@
 <f:section name="Content">
 
     <f:if condition="{session}">
-        <div class="session">
-            <div class="session-title">
+        <article class="sessionplaner-sessiondetail">
+            <div class="sessionplaner-sessiondetail-title">
                 <h1>{session.topic}</h1>
             </div>
-            <div class="session-description">
+            <div class="sessionplaner-sessiondetail-description">
                 <f:format.html>{session.description}</f:format.html>
             </div>
-            <div class="session-meta">
-                <p>
-                    <span class="session-meta-item session-meta-type">
-                        <f:if condition="{session.type} == 1">{f:translate(key: 'type-talk')}</f:if>
-                        <f:if condition="{session.type} == 2">{f:translate(key: 'type-tutorial')}</f:if>
-                        <f:if condition="{session.type} == 3">{f:translate(key: 'type-workshop')}</f:if>
-                        <f:if condition="{session.type} == 4">{f:translate(key: 'type-other')}</f:if>
-                        <f:if condition="{session.type} == 5">{f:translate(key: 'type-break')}</f:if>
-                        <f:if condition="{session.type} == 6">{f:translate(key: 'type-wish')}</f:if>
-                    </span>
-                    -
-                    <span class="session-meta-item session-meta-level">
-                        <f:if condition="{session.level} == 1">{f:translate(key: 'level-starter')}</f:if>
-                        <f:if condition="{session.level} == 2">{f:translate(key: 'level-advanced')}</f:if>
-                        <f:if condition="{session.level} == 3">{f:translate(key: 'level-pro')}</f:if>
-                    </span>
-                </p>
+            <div class="sessionplaner-sessiondetail-meta">
+                <f:render partial="Session/Box" arguments="{settings: settings, session: session}" />
             </div>
-            <f:if condition="{session.speakers}">
-                <f:then>
-                    <f:for each="{session.speakers}" as="speaker">
-                        <div class="session-speaker">
-                            <span class="session-speaker-item session-speaker-name">
-                                <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">
-                                    {speaker.name}
-                                </f:render>
-                            </span>
-                            <f:if condition="{speaker.twitter}">
-                                <span class="session-speaker-item session-speaker-twitter">
-                                    <a href="https://www.twitter.com/{speaker.twitter}" title="@{speaker.twitter}" target="_blank">@{speaker.twitter}</a>
-                                </span>
-                            </f:if>
-                        </div>
-                    </f:for>
-                </f:then>
-                <f:else>
-                    <f:if condition="{session.speaker}">
-                        <div class="session-speaker">
-                            <span class="session-speaker-item session-speaker-name">{session.speaker}</span>
-                            <f:if condition="{session.twitter}">
-                                <span class="session-speaker-item session-speaker-twitter">
-                                    <a href="https://www.twitter.com/{session.twitter}" title="@{session.twitter}" target="_blank">@{session.twitter}</a>
-                                </span>
-                            </f:if>
-                        </div>
-                    </f:if>
-                </f:else>
-            </f:if>
             <f:if condition="{session.documents}">
-                <div class="session-files">
+                <div class="sessionplaner-sessiondetail-documents">
                     <h4>{f:translate(key: 'documents')}</h4>
-                    <table>
-                        <tbody>
-                            <f:for each="{session.documents}" as="document">
-                                <tr>
-                                    <td><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></td>
-                                </tr>
-                            </f:for>
-                        </tbody>
-                    </table>
+                    <ul>
+                        <f:for each="{session.documents}" as="document">
+                            <li><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></li>
+                        </f:for>
+                    </ul>
                 </div>
             </f:if>
-        </div>
-        <div class="session-backlink">
-            <div class="medium primary btn">
+            <div class="sessionplaner-sessiondetail-backlink">
                 <f:link.action action="list">{f:translate(key: 'back-to-overview')}</f:link.action>
             </div>
-        </div>
-        <div class="session-social">
-            <div class="session-social-item">
-                <div class="fb-like" data-layout="button_count" data-action="like" data-show-faces="true"></div>
-            </div>
-            <div class="session-social-item">
-                <f:if condition="{session.twitter}">
-                    <f:then>
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="{session.twitter}" data-hashtags="{settings.twitter.hashtag}">{f:translate(key: 'tweet')}</a>
-                    </f:then>
-                    <f:else>
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-via="{settings.twitter.account}" data-hashtags="{settings.twitter.hashtag}">{f:translate(key: 'tweet')}</a>
-                    </f:else>
-                </f:if>
-            </div>
-        </div>
-        <f:if condition="{settings.disqusShortname}">
-            <div class="session-comments-disqus">
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    var disqus_shortname = '{settings.disqusShortname}';
-                    (function () {
-                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-            </div>
-        </f:if>
+        </article>
+        <f:render partial="Disqus/Index" arguments="{settings: settings}" />
     </f:if>
 
 </f:section>

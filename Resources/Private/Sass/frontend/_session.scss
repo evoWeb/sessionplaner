@@ -10,7 +10,7 @@ $session-sessioninfo-shadow: 0 2px 1px rgba(0,0,0,.15);
 
 
 //
-// Session Box
+// Box
 //
 .sessionplaner-sessionbox-tags {
     margin-top: .5rem;
@@ -24,7 +24,7 @@ $session-sessioninfo-shadow: 0 2px 1px rgba(0,0,0,.15);
 
 
 //
-// Session Info
+// Info
 //
 .sessionplaner-sessioninfo {
     position: relative;
@@ -56,4 +56,16 @@ $session-sessioninfo-shadow: 0 2px 1px rgba(0,0,0,.15);
 }
 .sesionplaner-sessioninfo-info {
     margin-top: 1rem;
+}
+
+//
+// Detail
+//
+.sessionplaner-sessiondetail {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sessionplaner-sessiondetail-backlink {
+    margin-top: 2rem;
 }
