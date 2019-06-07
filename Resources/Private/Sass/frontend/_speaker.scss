@@ -4,8 +4,12 @@
 $session-speakerlist-space: 10px;
 
 $session-speaker-bg: #ffffff !default;
-$session-speaker-border-color: rgba(0,0,0,.15) !default;
-$session-speaker-padding: 1.5rem;
+$session-speaker-color: #616161 !default;
+$session-speaker-link-color: #ff8700 !default;
+$session-speaker-link-hover-color: darken($session-speaker-link-color, 10%) !default;
+$session-speaker-border: none !default;
+$session-speaker-padding: 1rem;
+$session-speaker-shadow: 0 2px 1px rgba(0,0,0,.15);
 
 
 //
@@ -16,9 +20,17 @@ $session-speaker-padding: 1.5rem;
     display: flex;
     flex-direction: column;
     word-wrap: break-word;
+    color: $session-speaker-color;
     background-color: $session-speaker-bg;
-    border: 1px solid $session-speaker-border-color;
     height: 100%;
+    border: $session-speaker-border;
+    box-shadow: $session-speaker-shadow;
+    a {
+        color: $session-speaker-link-color !important;
+        &:hover {
+            color: $session-speaker-link-hover-color !important;
+        }
+    }
 }
 .sessionplaner-speaker-image {
     img {
@@ -27,18 +39,15 @@ $session-speaker-padding: 1.5rem;
     }
 }
 .sessionplaner-speaker-body {
-    padding: ($session-speaker-padding / 2);
-    @media only screen and (min-width: $session-breakpoint-sm) {
-        padding: $session-speaker-padding;
-    }
+    padding: $session-speaker-padding;
 }
 .sessionplaner-speaker-name {
-    font-weight: normal;
+    font-weight: bold;
     font-size: 1rem;
 }
 .sessionplaner-speaker-company {
     font-weight: normal;
-    font-size: 1rem;
+    font-size: .75rem;
 }
 
 
@@ -61,9 +70,6 @@ $session-speaker-padding: 1.5rem;
     }
     width: calc(100% / 2);
     @media only screen and (min-width: $session-breakpoint-md) {
-        width: calc(100% / 3);
-    }
-    @media only screen and (min-width: $session-breakpoint-lg) {
-        width: calc(100% / 4);
+        width: 230px;
     }
 }
