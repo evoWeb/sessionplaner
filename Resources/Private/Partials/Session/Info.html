@@ -1,0 +1,49 @@
+<f:if condition="{session}">
+    <div class="sessionplaner-sessioninfo">
+        <div class="sessionplaner-sessioninfo-title">
+            <h2><f:link.action action="show" arguments="{session:session}" title="{session.topic}">{session.topic}</f:link.action></h2>
+        </div>
+        <div class="sessionplaner-sessioninfo-teaser">
+            <f:format.html><f:format.crop maxCharacters="200">{session.description}</f:format.crop></f:format.html>
+        </div>
+        <f:if condition="{session.speaker} || {session.speakers} || {session.day} || {session.slot} || {session.room}">
+            <div class="sesionplaner-sessioninfo-info">
+                <div class="sessionplaner-sessionbox">
+                    <f:if condition="{session.speakers}">
+                        <f:for each="{session.speakers}" as="speaker">
+                            <div class="sessionplaner-sessionbox-spaker">
+                                <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">
+                                    {speaker.name}
+                                </f:render>
+                            </div>
+                        </f:for>
+                    </f:if>
+                    <f:if condition="!{session.speakers} && {session.speaker}">
+                        <div class="sessionplaner-sessionbox-spaker">
+                            {session.speaker}
+                        </div>
+                    </f:if>
+                    <f:if condition="{session.day} || {session.slot} || {session.room}">
+                        <div class="sessionplaner-sessionbox-info">
+                            <f:if condition="{session.day}">
+                                <span class="sessionplaner-sessionbox-info-date">
+                                    <f:format.date format="d.m.Y">@{session.day.date}</f:format.date>
+                                </span>
+                            </f:if>
+                            <f:if condition="{session.slot}">
+                                <span class="sessionplaner-sessionbox-info-slot">
+                                    <sessionplanervh:format.time value="{session.slot.start}" /> - <sessionplanervh:format.time value="{session.slot.end}" />
+                                </span>
+                            </f:if>
+                            <f:if condition="{session.room}">
+                                <span class="sessionplaner-sessionbox-info-room">
+                                    {session.room.name}
+                                </span>
+                            </f:if>
+                        </div>
+                    </f:if>
+                </div>
+            </div>
+        </f:if>
+    </div>
+</f:if>
