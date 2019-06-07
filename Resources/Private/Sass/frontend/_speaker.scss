@@ -5,8 +5,8 @@ $session-speakerlist-space: 10px;
 
 $session-speaker-bg: #ffffff !default;
 $session-speaker-color: #616161 !default;
-$session-speaker-link-color: #ff8700 !default;
-$session-speaker-link-hover-color: darken($session-speaker-link-color, 10%) !default;
+$session-speaker-name-color: #ff8700 !default;
+$session-speaker-name-hover-color: darken($session-speaker-name-color, 10%) !default;
 $session-speaker-border: none !default;
 $session-speaker-padding: 1rem;
 $session-speaker-shadow: 0 2px 1px rgba(0,0,0,.15);
@@ -16,6 +16,8 @@ $session-speaker-shadow: 0 2px 1px rgba(0,0,0,.15);
 // Speaker
 //
 .sessionplaner-speaker {
+    margin-left: auto;
+    margin-right: auto;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -25,12 +27,6 @@ $session-speaker-shadow: 0 2px 1px rgba(0,0,0,.15);
     height: 100%;
     border: $session-speaker-border;
     box-shadow: $session-speaker-shadow;
-    a {
-        color: $session-speaker-link-color !important;
-        &:hover {
-            color: $session-speaker-link-hover-color !important;
-        }
-    }
 }
 .sessionplaner-speaker-image {
     img {
@@ -44,6 +40,13 @@ $session-speaker-shadow: 0 2px 1px rgba(0,0,0,.15);
 .sessionplaner-speaker-name {
     font-weight: bold;
     font-size: 1rem;
+    color: $session-speaker-name-color !important;
+    &:hover {
+        color: $session-speaker-name-hover-color !important;
+    }
+    a {
+        color: inherit !important
+    }
 }
 .sessionplaner-speaker-company {
     font-weight: normal;

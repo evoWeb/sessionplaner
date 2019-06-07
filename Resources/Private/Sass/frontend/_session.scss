@@ -5,3 +5,9 @@
 .sessionplaner-sessionbox-tags {
     margin-top: .5rem;
 }
+.sessionplaner-sessionbox-info {
+    > * + *:before {
+        content: '|';
+        opacity: .25;
+    }
+}

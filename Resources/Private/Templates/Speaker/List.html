@@ -4,25 +4,9 @@
     <f:if condition="{speakers}">
         <div class="sessionplaner-speakerlist">
             <f:for each="{speakers}" as="speaker">
-                <div class="sessionplaner-speakerlist-item">
-                    <div class="sessionplaner-speaker">
-                        <div class="sessionplaner-speaker-image">
-                            <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{speaker: speaker}">
-                                <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 240}" />
-                            </f:render>
-                        </div>
-                        <div class="sessionplaner-speaker-body">
-                            <h3 class="sessionplaner-speaker-name">
-                                <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{speaker: speaker}">
-                                    {speaker.name}
-                                </f:render>
-                            </h3>
-                            <f:if condition="{speaker.company}">
-                                <h4 class="sessionplaner-speaker-company">{speaker.company}</h4>
-                            </f:if>
-                        </div>
-                    </div>
-                </div>
+                <article class="sessionplaner-speakerlist-item">
+                    <f:render partial="Speaker/Card" arguments="{settings: settings, speaker: speaker, size: 240}" />
+                </article>
             </f:for>
         </div>
     </f:if>

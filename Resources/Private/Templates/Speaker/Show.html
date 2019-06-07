@@ -1,28 +1,89 @@
 <f:layout name="Frontend" />
 <f:section name="Content">
 
-    <div class="speaker">
-        <div class="speaker-title">
-            <h1>{speaker.name}</h1>
-        </div>
-        <div class="speaker-company">{speaker.company}</div>
-        <div class="speaker-picture">
-            <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: 250}" />
-        </div>
-        <div class="speaker-bio">
-            <f:format.html>{speaker.bio}</f:format.html>
-        </div>
-        <div class="speaker-sessions">
-            <f:if condition="{speaker.sessions}">
-                <ul>
-                    <f:for each="{speaker.sessions}" as="session">
-                        <li>
-                            <f:link.action pageUid="{settings.sessionSinglePid}" controller="Session" action="show" arguments="{session:session}">{session.topic}</f:link.action> - {session.day.name} - {session.room.name}
-                        </li>
-                    </f:for>
-                </ul>
-            </f:if>
-        </div>
-    </div>
+    <f:if condition="{speaker}">
+        <article class="sessionplaner-bio">
+            <div class="sessionplaner-bio-card">
+                <f:render partial="Speaker/Card" arguments="{settings: settings, speaker: speaker, size: 300}" />
+            </div>
+            <div class="sessionplaner-bio-body">
+                <div class="sessionplaner-bio-header">
+                    <h1 class="sessionplaner-bio-name">{speaker.name}</h1>
+                    <f:if condition="{speaker.company}">
+                        <div class="sessionplaner-bio-company">{speaker.company}</div>
+                    </f:if>
+                </div>
+                <f:if condition="{speaker.bio}">
+                    <div class="sessionplaner-bio-text">
+                        <f:format.html>{speaker.bio}</f:format.html>
+                    </div>
+                </f:if>
+                <f:if condition="{speaker.twitter} || {speaker.linkedin} || {speaker.xing}">
+                    <div class="sessionplaner-bio-connect">
+                        <h2>Connect</h2>
+                        <div class="sessionplaner-connect">
+                            <f:if condition="{speaker.twitter}">
+                                <a href="https://twitter.com/{speaker.twitter}" class="sessionplaner-connect-link sessionplaner-connect-link-twitter" target="_blank" itemprop="url">
+                                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Twitter" optional="true" /></span>
+                                </a>
+                            </f:if>
+                            <f:if condition="{speaker.linkedin}">
+                                <a href="https://www.linkedin.com/in/{speaker.linkedin}" class="sessionplaner-connect-link sessionplaner-connect-link-linkedin" target="_blank" itemprop="url">
+                                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="LinkedIn" optional="true" /></span>
+                                </a>
+                            </f:if>
+                            <f:if condition="https://www.xing.com/profile/{speaker.xing}">
+                                <a href="{speaker.xing}" class="sessionplaner-connect-link sessionplaner-connect-link-xing" target="_blank" itemprop="url">
+                                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Xing" optional="true" /></span>
+                                </a>
+                            </f:if>
+                        </div>
+                    </div>
+                </f:if>
+                <f:if condition="{speaker.sessions}">
+                    <div class="sessionplaner-bio-sessions">
+                        <f:if condition="{speaker.sessions -> f:count()} > 1">
+                            <f:then>
+                                <h2>Sessions</h2>
+                            </f:then>
+                            <f:else>
+                                <h2>Session</h2>
+                            </f:else>
+                        </f:if>
+                        <div class="sessionplaner-list">
+                            <f:for each="{speaker.sessions}" as="session">
+                                <div class="sessionplaner-list-item">
+                                    <div class="sessionplaner-sessionbox">
+                                        <div class="sessionplaner-sessionbox-topic">
+                                            <f:link.action pageUid="{settings.sessionSinglePid}" pluginName="Session" controller="Session" action="show" arguments="{session: session}">
+                                                {session.topic}
+                                            </f:link.action>
+                                        </div>
+                                        <div class="sessionplaner-sessionbox-info">
+                                            <f:if condition="{session.day}">
+                                                <span class="sessionplaner-sessionbox-info-date">
+                                                    <f:format.date format="d.m.Y">@{session.day.date}</f:format.date>
+                                                </span>
+                                            </f:if>
+                                            <f:if condition="{session.slot}">
+                                                <span class="sessionplaner-sessionbox-info-slot">
+                                                    <sessionplanervh:format.time value="{session.slot.start}" /> - <sessionplanervh:format.time value="{session.slot.end}" />
+                                                </span>
+                                            </f:if>
+                                            <f:if condition="{session.room}">
+                                                <span class="sessionplaner-sessionbox-info-room">
+                                                    {session.room.name}
+                                                </span>
+                                            </f:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </f:for>
+                        </div>
+                    </div>
+                </f:if>
+            </div>
+        </article>
+    </f:if>
 
 </f:section>
