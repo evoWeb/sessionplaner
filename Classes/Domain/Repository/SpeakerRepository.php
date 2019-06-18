@@ -13,13 +13,16 @@
 
 namespace Evoweb\Sessionplaner\Domain\Repository;
 
-class SpeakerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
+class SpeakerRepository extends Repository
 {
     /**
      * Default Orderings
      */
     protected $defaultOrderings = [
-        'name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'name' => QueryInterface::ORDER_ASCENDING
     ];
 
     /**

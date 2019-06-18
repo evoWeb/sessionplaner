@@ -21,7 +21,7 @@ return [
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'sortby' => 'sorting',
+        'default_sortby' => 'ORDER BY name',
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
