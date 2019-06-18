@@ -152,7 +152,7 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getSlots()
     {
-        return $this->slots;
+        return ObjectStorageUtility::sort($this->slots, 'start');
     }
 
     /**
