@@ -13,6 +13,15 @@
 
 namespace Evoweb\Sessionplaner\Domain\Repository;
 
-class RoomRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
+class RoomRepository extends Repository
 {
+    /**
+     * Default Orderings
+     */
+    protected $defaultOrderings = [
+        'name' => QueryInterface::ORDER_ASCENDING
+    ];
 }
