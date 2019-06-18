@@ -13,6 +13,7 @@
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use Evoweb\Sessionplaner\Utility\ObjectStorageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Day extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
@@ -106,6 +107,6 @@ class Day extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getSlots()
     {
-        return $this->slots;
+        return ObjectStorageUtility::sort($this->slots, 'start');
     }
 }
