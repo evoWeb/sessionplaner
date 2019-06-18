@@ -15,4 +15,10 @@ namespace Evoweb\Sessionplaner\Domain\Repository;
 
 class SlotRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
+    /**
+     * Default Orderings
+     */
+    protected $defaultOrderings = [
+        'start' => QueryInterface::ORDER_ASCENDING
+    ];
 }
