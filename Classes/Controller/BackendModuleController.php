@@ -59,7 +59,7 @@ class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCo
         $this->view->assign('currentDay', $day);
         $this->view->assign('roomCount', is_object($day) ? count($day->getRooms()) : 0);
         $this->view->assign('days', $this->dayRepository->findAll());
-        $this->view->assign('unassignedSessions', $this->sessionRepository->findByDayAndEmptySlot($day));
+        $this->view->assign('unassignedSessions', $this->sessionRepository->findUnassignedSessions());
     }
 
     /**

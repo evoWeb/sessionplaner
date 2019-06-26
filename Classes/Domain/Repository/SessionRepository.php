@@ -34,7 +34,6 @@ class SessionRepository extends Repository
     public function findSuggested()
     {
         $query = $this->createQuery();
-
         $query->matching(
             $query->logicalAnd(
                 [
@@ -54,11 +53,27 @@ class SessionRepository extends Repository
     public function findByDayAndEmptySlot($day)
     {
         $query = $this->createQuery();
-
         $query->matching(
             $query->logicalAnd(
                 [
                     $query->equals('day', $day),
+                    $query->equals('slot', 0)
+                ]
+            )
+        );
+
+        return $query->execute();
+    }
+
+    /**
+     * @param Day $day
+     */
+    public function findUnassignedSessions()
+    {
+        $query = $this->createQuery();
+        $query->matching(
+            $query->logicalAnd(
+                [
                     $query->equals('slot', 0)
                 ]
             )
