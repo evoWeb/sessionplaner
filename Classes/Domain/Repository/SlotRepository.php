@@ -13,7 +13,10 @@
 
 namespace Evoweb\Sessionplaner\Domain\Repository;
 
-class SlotRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
+class SlotRepository extends Repository
 {
     /**
      * Default Orderings

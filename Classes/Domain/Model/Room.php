@@ -13,6 +13,7 @@
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use Evoweb\Sessionplaner\Utility\ObjectStorageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity

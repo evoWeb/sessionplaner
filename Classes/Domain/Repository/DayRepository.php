@@ -13,13 +13,17 @@
 
 namespace Evoweb\Sessionplaner\Domain\Repository;
 
-class DayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
+class DayRepository extends Repository
 {
     /**
      * Default Orderings
      */
     protected $defaultOrderings = [
-        'date' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'date' => QueryInterface::ORDER_ASCENDING
     ];
 
     /**
@@ -29,7 +33,7 @@ class DayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findByUidsRaw($uids)
     {
-        $uids = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $uids);
+        $uids = GeneralUtility::trimExplode(',', $uids);
         if (is_array($uids) && count($uids) > 0) {
             $query = $this->createQuery();
             $result = $query->matching(
