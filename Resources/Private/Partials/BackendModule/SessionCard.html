@@ -18,6 +18,17 @@
                     <div class="hidden property hidden" data-name="hidden" data-value="{session.hidden as integer}">{session.hidden}</div>
                     <div class="property topic" data-name="topic" data-value="{session.topic}">{session.topic}</div>
                     <div class="property speaker" data-name="speaker" data-value="{session.speaker}">{session.speaker}</div>
+                    <f:if condition="{session.speakers}">
+                        <div class="speakers">
+                            <f:for each="{session.speakers}" as="speaker" iteration="iteration">
+                                {speaker.name}<f:if condition="!{iteration.isLast}">,</f:if>
+                            </f:for>
+                        </div>
+                        <div class="hidden property speaker" data-name="speaker" data-value="{session.speaker}">{session.speaker}</div>
+                    </f:if>
+                    <f:if condition="!{session.speakers} && {session.speaker}">
+                        <div class="property speaker" data-name="speaker" data-value="{session.speaker}">{session.speaker}</div>
+                    </f:if>
                     <div class="hidden property description" data-name="description" data-value="{session.description}">{session.description}</div>
                     <div class="hidden property twitter" data-name="twitter" data-value="{session.twitter}">{session.twitter}</div>
                     <div class="hidden property attendees" data-name="attendees" data-value="{session.attendees}">{session.attendees}</div>
