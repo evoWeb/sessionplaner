@@ -28,6 +28,20 @@ class SessionRepository extends Repository
         'topic' => QueryInterface::ORDER_ASCENDING
     ];
 
+
+    /**
+     * @param int $uid
+     * @return object
+     */
+    public function findAnyByUid($uid) {
+        $query = $this->createQuery();
+        $query->getQuerySettings()
+            ->setIgnoreEnableFields(true)
+            ->setIncludeDeleted(true);
+        $query->matching($query->equals('uid', $uid));
+        return $query->execute()->getFirst();
+    }
+
     /**
      * @return array|QueryResult
      */

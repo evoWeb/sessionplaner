@@ -48,6 +48,7 @@ define([
                 || fieldNameAndValue.name === 'day'
                 || fieldNameAndValue.name === 'room'
                 || fieldNameAndValue.name === 'slot'
+                || fieldNameAndValue.name === 'hidden'
             ) {
                 fieldNameAndValue.value = parseInt(fieldNameAndValue.value) || 0;
             }
@@ -87,6 +88,12 @@ define([
                 .text(value);
         });
 
+        if (sessionData.hidden) {
+            $card.addClass('t3-page-ce-hidden');
+        } else {
+            $card.removeClass('t3-page-ce-hidden');
+        }
+
         return $card;
     };
 
@@ -98,9 +105,11 @@ define([
      */
     Sessionplaner.addValuesFromParent = function (sessionData, $cardParent) {
         if ($cardParent.attr('id') === 'stash') {
+            sessionData.day = 0;
             sessionData.slot = 0;
             sessionData.room = 0;
         } else {
+            sessionData.day = $cardParent.data('day');
             sessionData.slot = $cardParent.data('slot');
             sessionData.room = $cardParent.data('room');
         }
@@ -442,8 +451,6 @@ define([
             })
             .on('dblclick', '.t3js-page-ce', function () {
                 let sessionData = Sessionplaner.getDataFromCard($(this));
-                console.log('data');
-                console.log(sessionData);
                 Sessionplaner.editSession(sessionData);
             })
             .on('mouseover', '.t3js-grid-cell', function () {

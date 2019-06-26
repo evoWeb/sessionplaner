@@ -164,7 +164,7 @@ class AjaxController
         $this->initializeAction($request);
 
         /** @var Session $session */
-        $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
+        $session = $this->sessionRepository->findAnyByUid((int)$this->parameter['session']['uid']);
         $this->updateSessionFromRequest($session);
 
         $validationResults = $this->validateSession($session);
@@ -186,7 +186,7 @@ class AjaxController
         $this->initializeAction($request);
 
         /** @var Session $session */
-        $session = $this->sessionRepository->findByUid((int)$this->parameter['session']['uid']);
+        $session = $this->sessionRepository->findAnyByUid((int)$this->parameter['session']['uid']);
         $validationResults = $this->validateSession($session);
         if (!$validationResults->hasErrors()) {
             $this->sessionRepository->remove($session);

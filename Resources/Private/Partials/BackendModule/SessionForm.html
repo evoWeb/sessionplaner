@@ -27,6 +27,17 @@
                 <f:form.hidden id="session-form-slot" name="slot" value="0" />
                 <dl>
                     <dt>
+                        <label for="session-form-hidden">
+                            <f:translate key="hidden"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.select id="session-form-hidden" name="hidden" options="{
+                            0: '{f:translate(key: \'hidden-0\')}',
+                            1: '{f:translate(key: \'hidden-1\')}'
+                        }"/>
+                    </dd>
+                    <dt>
                         <label for="session-form-topic">
                             <f:translate key="topic"/>*
                         </label>

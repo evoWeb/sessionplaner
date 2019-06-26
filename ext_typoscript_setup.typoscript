@@ -1,0 +1,5 @@
+module.tx_sessionplaner {
+    features {
+        ignoreAllEnableFieldsInBe = 1
+    }
+}

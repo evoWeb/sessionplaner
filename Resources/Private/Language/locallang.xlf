@@ -35,6 +35,15 @@
             <trans-unit id="sessionpool">
                 <source>Sessionpool</source>
             </trans-unit>
+            <trans-unit id="hidden">
+                <source>Hidden</source>
+            </trans-unit>
+            <trans-unit id="hidden-1">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="hidden-0">
+                <source>No</source>
+            </trans-unit>
             <trans-unit id="topic">
                 <source>Topic</source>
             </trans-unit>
