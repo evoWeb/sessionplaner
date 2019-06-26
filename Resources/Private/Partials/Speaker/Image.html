@@ -1,7 +1,8 @@
 <f:if condition="{speaker} && {size}">
+    <f:variable name="size" value="{size as integer}" />
     <f:if condition="{speaker.picture}">
         <f:then>
-            <f:image image="{speaker.picture}" width="{size}" height="{size}" />
+            <f:image image="{speaker.picture}" height="{size}c" width="{size}c" />
         </f:then>
         <f:else>
             <f:if condition="{speaker.email}">
@@ -9,7 +10,7 @@
                     <sessionplanervh:gravatar email="{speaker.email}" size="{size}" />
                 </f:then>
                 <f:else>
-                    <f:image src="EXT:sessionplaner/Resources/Public/Images/speaker-placeholder.png" height="{size}" width="{size}" />
+                    <f:image src="EXT:sessionplaner/Resources/Public/Images/speaker-placeholder.png" height="{size}c" width="{size}c" />
                 </f:else>
             </f:if>
         </f:else>
