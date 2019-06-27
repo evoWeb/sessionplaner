@@ -162,6 +162,7 @@ CREATE TABLE tx_sessionplaner_domain_model_speaker
     company         varchar(255) DEFAULT '' NOT NULL,
     picture         int(11) unsigned DEFAULT '0' NOT NULL,
 
+    website         varchar(255) DEFAULT '' NOT NULL,
     twitter         varchar(255) DEFAULT '' NOT NULL,
     linkedin        varchar(255) DEFAULT '' NOT NULL,
     xing            varchar(255) DEFAULT '' NOT NULL,

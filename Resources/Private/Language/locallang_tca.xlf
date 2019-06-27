@@ -29,6 +29,9 @@
             <trans-unit id="tx_sessionplaner_domain_model_speaker-company" xml:space="preserve">
                 <source>Company</source>
             </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-website" xml:space="preserve">
+                <source>Website</source>
+            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_speaker-twitter" xml:space="preserve">
                 <source>Twitter profile name</source>
             </trans-unit>

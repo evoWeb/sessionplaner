@@ -37,6 +37,11 @@ class Speaker extends AbstractEntity
     /**
      * @var string
      */
+    protected $website = '';
+
+    /**
+     * @var string
+     */
     protected $twitter = '';
 
     /**
@@ -108,6 +113,14 @@ class Speaker extends AbstractEntity
     public function getCompany(): string
     {
         return $this->company;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWebsite(): string
+    {
+        return $this->website;
     }
 
     /**

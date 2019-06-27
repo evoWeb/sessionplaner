@@ -79,6 +79,16 @@ return [
                 $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
             ),
         ],
+        'website' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-website',
+            'config' => [
+                'type' => 'input',
+                'size' => 20,
+                'eval' => 'trim',
+                'max' => 256,
+            ],
+        ],
         'twitter' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-twitter',
@@ -166,6 +176,7 @@ return [
                 company,
                 bio,
                 picture,
+                website,
                 twitter,
                 linkedin,
                 xing,

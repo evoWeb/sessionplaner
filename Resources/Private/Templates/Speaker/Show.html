@@ -18,10 +18,15 @@
                         <f:format.html>{speaker.bio}</f:format.html>
                     </div>
                 </f:if>
-                <f:if condition="{speaker.twitter} || {speaker.linkedin} || {speaker.xing}">
+                <f:if condition="{speaker.website} || {speaker.twitter} || {speaker.linkedin} || {speaker.xing}">
                     <div class="sessionplaner-bio-connect">
                         <h2>Connect</h2>
                         <div class="sessionplaner-connect">
+                            <f:if condition="{speaker.website}">
+                                <a href="{speaker.website}" class="sessionplaner-connect-link sessionplaner-connect-link-website" target="_blank" itemprop="url">
+                                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Website" optional="true" /></span>
+                                </a>
+                            </f:if>
                             <f:if condition="{speaker.twitter}">
                                 <a href="https://twitter.com/{speaker.twitter}" class="sessionplaner-connect-link sessionplaner-connect-link-twitter" target="_blank" itemprop="url">
                                     <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Twitter" optional="true" /></span>
