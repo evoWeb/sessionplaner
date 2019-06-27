@@ -28,12 +28,12 @@ class SessionRepository extends Repository
         'topic' => QueryInterface::ORDER_ASCENDING
     ];
 
-
     /**
      * @param int $uid
      * @return object
      */
-    public function findAnyByUid($uid) {
+    public function findAnyByUid($uid)
+    {
         $query = $this->createQuery();
         $query->getQuerySettings()
             ->setIgnoreEnableFields(true)
