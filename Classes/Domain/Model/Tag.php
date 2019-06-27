@@ -23,6 +23,11 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $label = '';
 
     /**
+     * @var string
+     */
+    protected $color = '';
+
+    /**
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      */
@@ -50,6 +55,22 @@ class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getLabel()
     {
         return $this->label;
+    }
+
+    /**
+     * @param string $color
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 
     /**

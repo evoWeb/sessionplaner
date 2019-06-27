@@ -1,10 +1,12 @@
 //
 // Variables
 //
-$session-breakpoint-sm: 576px !default;
-$session-breakpoint-md: 768px !default;
-$session-breakpoint-lg: 992px !default;
-$session-breakpoint-xl: 1200px !default;
+@import 'variables';
+
+//
+// Mixins
+//
+@import 'mixins/color';
 
 //
 // Imports

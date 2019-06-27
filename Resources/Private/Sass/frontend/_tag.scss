@@ -22,3 +22,9 @@ $session-tag-border-radius: 4px !default;
     border-radius: $session-tag-border-radius;
     margin: 2px;
 }
+@each $name, $color in $session-colors {
+    .sessionplaner-tag-#{$name} {
+        color: color-contrast($color);
+        background-color: $color;
+    }
+}

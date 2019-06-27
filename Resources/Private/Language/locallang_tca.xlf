@@ -204,6 +204,9 @@
             <trans-unit id="tx_sessionplaner_domain_model_tag-label" xml:space="preserve">
                 <source>Label</source>
             </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_tag-color" xml:space="preserve">
+                <source>Color</source>
+            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_tag-sessions" xml:space="preserve">
                 <source>Sessions</source>
             </trans-unit>

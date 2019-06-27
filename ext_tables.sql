@@ -123,6 +123,7 @@ CREATE TABLE tx_sessionplaner_domain_model_tag
     hidden          tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
     label           varchar(255) DEFAULT '' NOT NULL,
+    color           varchar(255) DEFAULT '' NOT NULL,
     sessions        int(11) unsigned DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),

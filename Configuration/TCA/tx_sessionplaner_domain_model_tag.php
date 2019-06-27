@@ -31,7 +31,11 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'start'
+        'showRecordFieldList' => '
+            label,
+            color,
+            sessions
+        '
     ],
     'columns' => [
         'label' => [
@@ -42,6 +46,40 @@ return [
                 'size' => 20,
                 'eval' => 'trim,required',
                 'max' => 256,
+            ],
+        ],
+        'color' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-color',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['', ''],
+                    ['TYPO3', 'typo3'],
+                    ['RED', 'red'],
+                    ['PINK', 'pink'],
+                    ['PURPLE', 'purple'],
+                    ['DEEP PURPLE', 'deeppurple'],
+                    ['INDIGO', 'indigo'],
+                    ['BLUE', 'blue'],
+                    ['LIGHT BLUE', 'lightblue'],
+                    ['CYAN', 'cyan'],
+                    ['TEAL', 'teal'],
+                    ['GREEN', 'green'],
+                    ['LIGHT GREEN', 'lightgreen'],
+                    ['LIME', 'lime'],
+                    ['YELLOW', 'yellow'],
+                    ['AMBER', 'amber'],
+                    ['ORANGE', 'orange'],
+                    ['DEEP ORANGE', 'deeporange'],
+                    ['BROWN', 'brown'],
+                    ['GREY', 'grey'],
+                    ['BLUE GREY', 'bluegrey'],
+                ],
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => '',
             ],
         ],
         'sessions' => [
@@ -62,6 +100,7 @@ return [
         '0' => [
             'showitem' => '
                 label,
+                color,
                 sessions
             '
         ]
