@@ -109,3 +109,21 @@ $session-slot-track-type-side-color: $session-slot-track-type-main-color !defaul
         }
     }
 }
+[data-sessionplaner-columns="5"] {
+    @media only screen and (min-width: $session-breakpoint-sm) {
+        .sessionplaner-slot-track {
+            width: calc(100% / 2);
+        }
+    }
+    @media only screen and (min-width: $session-breakpoint-lg) {
+        &.sessionplaner-slot-header {
+            display: flex;
+        }
+        .sessionplaner-slot-track {
+            width: calc(100% / 5);
+        }
+        .sessionplaner-track-header {
+            display: none;
+        }
+    }
+}
