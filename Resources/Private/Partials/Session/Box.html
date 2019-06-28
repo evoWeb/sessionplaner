@@ -33,7 +33,7 @@
                 </f:if>
             </div>
         </f:if>
-        <f:if condition="{session.type} || {session.level}">
+        <f:if condition="{session.tags} || {session.type} || {session.level}">
             <div class="sessionplaner-sessionbox-tags sessionplaner-tag-list">
                 <f:if condition="{session.type}">
                     <span class="sessionplaner-sessionbox-tags-type">
@@ -59,7 +59,7 @@
                 <f:if condition="{session.tags}">
                     <span class="sessionplaner-sessionbox-tags-tags">
                         <f:for each="{session.tags}" as="tag">
-                            <span class="sessionplaner-tag">{tag.label}</span>
+                            <span class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}">{tag.label}</span>
                         </f:for>
                     </span>
                 </f:if>
