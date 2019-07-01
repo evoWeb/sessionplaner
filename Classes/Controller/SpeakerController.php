@@ -14,6 +14,9 @@
 namespace Evoweb\Sessionplaner\Controller;
 
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
+use Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider;
+use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class SpeakerController extends ActionController
@@ -46,6 +49,15 @@ class SpeakerController extends ActionController
      */
     public function showAction(Speaker $speaker)
     {
+        $provider = GeneralUtility::makeInstance(SpeakerTitleTagProvider::class);
+        $provider->setTitle($speaker->getName());
+
+        $ogMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('og:title');
+        $ogMetaTagManager->addProperty('og:title', $speaker->getName());
+
+        $twitterMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('twitter:title');
+        $twitterMetaTagManager->addProperty('twitter:title', $speaker->getName());
+
         $this->view->assign('speaker', $speaker);
     }
 }

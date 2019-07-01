@@ -103,13 +103,18 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\Evoweb\Sessi
 );
 
 /**
- * Register Event Title Provider
+ * Register Title Provider
  */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
     config.pageTitleProviders {
         event {
             provider = Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider
             before = record
+            after = altPageTitle
+        }
+        speaker {
+            provider = Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider
+            before = seo
             after = altPageTitle
         }
     }
