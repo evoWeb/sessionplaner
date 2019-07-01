@@ -37,8 +37,8 @@
                                     <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="LinkedIn" optional="true" /></span>
                                 </a>
                             </f:if>
-                            <f:if condition="https://www.xing.com/profile/{speaker.xing}">
-                                <a href="{speaker.xing}" class="sessionplaner-connect-link sessionplaner-connect-link-xing" target="_blank" itemprop="url">
+                            <f:if condition="{speaker.xing}">
+                                <a href="https://www.xing.com/profile/{speaker.xing}" class="sessionplaner-connect-link sessionplaner-connect-link-xing" target="_blank" itemprop="url">
                                     <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Xing" optional="true" /></span>
                                 </a>
                             </f:if>
