@@ -34,6 +34,13 @@ return [
         'showRecordFieldList' => 'name'
     ],
     'columns' => [
+        'hidden' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
         'name' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-name',
@@ -171,6 +178,7 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
+                hidden,
                 name,
                 path_segment,
                 company,
