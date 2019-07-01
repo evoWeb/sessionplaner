@@ -109,7 +109,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\Evoweb\Sessi
     config.pageTitleProviders {
         event {
             provider = Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider
-            before = record
+            before = seo
             after = altPageTitle
         }
         speaker {
