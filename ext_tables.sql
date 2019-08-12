@@ -104,6 +104,7 @@ CREATE TABLE tx_sessionplaner_domain_model_session
     room            int(11) unsigned DEFAULT '0' NOT NULL,
     slot            int(11) unsigned DEFAULT '0' NOT NULL,
     tags            int(11) unsigned DEFAULT '0' NOT NULL,
+    links           int(11) unsigned DEFAULT '0' NOT NULL,
 
     PRIMARY KEY (uid),
     KEY             parent (pid),
@@ -174,6 +175,18 @@ CREATE TABLE tx_sessionplaner_domain_model_speaker
     PRIMARY KEY (uid),
     KEY      parent (pid),
     KEY      enable (deleted,hidden)
+);
+
+#
+# Table structure for table 'tx_sessionplaner_domain_model_link'
+#
+CREATE TABLE tx_sessionplaner_domain_model_link
+(
+    parentid        int(11) DEFAULT '0' NOT NULL,
+    parenttable     varchar(255) DEFAULT '' NOT NULL,
+
+    link            tinytext DEFAULT '' NOT NULL,
+    link_text       tinytext DEFAULT '' NOT NULL
 );
 
 #

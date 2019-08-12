@@ -104,6 +104,9 @@
             <trans-unit id="documents">
                 <source>Documents</source>
             </trans-unit>
+            <trans-unit id="links">
+                <source>Links</source>
+            </trans-unit>
             <trans-unit id="suggest">
                 <source>submit suggestion</source>
             </trans-unit>
