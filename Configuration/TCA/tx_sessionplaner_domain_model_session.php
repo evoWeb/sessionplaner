@@ -261,6 +261,33 @@ return [
                 'minitems' => 0,
             ],
         ],
+        'links' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-links',
+            'description' => $languageFile . 'tx_sessionplaner_domain_model_session-links-description',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_sessionplaner_domain_model_link',
+                'foreign_field' => 'parentid',
+                'foreign_table_field' => 'parenttable',
+                'minitems' => 0,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                    'useSortable' => 1,
+                    'enabledControls' => [
+                        'info' => false,
+                        'new' => true,
+                        'sort' => false,
+                        'hide' => true,
+                        'dragdrop' => true,
+                        'delete' => true,
+                        'localize' => true,
+                    ],
+                    'levelLinksPosition' => 'top',
+                ],
+            ],
+        ],
     ],
     'palettes' => [
         'options' => [
@@ -297,6 +324,8 @@ return [
                     room,
                     slot,
                     tags,
+                --div--;Summary,
+                    links,
             '
         ]
     ],

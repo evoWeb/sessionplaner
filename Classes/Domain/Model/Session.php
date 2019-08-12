@@ -114,6 +114,12 @@ class Session extends AbstractSlugEntity
     protected $tags;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Link>
+     * @Extbase\ORM\Lazy
+     */
+    protected $links = null;
+
+    /**
      * Initialize day, room, slot and tags
      */
     public function __construct()
@@ -441,5 +447,21 @@ class Session extends AbstractSlugEntity
         }
 
         return $data;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getLinks(): ObjectStorage
+    {
+        return $this->links;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $links
+     */
+    public function setLinks(ObjectStorage $links)
+    {
+        $this->links = $links;
     }
 }
