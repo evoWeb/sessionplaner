@@ -12,23 +12,24 @@
             <div class="sessionplaner-sessiondetail-meta">
                 <f:render partial="Session/Box" arguments="{settings: settings, session: session}" />
             </div>
+            <f:if condition="{session.links}">
+                <div class="sessionplaner-sessiondetail-links">
+                    <h4>{f:translate(key: 'links')}</h4>
+                    <ul>
+                        <f:for each="{session.links}" as="linkitem">
+                            <li>
+                                <f:link.typolink parameter="{linkitem.link}">{linkitem.linkText}</f:link.typolink>
+                            </li>
+                        </f:for>
+                    </ul>
+                </div>
+            </f:if>
             <f:if condition="{session.documents}">
                 <div class="sessionplaner-sessiondetail-documents">
                     <h4>{f:translate(key: 'documents')}</h4>
                     <ul>
                         <f:for each="{session.documents}" as="document">
                             <li><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></li>
-                        </f:for>
-                    </ul>
-                </div>
-            </f:if>
-            <f:if condition="{session.links}">
-                <div class="sessionplaner-sessiondetail-links">
-                    <ul>
-                        <f:for each="{session.links}" as="linkitem">
-                            <li>
-                                <f:link.typolink parameter="{linkitem.link}">{linkitem.linkText}</f:link.typolink>
-                            </li>
                         </f:for>
                     </ul>
                 </div>

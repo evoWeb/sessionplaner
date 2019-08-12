@@ -316,6 +316,7 @@ return [
                     --palette--;' . $languageFile . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
                     speakers,
                     attendees,
+                    links,
                     documents,
                 --div--;Relations,
                     type,
@@ -324,8 +325,6 @@ return [
                     room,
                     slot,
                     tags,
-                --div--;Summary,
-                    links,
             '
         ]
     ],
