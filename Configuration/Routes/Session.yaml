@@ -5,10 +5,10 @@ routeEnhancers:
         plugin: Session
         defaultController: 'Session::list'
         routes:
-            - { routePath: '/', _controller: 'Session::list' }
-            - { routePath: '/{session-title}', _controller: 'Session::show', _arguments: {'session-title': 'session'} }
+            - { routePath: '/{session}', _controller: 'Session::show', _arguments: {'session': 'session'} }
         aspects:
-            session-title:
-                type: PersistedAliasMapper
-                tableName: tx_sessionplaner_domain_model_session
-                routeFieldName: path_segment
+            session:
+                type: PersistedPatternMapper
+                tableName: 'tx_sessionplaner_domain_model_session'
+                routeFieldPattern: '^(?P<path_segment>.+)-(?P<uid>\d+)$'
+                routeFieldResult: '{path_segment}-{uid}'
