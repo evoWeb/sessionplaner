@@ -5,6 +5,7 @@ routeEnhancers:
         plugin: Session
         defaultController: 'Session::list'
         routes:
+            - { routePath: '/', _controller: 'Session::list' }
             - { routePath: '/{session}', _controller: 'Session::show', _arguments: {'session': 'session'} }
         aspects:
             session:
