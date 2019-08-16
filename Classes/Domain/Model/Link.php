@@ -59,5 +59,4 @@ class Link extends AbstractEntity
     {
         $this->linkText = $linkText;
     }
-
 }
