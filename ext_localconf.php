@@ -46,8 +46,8 @@ call_user_func(function () {
         \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class
     ] = \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class;
 
-    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) <
-        \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger('10.0.0')) {
+    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch)
+        < 10000000) {
         // @todo remove once TYPO3 9.5.x support is dropped
         $extensionName = 'Evoweb.sessionplaner';
         $sessionController = 'Session';
