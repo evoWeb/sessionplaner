@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Repository;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,41 +13,32 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Repository;
-
 use Evoweb\Sessionplaner\Domain\Model\Day;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\Repository;
+use Evoweb\Sessionplaner\Domain\Model\Session;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
-class SessionRepository extends Repository
+class SessionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
     /**
      * Default Orderings
      */
     protected $defaultOrderings = [
-        'topic' => QueryInterface::ORDER_ASCENDING
+        'topic' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     ];
 
-    /**
-     * @param int $uid
-     * @return object
-     */
-    public function findAnyByUid($uid)
+    public function findAnyByUid(int $uid): Session
     {
         $query = $this->createQuery();
         $query->getQuerySettings()
             ->setIgnoreEnableFields(true)
             ->setIncludeDeleted(true);
         $query->matching($query->equals('uid', $uid));
-        return $query->execute()->getFirst();
+        /** @var Session $result */
+        $result = $query->execute()->getFirst();
+        return $result;
     }
 
-    /**
-     * @return array|QueryResult
-     */
-    public function findSuggested()
+    public function findSuggested(): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->matching(
@@ -55,16 +48,10 @@ class SessionRepository extends Repository
                 ]
             )
         );
-
         return $query->execute();
     }
 
-    /**
-     * @param Day $day
-     *
-     * @return array|QueryResult
-     */
-    public function findByDayAndEmptySlot($day)
+    public function findByDayAndEmptySlot(Day $day): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->matching(
@@ -75,14 +62,10 @@ class SessionRepository extends Repository
                 ]
             )
         );
-
         return $query->execute();
     }
 
-    /**
-     * @param Day $day
-     */
-    public function findUnassignedSessions()
+    public function findUnassignedSessions(): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->matching(
@@ -92,18 +75,12 @@ class SessionRepository extends Repository
                 ]
             )
         );
-
         return $query->execute();
     }
 
-    /**
-     * @param string $days
-     *
-     * @return array|QueryResult|null
-     */
-    public function findByDayAndHasSlotHasRoom($days)
+    public function findByDayAndHasSlotHasRoom(string $days): array
     {
-        $days = GeneralUtility::trimExplode(',', $days);
+        $days = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $days, true);
         if (is_array($days) && count($days) > 0) {
             $query = $this->createQuery();
 
@@ -115,9 +92,9 @@ class SessionRepository extends Repository
                         $query->logicalNot($query->equals('room', 0))
                     ]
                 )
-            )->execute();
+            )->execute(true);
         } else {
-            $result = null;
+            $result = [];
         }
         return $result;
     }

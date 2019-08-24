@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+namespace Evoweb\Sessionplaner\Utility;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,26 +13,26 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Utility;
-
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class ObjectStorageUtility
 {
+    /**
+     * @const string
+     */
     const SORT_ASCENDING = 'ASC';
-    const SORT_DESCENDING = 'DESC';
 
     /**
-     * @param ObjectStorage $objectStorage
-     * @param string $property
-     * @param string $order
-     *
-     * @return ObjectStorage
+     * @const string
      */
-    public static function sort($objectStorage, $property, $order = self::SORT_ASCENDING): ObjectStorage
-    {
+    const SORT_DESCENDING = 'DESC';
+
+    public static function sort(
+        ObjectStorage $objectStorage,
+        string $property,
+        string $order = self::SORT_ASCENDING
+    ): ObjectStorage {
         $inventory = [];
         foreach ($objectStorage as $item) {
             $key = $item->_getProperty($property);
@@ -45,7 +47,7 @@ class ObjectStorageUtility
             krsort($inventory);
         }
 
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
         $storage = $objectManager->get(ObjectStorage::class);
         foreach ($inventory as $item) {
             $storage->attach($item);

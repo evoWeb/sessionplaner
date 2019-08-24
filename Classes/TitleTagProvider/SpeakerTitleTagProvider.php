@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\TitleTagProvider;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,15 +13,8 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\TitleTagProvider;
-
-use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
-
-class SpeakerTitleTagProvider extends AbstractPageTitleProvider
+class SpeakerTitleTagProvider extends \TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider
 {
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title)
     {
         $this->title = $title;

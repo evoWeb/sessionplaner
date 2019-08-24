@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Repository;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,29 +13,22 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Repository;
-
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\Repository;
-
-class SpeakerRepository extends Repository
+class SpeakerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
     /**
      * Default Orderings
      */
     protected $defaultOrderings = [
-        'name' => QueryInterface::ORDER_ASCENDING
+        'name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     ];
 
-    /**
-     * @param int $pageId
-     * @return object
-     */
-    public function findByDetailPage($pageId)
+    public function findByDetailPage(int $pageId): \Evoweb\Sessionplaner\Domain\Model\Speaker
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->matching($query->equals('detailPage', $pageId));
-        return $query->execute()->getFirst();
+        /** @var \Evoweb\Sessionplaner\Domain\Model\Speaker $result */
+        $result = $query->execute()->getFirst();
+        return $result;
     }
 }

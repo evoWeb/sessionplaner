@@ -1,11 +1,4 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
 .. include:: Includes.txt
-.. include:: Images.txt
-
 
 .. _start:
 
@@ -13,40 +6,51 @@
 sessionplaner: TYPO3Camp Session planer
 =======================================
 
-:Extension Key:
-	sessionplaner
+:Extension key:
+    sessionplaner
+
+:Version:
+    |release|
 
 :Language:
-	en
+    en
+
+:Description:
+    TYPO3camp session planing inside TYPO3
 
 :Keywords:
-	TYPO3camp session planing inside TYPO3
+    forIntegrator
 
 :Copyright:
-	2013-2019
+    2013-2019
 
 :Author:
-	Sebastian Fischer, Benjamin Kott
-
-:Email:
-	typo3@evoweb.de
+    evoWeb
 
 :License:
-	Open Content License_
+    Open Content License available from http://www.opencontent.org/opl.shtml
 
 :Rendered:
-	|today|
-
-|img-1| |img-logo| sessionplaner: TYPO3camp session planing inside TYPO3
+    |today|
 
 The content of this document is related to TYPO3,
+a GNU/GPL CMS/Framework available from http://typo3.org
 
-a GNU/GPL CMS/Framework available from www.typo3.org_
+.. only:: html
+
+   .. tip::
+
+      :ref: `Sitemap`
+
+**Table of Contents**
 
 .. toctree::
    :maxdepth: 5
    :titlesonly:
    :glob:
 
-.. _License: http://www.opencontent.org/opl.shtml
-.. _www.typo3.org: http://www.typo3.org/
+   Introduction/Index
+   Installation/Index
+   Configuration/Index
+   Breaking/Index
+   Testing/Index

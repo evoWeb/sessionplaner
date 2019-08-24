@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Controller;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,12 +13,10 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Controller;
-
+use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
-class SuggestController extends ActionController
+class SuggestController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
      * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
@@ -28,17 +28,17 @@ class SuggestController extends ActionController
         $this->sessionRepository = $repository;
     }
 
-    public function newAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
+    public function newAction(Session $session = null)
     {
         // Has a session been submitted?
         if ($session === null) {
             // Get a blank one
-            $session = $this->objectManager->get(\Evoweb\Sessionplaner\Domain\Model\Session::class);
+            $session = $this->objectManager->get(Session::class);
         }
         $this->view->assign('session', $session);
     }
 
-    public function createAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
+    public function createAction(Session $session = null)
     {
         if ($session === null) {
             // redirect to drop unwanted parameters
@@ -56,9 +56,8 @@ class SuggestController extends ActionController
         $this->redirect('new');
     }
 
-    protected function setDefaultValues(
-        \Evoweb\Sessionplaner\Domain\Model\Session $session
-    ): \Evoweb\Sessionplaner\Domain\Model\Session {
+    protected function setDefaultValues(Session $session): Session
+    {
         if (isset($this->settings['default'])
             && is_array($this->settings['default'])
             && !empty($this->settings['default'])) {
@@ -81,7 +80,7 @@ class SuggestController extends ActionController
      *
      * @return mixed
      */
-    protected function getDefaultValues($field, $value)
+    protected function getDefaultValues(string $field, $value)
     {
         switch ($field) {
             case 'day':

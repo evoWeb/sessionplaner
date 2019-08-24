@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Controller;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,9 +13,10 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Controller;
-
+use Evoweb\Sessionplaner\Domain\Model\Day;
+use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Session;
+use Evoweb\Sessionplaner\Domain\Model\Slot;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\RoomRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
@@ -110,12 +113,14 @@ class AjaxController
     {
         $this->parameter = $request->getParsedBody()['tx_sessionplaner'];
 
-        if (!($this->backendUser->isAdmin() || $this->backendUser->modAccess($this->moduleConfiguration, 0))) {
+        if (!($this->backendUser->isAdmin() || $this->backendUser->modAccess($this->moduleConfiguration))) {
             $this->errorAction();
             return false;
         }
 
-        $configuration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $configuration = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+        );
         if (empty($configuration['persistence']['storagePid'])) {
             $currentPid['persistence']['storagePid'] = $request->getParsedBody()['id'];
             $this->configurationManager->setConfiguration(array_merge($configuration, $currentPid));
@@ -220,14 +225,17 @@ class AjaxController
         foreach ($sessionData as $field => $value) {
             switch ($field) {
                 case 'room':
+                    /** @var Room $room */
                     $room = $this->roomRepository->findByUid((int) $value);
                     $session->setRoom($room);
                     break;
                 case 'slot':
+                    /** @var Slot $slot */
                     $slot = $this->slotRepository->findByUid((int) $value);
                     $session->setSlot($slot);
                     break;
                 case 'day':
+                    /** @var Day $day */
                     $day = $this->dayRepository->findByUid((int) $value);
                     $session->setDay($day);
                     break;

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\ViewHelpers\Be\Buttons;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -10,8 +12,6 @@
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
-namespace Evoweb\Sessionplaner\ViewHelpers\Be\Buttons;
 
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -74,20 +74,6 @@ class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendView
         );
         $this->registerArgument('id', 'string', '');
         $this->registerArgument('class', 'string', '');
-    }
-
-    /**
-     * Renders an icon link as known from the TYPO3 backend
-     *
-     * @return string the rendered icon link
-     */
-    public function render()
-    {
-        return static::renderStatic(
-            $this->arguments,
-            $this->buildRenderChildrenClosure(),
-            $this->renderingContext
-        );
     }
 
     /**

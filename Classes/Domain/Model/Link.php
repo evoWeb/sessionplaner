@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Model;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,13 +13,10 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class Link extends AbstractEntity
 {
-
     /**
      * @var string
      */

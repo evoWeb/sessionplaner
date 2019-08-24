@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Model;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,11 +13,8 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
 use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
-use TYPO3\CMS\Core\Exception\SiteNotFoundException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
@@ -34,19 +33,22 @@ abstract class AbstractSlugEntity extends AbstractEntity
 
     /**
      * @throws NoSuchArgumentException
-     * @throws SiteNotFoundException
+     *
      * @return bool
      */
-    public function _isNew()
+    public function _isNew(): bool
     {
-        $isnew = parent::_isNew();
-        if ($isnew) {
+        $isNew = parent::_isNew();
+        if ($isNew) {
             if (empty($this->slugField)) {
                 throw new NoSuchArgumentException('The property "slugField" can not be empty', 1559731500);
             }
             $slugSetter = 'set' . GeneralUtility::underscoredToUpperCamelCase($this->slugField);
             if (!method_exists($this, $slugSetter)) {
-                throw new NoSuchArgumentException('The method "' . $slugSetter . '" must exist in your entity', 1559731501);
+                throw new NoSuchArgumentException(
+                    'The method "' . $slugSetter . '" must exist in your entity',
+                    1559731501
+                );
             }
             if (empty($this->tablename)) {
                 throw new NoSuchArgumentException('The property "tablename" can not be empty', 1559731502);
@@ -57,14 +59,9 @@ abstract class AbstractSlugEntity extends AbstractEntity
             $this->{$slugSetter}($this->generateSlug());
         }
 
-        return $isnew;
+        return $isNew;
     }
 
-    /**
-     * @throws NoSuchArgumentException
-     * @throws SiteNotFoundException
-     * @return string
-     */
     public function generateSlug(): string
     {
         $properties = $this->_getProperties();
@@ -82,6 +79,7 @@ abstract class AbstractSlugEntity extends AbstractEntity
             $record[$field] = $v;
         }
 
+        $pid = (int)$record['pid'];
         $slug = $slugHelper->generate($record, $this->getPid());
         $state = RecordStateFactory::forName($this->tablename)->fromArray($record, $pid, 'NEW');
         if ($hasToBeUniqueInSite && !$slugHelper->isUniqueInSite($slug, $state)) {

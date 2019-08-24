@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Controller;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,8 +13,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Controller;
-
+use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,11 +40,12 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->sessionRepository = $repository;
     }
 
-    public function listAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
+    public function listAction(Session $session = null)
     {
         if ($session) {
             $this->forward('show');
         }
+
         if ($this->settings['suggestions']) {
             $sessions = $this->sessionRepository->findSuggested();
         } else {
@@ -51,21 +53,25 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $days = $this->dayRepository->findByUidsRaw($this->settings['days']);
             $this->view->assign('days', $days);
         }
+
         $this->view->assign('sessions', $sessions);
     }
 
-    public function showAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
+    public function showAction(Session $session = null)
     {
         if ($session === null) {
             $this->forward('list');
         }
+
         $provider = GeneralUtility::makeInstance(EventTitleTagProvider::class);
         $provider->setTitle($session->getTopic());
 
-        $ogMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('og:title');
+        $ogMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)
+            ->getManagerForProperty('og:title');
         $ogMetaTagManager->addProperty('og:title', $session->getTopic());
 
-        $twitterMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)->getManagerForProperty('twitter:title');
+        $twitterMetaTagManager = GeneralUtility::makeInstance(MetaTagManagerRegistry::class)
+            ->getManagerForProperty('twitter:title');
         $twitterMetaTagManager->addProperty('twitter:title', $session->getTopic());
 
         $this->view->assign('session', $session);

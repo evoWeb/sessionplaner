@@ -14,12 +14,12 @@
 defined('TYPO3_MODE') || die('Access denied.');
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-    'Evoweb.sessionplaner',
+    'Sessionplaner',
     'web',
     'sessionplaner_main',
     '',
     [
-        'BackendModule' => 'show',
+        \Evoweb\Sessionplaner\Controller\BackendModuleController::class => 'show',
     ],
     [
         'access' => 'user,group',

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\DataProcessing;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -10,8 +12,6 @@
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
-namespace Evoweb\Sessionplaner\DataProcessing;
 
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;

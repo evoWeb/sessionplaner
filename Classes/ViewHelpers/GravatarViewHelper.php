@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\ViewHelpers;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,11 +13,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\ViewHelpers;
-
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
-
-class GravatarViewHelper extends AbstractTagBasedViewHelper
+class GravatarViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper
 {
     /**
      * @var string

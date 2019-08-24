@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Model;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,10 +13,9 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
 use Evoweb\Sessionplaner\Utility\ObjectStorageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
@@ -56,14 +57,11 @@ class Room extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $sessions;
 
-    /**
-     * Initialize days and slots
-     */
-    public function __construct()
+    public function initializeObject()
     {
-        $this->days = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
-        $this->slots = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
-        $this->sessions = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->days = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->slots = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->sessions = GeneralUtility::makeInstance(ObjectStorage::class);
     }
 
     public function setType(string $type)

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+namespace Evoweb\Sessionplaner\Utility;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,19 +13,13 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Utility;
-
 class TimeFormatUtility
 {
-    /**
-     * @param int $value
-     * @return string
-     */
-    public static function getFormattedTime($value)
+    public static function getFormattedTime(int $value): string
     {
         $value = (int) $value;
-        $hours = floor($value / 3600);
-        $minutes = floor(($value / 60) % 60);
+        $hours = (string) floor($value / 3600);
+        $minutes = (string) floor(($value / 60) % 60);
         $formatted = str_pad($hours, 2, '0', STR_PAD_LEFT) . ':' . str_pad($minutes, 2, '0', STR_PAD_LEFT);
 
         return $formatted;

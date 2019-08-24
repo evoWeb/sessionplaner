@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Model;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,13 +13,9 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Speaker extends AbstractEntity
+class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
      * @var string
@@ -65,7 +63,7 @@ class Speaker extends AbstractEntity
     protected $picture;
 
     /**
-     * @Extbase\ORM\Lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      */
     protected $sessions;
@@ -75,12 +73,9 @@ class Speaker extends AbstractEntity
      */
     protected $detailPage;
 
-    /**
-     * Initialize days and slots
-     */
-    public function __construct()
+    public function initializeObject()
     {
-        $this->sessions = new ObjectStorage();
+        $this->sessions = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectStorage::class);
     }
 
     /**

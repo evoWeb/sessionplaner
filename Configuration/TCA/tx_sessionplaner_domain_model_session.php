@@ -53,7 +53,7 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-social',
             'config' => [
                 'type' => 'check',
-                'default' => '1'
+                'default' => 1
             ],
         ],
         'donotlink' => [
@@ -119,7 +119,8 @@ return [
                 'renderType' => 'selectMultipleSideBySide',
                 'multiple' => 0,
                 'foreign_table' => 'tx_sessionplaner_domain_model_speaker',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### ORDER BY tx_sessionplaner_domain_model_speaker.name',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### '
+                    . 'ORDER BY tx_sessionplaner_domain_model_speaker.name',
                 'MM' => 'tx_sessionplaner_session_speaker_mm',
             ],
             'onChange' => 'reload'
@@ -139,8 +140,8 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-description',
             'config' => [
                 'type' => 'text',
-                'cols' => '80',
-                'rows' => '15',
+                'cols' => 80,
+                'rows' => 15,
                 'softref' => 'typolink_tag,images,email[subst],url',
                 'enableRichtext' => true,
                 'richtextConfiguration' => 'default'
@@ -171,7 +172,6 @@ return [
                     [$languageFile . 'tx_sessionplaner_domain_model_session-type-break', 5],
                 ],
                 'minitems' => 0,
-                'maxitems' => 1,
                 'maxitems' => 1,
             ],
         ],
@@ -205,7 +205,8 @@ return [
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID### ORDER BY tx_sessionplaner_domain_model_day.date',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID### '
+                    . 'ORDER BY tx_sessionplaner_domain_model_day.date',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
@@ -313,7 +314,8 @@ return [
                     topic,
                     path_segment,
                     description,
-                    --palette--;' . $languageFile . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
+                    --palette--;' . $languageFile
+                . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
                     speakers,
                     attendees,
                     links,

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Model;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,14 +13,21 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Session extends AbstractSlugEntity
 {
+    /**
+     * @var string
+     */
+    protected $slugField = 'path_segment';
+
+    /**
+     * @var string
+     */
+    protected $tablename = 'tx_sessionplaner_domain_model_session';
+
     /**
      * @var bool
      */
@@ -40,7 +49,7 @@ class Session extends AbstractSlugEntity
     protected $donotlink = false;
 
     /**
-     * @Extbase\Validate("NotEmpty")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      * @var string
      */
     protected $topic = '';
@@ -62,7 +71,7 @@ class Session extends AbstractSlugEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
-     * @Extbase\ORM\Lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $speakers;
 
@@ -88,7 +97,7 @@ class Session extends AbstractSlugEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @Extbase\ORM\Lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $documents;
 
@@ -109,26 +118,21 @@ class Session extends AbstractSlugEntity
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
-     * @Extbase\ORM\Lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $tags;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Link>
-     * @Extbase\ORM\Lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $links = null;
 
-    /**
-     * Initialize day, room, slot and tags
-     */
-    public function __construct()
+    public function initializeObject()
     {
-        $this->slugField = 'path_segment';
-        $this->tablename = 'tx_sessionplaner_domain_model_session';
-        $this->speakers = new ObjectStorage();
-        $this->documents = new ObjectStorage();
-        $this->tags = new ObjectStorage();
+        $this->speakers = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->documents = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->tags = GeneralUtility::makeInstance(ObjectStorage::class);
     }
 
     /**
@@ -252,11 +256,11 @@ class Session extends AbstractSlugEntity
     }
 
     /**
-     * @param Speaker $author
+     * @param Speaker $speaker
      */
     public function removeSpeaker(Speaker $speaker)
     {
-        $this->speakers->detach($author);
+        $this->speakers->detach($speaker);
     }
 
     /**
@@ -268,9 +272,9 @@ class Session extends AbstractSlugEntity
     }
 
     /**
-     * @param ObjectStorage $speaker
+     * @param ObjectStorage $speakers
      */
-    public function setSpeakers(ObjectStorage $speaker)
+    public function setSpeakers(ObjectStorage $speakers)
     {
         $this->speakers = $speakers;
     }

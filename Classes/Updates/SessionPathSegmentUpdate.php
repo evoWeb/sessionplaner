@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Updates;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,8 +12,6 @@ declare(strict_types = 1);
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
-namespace Evoweb\Sessionplaner\Updates;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+namespace Evoweb\Sessionplaner\Domain\Repository;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,29 +13,18 @@
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Repository;
-
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\Repository;
-
-class DayRepository extends Repository
+class DayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
     /**
      * Default Orderings
      */
     protected $defaultOrderings = [
-        'date' => QueryInterface::ORDER_ASCENDING
+        'date' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     ];
 
-    /**
-     * @param string $uids
-     *
-     * @return array
-     */
-    public function findByUidsRaw($uids)
+    public function findByUidsRaw(string $uids): array
     {
-        $uids = GeneralUtility::trimExplode(',', $uids);
+        $uids = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $uids, true);
         if (is_array($uids) && count($uids) > 0) {
             $query = $this->createQuery();
             $result = $query->matching(
@@ -42,7 +33,7 @@ class DayRepository extends Repository
                 )
             )->execute(true);
         } else {
-            $result = null;
+            $result = [];
         }
         return $result;
     }
