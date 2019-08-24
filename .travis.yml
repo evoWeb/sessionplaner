@@ -25,8 +25,7 @@ install:
   - >
     export TYPO3_PATH_WEB=$PWD/.Build/Web;
     composer require typo3/minimal="$TYPO3_VERSION" $PREFER_LOWEST;
-    #if [ ! -z "$PHPUNIT_VERSION" ]; then composer require --dev phpunit/phpunit="$PHPUNIT_VERSION"; fi;
-    #if [ ! -z "$TESTING_FRAMEWORK" ]; then composer require --dev typo3/testing-framework="$TESTING_FRAMEWORK"; fi;
+    if [ ! -z "$TESTING_FRAMEWORK" ]; then composer require --dev typo3/testing-framework="$TESTING_FRAMEWORK"; fi;
     git checkout composer.json;
 
 before_script:
@@ -35,21 +34,19 @@ before_script:
 script:
   - >
     echo "Running functional tests -- not implemented jet";
-    #export typo3DatabaseName="typo3";
-    #export typo3DatabaseHost="localhost";
-    #export typo3DatabaseUsername="root";
-    #export typo3DatabasePassword="";
-    #php .Build/bin/phpunit --colors -c .Build/Web/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTests.xml Tests/Functional/;
+    #export typo3DatabaseDriver="pdo_sqlite";
+    #php .Build/bin/phpunit --colors -c .Build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTests.xml Tests/Functional/;
 
 jobs:
   fast_finish: true
   allow_failures:
     - env:
-        - TYPO3_VERSION="dev-master as 10.0.0" TESTING_FRAMEWORK="~4.10.0" UNITTEST_SUITE=".Build/Web/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml"
+        - TYPO3_VERSION="dev-master as 10.0.0" TESTING_FRAMEWORK="~5.0.11"
 
   include:
-    - stage: test
-      php: 7.2
+    - &lint
+      stage: test
+      php: 7.3
       env: TASK="PHP Lint"
       before_install: skip
       install: skip
@@ -57,18 +54,29 @@ jobs:
       script:
         - echo "Running php lint";
           errors=$(find . -name \*.php ! -path "./.Build/*" -exec php -d display_errors=stderr -l {} 2>&1 >/dev/null \;) && echo "$errors" && test -z "$errors"
-    - stage: test
+    - <<: *lint
       php: 7.2
-      env:
-        - TYPO3_VERSION="^9.5.0" TESTING_FRAMEWORK="~4.10.0" UNITTEST_SUITE=".Build/Web/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml"
+
     - stage: test
       php: 7.3
       env:
-        - TYPO3_VERSION="^9.5.0" TESTING_FRAMEWORK="~4.10.0" UNITTEST_SUITE=".Build/Web/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml"
+        - TYPO3_VERSION="^9.5.0" TESTING_FRAMEWORK="~4.10.0"
     - stage: test
       php: 7.2
       env:
-        - TYPO3_VERSION="dev-master as 10.0.0" TESTING_FRAMEWORK="~4.10.0" UNITTEST_SUITE=".Build/Web/vendor/typo3/testing-framework/Resources/Core/Build/UnitTests.xml"
+        - TYPO3_VERSION="^9.5.0" TESTING_FRAMEWORK="~4.10.0"
+    - stage: test
+      php: 7.3
+      env:
+        - TYPO3_VERSION="^10.0.0" TESTING_FRAMEWORK="~5.0.11"
+    - stage: test
+      php: 7.2
+      env:
+        - TYPO3_VERSION="^10.0.0" TESTING_FRAMEWORK="~5.0.11"
+    - stage: test
+      php: 7.2
+      env:
+        - TYPO3_VERSION="dev-master as 10.0.0" TESTING_FRAMEWORK="~5.0.11"
 
     - stage: publish in ter
       if: tag IS present
