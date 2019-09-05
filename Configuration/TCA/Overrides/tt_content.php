@@ -17,7 +17,7 @@ defined('TYPO3_MODE') || die('Access denied.');
  * Frontend Plugin Session Suggest
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Evoweb.sessionplaner',
+    'sessionplaner',
     'Suggest',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest',
     'sessionplaner-plugin-suggest'
@@ -29,7 +29,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionp
  * Frontend Plugin Session
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Evoweb.sessionplaner',
+    'sessionplaner',
     'Session',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session',
     'sessionplaner-plugin-session'
@@ -46,7 +46,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
  * Frontend Plugin Sessionplan
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Evoweb.sessionplaner',
+    'sessionplaner',
     'Sessionplan',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan',
     'sessionplaner-plugin-display'
@@ -63,7 +63,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
  * Frontend Plugin Speaker
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Evoweb.sessionplaner',
+    'sessionplaner',
     'Speaker',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker',
     'sessionplaner-plugin-speaker'
