@@ -1,4 +1,5 @@
 <?php
+defined('TYPO3_MODE') || die('Access denied.');
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -11,15 +12,22 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3_MODE') || die('Access denied.');
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) < 10000000) {
+    // @todo remove once TYPO3 9.5.x support is dropped
+    $extensionName = 'Evoweb.Sessionplaner';
+    $moduleController = 'BackendModule';
+} else {
+    $extensionName = 'Sessionplaner';
+    $moduleController = \Evoweb\Sessionplaner\Controller\BackendModuleController::class;
+}
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-    'Sessionplaner',
+    $extensionName,
     'web',
     'sessionplaner_main',
     '',
     [
-        \Evoweb\Sessionplaner\Controller\BackendModuleController::class => 'show',
+        $moduleController => 'show',
     ],
     [
         'access' => 'user,group',
