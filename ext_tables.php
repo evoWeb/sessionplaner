@@ -13,17 +13,36 @@
 
 defined('TYPO3_MODE') || die('Access denied.');
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-    'Sessionplaner',
-    'web',
-    'sessionplaner_main',
-    '',
-    [
-        \Evoweb\Sessionplaner\Controller\BackendModuleController::class => 'show',
-    ],
-    [
-        'access' => 'user,group',
-        'icon' => 'EXT:sessionplaner/Resources/Public/Icons/module-sessionplaner.svg',
-        'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xlf',
-    ]
-);
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch)
+    < 10000000) {
+    // @todo remove once TYPO3 9.5.x support is dropped
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'Evoweb.Sessionplaner',
+        'web',
+        'sessionplaner_main',
+        '',
+        [
+            'BackendModule' => 'show',
+        ],
+        [
+            'access' => 'user,group',
+            'icon' => 'EXT:sessionplaner/Resources/Public/Icons/module-sessionplaner.svg',
+            'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xlf',
+        ]
+    );
+} else {
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'Sessionplaner',
+        'web',
+        'sessionplaner_main',
+        '',
+        [
+            \Evoweb\Sessionplaner\Controller\BackendModuleController::class => 'show',
+        ],
+        [
+            'access' => 'user,group',
+            'icon' => 'EXT:sessionplaner/Resources/Public/Icons/module-sessionplaner.svg',
+            'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xlf',
+        ]
+    );
+}
