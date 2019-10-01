@@ -22,14 +22,14 @@ class DayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         'date' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     ];
 
-    public function findByUidsRaw(string $uids): array
+    public function findByUidListRaw(string $uidList): array
     {
-        $uids = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $uids, true);
-        if (is_array($uids) && count($uids) > 0) {
+        $uid = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $uidList, true);
+        if (is_array($uid) && !empty($uid)) {
             $query = $this->createQuery();
             $result = $query->matching(
                 $query->logicalAnd(
-                    $query->in('uid', $uids)
+                    $query->in('uid', $uid)
                 )
             )->execute(true);
         } else {

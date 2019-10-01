@@ -50,7 +50,7 @@ class SessionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $sessions = $this->sessionRepository->findSuggested();
         } else {
             $sessions = $this->sessionRepository->findByDayAndHasSlotHasRoom($this->settings['days']);
-            $days = $this->dayRepository->findByUidsRaw($this->settings['days']);
+            $days = $this->dayRepository->findByUidListRaw($this->settings['days']);
             $this->view->assign('days', $days);
         }
 

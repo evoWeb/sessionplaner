@@ -28,7 +28,7 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
  * </f:be.menus.actionMenu>
  * </code>
  * <output>
- * Selectbox with the options "Overview", "Create new Blog" and "List Posts"
+ * Select element with the options "Overview", "Create new Blog" and "List Posts"
  * </output>
  *
  * <code title="Localized">
@@ -38,7 +38,7 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
  * </f:be.menus.actionMenu>
  * </code>
  * <output>
- * localized selectbox
+ * localized select element
  * <output>
  */
 class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\ActionMenuItemViewHelper
