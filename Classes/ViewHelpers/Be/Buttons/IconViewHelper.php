@@ -114,10 +114,13 @@ class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendView
             return $icon;
         } else {
             $onclick = ' onclick="' . $onclick . '"';
-            return '<a href="' . $uri . '"
-                title="' . $title . '"
-                class="' . $class . '"
-                id="' . $id . '" ' . $onclick . '>' . $icon . '</a>';
+            return implode(' ', [
+                '<a href="' . $uri . '"',
+                'title="' . $title . '"',
+                'class="' . $class . '"',
+                'id="' . $id . '"',
+                $onclick . '>' . $icon . '</a>'
+            ]);
         }
     }
 }
