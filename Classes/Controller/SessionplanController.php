@@ -1,75 +1,35 @@
 <?php
+declare(strict_types = 1);
 namespace Evoweb\Sessionplaner\Controller;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the package evoweb\sessionplaner.
  *
- *  (c) 2013-2019 Benjamin Kott <info@bk2k.info>
- *  All rights reserved
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
+use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 
 class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
+     * @var DayRepository
      */
     protected $dayRepository;
 
-    /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
-     */
-    protected $sessionRepository;
-
-    public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $dayRepository)
+    public function injectDayRepository(DayRepository $dayRepository)
     {
         $this->dayRepository = $dayRepository;
     }
 
-    public function injectSessionRepository(
-        \Evoweb\Sessionplaner\Domain\Repository\SessionRepository $sessionRepository
-    ) {
-        $this->sessionRepository = $sessionRepository;
-    }
-
-    public function displayAction(\Evoweb\Sessionplaner\Domain\Model\Session $session = null)
+    public function displayAction()
     {
-        if ($session) {
-            $this->forward('show');
-        }
         $day = $this->dayRepository->findByUid($this->settings['day']);
-        $sessions = $this->sessionRepository->findByDay($this->settings['day']);
         $this->view->assign('day', $day);
-        $this->view->assign('sessions', $sessions);
-    }
-
-    public function showAction(\Evoweb\Sessionplaner\Domain\Model\Session $session)
-    {
-        $this->view->assign('session', $session);
-    }
-
-    /**
-     * Disable error flash message
-     *
-     * @return bool
-     */
-    protected function getErrorFlashMessage()
-    {
-        return false;
     }
 }

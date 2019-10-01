@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the package evoweb\sessionplaner.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_session');
@@ -15,43 +26,45 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg',
+        'typeicon_classes' => [
+            'default' => 'sessionplaner-record-session'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'name'
     ],
     'columns' => [
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'suggestion' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-suggestion',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'social' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-social',
             'config' => [
                 'type' => 'check',
-                'default' => '1'
+                'default' => 1
             ],
         ],
         'donotlink' => [
-            'exclude' => 1,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-donotlink',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'topic' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-topic',
             'config' => [
                 'type' => 'input',
@@ -60,18 +73,35 @@ return [
                 'max' => 256,
             ],
         ],
+        'path_segment' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-path_segment',
+            'config' => [
+                'type' => 'slug',
+                'generatorOptions' => [
+                    'fields' => ['topic'],
+                    'replacements' => [
+                        '/' => ''
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
+            ]
+        ],
         'speaker' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speaker',
             'config' => [
                 'type' => 'input',
                 'size' => 40,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
                 'max' => 256,
             ],
+            'displayCond' => 'FIELD:speakers:REQ:false'
         ],
         'twitter' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-twitter',
             'config' => [
                 'type' => 'input',
@@ -79,9 +109,24 @@ return [
                 'eval' => 'trim',
                 'max' => 256,
             ],
+            'displayCond' => 'FIELD:speakers:REQ:false'
+        ],
+        'speakers' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speakers',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'multiple' => 0,
+                'foreign_table' => 'tx_sessionplaner_domain_model_speaker',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### '
+                    . 'ORDER BY tx_sessionplaner_domain_model_speaker.name',
+                'MM' => 'tx_sessionplaner_session_speaker_mm',
+            ],
+            'onChange' => 'reload'
         ],
         'attendees' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-attendees',
             'config' => [
                 'type' => 'input',
@@ -91,14 +136,19 @@ return [
             ],
         ],
         'description' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-description',
             'config' => [
-                'type' => 'text'
+                'type' => 'text',
+                'cols' => 80,
+                'rows' => 15,
+                'softref' => 'typolink_tag,images,email[subst],url',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default'
             ],
         ],
         'documents' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-download',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'documents',
@@ -107,10 +157,10 @@ return [
             ),
         ],
         'type' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-type',
             'config' => [
-                'type' => 'check',
+                'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
@@ -121,13 +171,15 @@ return [
                     [$languageFile . 'tx_sessionplaner_domain_model_session-type-other', 4],
                     [$languageFile . 'tx_sessionplaner_domain_model_session-type-break', 5],
                 ],
+                'minitems' => 0,
+                'maxitems' => 1,
             ],
         ],
         'level' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
             'config' => [
-                'type' => 'check',
+                'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
                     [$languageFile . 'notassigned', 0],
@@ -135,100 +187,146 @@ return [
                     [$languageFile . 'tx_sessionplaner_domain_model_session-level-advanced', 2],
                     [$languageFile . 'tx_sessionplaner_domain_model_session-level-pro', 3],
                 ],
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'day' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-day',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_sessionplaner_domain_model_day',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID###
-                ORDER BY tx_sessionplaner_domain_model_day.date',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
                 'items' => [
-                    '0' => [
-                        '0' => $languageFile . 'notassigned',
+                    [
+                        $languageFile . 'notassigned',
+                        0,
                     ],
                 ],
+                'foreign_table' => 'tx_sessionplaner_domain_model_day',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID### '
+                    . 'ORDER BY tx_sessionplaner_domain_model_day.date',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'room' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-room',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_sessionplaner_domain_model_room',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
                 'items' => [
-                    '0' => [
-                        '0' => $languageFile . 'notassigned',
+                    [
+                        $languageFile . 'notassigned',
+                        0,
                     ],
                 ],
+                'foreign_table' => 'tx_sessionplaner_domain_model_room',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'slot' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-slot',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###',
-                'size' => 1,
-                'minitems' => 0,
-                'maxitems' => 1,
                 'items' => [
-                    '0' => [
-                        '0' => $languageFile . 'notassigned',
+                    [
+                        $languageFile . 'notassigned',
+                        0,
                     ],
                 ],
+                'foreign_table' => 'tx_sessionplaner_domain_model_slot',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###',
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
             ],
         ],
         'tags' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-tags',
             'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'tx_sessionplaner_domain_model_tag',
-                // needed for extbase query
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_tag',
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_tag.pid = ###CURRENT_PID###',
                 'MM' => 'tx_sessionplaner_session_tag_mm',
-                'size' => 5,
                 'minitems' => 0,
-                'maxitems' => 100,
+            ],
+        ],
+        'links' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-links',
+            'description' => $languageFile . 'tx_sessionplaner_domain_model_session-links-description',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_sessionplaner_domain_model_link',
+                'foreign_field' => 'parentid',
+                'foreign_table_field' => 'parenttable',
+                'minitems' => 0,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                    'useSortable' => 1,
+                    'enabledControls' => [
+                        'info' => false,
+                        'new' => true,
+                        'sort' => false,
+                        'hide' => true,
+                        'dragdrop' => true,
+                        'delete' => true,
+                        'localize' => true,
+                    ],
+                    'levelLinksPosition' => 'top',
+                ],
             ],
         ],
     ],
-    'types' => [
-        '0' => [
+    'palettes' => [
+        'options' => [
             'showitem' => '
                 hidden,
                 suggestion,
                 social,
                 donotlink,
-                topic,
+            '
+        ],
+        'speaker_free' => [
+            'showitem' => '
                 speaker,
                 twitter,
-                attendees,
-                documents,
-                description,
+            '
+        ],
+    ],
+    'types' => [
+        '0' => [
+            'showitem' => '
+                --div--;General,
+                    --palette--;' . $languageFile . 'tx_sessionplaner_domain_model_session.palettes.options;options,
+                    topic,
+                    path_segment,
+                    description,
+                    --palette--;' . $languageFile
+                . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
+                    speakers,
+                    attendees,
+                    links,
+                    documents,
                 --div--;Relations,
-                type,
-                level,
-                day,
-                room,
-                slot,
-                tags
+                    type,
+                    level,
+                    day,
+                    room,
+                    slot,
+                    tags,
             '
         ]
     ],

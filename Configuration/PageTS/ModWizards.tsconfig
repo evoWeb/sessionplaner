@@ -1,0 +1,43 @@
+mod.wizards.newContentElement.wizardItems.sessionplaner {
+    after = common, menu, special, forms, plugins
+    header = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:wizard.group.sessionplaner
+    elements {
+        sessionplaner_sessionplan {
+            iconIdentifier = sessionplaner-plugin-display
+            title = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan
+            description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan_description
+            tt_content_defValues {
+                CType = list
+                list_type = sessionplaner_sessionplan
+            }
+        }
+        sessionplaner_suggest {
+            iconIdentifier = sessionplaner-plugin-suggest
+            title = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest
+            description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest_description
+            tt_content_defValues {
+                CType = list
+                list_type = sessionplaner_suggest
+            }
+        }
+        sessionplaner_session {
+            iconIdentifier = sessionplaner-plugin-session
+            title = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session
+            description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session_description
+            tt_content_defValues {
+                CType = list
+                list_type = sessionplaner_session
+            }
+        }
+        sessionplaner_speaker {
+            iconIdentifier = sessionplaner-plugin-speaker
+            title = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker
+            description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker_description
+            tt_content_defValues {
+                CType = list
+                list_type = sessionplaner_speaker
+            }
+        }
+    }
+    show = *
+}

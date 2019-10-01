@@ -1,0 +1,19 @@
+<f:if condition="{speaker} && {size}">
+    <div class="sessionplaner-speaker">
+        <div class="sessionplaner-speaker-image">
+            <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">
+                <f:render partial="Speaker/Image" arguments="{speaker: speaker, size: size}" />
+            </f:render>
+        </div>
+        <div class="sessionplaner-speaker-body">
+            <h3 class="sessionplaner-speaker-name">
+                <f:render partial="Speaker/LinkWrap" contentAs="content" arguments="{settings: settings, speaker: speaker}">
+                    {speaker.name}
+                </f:render>
+            </h3>
+            <f:if condition="{speaker.company}">
+                <h4 class="sessionplaner-speaker-company">{speaker.company}</h4>
+            </f:if>
+        </div>
+    </div>
+</f:if>

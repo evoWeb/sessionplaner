@@ -1,0 +1,78 @@
+//
+// Variables
+//
+$session-speakerlist-space: 10px;
+
+$session-speaker-bg: #ffffff !default;
+$session-speaker-color: #616161 !default;
+$session-speaker-name-color: #ff8700 !default;
+$session-speaker-name-hover-color: darken($session-speaker-name-color, 10%) !default;
+$session-speaker-border: none !default;
+$session-speaker-padding: 1rem;
+$session-speaker-shadow: 0 2px 1px rgba(0,0,0,.15);
+
+
+//
+// Speaker
+//
+.sessionplaner-speaker {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    color: $session-speaker-color;
+    background-color: $session-speaker-bg;
+    height: 100%;
+    border: $session-speaker-border;
+    box-shadow: $session-speaker-shadow;
+}
+.sessionplaner-speaker-image {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+.sessionplaner-speaker-body {
+    padding: $session-speaker-padding;
+}
+.sessionplaner-speaker-name {
+    font-weight: bold;
+    font-size: 1rem;
+    color: $session-speaker-name-color !important;
+    &:hover {
+        color: $session-speaker-name-hover-color !important;
+    }
+    a {
+        color: inherit !important
+    }
+}
+.sessionplaner-speaker-company {
+    font-weight: normal;
+    font-size: .75rem;
+}
+
+
+//
+// List
+//
+.sessionplaner-speakerlist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: -($session-speakerlist-space / 2);
+    @media only screen and (min-width: $session-breakpoint-sm) {
+        margin: -$session-speakerlist-space;
+    }
+}
+.sessionplaner-speakerlist-item {
+    padding: ($session-speakerlist-space / 2);
+    @media only screen and (min-width: $session-breakpoint-sm) {
+        padding: $session-speakerlist-space;
+    }
+    width: calc(100% / 2);
+    @media only screen and (min-width: $session-breakpoint-md) {
+        width: 230px;
+    }
+}

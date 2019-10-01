@@ -1,0 +1,32 @@
+plugin.tx_sessionplaner {
+    view {
+        templateRootPaths {
+            0 = EXT:sessionplaner/Resources/Private/Templates/
+            1 = {$plugin.tx_sessionplaner.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:sessionplaner/Resources/Private/Partials/
+            1 = {$plugin.tx_sessionplaner.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:sessionplaner/Resources/Private/Layouts/
+            1 = {$plugin.tx_sessionplaner.view.layoutRootPath}
+        }
+    }
+    persistence {
+        storagePid = {$plugin.tx_sessionplaner.persistence.storagePid}
+    }
+    settings {
+        disqusShortname = {$plugin.tx_sessionplaner.settings.disqusShortname}
+        twitter {
+            account = {$plugin.tx_sessionplaner.settings.twitterAccount}
+            hashtag = {$plugin.tx_sessionplaner.settings.twitterHashtag}
+        }
+    }
+}
+
+page {
+    includeCSS {
+        sessionplaner = {$plugin.tx_sessionplaner.settings.cssFile}
+    }
+}

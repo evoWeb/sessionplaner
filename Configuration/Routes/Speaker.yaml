@@ -1,0 +1,14 @@
+routeEnhancers:
+    SessionplanerSpeaker:
+        type: Extbase
+        extension: Sessionplaner
+        plugin: Speaker
+        defaultController: 'Speaker::list'
+        routes:
+            - { routePath: '/{speaker}', _controller: 'Speaker::show', _arguments: {'speaker': 'speaker'} }
+        aspects:
+            speaker:
+                type: PersistedPatternMapper
+                tableName: 'tx_sessionplaner_domain_model_speaker'
+                routeFieldPattern: '^(?P<path_segment>.+)-(?P<uid>\d+)$'
+                routeFieldResult: '{path_segment}-{uid}'

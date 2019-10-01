@@ -1,149 +1,241 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:40Z" product-name="sessionplaner">
-		<header/>
-		<body>
-			<trans-unit id="tx_sessionplaner_domain_model_day" xml:space="preserve">
-				<source>Day</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_day-name" xml:space="preserve">
-				<source>Day</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_day-date" xml:space="preserve">
-				<source>Date</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_day-rooms" xml:space="preserve">
-				<source>Rooms</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_day-slots" xml:space="preserve">
-				<source>Slots</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_room" xml:space="preserve">
-				<source>Room</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_room-name" xml:space="preserve">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_room-logo" xml:space="preserve">
-				<source>Sponsor Logo</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_room-seats" xml:space="preserve">
-				<source>Seats</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_room-days" xml:space="preserve">
-				<source>Days</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_room-slots" xml:space="preserve">
-				<source>Slots</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_room-sessions" xml:space="preserve">
-				<source>Sessions</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_slot" xml:space="preserve">
-				<source>Slot</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_slot-start" xml:space="preserve">
-				<source>Start</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_slot-duration" xml:space="preserve">
-				<source>Duration (minutes)</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_slot-break" xml:space="preserve">
-				<source>Break</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_slot-days" xml:space="preserve">
-				<source>Days</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_slot-rooms" xml:space="preserve">
-				<source>Rooms</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session" xml:space="preserve">
-				<source>Session</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-suggestion" xml:space="preserve">
-				<source>Suggestion</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-social" xml:space="preserve">
-				<source>Social</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-donotlink" xml:space="preserve">
-				<source>Do not link</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-topic" xml:space="preserve">
-				<source>Topic</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-speaker" xml:space="preserve">
-				<source>Speaker</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-twitter" xml:space="preserve">
-				<source>Twitter</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-attendees" xml:space="preserve">
-				<source>Attendees</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-room" xml:space="preserve">
-				<source>Room</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-slot" xml:space="preserve">
-				<source>Slot</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-tags" xml:space="preserve">
-				<source>Tags</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-type" xml:space="preserve">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-type-talk" xml:space="preserve">
-				<source>Talk</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-type-tutorial" xml:space="preserve">
-				<source>Tutorial</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-type-workshop" xml:space="preserve">
-				<source>Workshop</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-type-other" xml:space="preserve">
-				<source>Other</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-type-wish" xml:space="preserve">
-				<source>Wish</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-type-break" xml:space="preserve">
-				<source>Break</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-level" xml:space="preserve">
-				<source>Level</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-level-starter" xml:space="preserve">
-				<source>Starter / Overview</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-level-advanced" xml:space="preserve">
-				<source>Advanced / Basic knowleg</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-level-pro" xml:space="preserve">
-				<source>Pro / Detailed</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-day" xml:space="preserve">
-				<source>Day</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-description" xml:space="preserve">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_session-download" xml:space="preserve">
-				<source>Download Link</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_tag" xml:space="preserve">
-				<source>Tag</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_tag-label" xml:space="preserve">
-				<source>Label</source>
-			</trans-unit>
-			<trans-unit id="tx_sessionplaner_domain_model_tag-sessions" xml:space="preserve">
-				<source>Sessions</source>
-			</trans-unit>
-			<trans-unit id="notassigned" xml:space="preserve">
-				<source>not assigned</source>
-			</trans-unit>
-		</body>
-	</file>
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1558692598" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:40Z" product-name="sessionplaner">
+        <header/>
+        <body>
+
+            <trans-unit id="tx_sessionplaner_domain_model_day" xml:space="preserve">
+                <source>Day</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_day-name" xml:space="preserve">
+                <source>Day</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_day-date" xml:space="preserve">
+                <source>Date</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_day-rooms" xml:space="preserve">
+                <source>Rooms</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_day-slots" xml:space="preserve">
+                <source>Slots</source>
+            </trans-unit>
+
+            <trans-unit id="tx_sessionplaner_domain_model_link" xml:space="preserve">
+                <source>Link</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_link-link" xml:space="preserve">
+                <source>Link</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_link-linktext" xml:space="preserve">
+                <source>Linktext</source>
+            </trans-unit>
+
+            <trans-unit id="tx_sessionplaner_domain_model_speaker" xml:space="preserve">
+                <source>Speaker</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-company" xml:space="preserve">
+                <source>Company</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-website" xml:space="preserve">
+                <source>Website</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-twitter" xml:space="preserve">
+                <source>Twitter profile name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-linkedin" xml:space="preserve">
+                <source>LinkedIn account name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-xing" xml:space="preserve">
+                <source>Xing account name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-email" xml:space="preserve">
+                <source>E-mailaddress</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-picture" xml:space="preserve">
+                <source>Picture</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-sessions" xml:space="preserve">
+                <source>Sessions</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-detail_page" xml:space="preserve">
+                <source>Detail page with more information about the speaker</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-path_segment" xml:space="preserve">
+                <source>Path segment</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_speaker-bio" xml:space="preserve">
+                <source>Bio</source>
+            </trans-unit>
+
+            <trans-unit id="tx_sessionplaner_domain_model_room" xml:space="preserve">
+                <source>Room</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-type" xml:space="preserve">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-type-main" xml:space="preserve">
+                <source>Main-Track</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-type-side" xml:space="preserve">
+                <source>Side-Track</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-logo" xml:space="preserve">
+                <source>Sponsor Logo</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-seats" xml:space="preserve">
+                <source>Seats</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-days" xml:space="preserve">
+                <source>Days</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-slots" xml:space="preserve">
+                <source>Slots</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_room-sessions" xml:space="preserve">
+                <source>Sessions</source>
+            </trans-unit>
+
+            <trans-unit id="tx_sessionplaner_domain_model_slot" xml:space="preserve">
+                <source>Slot</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_slot-start" xml:space="preserve">
+                <source>Start</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_slot-duration" xml:space="preserve">
+                <source>Duration (minutes)</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_slot-break" xml:space="preserve">
+                <source>Break</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_slot-description" xml:space="preserve">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_slot-days" xml:space="preserve">
+                <source>Days</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_slot-rooms" xml:space="preserve">
+                <source>Rooms</source>
+            </trans-unit>
+
+            <trans-unit id="tx_sessionplaner_domain_model_session" xml:space="preserve">
+                <source>Session</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session.palettes.options" xml:space="preserve">
+                <source>Options</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-suggestion" xml:space="preserve">
+                <source>Suggestion</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-social" xml:space="preserve">
+                <source>Social</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-donotlink" xml:space="preserve">
+                <source>Do not link</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-topic" xml:space="preserve">
+                <source>Topic</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-path_segment" xml:space="preserve">
+                <source>Path Segment</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-speaker" xml:space="preserve">
+                <source>Speaker Name</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-twitter" xml:space="preserve">
+                <source>Speaker Twitter</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-speakers" xml:space="preserve">
+                <source>Speakers</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-path_segment" xml:space="preserve">
+                <source>Path segment</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-attendees" xml:space="preserve">
+                <source>Attendees</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-room" xml:space="preserve">
+                <source>Room</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-slot" xml:space="preserve">
+                <source>Slot</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-tags" xml:space="preserve">
+                <source>Tags</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-links" xml:space="preserve">
+                <source>Links</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-links-description" xml:space="preserve">
+                <source>Links to provide a summary of the session (e.g. documents ore slideshare.com links)</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-type" xml:space="preserve">
+                <source>Type</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-type-talk" xml:space="preserve">
+                <source>Talk</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-type-tutorial" xml:space="preserve">
+                <source>Tutorial</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-type-workshop" xml:space="preserve">
+                <source>Workshop</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-type-other" xml:space="preserve">
+                <source>Other</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-type-wish" xml:space="preserve">
+                <source>Wish</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-type-break" xml:space="preserve">
+                <source>Break</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-level" xml:space="preserve">
+                <source>Level</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-level-starter" xml:space="preserve">
+                <source>Starter / Overview</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-level-advanced" xml:space="preserve">
+                <source>Advanced / Basic knowledge</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-level-pro" xml:space="preserve">
+                <source>Pro / Detailed</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-day" xml:space="preserve">
+                <source>Day</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-description" xml:space="preserve">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_session-download" xml:space="preserve">
+                <source>Download Link</source>
+            </trans-unit>
+
+            <trans-unit id="tx_sessionplaner_domain_model_tag" xml:space="preserve">
+                <source>Tag</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_tag-label" xml:space="preserve">
+                <source>Label</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_tag-color" xml:space="preserve">
+                <source>Color</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_tag-sessions" xml:space="preserve">
+                <source>Sessions</source>
+            </trans-unit>
+            <trans-unit id="notassigned" xml:space="preserve">
+                <source>not assigned</source>
+            </trans-unit>
+            <trans-unit id="free" xml:space="preserve">
+                <source>free input</source>
+            </trans-unit>
+
+        </body>
+    </file>
 </xliff>

@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the package evoweb\sessionplaner.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_tag');
@@ -15,14 +26,20 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg',
+        'typeicon_classes' => [
+            'default' => 'sessionplaner-record-tag'
+        ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'start'
+        'showRecordFieldList' => '
+            label,
+            color,
+            sessions
+        '
     ],
     'columns' => [
         'label' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-label',
             'config' => [
                 'type' => 'input',
@@ -31,20 +48,51 @@ return [
                 'max' => 256,
             ],
         ],
+        'color' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-color',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['', ''],
+                    ['TYPO3', 'typo3'],
+                    ['RED', 'red'],
+                    ['PINK', 'pink'],
+                    ['PURPLE', 'purple'],
+                    ['DEEP PURPLE', 'deeppurple'],
+                    ['INDIGO', 'indigo'],
+                    ['BLUE', 'blue'],
+                    ['LIGHT BLUE', 'lightblue'],
+                    ['CYAN', 'cyan'],
+                    ['TEAL', 'teal'],
+                    ['GREEN', 'green'],
+                    ['LIGHT GREEN', 'lightgreen'],
+                    ['LIME', 'lime'],
+                    ['YELLOW', 'yellow'],
+                    ['AMBER', 'amber'],
+                    ['ORANGE', 'orange'],
+                    ['DEEP ORANGE', 'deeporange'],
+                    ['BROWN', 'brown'],
+                    ['GREY', 'grey'],
+                    ['BLUE GREY', 'bluegrey'],
+                ],
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => '',
+            ],
+        ],
         'sessions' => [
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-sessions',
             'config' => [
-                'type' => 'group',
-                'internal_type' => 'db',
-                'allowed' => 'tx_sessionplaner_domain_model_tag',
-                // needed for extbase query
-                'foreign_table' => 'tx_sessionplaner_domain_model_tag',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_tag.pid = ###CURRENT_PID###',
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_sessionplaner_domain_model_session',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID###',
                 'MM' => 'tx_sessionplaner_session_tag_mm',
-                'MM_opposite_field' => 'sessions',
-                'size' => 5,
+                'MM_opposite_field' => 'tags',
                 'minitems' => 0,
-                'maxitems' => 100,
             ],
         ],
     ],
@@ -52,6 +100,7 @@ return [
         '0' => [
             'showitem' => '
                 label,
+                color,
                 sessions
             '
         ]

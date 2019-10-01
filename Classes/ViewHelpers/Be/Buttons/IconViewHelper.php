@@ -1,5 +1,17 @@
 <?php
+declare(strict_types = 1);
 namespace Evoweb\Sessionplaner\ViewHelpers\Be\Buttons;
+
+/*
+ * This file is part of the package evoweb\sessionplaner.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
 
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -65,20 +77,6 @@ class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendView
     }
 
     /**
-     * Renders an icon link as known from the TYPO3 backend
-     *
-     * @return string the rendered icon link
-     */
-    public function render()
-    {
-        return static::renderStatic(
-            $this->arguments,
-            $this->buildRenderChildrenClosure(),
-            $this->renderingContext
-        );
-    }
-
-    /**
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
@@ -116,10 +114,13 @@ class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendView
             return $icon;
         } else {
             $onclick = ' onclick="' . $onclick . '"';
-            return '<a href="' . $uri . '"
-                title="' . $title . '"
-                class="' . $class . '"
-                id="' . $id . '" ' . $onclick . '>' . $icon . '</a>';
+            return implode(' ', [
+                '<a href="' . $uri . '"',
+                'title="' . $title . '"',
+                'class="' . $class . '"',
+                'id="' . $id . '"',
+                $onclick . '>' . $icon . '</a>'
+            ]);
         }
     }
 }

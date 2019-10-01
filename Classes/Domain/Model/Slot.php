@@ -1,58 +1,48 @@
 <?php
+declare(strict_types = 1);
 namespace Evoweb\Sessionplaner\Domain\Model;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the package evoweb\sessionplaner.
  *
- *  (c) 2013-2019 Sebastian Fischer <typo3@evoweb.de>
- *  All rights reserved
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * @var \DateTime
+     * @var int
      */
-    protected $start = '';
+    protected $start = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $duration = 0;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $break = false;
 
     /**
-     * @var boolean
+     * @var string
      */
-    protected $noBreakAfter = false;
+    protected $description;
 
     /**
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Day>
+     * @var \Evoweb\Sessionplaner\Domain\Model\Day
      */
-    protected $days;
+    protected $day;
 
     /**
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
@@ -66,15 +56,14 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $sessions;
 
-    public function __construct()
+    public function initializeObject()
     {
-        $this->days = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
-        $this->rooms = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
-        $this->sessions = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\ObjectStorage::class);
+        $this->rooms = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->sessions = GeneralUtility::makeInstance(ObjectStorage::class);
     }
 
     /**
-     * @param \DateTime $start
+     * @param int $start
      */
     public function setStart($start)
     {
@@ -82,7 +71,7 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return \DateTime
+     * @return int
      */
     public function getStart()
     {
@@ -106,7 +95,15 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param boolean $break
+     * @return int
+     */
+    public function getEnd()
+    {
+        return $this->start + ($this->getDuration() * 60);
+    }
+
+    /**
+     * @param bool $break
      */
     public function setBreak($break)
     {
@@ -114,43 +111,37 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getBreak()
     {
         return $this->break;
     }
 
-    /**
-     * @param boolean $noBreakAfter
-     */
-    public function setNoBreakAfter($noBreakAfter)
+    public function setDescription(?string $description)
     {
-        $this->noBreakAfter = $noBreakAfter;
+        $this->description = $description;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
     }
 
     /**
-     * @return boolean
+     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
      */
-    public function getNoBreakAfter()
+    public function setDay(\Evoweb\Sessionplaner\Domain\Model\Day $day)
     {
-        return $this->noBreakAfter;
+        $this->day = $day;
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $days
+     * @return \Evoweb\Sessionplaner\Domain\Model\Day
      */
-    public function setDays(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $days)
+    public function getDay()
     {
-        $this->days = $days;
-    }
-
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getDays()
-    {
-        return $this->days;
+        return $this->day;
     }
 
     /**

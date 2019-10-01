@@ -1,0 +1,76 @@
+//
+// Variables
+//
+$session-sessioninfo-bg: #ffffff !default;
+$session-sessioninfo-color: #313131 !default;
+$session-sessioninfo-border: 1px solid rgba(0,0,0,.15) !default;
+$session-sessioninfo-border-radius: 2px;
+$session-sessioninfo-padding: 1.5rem;
+$session-sessioninfo-shadow: 0 2px 1px rgba(0,0,0,.15);
+
+//
+// Box
+//
+.sessionplaner-sessionbox {
+    display: flex;
+    flex-direction: column;
+}
+.sessionplaner-sessionbox-info {
+    > * + *:before {
+        content: '|';
+        opacity: .25;
+    }
+}
+.sessionplaner-sessionbox-tags {
+    margin-top: auto;
+    padding-top: .5rem;
+}
+
+//
+// Info
+//
+.sessionplaner-sessioninfo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    padding: $session-sessioninfo-padding;
+    color: $session-sessioninfo-color;
+    background-color: $session-sessioninfo-bg;
+    border: $session-sessioninfo-border;
+    border-radius: $session-sessioninfo-border-radius;
+    box-shadow: $session-sessioninfo-shadow;
+    height: 100%;
+
+}
+.sessionplaner-sessioninfo-title {
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+.sessionplaner-sessioninfo-teaser {
+    flex-grow: 1;
+    > *:first-child {
+        margin-top: 0;
+    }
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}
+.sesionplaner-sessioninfo-info {
+    margin-top: 1rem;
+}
+
+//
+// Detail
+//
+.sessionplaner-sessiondetail {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sessionplaner-sessiondetail-links,
+.sessionplaner-sessiondetail-documents,
+.sessionplaner-sessiondetail-backlink {
+    margin-top: 2rem;
+}

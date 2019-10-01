@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the package evoweb\sessionplaner.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_room');
@@ -10,19 +21,34 @@ return [
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'sortby' => 'sorting',
+        'default_sortby' => 'ORDER BY name',
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg',
+        'typeicon_classes' => [
+            'default' => 'sessionplaner-record-room'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'name'
     ],
     'columns' => [
+        'type' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_room-type',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['', ''],
+                    [$languageFile . 'tx_sessionplaner_domain_model_room-type-main', 'main'],
+                    [$languageFile . 'tx_sessionplaner_domain_model_room-type-side', 'side'],
+                ]
+            ],
+        ],
         'name' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-name',
             'config' => [
                 'type' => 'input',
@@ -32,7 +58,7 @@ return [
             ],
         ],
         'logo' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-logo',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'logo',
@@ -41,7 +67,7 @@ return [
             ),
         ],
         'seats' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-seats',
             'config' => [
                 'type' => 'input',
@@ -51,7 +77,7 @@ return [
             ],
         ],
         'days' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-days',
             'config' => [
                 'type' => 'select',
@@ -67,7 +93,7 @@ return [
             ],
         ],
         'slots' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-slots',
             'config' => [
                 'type' => 'select',
@@ -83,28 +109,25 @@ return [
             ],
         ],
         'sessions' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-sessions',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_session',
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID###',
-                'foreign_field' => 'room',
-                'size' => 5,
-                'autoSizeMax' => 20,
+                'foreign_field' => 'room'
             ],
         ],
     ],
     'types' => [
         '0' => [
             'showitem' => '
+            type,
             name,
             logo,
             seats,
             days,
             slots,
-            sessions
             '
         ]
     ],

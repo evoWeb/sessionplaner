@@ -1,0 +1,14 @@
+<f:layout name="Frontend" />
+<f:section name="Content">
+
+    <f:if condition="{speakers}">
+        <div class="sessionplaner-speakerlist">
+            <f:for each="{speakers}" as="speaker">
+                <article class="sessionplaner-speakerlist-item">
+                    <f:render partial="Speaker/Card" arguments="{settings: settings, speaker: speaker, size: 240}" />
+                </article>
+            </f:for>
+        </div>
+    </f:if>
+
+</f:section>

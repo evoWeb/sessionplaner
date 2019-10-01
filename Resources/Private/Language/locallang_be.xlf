@@ -1,83 +1,83 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:33Z" product-name="sessionplaner">
-		<header/>
-		<body>
-			<trans-unit id="tt_content.list_type_display" xml:space="preserve">
-				<source>Sessionplan display</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_display_description" xml:space="preserve">
-				<source>Show sessions</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_suggest" xml:space="preserve">
-				<source>Sessionplaner: Suggest Session</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_suggest_description" xml:space="preserve">
-				<source>Suggest a new session</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_session" xml:space="preserve">
-				<source>Sessionplaner: Session</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_session_description" xml:space="preserve">
-				<source>Session list and singleview</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_sessionplan" xml:space="preserve">
-				<source>Sessionplaner: Sessionplan</source>
-			</trans-unit>
-			<trans-unit id="tt_content.list_type_sessionplan_description" xml:space="preserve">
-				<source>Displays the sessionplan</source>
-			</trans-unit>
-			<trans-unit id="sessionplan_flexform.sheet_general" xml:space="preserve">
-				<source>Common settings</source>
-			</trans-unit>
-			<trans-unit id="sessionplan_flexform.settings.day" xml:space="preserve">
-				<source>Day</source>
-			</trans-unit>
-			<trans-unit id="sessionplan_flexform.settings.singlePid" xml:space="preserve">
-				<source>Single Pid</source>
-			</trans-unit>
-			<trans-unit id="session_flexform.sheet_general" xml:space="preserve">
-				<source>Common settings</source>
-			</trans-unit>
-			<trans-unit id="session_flexform.settings.listViewHeadline" xml:space="preserve">
-				<source>ListView Headline</source>
-			</trans-unit>
-			<trans-unit id="session_flexform.settings.listViewText" xml:space="preserve">
-				<source>ListView Text</source>
-			</trans-unit>
-			<trans-unit id="session_flexform.settings.days" xml:space="preserve">
-				<source>Days</source>
-			</trans-unit>
-			<trans-unit id="session_flexform.settings.suggestions" xml:space="preserve">
-				<source>Suggestions</source>
-			</trans-unit>
-			<trans-unit id="session_flexform.settings.singlePid" xml:space="preserve">
-				<source>Single Pid</source>
-			</trans-unit>
-			<trans-unit id="display_flexform.sheet_general" xml:space="preserve">
-				<source>Common settings</source>
-			</trans-unit>
-			<trans-unit id="display_flexform.switchableControllerAction" xml:space="preserve">
-				<source>Display</source>
-			</trans-unit>
-			<trans-unit id="display_flexform.switchableControllerAction.listDays" xml:space="preserve">
-				<source>List days</source>
-			</trans-unit>
-			<trans-unit id="display_flexform.switchableControllerAction.showDay" xml:space="preserve">
-				<source>Show day</source>
-			</trans-unit>
-			<trans-unit id="display_flexform.switchableControllerAction.showRoom" xml:space="preserve">
-				<source>List room</source>
-			</trans-unit>
-			<trans-unit id="display_flexform.switchableControllerAction.listSessions" xml:space="preserve">
-				<source>List sessions</source>
-			</trans-unit>
-			<trans-unit id="display_flexform.switchableControllerAction.screen" xml:space="preserve">
-				<source>Overview</source>
-			</trans-unit>
-			<trans-unit id="edit_flexform.switchableControllerAction.suggest" xml:space="preserve">
-				<source>Suggest</source>
-			</trans-unit>
-		</body>
-	</file>
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+    <file t3:id="1558692596" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:33Z" product-name="sessionplaner">
+        <header/>
+        <body>
+            <trans-unit id="wizard.group.sessionplaner" xml:space="preserve">
+                <source>Session Planer</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_display" xml:space="preserve">
+                <source>Sessionplan display</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_display_description" xml:space="preserve">
+                <source>Show sessions</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_suggest" xml:space="preserve">
+                <source>Sessionplaner: Suggest Session</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_suggest_description" xml:space="preserve">
+                <source>Suggest a new session</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_session" xml:space="preserve">
+                <source>Sessionplaner: Session</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_session_description" xml:space="preserve">
+                <source>Session list and singleview</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_sessionplan" xml:space="preserve">
+                <source>Sessionplaner: Sessionplan</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_sessionplan_description" xml:space="preserve">
+                <source>Displays the sessionplan</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_speaker" xml:space="preserve">
+                <source>Sessionplaner: Speaker</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_speaker_description" xml:space="preserve">
+                <source>Displays the speakers</source>
+            </trans-unit>
+            <trans-unit id="sessionplan_flexform.sheet_general" xml:space="preserve">
+                <source>Common settings</source>
+            </trans-unit>
+            <trans-unit id="sessionplan_flexform.settings.day" xml:space="preserve">
+                <source>Day</source>
+            </trans-unit>
+            <trans-unit id="sessionplan_flexform.settings.singlePid" xml:space="preserve">
+                <source>Single Pid</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.sheet_general" xml:space="preserve">
+                <source>Common settings</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.settings.listViewHeadline" xml:space="preserve">
+                <source>ListView Headline</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.settings.listViewText" xml:space="preserve">
+                <source>ListView Text</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.settings.days" xml:space="preserve">
+                <source>Days</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.settings.suggestions" xml:space="preserve">
+                <source>Suggestions</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.settings.singlePid" xml:space="preserve">
+                <source>Single Pid</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.settings.speakerSinglePid" xml:space="preserve">
+                <source>Single Pid for speakers</source>
+            </trans-unit>
+            <trans-unit id="session_flexform.settings.sessionSinglePid" xml:space="preserve">
+                <source>Single Pid for sessions</source>
+            </trans-unit>
+            <trans-unit id="display_flexform.sheet_general" xml:space="preserve">
+                <source>Common settings</source>
+            </trans-unit>
+            <trans-unit id="display_flexform.switchableControllerAction" xml:space="preserve">
+                <source>Display</source>
+            </trans-unit>
+            <trans-unit id="edit_flexform.switchableControllerAction.suggest" xml:space="preserve">
+                <source>Suggest</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

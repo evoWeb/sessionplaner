@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the package evoweb\sessionplaner.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_day');
@@ -17,24 +28,26 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile' => 'EXT:sessionplaner/Resources/Public/Icons/iconmonstr-calendar-4_record.svg'
+        'typeicon_classes' => [
+            'default' => 'sessionplaner-record-day'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'name'
     ],
     'columns' => [
         'name' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-name',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim,required',
-                'max'  => 256,
+                'max' => 256,
             ],
         ],
         'date' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
             'config' => [
                 'type' => 'input',
@@ -44,7 +57,7 @@ return [
             ],
         ],
         'rooms' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-rooms',
             'config' => [
                 'type' => 'select',
@@ -59,19 +72,16 @@ return [
             ],
         ],
         'slots' => [
-            'exclude' => 0,
+            'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-slots',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectMultipleSideBySide',
+                'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###
-                    ORDER BY tx_sessionplaner_domain_model_slot.start',
-                'MM' => 'tx_sessionplaner_day_slot_mm',
-                'size' => 10,
-                'minitems' => 0,
-                'maxitems' => 100,
-                'autoSizeMax' => 100,
+                'foreign_field' => 'day',
+                'appearance' => [
+                    'collapseAll' => true,
+                    'expandSingle' => true,
+                ]
             ],
         ],
     ],

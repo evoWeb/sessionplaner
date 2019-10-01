@@ -1,0 +1,15 @@
+routeEnhancers:
+    SessionplanerSession:
+        type: Extbase
+        extension: Sessionplaner
+        plugin: Session
+        defaultController: 'Session::list'
+        routes:
+            - { routePath: '/', _controller: 'Session::list' }
+            - { routePath: '/{session}', _controller: 'Session::show', _arguments: {'session': 'session'} }
+        aspects:
+            session:
+                type: PersistedPatternMapper
+                tableName: 'tx_sessionplaner_domain_model_session'
+                routeFieldPattern: '^(?P<path_segment>.+)-(?P<uid>\d+)$'
+                routeFieldResult: '{path_segment}-{uid}'

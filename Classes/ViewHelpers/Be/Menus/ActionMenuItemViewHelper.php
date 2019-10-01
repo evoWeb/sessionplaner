@@ -1,17 +1,16 @@
 <?php
+declare(strict_types = 1);
 namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
 
 /*
- * This file is part of the TYPO3 CMS project.
+ * This file is part of the package evoweb\sessionplaner.
  *
  * It is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, either version 2
  * of the License, or any later version.
  *
  * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
+ * LICENSE file that was distributed with this source code.
  */
 
 /**
@@ -29,7 +28,7 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
  * </f:be.menus.actionMenu>
  * </code>
  * <output>
- * Selectbox with the options "Overview", "Create new Blog" and "List Posts"
+ * Select element with the options "Overview", "Create new Blog" and "List Posts"
  * </output>
  *
  * <code title="Localized">
@@ -39,7 +38,7 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
  * </f:be.menus.actionMenu>
  * </code>
  * <output>
- * localized selectbox
+ * localized select element
  * <output>
  */
 class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\ActionMenuItemViewHelper
@@ -92,7 +91,7 @@ class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\Act
      * @param string $current
      * @param string $currentArgumentKey
      *
-     * @return boolean
+     * @return bool
      */
     public function isSelected($controller, $action, $arguments, $current, $currentArgumentKey)
     {

@@ -1,14 +1,26 @@
 <?php
+
+/*
+ * This file is part of the package evoweb\sessionplaner.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 defined('TYPO3_MODE') || die('Access denied.');
 
 /**
  * Frontend Plugin Session Suggest
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Evoweb.sessionplaner',
+    'sessionplaner',
     'Suggest',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest',
-    'EXT:sessionplaner/Resources/Public/Icons/Extension.gif'
+    'sessionplaner-plugin-suggest'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_suggest'] =
     'layout, select_key';
@@ -17,10 +29,10 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionp
  * Frontend Plugin Session
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Evoweb.sessionplaner',
+    'sessionplaner',
     'Session',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session',
-    'EXT:sessionplaner/Resources/Public/Icons/Extension.gif'
+    'sessionplaner-plugin-session'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_session'] =
     'layout, select_key';
@@ -34,10 +46,10 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
  * Frontend Plugin Sessionplan
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Evoweb.sessionplaner',
+    'sessionplaner',
     'Sessionplan',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan',
-    'EXT:sessionplaner/Resources/Public/Icons/Extension.gif'
+    'sessionplaner-plugin-display'
 );
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_sessionplan'] =
     'layout, select_key';
@@ -45,4 +57,21 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
     'sessionplaner_sessionplan',
     'FILE:EXT:sessionplaner/Configuration/FlexForms/Sessionplan.xml'
+);
+
+/**
+ * Frontend Plugin Speaker
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'sessionplaner',
+    'Speaker',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker',
+    'sessionplaner-plugin-speaker'
+);
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_speaker'] =
+    'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplaner_speaker'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'sessionplaner_speaker',
+    'FILE:EXT:sessionplaner/Configuration/FlexForms/Speaker.xml'
 );

@@ -1,0 +1,120 @@
+<f:section name="Main">
+    <script type="text/template" id="sessionFormTemplate">
+        <style>
+            .new-session dl {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .new-session dt {
+                width: 150px;
+                clear: left;
+                float: left;
+                padding: 0 0 5px 0;
+            }
+
+            .new-session dd {
+                float: left;
+                padding: 0 0 5px 0;
+            }
+        </style>
+
+        <div>
+            <form class="new-session">
+                <f:form.hidden id="session-form-day" name="day" value="{day.uid}" />
+                <f:form.hidden id="session-form-room" name="room" value="0" />
+                <f:form.hidden id="session-form-slot" name="slot" value="0" />
+                <dl>
+                    <dt>
+                        <label for="session-form-hidden">
+                            <f:translate key="hidden"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.select id="session-form-hidden" name="hidden" options="{
+                            0: '{f:translate(key: \'hidden-0\')}',
+                            1: '{f:translate(key: \'hidden-1\')}'
+                        }"/>
+                    </dd>
+
+                    <dt>
+                        <label for="session-form-topic">
+                            <f:translate key="topic"/>*
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.textfield id="session-form-topic" name="topic" />
+                    </dd>
+
+                    <dt>
+                        <label for="session-form-speaker">
+                            <f:translate key="speaker"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.textfield id="session-form-speaker" name="speaker" />
+                    </dd>
+
+                    <dt>
+                        <label for="session-form-attendees">
+                            <f:translate key="attendees"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.textfield id="session-form-attendees" name="attendees" />
+                    </dd>
+
+                    <dt>
+                        <label for="session-form-description">
+                            <f:translate key="description"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.textarea id="session-form-description" name="description" />
+                    </dd>
+
+                    <dt>
+                        <label for="session-form-twitter">
+                            <f:translate key="twitter"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.textfield id="session-form-twitter" name="twitter" />
+                    </dd>
+
+                    <dt>
+                        <label for="session-form-type">
+                            <f:translate key="type"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.select id="session-form-type" name="type" options="{
+                            1: '{f:translate(key: \'type-talk\')}',
+                            2: '{f:translate(key: \'type-tutorial\')}',
+                            3: '{f:translate(key: \'type-workshop\')}',
+                            4: '{f:translate(key: \'type-other\')}'
+                        }"/>
+                    </dd>
+
+                    <dt>
+                        <label for="session-form-level">
+                            <f:translate key="level"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.select id="session-form-level" name="level" class="level" options="{
+                            1: '{f:translate(key: \'level-starter\')}',
+                            2: '{f:translate(key: \'level-advanced\')}',
+                            3: '{f:translate(key: \'level-pro\')}'
+                        }"/>
+                    </dd>
+                </dl>
+            </form>
+            <div>
+                <f:translate key="mandatory"/>
+            </div>
+            <div class="error"></div>
+        </div>
+    </script>
+</f:section>

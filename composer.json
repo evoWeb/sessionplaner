@@ -1,46 +1,44 @@
 {
-	"name": "evoweb/sessionplaner",
-	"type": "typo3-cms-extension",
-	"description": "Sessionplaner for TYPO3Camps",
-	"homepage": "https://github.com/evoWeb/sessionplaner/",
+    "name": "evoweb/sessionplaner",
+    "type": "typo3-cms-extension",
+    "description": "Sessionplaner for TYPO3Camps",
+    "homepage": "https://github.com/evoWeb/sessionplaner/",
 
-	"license": [
-		"GPL-2.0-or-later"
-	],
+    "license": "GPL-2.0-or-later",
 
-	"support" : {
-		"issues" : "https://github.com/evoWeb/sessionplaner/issues"
-	},
+    "support": {
+        "issues": "https://github.com/evoWeb/sessionplaner/issues"
+    },
+    "keywords": [
+        "sessionplaner",
+        "barcamp",
+        "TYPO3Camps"
+    ],
+    "require": {
+        "typo3/cms-core": "^9.5 || ^10.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "Evoweb\\Sessionplaner\\": "Classes/"
+        }
+    },
 
-	"keywords": [
-		"sessionplaner",
-		"barcamp",
-		"TYPO3Camps"
-	],
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "sessionplaner",
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": ".Build/Web"
+        }
+    },
 
-	"require": {
-		"typo3/cms-core": "^9.5"
-	},
-
-	"autoload": {
-		"psr-4": {
-			"Evoweb\\Sessionplaner\\": "Classes/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Evoweb\\Sessionplaner\\Tests\\": "Tests/"
-		}
-	},
-
-	"config": {
-		"vendor-dir": ".Build/Web/vendor",
-		"bin-dir": ".Build/bin"
-	},
-	"extra": {
-		"typo3/cms": {
-			"cms-package-dir": "{$vendor-dir}/typo3/cms",
-			"web-dir": ".Build/Web"
-		}
-	}
+    "scripts": {
+        "post-autoload-dump": "mkdir -p .Build/Web/typo3conf/ext/ && ln -snf ../../../.. .Build/Web/typo3conf/ext/sessionplaner"
+    }
 }

@@ -1,0 +1,64 @@
+<f:layout name="Backend" />
+<f:section name="IconFunctions">
+
+    <f:if condition="{roomCount}">
+        <f:be.menus.actionMenu>
+            <f:for each="{days}" as="day">
+                <sessionplanervh:be.menus.actionMenuItem label="{day.name}" controller="BackendModule" action="show" arguments="{day: day.uid}" current="{currentDay.uid}" currentArgumentKey="day" />
+            </f:for>
+        </f:be.menus.actionMenu>
+    </f:if>
+
+</f:section>
+<f:section name="IconLeftButtons">
+
+    <f:if condition="{roomCount}">
+        <f:format.raw>
+            <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
+        </f:format.raw>
+    </f:if>
+
+</f:section>
+<f:section name="IconRightButtons">
+
+    <f:format.raw>
+        <span class="btn btn-default btn-sm">
+            <f:be.buttons.shortcut />
+        </span>
+        <sessionplanervh:be.buttons.icon uri="#" iconKey="actions-window-open" title="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.openInNewWindow')}" onclick="sessionplanerWin=window.open(location.href, 'Sessionplaner', 'width=790,status=0,menubar=0,resizable=1,location=0,scrollbars=1,toolbar=0'); return false;" class="btn btn-default btn-sm" />
+    </f:format.raw>
+
+</f:section>
+<f:section name="Content">
+
+    <div id="t3js-ui-block" class="ui-block hidden">
+        <core:icon identifier="spinner-circle-light" size="large" />
+    </div>
+    <f:if condition="{roomCount}">
+        <f:then>
+            <f:for each="{days}" as="day">
+                <f:if condition="{day} == {currentDay}">
+                    <div id="sessionplaner">
+                        <h1>{day.name}</h1>
+                        <div id="stash" class="t3-page-ce-dropzone-available t3js-page-ce-dropzone-available">
+                            <f:for each="{unassignedSessions}" as="session">
+                                <f:render partial="BackendModule/SessionCard" section="Main" arguments="{session: session}" />
+                            </f:for>
+                        </div>
+                        <f:render partial="BackendModule/Grid" section="Main" arguments="{day: day}" />
+                    </div>
+                </f:if>
+            </f:for>
+            <f:render partial="BackendModule/SessionForm" section="Main" arguments="{day: currentDay}" />
+            <script type="text/template" id="sessionCardTemplate">
+                <f:render partial="BackendModule/SessionCard" section="Main" arguments="{session: session}"/>
+            </script>
+        </f:then>
+        <f:else>
+            <f:format.raw>
+                <f:translate key="storageFolderEmpty" />
+            </f:format.raw>
+        </f:else>
+    </f:if>
+
+</f:section>
