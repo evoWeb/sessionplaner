@@ -1,6 +1,5 @@
 <?php
 declare(strict_types = 1);
-namespace Evoweb\Sessionplaner\Domain\Model;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -12,6 +11,8 @@ namespace Evoweb\Sessionplaner\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
+
+namespace Evoweb\Sessionplaner\Domain\Model;
 
 use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;

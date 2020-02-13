@@ -1,6 +1,5 @@
 <?php
 declare(strict_types=1);
-namespace Evoweb\Sessionplaner\Utility;
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -12,6 +11,8 @@ namespace Evoweb\Sessionplaner\Utility;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
+
+namespace Evoweb\Sessionplaner\Utility;
 
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
