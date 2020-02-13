@@ -51,30 +51,32 @@ class SuggestFormFactory extends AbstractFormFactory
         $form->setRenderingOption('submitButtonLabel', LocalizationUtility::translate('form.submit', 'sessionplaner'));
         $page = $form->createPage('suggestform');
 
-        // Form
-        $fullnameField = $page->createElement('fullname', 'Text');
+        // Personal Information
+        $personalinformation = $page->createElement('personalinformation', 'Fieldset');
+        $personalinformation->setLabel(LocalizationUtility::translate('label.personalinformation', 'sessionplaner'));
+
+        $fullnameField = $personalinformation->createElement('fullname', 'Text');
         $fullnameField->setLabel(LocalizationUtility::translate('form.fullname', 'sessionplaner'));
+        $fullnameField->setProperty('elementDescription', LocalizationUtility::translate('form.fullname.description', 'sessionplaner'));
         $fullnameField->addValidator($objectManager->get(NotEmptyValidator::class));
 
-        $emailField = $page->createElement('email', 'Text');
+        $emailField = $personalinformation->createElement('email', 'Text');
         $emailField->setLabel(LocalizationUtility::translate('form.email', 'sessionplaner'));
+        $emailField->setProperty('elementDescription', LocalizationUtility::translate('form.email.description', 'sessionplaner'));
         $emailField->addValidator($objectManager->get(NotEmptyValidator::class));
         $emailField->addValidator($objectManager->get(EmailAddressValidator::class));
 
-        $twitterField = $page->createElement('twitter', 'Text');
+        $twitterField = $personalinformation->createElement('twitter', 'Text');
         $twitterField->setLabel(LocalizationUtility::translate('form.twitter', 'sessionplaner'));
+        $twitterField->setProperty('elementDescription', LocalizationUtility::translate('form.twitter.description', 'sessionplaner'));
 
-        $titleField = $page->createElement('title', 'Text');
-        $titleField->setLabel(LocalizationUtility::translate('form.title', 'sessionplaner'));
-        $titleField->addValidator($objectManager->get(NotEmptyValidator::class));
+        // Session Information
+        $sessioninformation = $page->createElement('sessioninformation', 'Fieldset');
+        $sessioninformation->setLabel(LocalizationUtility::translate('label.sessioninformation', 'sessionplaner'));
 
-        $descriptionField = $page->createElement('description', 'Textarea');
-        $descriptionField->setLabel(LocalizationUtility::translate('form.description', 'sessionplaner'));
-        $descriptionField->addValidator($objectManager->get(NotEmptyValidator::class));
-        $descriptionField->addValidator($objectManager->get(StringLengthValidator::class, ['minimum' => 5]));
-
-        $typeField = $page->createElement('type', 'SingleSelect');
+        $typeField = $sessioninformation->createElement('type', 'SingleSelect');
         $typeField->setLabel(LocalizationUtility::translate('form.type', 'sessionplaner'));
+        $typeField->setProperty('elementDescription', LocalizationUtility::translate('form.type.description', 'sessionplaner'));
         $typeField->addValidator($objectManager->get(NotEmptyValidator::class));
         $typeFieldOptions = SessionTypeEnum::getOptions();
         foreach ($typeFieldOptions as $typeFieldOptionKey => $typeFieldOptionValue) {
@@ -83,8 +85,28 @@ class SuggestFormFactory extends AbstractFormFactory
         $typeField->setProperty('prependOptionLabel', ' ');
         $typeField->setProperty('options', $typeFieldOptions);
 
-        $levelField = $page->createElement('level', 'SingleSelect');
+        $titleField = $sessioninformation->createElement('title', 'Text');
+        $titleField->setLabel(LocalizationUtility::translate('form.title', 'sessionplaner'));
+        $titleField->setProperty('elementDescription', LocalizationUtility::translate('form.title.description', 'sessionplaner'));
+        $titleField->addValidator($objectManager->get(NotEmptyValidator::class));
+
+        $descriptionField = $sessioninformation->createElement('description', 'Textarea');
+        $descriptionField->setLabel(LocalizationUtility::translate('form.description', 'sessionplaner'));
+        $descriptionField->setProperty('elementDescription', LocalizationUtility::translate('form.description.description', 'sessionplaner'));
+        $descriptionField->addValidator($objectManager->get(NotEmptyValidator::class));
+        $descriptionField->addValidator($objectManager->get(StringLengthValidator::class, ['minimum' => 5]));
+
+        $lengthField = $sessioninformation->createElement('estimatedlength', 'SingleSelect');
+        $lengthField->setLabel(LocalizationUtility::translate('form.estimatedlength', 'sessionplaner'));
+        $lengthField->setProperty('elementDescription', LocalizationUtility::translate('form.estimatedlength.description', 'sessionplaner'));
+        $lengthField->setProperty('options', [
+            '45 Minutes' => '45 Minutes',
+            '90 Minutes' => '90 Minutes'
+        ]);
+
+        $levelField = $sessioninformation->createElement('level', 'SingleSelect');
         $levelField->setLabel(LocalizationUtility::translate('form.level', 'sessionplaner'));
+        $levelField->setProperty('elementDescription', LocalizationUtility::translate('form.level.description', 'sessionplaner'));
         $levelField->addValidator($objectManager->get(NotEmptyValidator::class));
         $levelFieldOptions = SessionLevelEnum::getOptions();
         foreach ($levelFieldOptions as $levelFieldOptionKey => $levelFieldOptionValue) {
