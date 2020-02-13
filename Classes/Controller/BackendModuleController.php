@@ -14,8 +14,11 @@ declare(strict_types = 1);
 
 namespace Evoweb\Sessionplaner\Controller;
 
+use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
+use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
@@ -57,6 +60,19 @@ class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCo
             $day = $this->dayRepository->findAll()->getFirst();
         }
 
+        $typeFieldOptions = SessionTypeEnum::getOptions();
+        foreach ($typeFieldOptions as $typeFieldOptionKey => $typeFieldOptionValue) {
+            $typeFieldOptions[$typeFieldOptionKey] = LocalizationUtility::translate($typeFieldOptionValue);
+        }
+        $levelFieldOptions = SessionLevelEnum::getOptions();
+        foreach ($levelFieldOptions as $levelFieldOptionKey => $levelFieldOptionValue) {
+            $levelFieldOptions[$levelFieldOptionKey] = LocalizationUtility::translate($levelFieldOptionValue);
+        }
+
+        $this->view->assign('formOptions', [
+            'types' => $typeFieldOptions,
+            'levels' => $levelFieldOptions,
+        ]);
         $this->view->assign('currentDay', $day);
         $this->view->assign('roomCount', is_object($day) ? count($day->getRooms()) : 0);
         $this->view->assign('days', $this->dayRepository->findAll());

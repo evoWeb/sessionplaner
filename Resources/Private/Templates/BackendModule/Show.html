@@ -49,7 +49,7 @@
                     </div>
                 </f:if>
             </f:for>
-            <f:render partial="BackendModule/SessionForm" section="Main" arguments="{day: currentDay}" />
+            <f:render partial="BackendModule/SessionForm" section="Main" arguments="{day: currentDay, formOptions: formOptions}" />
             <script type="text/template" id="sessionCardTemplate">
                 <f:render partial="BackendModule/SessionCard" section="Main" arguments="{session: session}"/>
             </script>

@@ -23,7 +23,8 @@ $EM_CONF['sessionplaner'] = [
     'version' => '2.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-10.4.99',
+            'typo3' => '9.5.5-10.4.99',
+            'form' => '9.5.5-10.4.99',
         ],
     ],
 ];

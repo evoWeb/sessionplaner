@@ -1,3 +1,11 @@
+######################
+#### DEPENDENCIES ####
+######################
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:form/Configuration/TypoScript/setup.typoscript">
+
+################
+#### PLUGIN ####
+################
 plugin.tx_sessionplaner {
     view {
         templateRootPaths {
@@ -22,9 +30,42 @@ plugin.tx_sessionplaner {
             account = {$plugin.tx_sessionplaner.settings.twitterAccount}
             hashtag = {$plugin.tx_sessionplaner.settings.twitterHashtag}
         }
+        suggest {
+            notification {
+                enable = {$plugin.tx_sessionplaner.settings.suggest.notification.enable}
+                subject = {$plugin.tx_sessionplaner.settings.suggest.notification.subject}
+                recipientAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.recipientAddress}
+                recipientName = {$plugin.tx_sessionplaner.settings.suggest.notification.recipientName}
+                senderAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.senderAddress}
+                senderName = {$plugin.tx_sessionplaner.settings.suggest.notification.senderName}
+                carbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress}
+                blindCarbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress}
+            }
+        }
     }
 }
 
+
+options:
+      subject: 'Become an Initiative Sponsor'
+      recipientAddress: susanne.moog@typo3.com
+      recipientName: 'Susanne Moog'
+      senderAddress: '{email-1}'
+      senderName: '{text-2}'
+      replyToAddress: susanne.moog@typo3.com
+      carbonCopyAddress: petra.hasenau@typo3.org
+      blindCarbonCopyAddress: ''
+      format: html
+      attachUploads: true
+      translation:
+        language: ''
+    identifier: EmailToReceiver
+
+
+
+##############
+#### PAGE ####
+##############
 page {
     includeCSS {
         sessionplaner = {$plugin.tx_sessionplaner.settings.cssFile}

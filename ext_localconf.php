@@ -113,10 +113,10 @@ call_user_func(function () {
         $extensionName,
         'Suggest',
         [
-            $suggestController => 'new, create',
+            $suggestController => 'form',
         ],
         [
-            $suggestController => 'new, create',
+            $suggestController => 'form',
         ]
     );
 

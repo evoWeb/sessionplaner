@@ -177,35 +177,8 @@
             <trans-unit id="tx_sessionplaner_domain_model_session-type" xml:space="preserve">
                 <source>Type</source>
             </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-talk" xml:space="preserve">
-                <source>Talk</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-tutorial" xml:space="preserve">
-                <source>Tutorial</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-workshop" xml:space="preserve">
-                <source>Workshop</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-other" xml:space="preserve">
-                <source>Other</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-wish" xml:space="preserve">
-                <source>Wish</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-break" xml:space="preserve">
-                <source>Break</source>
-            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-level" xml:space="preserve">
                 <source>Level</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-level-starter" xml:space="preserve">
-                <source>Starter / Overview</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-level-advanced" xml:space="preserve">
-                <source>Advanced / Basic knowledge</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-level-pro" xml:space="preserve">
-                <source>Pro / Detailed</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-day" xml:space="preserve">
                 <source>Day</source>
