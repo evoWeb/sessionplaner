@@ -141,9 +141,16 @@ class SuggestFormFactory extends AbstractFormFactory
             ]);
         }
 
-        $form->createFinisher('Confirmation', [
-            'message' => LocalizationUtility::translate('form.suggest.confirmation', 'sessionplaner'),
-        ]);
+        if ($settings['suggest']['confirmation']['pageUid']) {
+            $form->createFinisher('Redirect', [
+                'pageUid' => (int) $settings['suggest']['confirmation']['pageUid'],
+            ]);
+        } else {
+            $message = $settings['suggest']['confirmation']['message'] ?? 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
+            $form->createFinisher('Confirmation', [
+                'message' => LocalizationUtility::translate($message),
+            ]);
+        }
 
         $this->triggerFormBuildingFinished($form);
         return $form;

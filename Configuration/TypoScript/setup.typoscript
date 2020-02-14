@@ -41,6 +41,10 @@ plugin.tx_sessionplaner {
                 carbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress}
                 blindCarbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress}
             }
+            confirmation {
+                message = {$plugin.tx_sessionplaner.settings.suggest.confirmation.message}
+                pageUid = {$plugin.tx_sessionplaner.settings.suggest.confirmation.pageUid}
+            }
         }
     }
 }

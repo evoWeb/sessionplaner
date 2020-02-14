@@ -2,6 +2,7 @@
 # customsubcategory=110_SPPERSISTENCE=Persistence
 # customsubcategory=120_SPSETTINGS=Settings
 # customsubcategory=130_SPSUGGESTMAIL=Suggest Notifications
+# customsubcategory=140_SPSUGGESTCONFIRMATION=Suggest Confirmation
 
 plugin.tx_sessionplaner {
     view {
@@ -46,6 +47,12 @@ plugin.tx_sessionplaner {
                 carbonCopyAddress =
                 # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/blindCarbonCopyAddress; type=string; label=Blind Carbon Copy Address
                 blindCarbonCopyAddress =
+            }
+            confirmation {
+                # cat=plugin.sessionplaner/140_SPSUGGESTCONFIRMATION/message; type=string; label=Confirmation Message
+                message = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation
+                # cat=plugin.sessionplaner/140_SPSUGGESTCONFIRMATION/pageUid; type=int+; label=Confirmation Page: If confirmation page is set, the user will be redirected to this page after submisstion instead of showing a message.
+                pageUid =
             }
         }
     }
