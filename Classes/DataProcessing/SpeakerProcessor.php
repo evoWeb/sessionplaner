@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -16,11 +17,19 @@ namespace Evoweb\Sessionplaner\DataProcessing;
 
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 class SpeakerProcessor implements \TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface
 {
+    /**
+     * @var SpeakerRepository
+     */
+    protected $speakerRepository;
+
+    public function __construct(SpeakerRepository $speakerRepository)
+    {
+        $this->speakerRepository = $speakerRepository;
+    }
+
     /**
      * Add this data processor if you want to have the Speaker object available
      * in your FLUID templates when the current page is set as a detail page of
@@ -43,9 +52,7 @@ class SpeakerProcessor implements \TYPO3\CMS\Frontend\ContentObject\DataProcesso
         array $processorConfiguration,
         array $processedData
     ) {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $speakerRepository = $objectManager->get(SpeakerRepository::class);
-        $speaker = $speakerRepository->findByDetailPage((int)$processedData['data']['uid']);
+        $speaker = $this->speakerRepository->findByDetailPage((int)$processedData['data']['uid']);
 
         if ($speaker instanceof Speaker) {
             $targetVariableName = $cObj->stdWrapValue('as', $processorConfiguration) ?: 'speaker';

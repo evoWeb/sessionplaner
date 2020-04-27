@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -89,6 +90,11 @@ class Speaker extends AbstractSlugEntity
      * @var int
      */
     protected $detailPage;
+
+    /**
+     * @var string
+     */
+    protected $pathSegment;
 
     public function initializeObject()
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -16,14 +17,17 @@ namespace Evoweb\Sessionplaner\Enum;
 
 class SessionLevelEnum
 {
-    const OPTION_BEGINNER = 1;
-    const OPTION_ADVANCED = 2;
-    const OPTION_PRO = 3;
+    public const OPTION_BEGINNER = 1;
+    public const OPTION_ADVANCED = 2;
+    public const OPTION_PRO = 3;
 
     protected static $optionLabel = [
-        self::OPTION_BEGINNER => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.beginner',
-        self::OPTION_ADVANCED => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.advanced',
-        self::OPTION_PRO => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro'
+        self::OPTION_BEGINNER =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.beginner',
+        self::OPTION_ADVANCED =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.advanced',
+        self::OPTION_PRO =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro'
     ];
 
     public static function getLabel(int $option): string

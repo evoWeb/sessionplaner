@@ -14,14 +14,14 @@
 defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(function () {
-    /**
-     * Register "sessionplannervh" as global fluid namespace
-     */
+    // Register "sessionplannervh" as global fluid namespace
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] =
         'Evoweb\\Sessionplaner\\ViewHelpers';
 
     /**
      * Register Icons
+     *
+     * @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry
      */
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $icons = [

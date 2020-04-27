@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -27,7 +28,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
@@ -45,12 +45,7 @@ class AjaxController
     protected $moduleConfiguration;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     * @var ConfigurationManager
      */
     protected $configurationManager;
 
@@ -75,39 +70,47 @@ class AjaxController
     protected $data = [];
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
+     * @var SessionRepository
      */
     protected $sessionRepository;
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
+     * @var DayRepository
      */
     protected $dayRepository;
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\RoomRepository
+     * @var RoomRepository
      */
     protected $roomRepository;
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\SlotRepository
+     * @var SlotRepository
      */
     protected $slotRepository;
 
     /**
-     * Constructor
+     * @var PersistenceManager
      */
-    public function __construct()
-    {
+    protected $persistenceManager;
+
+    public function __construct(
+        ConfigurationManager $configurationManager,
+        SessionRepository $sessionRepository,
+        DayRepository $dayRepository,
+        RoomRepository $roomRepository,
+        SlotRepository $slotRepository,
+        PersistenceManager $persistenceManager
+    ) {
         $this->backendUser = $GLOBALS['BE_USER'];
         $this->moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration']['web_SessionplanerTxSessionplanerM1'];
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->configurationManager = $this->objectManager->get(ConfigurationManager::class);
 
-        $this->sessionRepository = $this->objectManager->get(SessionRepository::class);
-        $this->dayRepository = $this->objectManager->get(DayRepository::class);
-        $this->roomRepository = $this->objectManager->get(RoomRepository::class);
-        $this->slotRepository = $this->objectManager->get(SlotRepository::class);
+        $this->configurationManager = $configurationManager;
+        $this->sessionRepository = $sessionRepository;
+        $this->dayRepository = $dayRepository;
+        $this->roomRepository = $roomRepository;
+        $this->slotRepository = $slotRepository;
+        $this->persistenceManager = $persistenceManager;
     }
 
     protected function initializeAction(ServerRequestInterface $request)
@@ -169,7 +172,6 @@ class AjaxController
     {
         $this->initializeAction($request);
 
-        /** @var Session $session */
         $session = $this->sessionRepository->findAnyByUid((int)$this->parameter['session']['uid']);
         $this->updateSessionFromRequest($session);
 
@@ -191,7 +193,6 @@ class AjaxController
     {
         $this->initializeAction($request);
 
-        /** @var Session $session */
         $session = $this->sessionRepository->findAnyByUid((int)$this->parameter['session']['uid']);
         $validationResults = $this->validateSession($session);
         if (!$validationResults->hasErrors()) {
@@ -208,8 +209,9 @@ class AjaxController
 
     protected function getSessionFromRequest(ServerRequestInterface $request)
     {
-        $session = $this->objectManager
-            ->get(PropertyMapper::class)
+        /** @var PropertyMapper $propertyMapper */
+        $propertyMapper = GeneralUtility::makeInstance(PropertyMapper::class);
+        $session = $propertyMapper
             ->convert(
                 $this->parameter['session'],
                 Session::class
@@ -248,14 +250,14 @@ class AjaxController
 
     protected function validateSession(Session $session)
     {
-        $validator = $this->objectManager->get(ValidatorResolver::class)->getBaseValidatorConjunction(Session::class);
+        /** @var ValidatorResolver $validationResolver */
+        $validationResolver = GeneralUtility::makeInstance(ValidatorResolver::class);
+        $validator = $validationResolver->getBaseValidatorConjunction(Session::class);
         return $validator->validate($session);
     }
 
     protected function persistAll()
     {
-        /** @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
-        $persistenceManager = $this->objectManager->get(PersistenceManager::class);
-        $persistenceManager->persistAll();
+        $this->persistenceManager->persistAll();
     }
 }

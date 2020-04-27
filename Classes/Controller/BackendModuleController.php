@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -14,6 +15,8 @@ declare(strict_types = 1);
 
 namespace Evoweb\Sessionplaner\Controller;
 
+use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
+use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
 use TYPO3\CMS\Core\Page\PageRenderer;
@@ -23,32 +26,31 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\DayRepository
+     * @var DayRepository
      */
     protected $dayRepository;
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\SessionRepository
+     * @var SessionRepository
      */
     protected $sessionRepository;
 
-    public function injectDayRepository(\Evoweb\Sessionplaner\Domain\Repository\DayRepository $repository)
+    public function __construct(DayRepository $dayRepository, SessionRepository $sessionRepository)
     {
-        $this->dayRepository = $repository;
-    }
-
-    public function injectSessionRepository(\Evoweb\Sessionplaner\Domain\Repository\SessionRepository $repository)
-    {
-        $this->sessionRepository = $repository;
+        $this->dayRepository = $dayRepository;
+        $this->sessionRepository = $sessionRepository;
     }
 
     protected function initializeAction()
     {
-        /** @var \TYPO3\CMS\Core\Page\PageRenderer::class $pageRenderer */
+        /** @var PageRenderer $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Sessionplaner/Edit', 'function(sessionplaner) {
-            sessionplaner.setPageId(' . (int)GeneralUtility::_GP('id') . ');
-        }');
+        $pageRenderer->loadRequireJsModule(
+            'TYPO3/CMS/Sessionplaner/Edit',
+            'function(sessionplaner) {
+                sessionplaner.setPageId(' . (int)GeneralUtility::_GP('id') . ');
+            }'
+        );
     }
 
     public function showAction()

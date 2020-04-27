@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -25,17 +26,57 @@ use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
 
 class SuggestFormFinisher extends AbstractFinisher
 {
+    /**
+     * @var ConfigurationManagerInterface
+     */
+    protected $configurationManager;
+
+    /**
+     * @var SpeakerRepository
+     */
+    protected $speakerRepository;
+
+    /**
+     * @var SessionRepository
+     */
+    protected $sessionRepository;
+
+    /**
+     * @var PersistenceManagerInterface
+     */
+    protected $persistenceManager;
+
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
+    {
+        $this->configurationManager = $configurationManager;
+    }
+
+    public function injectSpeakerRepository(SpeakerRepository $speakerRepository)
+    {
+        $this->speakerRepository = $speakerRepository;
+    }
+
+    public function injectSessionRepository(SessionRepository $sessionRepository)
+    {
+        $this->sessionRepository = $sessionRepository;
+    }
+
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
     protected function executeInternal()
     {
-        $configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        $settings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'sessionplaner');
+        $settings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            'sessionplaner'
+        );
         $storagePid = GeneralUtility::intExplode(',', $settings['persistence']['storagePid'])[0] ?? 0;
-        $sessionRepository = $this->objectManager->get(SessionRepository::class);
-        $speakerRepository = $this->objectManager->get(SpeakerRepository::class);
-        $persistenceManager = $this->objectManager->get(PersistenceManagerInterface::class);
 
         $data = $this->finisherContext->getFormValues();
-        $speaker = $speakerRepository->findOneByEmailIncludeHidden($data['email']);
+
+        $speaker = $this->speakerRepository->findOneByEmailIncludeHidden($data['email']);
         if (!$speaker) {
             $speaker = new Speaker();
             $speaker->initializeObject();
@@ -56,7 +97,7 @@ class SuggestFormFinisher extends AbstractFinisher
         $session->setLevel($data['level']);
         $session->addSpeaker($speaker);
 
-        $sessionRepository->add($session);
-        $persistenceManager->persistAll();
+        $this->sessionRepository->add($session);
+        $this->persistenceManager->persistAll();
     }
 }

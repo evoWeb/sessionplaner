@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -19,8 +20,6 @@ use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
-use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
  * SessionPathSegmentUpdate
@@ -76,8 +75,10 @@ class SessionPathSegmentUpdate implements UpgradeWizardInterface
      */
     public function updateNecessary(): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($this->table);
-        $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
+        /** @var DeletedRestriction $deleteRestriction */
+        $deleteRestriction = GeneralUtility::makeInstance(DeletedRestriction::class);
+        $queryBuilder = $this->getQueryBuilderForTable($this->table);
+        $queryBuilder->getRestrictions()->removeAll()->add($deleteRestriction);
 
         $elementCount = $queryBuilder
             ->count('uid')
@@ -148,5 +149,14 @@ class SessionPathSegmentUpdate implements UpgradeWizardInterface
         }
 
         return true;
+    }
+
+    protected function getQueryBuilderForTable(string $table): \TYPO3\CMS\Core\Database\Query\QueryBuilder
+    {
+        /** @var \TYPO3\CMS\Core\Database\ConnectionPool $pool */
+        $pool = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            \TYPO3\CMS\Core\Database\ConnectionPool::class
+        );
+        return $pool->getQueryBuilderForTable($table);
     }
 }

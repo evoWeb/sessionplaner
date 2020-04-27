@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -40,6 +41,9 @@ class SpeakerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->matching($query->equals('email', trim($email)));
-        return $query->execute()->getFirst();
+
+        /** @var Speaker $speaker */
+        $speaker = $query->execute()->getFirst();
+        return $speaker;
     }
 }
