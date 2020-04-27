@@ -153,9 +153,6 @@
             <trans-unit id="tx_sessionplaner_domain_model_session-speakers" xml:space="preserve">
                 <source>Speakers</source>
             </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-path_segment" xml:space="preserve">
-                <source>Path segment</source>
-            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-attendees" xml:space="preserve">
                 <source>Attendees</source>
             </trans-unit>
