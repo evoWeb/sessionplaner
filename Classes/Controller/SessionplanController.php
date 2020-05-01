@@ -24,7 +24,7 @@ class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     protected $dayRepository;
 
-    public function injectDayRepository(DayRepository $dayRepository)
+    public function __construct(DayRepository $dayRepository)
     {
         $this->dayRepository = $dayRepository;
     }

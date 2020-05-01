@@ -20,11 +20,11 @@ $EM_CONF['sessionplaner'] = [
     'author_company' => '',
     'state' => 'stable',
     'clearCacheOnLoad' => 1,
-    'version' => '2.1.0',
+    'version' => '3.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.5-10.4.99',
-            'form' => '9.5.5-10.4.99',
+            'typo3' => '10.4.0-10.4.99',
+            'form' => '10.4.0-10.4.99',
         ],
     ],
 ];
