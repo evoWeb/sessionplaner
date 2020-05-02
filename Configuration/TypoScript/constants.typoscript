@@ -1,6 +1,8 @@
 # customsubcategory=100_SPTEMPLATE=Template
 # customsubcategory=110_SPPERSISTENCE=Persistence
 # customsubcategory=120_SPSETTINGS=Settings
+# customsubcategory=130_SPSUGGESTMAIL=Suggest Notifications
+# customsubcategory=140_SPSUGGESTCONFIRMATION=Suggest Confirmation
 
 plugin.tx_sessionplaner {
     view {
@@ -26,5 +28,32 @@ plugin.tx_sessionplaner {
         twitterHashtag = TYPO3
         # cat=plugin.sessionplaner/120_SPSETTINGS/twitterAccount; type=string; label=Twitter Account
         twitterAccount = typo3
+
+        suggest {
+            notification {
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/enable; type=boolean; label=Enable
+                enable = 0
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/subject; type=string; label=Subject
+                subject = New Session Suggestion
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/recipientAddress; type=string; label=Recipient Address
+                recipientAddress =
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/recipientName; type=string; label=Recipient Name
+                recipientName =
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/senderAddress; type=string; label=Sender Address
+                senderAddress =
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/senderName; type=string; label=Sender Name
+                senderName =
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/carbonCopyAddress; type=string; label=Carbon Copy Address
+                carbonCopyAddress =
+                # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/blindCarbonCopyAddress; type=string; label=Blind Carbon Copy Address
+                blindCarbonCopyAddress =
+            }
+            confirmation {
+                # cat=plugin.sessionplaner/140_SPSUGGESTCONFIRMATION/message; type=string; label=Confirmation Message
+                message = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation
+                # cat=plugin.sessionplaner/140_SPSUGGESTCONFIRMATION/pageUid; type=int+; label=Confirmation Page: If confirmation page is set, the user will be redirected to this page after submisstion instead of showing a message.
+                pageUid =
+            }
+        }
     }
 }

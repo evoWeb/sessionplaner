@@ -1,6 +1,6 @@
 <?php
-declare(strict_types = 1);
-namespace Evoweb\Sessionplaner\Controller;
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -13,7 +13,10 @@ namespace Evoweb\Sessionplaner\Controller;
  * LICENSE file that was distributed with this source code.
  */
 
+namespace Evoweb\Sessionplaner\Controller;
+
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
+use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
 use Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -21,15 +24,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class SpeakerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository
+     * @var SpeakerRepository
      */
     protected $speakerRepository;
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository $speakerRepository
-     */
-    public function injectSpeakerRepository(
-        \Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository $speakerRepository
+    public function __construct(
+        SpeakerRepository $speakerRepository
     ) {
         $this->speakerRepository = $speakerRepository;
     }
@@ -43,9 +43,11 @@ class SpeakerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
     public function showAction(Speaker $speaker)
     {
+        /** @var SpeakerTitleTagProvider $provider */
         $provider = GeneralUtility::makeInstance(SpeakerTitleTagProvider::class);
         $provider->setTitle($speaker->getName());
 
+        /** @var MetaTagManagerRegistry $metaTagRegistry */
         $metaTagRegistry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
 
         $ogMetaTagManager = $metaTagRegistry->getManagerForProperty('og:title');

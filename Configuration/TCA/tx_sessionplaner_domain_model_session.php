@@ -144,7 +144,6 @@ return [
                 'rows' => 15,
                 'softref' => 'typolink_tag,images,email[subst],url',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default'
             ],
         ],
         'documents' => [
@@ -162,15 +161,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    [$languageFile . 'notassigned', 0],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-talk', 1],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-tutorial', 2],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-workshop', 3],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-wish', 6],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-other', 4],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-type-break', 5],
-                ],
+                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionTypeEnum::getTcaOptions()),
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
@@ -181,12 +172,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => [
-                    [$languageFile . 'notassigned', 0],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-level-starter', 1],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-level-advanced', 2],
-                    [$languageFile . 'tx_sessionplaner_domain_model_session-level-pro', 3],
-                ],
+                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionLevelEnum::getTcaOptions()),
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,

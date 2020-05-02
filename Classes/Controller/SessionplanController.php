@@ -1,6 +1,6 @@
 <?php
-declare(strict_types = 1);
-namespace Evoweb\Sessionplaner\Controller;
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -13,6 +13,8 @@ namespace Evoweb\Sessionplaner\Controller;
  * LICENSE file that was distributed with this source code.
  */
 
+namespace Evoweb\Sessionplaner\Controller;
+
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 
 class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
@@ -22,7 +24,7 @@ class SessionplanController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     protected $dayRepository;
 
-    public function injectDayRepository(DayRepository $dayRepository)
+    public function __construct(DayRepository $dayRepository)
     {
         $this->dayRepository = $dayRepository;
     }

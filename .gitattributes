@@ -1,14 +1,11 @@
 # Files
+.Build export-ignore
 .editorconfig export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
-.php_cs.dist export-ignore
 .travis.yml
-gulpfile.js
-package.json
-yarn.lock
 
-# Enforce checkout with linux lf consistent over all plattforms
+# Enforce checkout with linux lf consistent over all platforms
 *.xml text eol=lf
 *.html text eol=lf
 *.css text eol=lf

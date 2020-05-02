@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
-    <file t3:id="1558692598" source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:40Z" product-name="sessionplaner">
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:40Z" product-name="sessionplaner">
         <header/>
         <body>
 
@@ -153,9 +153,6 @@
             <trans-unit id="tx_sessionplaner_domain_model_session-speakers" xml:space="preserve">
                 <source>Speakers</source>
             </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-path_segment" xml:space="preserve">
-                <source>Path segment</source>
-            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-attendees" xml:space="preserve">
                 <source>Attendees</source>
             </trans-unit>
@@ -177,35 +174,8 @@
             <trans-unit id="tx_sessionplaner_domain_model_session-type" xml:space="preserve">
                 <source>Type</source>
             </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-talk" xml:space="preserve">
-                <source>Talk</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-tutorial" xml:space="preserve">
-                <source>Tutorial</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-workshop" xml:space="preserve">
-                <source>Workshop</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-other" xml:space="preserve">
-                <source>Other</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-wish" xml:space="preserve">
-                <source>Wish</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-type-break" xml:space="preserve">
-                <source>Break</source>
-            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-level" xml:space="preserve">
                 <source>Level</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-level-starter" xml:space="preserve">
-                <source>Starter / Overview</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-level-advanced" xml:space="preserve">
-                <source>Advanced / Basic knowledge</source>
-            </trans-unit>
-            <trans-unit id="tx_sessionplaner_domain_model_session-level-pro" xml:space="preserve">
-                <source>Pro / Detailed</source>
             </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_session-day" xml:space="preserve">
                 <source>Day</source>

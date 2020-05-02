@@ -1,6 +1,6 @@
 <?php
-declare(strict_types = 1);
-namespace Evoweb\Sessionplaner\Domain\Model;
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -13,10 +13,28 @@ namespace Evoweb\Sessionplaner\Domain\Model;
  * LICENSE file that was distributed with this source code.
  */
 
+namespace Evoweb\Sessionplaner\Domain\Model;
+
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Speaker extends AbstractSlugEntity
 {
+    /**
+     * @var string
+     */
+    protected $slugField = 'path_segment';
+
+    /**
+     * @var string
+     */
+    protected $tablename = 'tx_sessionplaner_domain_model_speaker';
+
+    /**
+     * @var bool
+     */
+    protected $hidden = false;
+
     /**
      * @var string
      */
@@ -73,102 +91,140 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $detailPage;
 
+    /**
+     * @var string
+     */
+    protected $pathSegment;
+
     public function initializeObject()
     {
         $this->sessions = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectStorage::class);
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function setHidden(bool $hidden)
+    {
+        $this->hidden = $hidden;
+    }
+
+    public function getHidden(): bool
+    {
+        return $this->hidden;
+    }
+
+    public function setPathSegment(string $pathSegment)
+    {
+        $this->pathSegment = $pathSegment;
+    }
+
+    public function getPathSegment(): string
+    {
+        return $this->pathSegment;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getSessions()
+    public function getSessions(): ObjectStorage
     {
         return $this->sessions;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sessions
-     */
     public function setSessions(ObjectStorage $sessions): void
     {
         $this->sessions = $sessions;
     }
 
-    /**
-     * @return string
-     */
+    public function setCompany(string $company): void
+    {
+        $this->company = $company;
+    }
+
     public function getCompany(): string
     {
         return $this->company;
     }
 
-    /**
-     * @return string
-     */
+    public function setWebsite(string $website): void
+    {
+        $this->website = $website;
+    }
+
     public function getWebsite(): string
     {
         return $this->website;
     }
 
-    /**
-     * @return string
-     */
+    public function setTwitter(string $twitter): void
+    {
+        $this->twitter = $twitter;
+    }
+
     public function getTwitter(): string
     {
         return $this->twitter;
     }
 
-    /**
-     * @return string
-     */
+    public function setLinkedin(string $linkedin): void
+    {
+        $this->linkedin = $linkedin;
+    }
+
     public function getLinkedin(): string
     {
         return $this->linkedin;
     }
 
-    /**
-     * @return string
-     */
+    public function setXing(string $xing): void
+    {
+        $this->xing = $xing;
+    }
+
     public function getXing(): string
     {
         return $this->xing;
     }
 
-    /**
-     * @return string
-     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $logo
-     */
-    public function getPicture()
+    public function setPicture(FileReference $picture): void
+    {
+        $this->picture = $picture;
+    }
+    public function getPicture(): ?FileReference
     {
         return $this->picture;
     }
 
-    /**
-     * @return int
-     */
+    public function setDetailPage(int $detailPage): void
+    {
+        $this->detailPage = $detailPage;
+    }
+
     public function getDetailPage(): int
     {
         return $this->detailPage;
     }
 
-    /**
-     * @return string
-     */
+    public function setBio(string $bio): void
+    {
+        $this->bio = $bio;
+    }
+
     public function getBio(): string
     {
         return $this->bio;

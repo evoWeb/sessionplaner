@@ -1,15 +1,27 @@
 <?php
+
+/*
+ * This file is part of the package evoweb\sessionplaner.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(function () {
-    /**
-     * Register "sessionplannervh" as global fluid namespace
-     */
+    // Register "sessionplannervh" as global fluid namespace
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] =
         'Evoweb\\Sessionplaner\\ViewHelpers';
 
     /**
      * Register Icons
+     *
+     * @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry
      */
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $icons = [
@@ -46,29 +58,14 @@ call_user_func(function () {
         \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class
     ] = \Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate::class;
 
-    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_branch) < 10000000) {
-        // @todo remove once TYPO3 9.5.x support is dropped
-        $extensionName = 'Evoweb.sessionplaner';
-        $sessionController = 'Session';
-        $sessionPlanController = 'Sessionplan';
-        $speakerController = 'Speaker';
-        $suggestController = 'Suggest';
-    } else {
-        $extensionName = 'Sessionplaner';
-        $sessionController = \Evoweb\Sessionplaner\Controller\SessionController::class;
-        $sessionPlanController = \Evoweb\Sessionplaner\Controller\SessionplanController::class;
-        $speakerController = \Evoweb\Sessionplaner\Controller\SpeakerController::class;
-        $suggestController = \Evoweb\Sessionplaner\Controller\SuggestController::class;
-    }
-
     /**
      * Configure Session Frontend Plugin
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        $extensionName,
+        'Sessionplaner',
         'Session',
         [
-            $sessionController => 'list, show',
+            \Evoweb\Sessionplaner\Controller\SessionController::class => 'list, show',
         ]
     );
 
@@ -76,10 +73,10 @@ call_user_func(function () {
      * Configure Sessionplan Frontend Plugin
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        $extensionName,
+        'Sessionplaner',
         'Sessionplan',
         [
-            $sessionPlanController => 'display',
+            \Evoweb\Sessionplaner\Controller\SessionplanController::class => 'display',
         ]
     );
 
@@ -87,10 +84,10 @@ call_user_func(function () {
      * Configure Speaker Frontend Plugin
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        $extensionName,
+        'Sessionplaner',
         'Speaker',
         [
-            $speakerController => 'list, show',
+            \Evoweb\Sessionplaner\Controller\SpeakerController::class => 'list, show',
         ]
     );
 
@@ -98,13 +95,13 @@ call_user_func(function () {
      * Configure Suggest Frontend Plugin
      */
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        $extensionName,
+        'Sessionplaner',
         'Suggest',
         [
-            $suggestController => 'new, create',
+            \Evoweb\Sessionplaner\Controller\SuggestController::class => 'form',
         ],
         [
-            $suggestController => 'new, create',
+            \Evoweb\Sessionplaner\Controller\SuggestController::class => 'form',
         ]
     );
 

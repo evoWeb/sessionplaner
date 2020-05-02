@@ -89,12 +89,7 @@
                         </label>
                     </dt>
                     <dd>
-                        <f:form.select id="session-form-type" name="type" options="{
-                            1: '{f:translate(key: \'type-talk\')}',
-                            2: '{f:translate(key: \'type-tutorial\')}',
-                            3: '{f:translate(key: \'type-workshop\')}',
-                            4: '{f:translate(key: \'type-other\')}'
-                        }"/>
+                        <f:form.select id="session-form-type" name="type" options="{formOptions.types}"/>
                     </dd>
 
                     <dt>
@@ -103,11 +98,7 @@
                         </label>
                     </dt>
                     <dd>
-                        <f:form.select id="session-form-level" name="level" class="level" options="{
-                            1: '{f:translate(key: \'level-starter\')}',
-                            2: '{f:translate(key: \'level-advanced\')}',
-                            3: '{f:translate(key: \'level-pro\')}'
-                        }"/>
+                        <f:form.select id="session-form-level" name="level" class="level" options="{formOptions.levels}"/>
                     </dd>
                 </dl>
             </form>

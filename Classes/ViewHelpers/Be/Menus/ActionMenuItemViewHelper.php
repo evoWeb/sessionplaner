@@ -1,6 +1,6 @@
 <?php
-declare(strict_types = 1);
-namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
+
+declare(strict_types=1);
 
 /*
  * This file is part of the package evoweb\sessionplaner.
@@ -12,6 +12,8 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
+
+namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
 
 /**
  * View helper which returns an option tag.
@@ -73,7 +75,6 @@ class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\Act
         $current = $this->arguments['current'];
         $currentArgumentKey = $this->arguments['currentArgumentKey'];
 
-        /** @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder */
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
         $uri = $uriBuilder->reset()->uriFor($action, $arguments, $controller);
         $this->tag->addAttribute('value', $uri);
