@@ -135,6 +135,7 @@ class Session extends AbstractSlugEntity
         $this->speakers = GeneralUtility::makeInstance(ObjectStorage::class);
         $this->documents = GeneralUtility::makeInstance(ObjectStorage::class);
         $this->tags = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->links = GeneralUtility::makeInstance(ObjectStorage::class);
     }
 
     /**
