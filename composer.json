@@ -17,7 +17,11 @@
     ],
     "require": {
         "typo3/cms-core": "^10.4",
-        "typo3/cms-form": "^10.4"
+        "typo3/cms-extbase": "*",
+        "typo3/cms-fluid": "*"
+    },
+    "suggest": {
+        "typo3/cms-form": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.13"
