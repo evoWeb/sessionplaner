@@ -1,7 +1,7 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-@import 'FILE:EXT:form/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:form/Configuration/TypoScript/setup.typoscript'
 
 ################
 #### PLUGIN ####
