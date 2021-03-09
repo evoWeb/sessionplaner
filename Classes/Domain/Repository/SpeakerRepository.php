@@ -16,8 +16,8 @@ namespace Evoweb\Sessionplaner\Domain\Repository;
  */
 
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
-use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class SpeakerRepository extends Repository
 {

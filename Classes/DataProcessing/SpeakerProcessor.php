@@ -15,10 +15,10 @@ namespace Evoweb\Sessionplaner\DataProcessing;
  * LICENSE file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
 class SpeakerProcessor implements DataProcessorInterface
 {

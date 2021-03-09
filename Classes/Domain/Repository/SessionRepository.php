@@ -18,9 +18,9 @@ namespace Evoweb\Sessionplaner\Domain\Repository;
 use Evoweb\Sessionplaner\Domain\Model\Day;
 use Evoweb\Sessionplaner\Domain\Model\Session;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class SessionRepository extends Repository
 {

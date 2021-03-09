@@ -1,6 +1,7 @@
 <?php
 
 use Evoweb\Sessionplaner\Controller\AjaxController;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *

@@ -15,7 +15,6 @@ namespace Evoweb\Sessionplaner\Controller;
  * LICENSE file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Http\JsonResponse;
 use Evoweb\Sessionplaner\Domain\Model\Day;
 use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Session;
@@ -26,6 +25,8 @@ use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SlotRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -33,7 +34,6 @@ use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 class AjaxController
 {
