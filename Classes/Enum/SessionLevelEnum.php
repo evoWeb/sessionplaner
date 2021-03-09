@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Enum;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,15 +15,13 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Enum;
-
 class SessionLevelEnum
 {
     public const OPTION_BEGINNER = 1;
     public const OPTION_ADVANCED = 2;
     public const OPTION_PRO = 3;
 
-    protected static $optionLabel = [
+    protected static array $optionLabel = [
         self::OPTION_BEGINNER =>
             'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.beginner',
         self::OPTION_ADVANCED =>

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Repository;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,20 +15,22 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Repository;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class DayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class DayRepository extends Repository
 {
     /**
      * Default Orderings
      */
     protected $defaultOrderings = [
-        'date' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'date' => QueryInterface::ORDER_ASCENDING
     ];
 
     public function findByUidListRaw(string $uidList): array
     {
-        $uid = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $uidList, true);
+        $uid = GeneralUtility::intExplode(',', $uidList, true);
         if (is_array($uid) && !empty($uid)) {
             $query = $this->createQuery();
             $result = $query->matching(

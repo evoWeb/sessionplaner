@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Model;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,77 +15,58 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Tag extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Tag extends AbstractEntity
 {
     /**
      * @var string
      */
-    protected $label = '';
+    protected string $label = '';
 
     /**
      * @var string
      */
-    protected $color = '';
+    protected string $color = '';
 
     /**
+     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      */
-    protected $sessions;
+    protected ?ObjectStorage $sessions;
 
     public function initializeObject()
     {
-        $this->sessions = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->sessions = new ObjectStorage();
     }
 
-    /**
-     * @param string $label
-     */
-    public function setLabel($label)
+    public function setLabel(string $label)
     {
         $this->label = $label;
     }
 
-    /**
-     * @return string
-     */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
 
-    /**
-     * @param string $color
-     */
-    public function setColor($color)
+    public function setColor(string $color)
     {
         $this->color = $color;
     }
 
-    /**
-     * @return string
-     */
-    public function getColor()
+    public function getColor(): string
     {
         return $this->color;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sessions
-     */
-    public function setSessions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sessions)
+    public function setSessions(ObjectStorage $sessions)
     {
         $this->sessions = $sessions;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getSessions()
+    public function getSessions(): ObjectStorage
     {
         return $this->sessions;
     }

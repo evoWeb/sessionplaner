@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Enum;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,8 +15,6 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Enum;
-
 class SessionTypeEnum
 {
     public const OPTION_TALK = 1;
@@ -22,7 +22,7 @@ class SessionTypeEnum
     public const OPTION_WORKSHOP = 3;
     public const OPTION_DISCUSSION = 4;
 
-    protected static $optionLabel = [
+    protected static array $optionLabel = [
         self::OPTION_TALK =>
             'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.talk',
         self::OPTION_TUTORIAL =>

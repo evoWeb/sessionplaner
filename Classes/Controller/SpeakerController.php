@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Controller;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,35 +15,34 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Controller;
-
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
 use Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
-class SpeakerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class SpeakerController extends ActionController
 {
-    /**
-     * @var SpeakerRepository
-     */
-    protected $speakerRepository;
+    protected SpeakerRepository $speakerRepository;
 
-    public function __construct(
-        SpeakerRepository $speakerRepository
-    ) {
+    public function __construct(SpeakerRepository $speakerRepository)
+    {
         $this->speakerRepository = $speakerRepository;
     }
 
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $speakers = $this->speakerRepository->findAll();
 
         $this->view->assign('speakers', $speakers);
+
+        return new HtmlResponse($this->view->render());
     }
 
-    public function showAction(Speaker $speaker)
+    public function showAction(Speaker $speaker): ResponseInterface
     {
         /** @var SpeakerTitleTagProvider $provider */
         $provider = GeneralUtility::makeInstance(SpeakerTitleTagProvider::class);
@@ -57,5 +58,7 @@ class SpeakerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $twitterMetaTagManager->addProperty('twitter:title', $speaker->getName());
 
         $this->view->assign('speaker', $speaker);
+
+        return new HtmlResponse($this->view->render());
     }
 }

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Finisher;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -12,8 +14,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
-namespace Evoweb\Sessionplaner\Domain\Finisher;
 
 use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
@@ -26,25 +26,13 @@ use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
 
 class SuggestFormFinisher extends AbstractFinisher
 {
-    /**
-     * @var ConfigurationManagerInterface
-     */
-    protected $configurationManager;
+    protected ?ConfigurationManagerInterface $configurationManager;
 
-    /**
-     * @var SpeakerRepository
-     */
-    protected $speakerRepository;
+    protected ?SpeakerRepository $speakerRepository;
 
-    /**
-     * @var SessionRepository
-     */
-    protected $sessionRepository;
+    protected ?SessionRepository $sessionRepository;
 
-    /**
-     * @var PersistenceManagerInterface
-     */
-    protected $persistenceManager;
+    protected ?PersistenceManagerInterface $persistenceManager;
 
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {

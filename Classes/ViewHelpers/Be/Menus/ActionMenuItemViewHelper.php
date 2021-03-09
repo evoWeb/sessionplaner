@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,7 +15,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
+use TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\ActionMenuItemViewHelper as FluidActionMenuItemViewHelper;
 
 /**
  * View helper which returns an option tag.
@@ -43,16 +45,13 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
  * localized select element
  * <output>
  */
-class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\ActionMenuItemViewHelper
+class ActionMenuItemViewHelper extends FluidActionMenuItemViewHelper
 {
     /**
      * @var \TYPO3\CMS\Fluid\Core\Rendering\RenderingContext
      */
     protected $renderingContext;
 
-    /**
-     * Initialize arguments.
-     */
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -85,17 +84,13 @@ class ActionMenuItemViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\Act
         return $this->tag->render();
     }
 
-    /**
-     * @param string $controller
-     * @param string $action
-     * @param array $arguments
-     * @param string $current
-     * @param string $currentArgumentKey
-     *
-     * @return bool
-     */
-    public function isSelected($controller, $action, $arguments, $current, $currentArgumentKey)
-    {
+    public function isSelected(
+        string $controller,
+        string $action,
+        array $arguments,
+        string $current,
+        string $currentArgumentKey
+    ): bool {
         if ($current === '' && $currentArgumentKey === '') {
             $currentRequest = $this->renderingContext->getControllerContext()->getRequest();
             $currentController = $currentRequest->getControllerName();

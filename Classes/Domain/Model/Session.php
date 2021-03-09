@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Model;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,369 +15,230 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Session extends AbstractSlugEntity
 {
-    /**
-     * @var string
-     */
-    protected $slugField = 'path_segment';
+    protected string $slugField = 'path_segment';
 
-    /**
-     * @var string
-     */
-    protected $tablename = 'tx_sessionplaner_domain_model_session';
+    protected string $tablename = 'tx_sessionplaner_domain_model_session';
 
-    /**
-     * @var bool
-     */
-    protected $hidden = false;
+    protected bool $hidden = false;
 
-    /**
-     * @var bool
-     */
-    protected $suggestion = false;
+    protected bool $suggestion = false;
 
-    /**
-     * @var bool
-     */
-    protected $social = true;
+    protected bool $social = true;
 
-    /**
-     * @var bool
-     */
-    protected $donotlink = false;
+    protected bool $donotlink = false;
 
     /**
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
-     * @var string
      */
-    protected $topic = '';
+    protected string $topic = '';
+
+    protected string $pathSegment = '';
+
+    protected string $description = '';
+
+    protected string $speaker = '';
+
+    protected string $twitter = '';
+
+    protected int $attendees = 0;
+
+    protected int $type = 0;
+
+    protected int $level = 0;
+
+    protected Day $day;
+
+    protected Room $room;
+
+    protected Slot $slot;
 
     /**
-     * @var string
-     */
-    protected $pathSegment = '';
-
-    /**
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * @var string
-     */
-    protected $speaker = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
+     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $speakers;
+    protected ?ObjectStorage $speakers;
 
     /**
-     * @var string
-     */
-    protected $twitter = '';
-
-    /**
-     * @var int
-     */
-    protected $attendees = 0;
-
-    /**
-     * @var int
-     */
-    protected $type = 0;
-
-    /**
-     * @var int
-     */
-    protected $level = 0;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ?ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $documents;
+    protected ?ObjectStorage $documents;
 
     /**
-     * @var \Evoweb\Sessionplaner\Domain\Model\Day
-     */
-    protected $day = null;
-
-    /**
-     * @var \Evoweb\Sessionplaner\Domain\Model\Room
-     */
-    protected $room = null;
-
-    /**
-     * @var \Evoweb\Sessionplaner\Domain\Model\Slot
-     */
-    protected $slot = null;
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
+     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $tags;
+    protected ?ObjectStorage $tags;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Link>
+     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Link>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $links = null;
+    protected ?ObjectStorage $links;
 
     public function initializeObject()
     {
-        $this->speakers = GeneralUtility::makeInstance(ObjectStorage::class);
-        $this->documents = GeneralUtility::makeInstance(ObjectStorage::class);
-        $this->tags = GeneralUtility::makeInstance(ObjectStorage::class);
-        $this->links = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->speakers = new ObjectStorage();
+        $this->documents = new ObjectStorage();
+        $this->tags = new ObjectStorage();
+        $this->links = new ObjectStorage();
     }
 
-    /**
-     * @param bool $hidden
-     */
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
     }
 
-    /**
-     * @return bool
-     */
-    public function getHidden()
+    public function getHidden(): bool
     {
         return $this->hidden;
     }
 
-    /**
-     * @param bool $social
-     */
-    public function setSocial($social)
+    public function setSocial(bool $social)
     {
         $this->social = $social;
     }
 
-    /**
-     * @return bool
-     */
-    public function getSocial()
+    public function getSocial(): bool
     {
         return $this->social;
     }
 
-    /**
-     * @param bool $donotlink
-     */
-    public function setDonotlink($donotlink)
+    public function setDonotlink(bool $donotlink)
     {
         $this->donotlink = $donotlink;
     }
 
-    /**
-     * @return bool
-     */
-    public function getDonotlink()
+    public function getDonotlink(): bool
     {
         return $this->donotlink;
     }
 
-    /**
-     * @param bool $suggestion
-     */
-    public function setSuggestion($suggestion)
+    public function setSuggestion(bool $suggestion)
     {
         $this->suggestion = $suggestion;
     }
 
-    /**
-     * @return bool
-     */
-    public function getSuggestion()
+    public function getSuggestion(): bool
     {
         return $this->suggestion;
     }
 
-    /**
-     * @param string $topic
-     */
-    public function setTopic($topic)
+    public function setTopic(string $topic)
     {
         $this->topic = $topic;
     }
 
-    /**
-     * @return string
-     */
-    public function getTopic()
+    public function getTopic(): string
     {
         return $this->topic;
     }
 
-    /**
-     * @param string $pathSegment
-     */
-    public function setPathSegment($pathSegment)
+    public function setPathSegment(string $pathSegment)
     {
         $this->pathSegment = $pathSegment;
     }
 
-    /**
-     * @return string
-     */
-    public function getPathSegment()
+    public function getPathSegment(): string
     {
         return $this->pathSegment;
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param Speaker $speaker
-     */
     public function addSpeaker(Speaker $speaker)
     {
         $this->speakers->attach($speaker);
     }
 
-    /**
-     * @param Speaker $speaker
-     */
     public function removeSpeaker(Speaker $speaker)
     {
         $this->speakers->detach($speaker);
     }
 
-    /**
-     * @return ObjectStorage
-     */
     public function getSpeakers(): ObjectStorage
     {
         return $this->speakers;
     }
 
-    /**
-     * @param ObjectStorage $speakers
-     */
     public function setSpeakers(ObjectStorage $speakers)
     {
         $this->speakers = $speakers;
     }
 
-    /**
-     * @param string $speaker
-     */
-    public function setSpeaker($speaker)
+    public function setSpeaker(string $speaker)
     {
         $this->speaker = $speaker;
     }
 
-    /**
-     * @return string
-     */
-    public function getSpeaker()
+    public function getSpeaker(): string
     {
         return $this->speaker;
     }
 
-    /**
-     * @param string $twitter
-     */
-    public function setTwitter($twitter)
+    public function setTwitter(string $twitter)
     {
         $this->twitter = $twitter;
     }
 
-    /**
-     * @return string
-     */
-    public function getTwitter()
+    public function getTwitter(): string
     {
         return $this->twitter;
     }
 
-    /**
-     * @param int $attendees
-     */
-    public function setAttendees($attendees)
+    public function setAttendees(int $attendees)
     {
         $this->attendees = $attendees;
     }
 
-    /**
-     * @return int
-     */
-    public function getAttendees()
+    public function getAttendees(): int
     {
         return $this->attendees;
     }
 
-    /**
-     * @param int $type
-     */
-    public function setType($type)
+    public function setType(int $type)
     {
         $this->type = $type;
     }
 
-    /**
-     * @return int
-     */
-    public function getType()
+    public function getType(): int
     {
         return $this->type;
     }
 
-    /**
-     * @param int $level
-     */
-    public function setLevel($level)
+    public function setLevel(int $level)
     {
         $this->level = $level;
     }
 
-    /**
-     * @return int
-     */
-    public function getLevel()
+    public function getLevel(): int
     {
         return $this->level;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $documents
-     */
-    public function setDocuments(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $documents)
+    public function setDocuments(ObjectStorage $documents)
     {
         $this->documents = $documents;
     }
 
-    /**
-     * @return array
-     */
-    public function getDocuments()
+    public function getDocuments(): array
     {
         $result = [];
+        /** @var FileReference $file */
         foreach ($this->documents as $file) {
             $result[] = $file->getOriginalResource();
         }
@@ -392,9 +255,8 @@ class Session extends AbstractSlugEntity
         $day = $this->day;
         if (!empty($day) && $day !== 0) {
             return $day;
-        } else {
-            return null;
         }
+        return null;
     }
 
     public function setRoom(?Room $room)
@@ -407,9 +269,8 @@ class Session extends AbstractSlugEntity
         $room = $this->room;
         if (!empty($room) && $room !== 0) {
             return $room;
-        } else {
-            return null;
         }
+        return null;
     }
 
     public function setSlot(?Slot $slot)
@@ -422,23 +283,16 @@ class Session extends AbstractSlugEntity
         $slot = $this->slot;
         if (!empty($slot) && $slot !== 0) {
             return $slot;
-        } else {
-            return null;
         }
+        return null;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags
-     */
-    public function setTags(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags)
+    public function setTags(ObjectStorage $tags)
     {
         $this->tags = $tags;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getTags()
+    public function getTags(): ObjectStorage
     {
         return $this->tags;
     }
@@ -456,17 +310,11 @@ class Session extends AbstractSlugEntity
         return $data;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
     public function getLinks(): ObjectStorage
     {
         return $this->links;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $links
-     */
     public function setLinks(ObjectStorage $links)
     {
         $this->links = $links;

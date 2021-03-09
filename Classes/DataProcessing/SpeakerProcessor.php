@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\DataProcessing;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,17 +15,14 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\DataProcessing;
-
+use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
 
-class SpeakerProcessor implements \TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface
+class SpeakerProcessor implements DataProcessorInterface
 {
-    /**
-     * @var SpeakerRepository
-     */
-    protected $speakerRepository;
+    protected SpeakerRepository $speakerRepository;
 
     public function __construct(SpeakerRepository $speakerRepository)
     {
@@ -47,7 +46,7 @@ class SpeakerProcessor implements \TYPO3\CMS\Frontend\ContentObject\DataProcesso
      * @return array
      */
     public function process(
-        \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj,
+        ContentObjectRenderer $cObj,
         array $contentObjectConfiguration,
         array $processorConfiguration,
         array $processedData

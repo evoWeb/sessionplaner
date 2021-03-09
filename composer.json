@@ -16,11 +16,9 @@
         "TYPO3Camps"
     ],
     "require": {
-        "typo3/cms-core": "^10.4",
+        "typo3/cms-core": "^11.0.0",
         "typo3/cms-extbase": "*",
-        "typo3/cms-fluid": "*"
-    },
-    "suggest": {
+        "typo3/cms-fluid": "*",
         "typo3/cms-form": "*"
     },
     "require-dev": {
