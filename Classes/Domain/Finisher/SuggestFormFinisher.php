@@ -26,13 +26,13 @@ use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
 
 class SuggestFormFinisher extends AbstractFinisher
 {
-    protected ?ConfigurationManagerInterface $configurationManager;
+    protected ?ConfigurationManagerInterface $configurationManager = null;
 
-    protected ?SpeakerRepository $speakerRepository;
+    protected ?SpeakerRepository $speakerRepository = null;
 
-    protected ?SessionRepository $sessionRepository;
+    protected ?SessionRepository $sessionRepository = null;
 
-    protected ?PersistenceManagerInterface $persistenceManager;
+    protected ?PersistenceManagerInterface $persistenceManager = null;
 
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {

@@ -34,7 +34,7 @@ class Tag extends AbstractEntity
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $sessions;
+    protected ?ObjectStorage $sessions = null;
 
     public function initializeObject()
     {

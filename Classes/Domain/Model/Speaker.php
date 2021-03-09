@@ -42,13 +42,13 @@ class Speaker extends AbstractSlugEntity
 
     protected string $email = '';
 
-    protected ?FileReference $picture;
+    protected ?FileReference $picture = null;
 
     /**
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $sessions;
+    protected ?ObjectStorage $sessions = null;
 
     protected int $detailPage = 0;
 

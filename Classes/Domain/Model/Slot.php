@@ -32,19 +32,19 @@ class Slot extends AbstractEntity
      * @var ?Day
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?Day $day;
+    protected ?Day $day = null;
 
     /**
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Room>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $rooms;
+    protected ?ObjectStorage $rooms = null;
 
     /**
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $sessions;
+    protected ?ObjectStorage $sessions = null;
 
     public function initializeObject()
     {

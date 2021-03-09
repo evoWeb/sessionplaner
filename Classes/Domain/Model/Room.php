@@ -26,7 +26,7 @@ class Room extends AbstractEntity
 
     protected string $name = '';
 
-    protected ?FileReference $logo;
+    protected ?FileReference $logo = null;
 
     protected int $seats = 0;
 
@@ -34,19 +34,19 @@ class Room extends AbstractEntity
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Day>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $days;
+    protected ?ObjectStorage $days = null;
 
     /**
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Slot>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $slots;
+    protected ?ObjectStorage $slots = null;
 
     /**
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $sessions;
+    protected ?ObjectStorage $sessions = null;
 
     public function initializeObject()
     {

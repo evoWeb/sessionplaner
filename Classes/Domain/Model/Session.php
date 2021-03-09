@@ -62,25 +62,25 @@ class Session extends AbstractSlugEntity
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $speakers;
+    protected ?ObjectStorage $speakers = null;
 
     /**
      * @var ?ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $documents;
+    protected ?ObjectStorage $documents = null;
 
     /**
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $tags;
+    protected ?ObjectStorage $tags = null;
 
     /**
      * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Link>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $links;
+    protected ?ObjectStorage $links = null;
 
     public function initializeObject()
     {
