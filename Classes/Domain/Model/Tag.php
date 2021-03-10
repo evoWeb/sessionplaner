@@ -31,10 +31,15 @@ class Tag extends AbstractEntity
     protected string $color = '';
 
     /**
-     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
+     * @var ObjectStorage<Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $sessions = null;
+    protected ObjectStorage $sessions;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
 
     public function initializeObject()
     {

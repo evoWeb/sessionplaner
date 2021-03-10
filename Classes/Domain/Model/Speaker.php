@@ -45,14 +45,19 @@ class Speaker extends AbstractSlugEntity
     protected ?FileReference $picture = null;
 
     /**
-     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
+     * @var ObjectStorage<Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $sessions = null;
+    protected ObjectStorage $sessions;
 
     protected int $detailPage = 0;
 
     protected string $pathSegment = '';
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
 
     public function initializeObject()
     {

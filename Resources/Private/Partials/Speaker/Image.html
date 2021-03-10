@@ -1,3 +1,6 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:sessionplanervh="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:if condition="{speaker} && {size}">
     <f:variable name="size" value="{size as integer}" />
     <f:if condition="{speaker.picture}">
@@ -16,3 +19,5 @@
         </f:else>
     </f:if>
 </f:if>
+
+</html>

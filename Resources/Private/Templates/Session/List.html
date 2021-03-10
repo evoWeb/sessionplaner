@@ -1,3 +1,5 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:layout name="Frontend" />
 <f:section name="Content">
 
@@ -8,7 +10,7 @@
         <f:format.html>{settings.listViewText}</f:format.html>
     </f:if>
     <f:if condition="!{sessions}">
-        <p>{f:translate(key: 'warning-nosessionsfound')}</p>
+        <p>{f:translate(id: 'warning-nosessionsfound')}</p>
     </f:if>
 
     <f:if condition="{sessions} && {settings.suggestions}">
@@ -52,3 +54,5 @@
     </f:if>
 
 </f:section>
+
+</html>

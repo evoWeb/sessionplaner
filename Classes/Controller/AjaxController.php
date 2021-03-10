@@ -37,7 +37,7 @@ use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 
 class AjaxController
 {
-    protected array $moduleConfiguration = [];
+    protected ?array $moduleConfiguration = [];
 
     protected array $parameter = [];
 

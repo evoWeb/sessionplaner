@@ -1,7 +1,10 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:sessionplanervh="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:section name="Main">
     <div id="gridButtonGroup" class="hidden">
         <f:format.raw>
-            <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new-in-grid" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
+            <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new-in-grid" iconKey="actions-document-new" title="{f:translate(id: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
         </f:format.raw>
     </div>
     <div class="t3-grid-container">
@@ -27,7 +30,7 @@
                             <sessionplanervh:format.time value="{slot.start}" />
                             <br>
                             {slot.duration}
-                            <f:translate key="minutes" />
+                            <f:translate id="minutes" />
                         </th>
                         <f:for each="{day.rooms}" as="room">
                             <td class="t3-grid-cell t3-page-ce-dropzone-available {f:if(condition: slot.break, else: 't3js-page-ce-dropzone-available t3js-grid-cell')}" data-day="{day.uid}" data-room="{room.uid}" data-slot="{slot.uid}">
@@ -44,3 +47,5 @@
         </table>
     </div>
 </f:section>
+
+</html>

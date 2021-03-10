@@ -26,16 +26,21 @@ class Day extends AbstractEntity
     protected string $date = '';
 
     /**
-     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Room>
+     * @var ObjectStorage<Room>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    public ?ObjectStorage $rooms;
+    public ObjectStorage $rooms;
 
     /**
-     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Slot>
+     * @var ObjectStorage<Slot>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    public ?ObjectStorage $slots;
+    public ObjectStorage $slots;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
 
     public function initializeObject()
     {

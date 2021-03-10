@@ -52,35 +52,40 @@ class Session extends AbstractSlugEntity
 
     protected int $level = 0;
 
-    protected Day $day;
+    protected ?Day $day = null;
 
-    protected Room $room;
+    protected ?Room $room = null;
 
-    protected Slot $slot;
-
-    /**
-     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Speaker>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     */
-    protected ?ObjectStorage $speakers = null;
+    protected ?Slot $slot = null;
 
     /**
-     * @var ?ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var ObjectStorage<Speaker>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $documents = null;
+    protected ObjectStorage $speakers;
 
     /**
-     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Tag>
+     * @var ObjectStorage<FileReference>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $tags = null;
+    protected ObjectStorage $documents;
 
     /**
-     * @var ?ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Link>
+     * @var ObjectStorage<Tag>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected ?ObjectStorage $links = null;
+    protected ObjectStorage $tags;
+
+    /**
+     * @var ObjectStorage<Link>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected ObjectStorage $links;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
 
     public function initializeObject()
     {
@@ -90,9 +95,9 @@ class Session extends AbstractSlugEntity
         $this->links = new ObjectStorage();
     }
 
-    public function setHidden(bool $hidden)
+    public function setHidden($hidden)
     {
-        $this->hidden = $hidden;
+        $this->hidden = (bool)$hidden;
     }
 
     public function getHidden(): bool
@@ -100,9 +105,9 @@ class Session extends AbstractSlugEntity
         return $this->hidden;
     }
 
-    public function setSocial(bool $social)
+    public function setSocial($social)
     {
-        $this->social = $social;
+        $this->social = (bool)$social;
     }
 
     public function getSocial(): bool
@@ -110,9 +115,9 @@ class Session extends AbstractSlugEntity
         return $this->social;
     }
 
-    public function setDonotlink(bool $donotlink)
+    public function setDonotlink($donotlink)
     {
-        $this->donotlink = $donotlink;
+        $this->donotlink = (bool)$donotlink;
     }
 
     public function getDonotlink(): bool
@@ -120,9 +125,9 @@ class Session extends AbstractSlugEntity
         return $this->donotlink;
     }
 
-    public function setSuggestion(bool $suggestion)
+    public function setSuggestion($suggestion)
     {
-        $this->suggestion = $suggestion;
+        $this->suggestion = (bool)$suggestion;
     }
 
     public function getSuggestion(): bool
@@ -200,9 +205,9 @@ class Session extends AbstractSlugEntity
         return $this->twitter;
     }
 
-    public function setAttendees(int $attendees)
+    public function setAttendees($attendees)
     {
-        $this->attendees = $attendees;
+        $this->attendees = (int)$attendees;
     }
 
     public function getAttendees(): int
@@ -210,9 +215,9 @@ class Session extends AbstractSlugEntity
         return $this->attendees;
     }
 
-    public function setType(int $type)
+    public function setType($type)
     {
-        $this->type = $type;
+        $this->type = (int)$type;
     }
 
     public function getType(): int
@@ -220,9 +225,9 @@ class Session extends AbstractSlugEntity
         return $this->type;
     }
 
-    public function setLevel(int $level)
+    public function setLevel($level)
     {
-        $this->level = $level;
+        $this->level = (int)$level;
     }
 
     public function getLevel(): int

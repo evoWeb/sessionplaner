@@ -15,6 +15,7 @@ namespace Evoweb\Sessionplaner\ViewHelpers\Be\Menus;
  * LICENSE file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\Be\Menus\ActionMenuItemViewHelper as FluidActionMenuItemViewHelper;
 
 /**
@@ -71,16 +72,24 @@ class ActionMenuItemViewHelper extends FluidActionMenuItemViewHelper
         $controller = $this->arguments['controller'];
         $action = $this->arguments['action'];
         $arguments = $this->arguments['arguments'];
+
         $current = $this->arguments['current'];
         $currentArgumentKey = $this->arguments['currentArgumentKey'];
 
         $uriBuilder = $this->renderingContext->getControllerContext()->getUriBuilder();
+        $uriBuilder->setRequest($this->renderingContext->getRequest());
+
         $uri = $uriBuilder->reset()->uriFor($action, $arguments, $controller);
         $this->tag->addAttribute('value', $uri);
-        if ($this->isSelected($controller, $action, $arguments, $current, $currentArgumentKey)) {
-            $this->tag->addAttribute('selected', 'selected');
+
+        if (!$this->tag->hasAttribute('selected')) {
+            $this->isSelected($controller, $action, $arguments, $current, $currentArgumentKey);
         }
-        $this->tag->setContent($label);
+
+        $this->tag->setContent(
+            // Double encode can be set to true, once the typo3fluid/fluid fix is released and required
+            htmlspecialchars($label, ENT_QUOTES, null, false)
+        );
         return $this->tag->render();
     }
 
@@ -88,19 +97,33 @@ class ActionMenuItemViewHelper extends FluidActionMenuItemViewHelper
         string $controller,
         string $action,
         array $arguments,
-        string $current,
+        int $current,
         string $currentArgumentKey
-    ): bool {
+    ) {
+        $result = false;
         if ($current === '' && $currentArgumentKey === '') {
-            $currentRequest = $this->renderingContext->getControllerContext()->getRequest();
-            $currentController = $currentRequest->getControllerName();
-            $currentAction = $currentRequest->getControllerActionName();
-
-            $result = ($action === $currentAction && $controller === $currentController);
+            $currentRequest = $this->renderingContext->getRequest();
+            $flatRequestArguments = ArrayUtility::flatten(
+                array_merge([
+                    'controller' => $currentRequest->getControllerName(),
+                    'action' => $currentRequest->getControllerActionName()
+                ], $currentRequest->getArguments())
+            );
+            $flatViewHelperArguments = ArrayUtility::flatten(
+                array_merge(['controller' => $controller, 'action' => $action], $arguments)
+            );
+            if (
+                $this->arguments['selected'] ||
+                array_diff($flatRequestArguments, $flatViewHelperArguments) === []
+            ) {
+                $result = true;
+            }
         } else {
             $result = ($current == $arguments[$currentArgumentKey]);
         }
 
-        return $result;
+        if ($result) {
+            $this->tag->addAttribute('selected', 'selected');
+        }
     }
 }
