@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Utility;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,8 +15,7 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Utility;
-
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class ObjectStorageUtility
@@ -47,7 +48,7 @@ class ObjectStorageUtility
         }
 
         /** @var ObjectStorage $storage */
-        $storage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectStorage::class);
+        $storage = GeneralUtility::makeInstance(ObjectStorage::class);
         foreach ($inventory as $item) {
             $storage->attach($item);
         }

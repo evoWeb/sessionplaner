@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Controller;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,27 +15,22 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Controller;
-
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class BackendModuleController extends ActionController
 {
-    /**
-     * @var DayRepository
-     */
-    protected $dayRepository;
+    protected DayRepository $dayRepository;
 
-    /**
-     * @var SessionRepository
-     */
-    protected $sessionRepository;
+    protected SessionRepository $sessionRepository;
 
     public function __construct(DayRepository $dayRepository, SessionRepository $sessionRepository)
     {
@@ -53,7 +50,7 @@ class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCo
         );
     }
 
-    public function showAction()
+    public function showAction(): ResponseInterface
     {
         if ($this->request->hasArgument('day')) {
             $day = $this->dayRepository->findByUid($this->request->getArgument('day'));
@@ -79,6 +76,8 @@ class BackendModuleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCo
         $this->view->assign('roomCount', is_object($day) ? count($day->getRooms()) : 0);
         $this->view->assign('days', $this->dayRepository->findAll());
         $this->view->assign('unassignedSessions', $this->sessionRepository->findUnassignedSessions());
+
+        return new HtmlResponse($this->view->render());
     }
 
     /**

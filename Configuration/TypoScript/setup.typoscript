@@ -1,7 +1,7 @@
 ######################
 #### DEPENDENCIES ####
 ######################
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:form/Configuration/TypoScript/setup.typoscript">
+@import 'EXT:form/Configuration/TypoScript/setup.typoscript'
 
 ################
 #### PLUGIN ####
@@ -48,24 +48,6 @@ plugin.tx_sessionplaner {
         }
     }
 }
-
-
-options:
-      subject: 'Become an Initiative Sponsor'
-      recipientAddress: susanne.moog@typo3.com
-      recipientName: 'Susanne Moog'
-      senderAddress: '{email-1}'
-      senderName: '{text-2}'
-      replyToAddress: susanne.moog@typo3.com
-      carbonCopyAddress: petra.hasenau@typo3.org
-      blindCarbonCopyAddress: ''
-      format: html
-      attachUploads: true
-      translation:
-        language: ''
-    identifier: EmailToReceiver
-
-
 
 ##############
 #### PAGE ####

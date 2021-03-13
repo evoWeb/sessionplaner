@@ -1,3 +1,5 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:layout name="Frontend" />
 <f:section name="Content">
 
@@ -14,7 +16,7 @@
             </div>
             <f:if condition="{session.links}">
                 <div class="sessionplaner-sessiondetail-links">
-                    <h4>{f:translate(key: 'links')}</h4>
+                    <h4>{f:translate(id: 'links')}</h4>
                     <ul>
                         <f:for each="{session.links}" as="linkitem">
                             <li>
@@ -26,7 +28,7 @@
             </f:if>
             <f:if condition="{session.documents}">
                 <div class="sessionplaner-sessiondetail-documents">
-                    <h4>{f:translate(key: 'documents')}</h4>
+                    <h4>{f:translate(id: 'documents')}</h4>
                     <ul>
                         <f:for each="{session.documents}" as="document">
                             <li><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></li>
@@ -36,10 +38,12 @@
             </f:if>
 
             <div class="sessionplaner-sessiondetail-backlink">
-                <f:link.action action="list">{f:translate(key: 'back-to-overview')}</f:link.action>
+                <f:link.action action="list">{f:translate(id: 'back-to-overview')}</f:link.action>
             </div>
         </article>
         <f:render partial="Disqus/Index" arguments="{settings: settings}" />
     </f:if>
 
 </f:section>
+
+</html>

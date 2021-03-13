@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\TitleTagProvider;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,9 +15,9 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\TitleTagProvider;
+use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
 
-class EventTitleTagProvider extends \TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider
+class EventTitleTagProvider extends AbstractPageTitleProvider
 {
     public function setTitle(string $title)
     {

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\ViewHelpers\Format;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,19 +15,18 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\ViewHelpers\Format;
-
 use Evoweb\Sessionplaner\Utility\TimeFormatUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
-class TimeViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class TimeViewHelper extends AbstractViewHelper
 {
     use CompileWithContentArgumentAndRenderStatic;
 
     public function initializeArguments()
     {
-        $this->registerArgument('value', 'integer', 'integer to format');
+        $this->registerArgument('value', 'int', 'integer to format');
     }
 
     /**
@@ -40,6 +41,6 @@ class TimeViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelpe
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
-        return TimeFormatUtility::getFormattedTime((int) $renderChildrenClosure());
+        return TimeFormatUtility::getFormattedTime((int)$renderChildrenClosure());
     }
 }

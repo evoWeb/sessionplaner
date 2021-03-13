@@ -1,3 +1,5 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:section name="Main">
     <f:form.validationResults for="{for}">
         <f:if condition="{validationResults.flattenedErrors}">
@@ -5,11 +7,11 @@
                 <f:if condition="{propertyPath}=={field}">
                     <f:for each="{propertyErrors}" as="propertyError">
                         <div class="error error-message error-field error-field-{propertyPath} error-code-{propertyError.code}">
-                            <f:if condition="{f:translate(key: 'field_{propertyError.code}') -> f:format.printf(arguments: {field: '{f:translate(key: \'{propertyPath}\')}'})}">
+                            <f:if condition="{f:translate(id: 'field_{propertyError.code}') -> f:format.printf(arguments: {field: '{f:translate(id: \'{propertyPath}\')}'})}">
                                 <f:then>
-                                    {f:translate(key: 'field_{propertyError.code}') -> f:format.printf(arguments:
+                                    {f:translate(id: 'field_{propertyError.code}') -> f:format.printf(arguments:
                                     {field:
-                                    '{f:translate(key: \'{propertyPath}\')}'})}
+                                    '{f:translate(id: \'{propertyPath}\')}'})}
                                 </f:then>
                                 <f:else>
                                     {propertyError.message}
@@ -22,3 +24,5 @@
         </f:if>
     </f:form.validationResults>
 </f:section>
+
+</html>

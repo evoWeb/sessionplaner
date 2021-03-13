@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Model;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,109 +15,79 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Slot extends AbstractEntity
 {
-    /**
-     * @var int
-     */
-    protected $start = 0;
+    protected int $start = 0;
+
+    protected int $duration = 0;
+
+    protected bool $break = false;
+
+    protected ?string $description = '';
 
     /**
-     * @var int
-     */
-    protected $duration = 0;
-
-    /**
-     * @var bool
-     */
-    protected $break = false;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
+     * @var ?Day
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \Evoweb\Sessionplaner\Domain\Model\Day
      */
-    protected $day;
+    protected $day = null;
 
     /**
+     * @var ObjectStorage<Room>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Room>
      */
-    protected $rooms;
+    protected ObjectStorage $rooms;
 
     /**
+     * @var ObjectStorage<Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      */
-    protected $sessions;
+    protected ObjectStorage $sessions;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
 
     public function initializeObject()
     {
-        $this->rooms = GeneralUtility::makeInstance(ObjectStorage::class);
-        $this->sessions = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->rooms = new ObjectStorage();
+        $this->sessions = new ObjectStorage();
     }
 
-    /**
-     * @param int $start
-     */
-    public function setStart($start)
+    public function setStart(int $start)
     {
         $this->start = $start;
     }
 
-    /**
-     * @return int
-     */
-    public function getStart()
+    public function getStart(): int
     {
         return $this->start;
     }
 
-    /**
-     * @param int $duration
-     */
-    public function setDuration($duration)
+    public function setDuration(int $duration)
     {
         $this->duration = $duration;
     }
 
-    /**
-     * @return int
-     */
-    public function getDuration()
+    public function getDuration(): int
     {
         return $this->duration;
     }
 
-    /**
-     * @return int
-     */
-    public function getEnd()
+    public function getEnd(): int
     {
         return $this->start + ($this->getDuration() * 60);
     }
 
-    /**
-     * @param bool $break
-     */
-    public function setBreak($break)
+    public function setBreak(bool $break)
     {
         $this->break = $break;
     }
 
-    /**
-     * @return bool
-     */
-    public function getBreak()
+    public function getBreak(): bool
     {
         return $this->break;
     }
@@ -125,55 +97,37 @@ class Slot extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->description = $description;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
-        return $this->description;
+        return (string)$this->description;
     }
 
-    /**
-     * @param \Evoweb\Sessionplaner\Domain\Model\Day $day
-     */
-    public function setDay(\Evoweb\Sessionplaner\Domain\Model\Day $day)
+    public function setDay(Day $day)
     {
         $this->day = $day;
     }
 
-    /**
-     * @return \Evoweb\Sessionplaner\Domain\Model\Day
-     */
-    public function getDay()
+    public function getDay(): ?Day
     {
         return $this->day;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $rooms
-     */
-    public function setRooms(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $rooms)
+    public function setRooms(ObjectStorage $rooms)
     {
         $this->rooms = $rooms;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getRooms()
+    public function getRooms(): ObjectStorage
     {
         return $this->rooms;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sessions
-     */
-    public function setSessions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sessions)
+    public function setSessions(ObjectStorage $sessions)
     {
         $this->sessions = $sessions;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getSessions()
+    public function getSessions(): ObjectStorage
     {
         return $this->sessions;
     }

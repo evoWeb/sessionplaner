@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Model;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -12,8 +14,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
-namespace Evoweb\Sessionplaner\Domain\Model;
 
 use TYPO3\CMS\Core\DataHandling\Model\RecordStateFactory;
 use TYPO3\CMS\Core\DataHandling\SlugHelper;
@@ -26,12 +26,12 @@ abstract class AbstractSlugEntity extends AbstractEntity
     /**
      * @var string The name of the path segment field
      */
-    protected $slugField;
+    protected string $slugField;
 
     /**
      * @var string the tablename for this model
      */
-    protected $tablename;
+    protected string $tablename;
 
     /**
      * @throws NoSuchArgumentException

@@ -12,16 +12,16 @@
 		"@babel/cli": "^7.8.4",
 		"@babel/core": "^7.8.7",
 		"@babel/preset-env": "^7.8.7",
-		"@babel/register": "^7.8.6",
-		"autoprefixer": "^9.7.4",
+		"@babel/register": "^7.12.10",
+		"autoprefixer": "^9.8.6",
 		"gulp": "^4.0.2",
 		"gulp-babel": "^8.0.0",
 		"gulp-jshint": "^2.1.0",
-		"gulp-postcss": "^8.0.0",
+		"gulp-postcss": "^9.0.0",
 		"gulp-sass": "^4.0.2",
-		"gulp-terser": "^1.2.0",
-		"jshint": "^2.11.0",
-		"node-sass": "^4.12.0"
+		"gulp-terser": "^1.2.1",
+		"jshint": "^2.12.0",
+		"node-sass": "^4.14.1"
 	},
 	"babel": {
 		"retainLines": true,

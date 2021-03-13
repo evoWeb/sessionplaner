@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\ViewHelpers\Be\Buttons;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,11 +15,13 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\ViewHelpers\Be\Buttons;
-
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Exception;
 
 /**
  * View helper which returns save button with icon
@@ -43,11 +47,8 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
  * This time the "new_el" icon is returned, the button has the title attribute
  * set and links to the "new" action of the current controller.
  */
-class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendViewHelper
+class IconViewHelper extends AbstractBackendViewHelper
 {
-    /**
-     * Initialize arguments.
-     */
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -103,27 +104,25 @@ class IconViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\AbstractBackendView
         $allowedIcons = $iconRegistry->getAllRegisteredIconIdentifiers();
 
         if (!in_array($iconKey, $allowedIcons)) {
-            throw new \TYPO3Fluid\Fluid\Core\ViewHelper\Exception(
+            throw new Exception(
                 '"' . $iconKey . '" is no valid icon. Allowed are "' . implode('", "', $allowedIcons) . '".',
                 1253208523
             );
-        } else {
-            /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
-            $iconFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconFactory::class);
-            $icon = $iconFactory->getIcon($iconKey, \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL);
         }
+        /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
+        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+        $icon = $iconFactory->getIcon($iconKey, Icon::SIZE_SMALL);
 
         if (empty($uri) && empty($onclick)) {
             return $icon;
-        } else {
-            $onclick = ' onclick="' . $onclick . '"';
-            return implode(' ', [
+        }
+        $onclick = ' onclick="' . $onclick . '"';
+        return implode(' ', [
                 '<a href="' . $uri . '"',
                 'title="' . $title . '"',
                 'class="' . $class . '"',
                 'id="' . $id . '"',
                 $onclick . '>' . $icon . '</a>'
             ]);
-        }
     }
 }

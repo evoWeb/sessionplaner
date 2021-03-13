@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Model;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,102 +15,75 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
 use Evoweb\Sessionplaner\Utility\ObjectStorageUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Day extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Day extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $name = '';
+    protected string $name = '';
+
+    protected string $date = '';
 
     /**
-     * @var string
-     */
-    protected $date = '';
-
-    /**
+     * @var ObjectStorage<Room>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Room>
      */
-    public $rooms;
+    public ObjectStorage $rooms;
 
     /**
+     * @var ObjectStorage<Slot>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Slot>
      */
-    public $slots;
+    public ObjectStorage $slots;
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
 
     public function initializeObject()
     {
-        $this->rooms = GeneralUtility::makeInstance(ObjectStorage::class);
-        $this->slots = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->rooms = new ObjectStorage();
+        $this->slots = new ObjectStorage();
     }
 
-    /**
-     * @param string $date
-     */
-    public function setDate($date)
+    public function setDate(string $date)
     {
         $this->date = $date;
     }
 
-    /**
-     * @return string
-     */
-    public function getDate()
+    public function getDate(): string
     {
         return $this->date;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $rooms
-     */
-    public function setRooms(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $rooms)
+    public function setRooms(ObjectStorage $rooms)
     {
         $this->rooms = $rooms;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getRooms()
+    public function getRooms(): ObjectStorage
     {
         return $this->rooms;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $slots
-     */
-    public function setSlots(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $slots)
+    public function setSlots(ObjectStorage $slots)
     {
         $this->slots = $slots;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getSlots()
+    public function getSlots(): ObjectStorage
     {
         return ObjectStorageUtility::sort($this->slots, 'start');
     }

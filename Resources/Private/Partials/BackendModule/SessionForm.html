@@ -1,3 +1,5 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:section name="Main">
     <script type="text/template" id="sessionFormTemplate">
         <style>
@@ -28,19 +30,19 @@
                 <dl>
                     <dt>
                         <label for="session-form-hidden">
-                            <f:translate key="hidden"/>
+                            <f:translate id="hidden"/>
                         </label>
                     </dt>
                     <dd>
                         <f:form.select id="session-form-hidden" name="hidden" options="{
-                            0: '{f:translate(key: \'hidden-0\')}',
-                            1: '{f:translate(key: \'hidden-1\')}'
+                            0: '{f:translate(id: \'hidden-0\')}',
+                            1: '{f:translate(id: \'hidden-1\')}'
                         }"/>
                     </dd>
 
                     <dt>
                         <label for="session-form-topic">
-                            <f:translate key="topic"/>*
+                            <f:translate id="topic"/>*
                         </label>
                     </dt>
                     <dd>
@@ -49,7 +51,7 @@
 
                     <dt>
                         <label for="session-form-speaker">
-                            <f:translate key="speaker"/>
+                            <f:translate id="speaker"/>
                         </label>
                     </dt>
                     <dd>
@@ -58,7 +60,7 @@
 
                     <dt>
                         <label for="session-form-attendees">
-                            <f:translate key="attendees"/>
+                            <f:translate id="attendees"/>
                         </label>
                     </dt>
                     <dd>
@@ -67,7 +69,7 @@
 
                     <dt>
                         <label for="session-form-description">
-                            <f:translate key="description"/>
+                            <f:translate id="description"/>
                         </label>
                     </dt>
                     <dd>
@@ -76,7 +78,7 @@
 
                     <dt>
                         <label for="session-form-twitter">
-                            <f:translate key="twitter"/>
+                            <f:translate id="twitter"/>
                         </label>
                     </dt>
                     <dd>
@@ -85,7 +87,7 @@
 
                     <dt>
                         <label for="session-form-type">
-                            <f:translate key="type"/>
+                            <f:translate id="type"/>
                         </label>
                     </dt>
                     <dd>
@@ -94,7 +96,7 @@
 
                     <dt>
                         <label for="session-form-level">
-                            <f:translate key="level"/>
+                            <f:translate id="level"/>
                         </label>
                     </dt>
                     <dd>
@@ -103,9 +105,11 @@
                 </dl>
             </form>
             <div>
-                <f:translate key="mandatory"/>
+                <f:translate id="mandatory"/>
             </div>
             <div class="error"></div>
         </div>
     </script>
 </f:section>
+
+</html>

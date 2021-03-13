@@ -1,0 +1,115 @@
+name: build
+
+on:
+  push:
+    branches: [ develop, master ]
+    tags: [ '*' ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  xliff:
+    runs-on: ubuntu-20.04
+
+    name: XML Lint (Xliff)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install libxml2-utils
+        run: sudo apt install libxml2-utils
+
+      - name: Running xmllint (Xliff)
+        run: find Resources/Private/Language/ -name '*.xlf' -type f | xargs xmllint --noout --schema .Build/xliff-core-1.2-strict.xsd
+
+  lint:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        php-versions: ['7.4']
+
+    name: Lint PHP ${{ matrix.php-versions }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+
+      - name: Running php lint with ${{ matrix.php-versions }}
+        run: errors=$(find . -name \*.php ! -path "./.Build/*" -exec php -d display_errors=stderr -l "{}" 2>&1 >/dev/null \;) && echo "${errors}" && test -z "${errors}"
+
+  phpunit:
+    needs: lint
+
+    runs-on: ubuntu-20.04
+
+    continue-on-error: ${{ matrix.env.experimental == true }}
+    strategy:
+      fail-fast: false
+      matrix:
+        env:
+          - { php: 7.4, TYPO3_VERSION: ^11.0, TESTING_FRAMEWORK: ^6.6.2 }
+          - { php: 7.4, TYPO3_VERSION: ^11.0, TESTING_FRAMEWORK: ^6.6.2, PREFER_LOWEST: "--prefer-lowest" }
+          - { php: 7.4, TYPO3_VERSION: "dev-master", TESTING_FRAMEWORK: ^6.6.2, experimental: true }
+
+    env: ${{ matrix.env }}
+
+    name: Run unit and/or functional tests on TYPO3 ${{ matrix.env.TYPO3_VERSION }} with PHP${{ matrix.env.php }} and testing framework ${{ matrix.env.TESTING_FRAMEWORK }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.env.php }}
+          tools: composer
+          extensions: pdo, sqlite3
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+      - name: Ensure stability dev
+        if: ${{ matrix.env.TYPO3_VERSION == 'dev-master' }}
+        run: |
+          composer config minimum-stability dev
+          composer config prefer-stable true
+
+      - name: Install TYPO3 core
+        run: composer require typo3/cms-core="${TYPO3_VERSION}" ${PREFER_LOWEST};
+
+      - name: Install testing framework ${{ matrix.env.TESTING_FRAMEWORK }}
+        if: ${{ matrix.env.TESTING_FRAMEWORK }}
+        run: composer require --dev typo3/testing-framework="${TESTING_FRAMEWORK}";
+
+      - name: Reset composer.json
+        run: git checkout composer.json;
+
+  TERUpload:
+    needs: [ xliff, lint, phpunit ]
+    if: startsWith(github.ref, 'refs/tags/')
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+    name: TYPO3 TER release
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Publish to TER
+        uses: tomasnorre/typo3-upload-ter@v2
+        with:
+          api-token: ${{ secrets.TYPO3_API_TOKEN }}

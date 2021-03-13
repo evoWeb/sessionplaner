@@ -1,3 +1,6 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:sessionplanervh="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <f:layout name="Backend" />
 <f:section name="IconFunctions">
 
@@ -14,7 +17,7 @@
 
     <f:if condition="{roomCount}">
         <f:format.raw>
-            <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new" iconKey="actions-document-new" title="{f:translate(key: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
+            <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new" iconKey="actions-document-new" title="{f:translate(id: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
         </f:format.raw>
     </f:if>
 
@@ -22,10 +25,8 @@
 <f:section name="IconRightButtons">
 
     <f:format.raw>
-        <span class="btn btn-default btn-sm">
-            <f:be.buttons.shortcut />
-        </span>
-        <sessionplanervh:be.buttons.icon uri="#" iconKey="actions-window-open" title="{f:translate(key: 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.openInNewWindow')}" onclick="sessionplanerWin=window.open(location.href, 'Sessionplaner', 'width=790,status=0,menubar=0,resizable=1,location=0,scrollbars=1,toolbar=0'); return false;" class="btn btn-default btn-sm" />
+        <f:be.buttons.shortcut />
+        <sessionplanervh:be.buttons.icon uri="#" iconKey="actions-window-open" title="{f:translate(id: 'LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.openInNewWindow')}" onclick="sessionplanerWin=window.open(location.href, 'Sessionplaner', 'width=790,status=0,menubar=0,resizable=1,location=0,scrollbars=1,toolbar=0'); return false;" class="btn btn-default btn-sm" />
     </f:format.raw>
 
 </f:section>
@@ -56,9 +57,11 @@
         </f:then>
         <f:else>
             <f:format.raw>
-                <f:translate key="storageFolderEmpty" />
+                <f:translate id="storageFolderEmpty" />
             </f:format.raw>
         </f:else>
     </f:if>
 
 </f:section>
+
+</html>

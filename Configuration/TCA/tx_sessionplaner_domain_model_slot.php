@@ -11,6 +11,8 @@
  * LICENSE file that was distributed with this source code.
  */
 
+defined('TYPO3') or die();
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_slot');
@@ -19,7 +21,7 @@ return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_slot',
         'label' => 'start',
-        'label_userFunc' => Evoweb\Sessionplaner\Userfuncs\Tca::class . '->slotLabel',
+        'label_userFunc' => \Evoweb\Sessionplaner\Userfuncs\Tca::class . '->slotLabel',
         'hideTable' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -31,9 +33,6 @@ return [
         'typeicon_classes' => [
             'default' => 'sessionplaner-record-slot'
         ],
-    ],
-    'interface' => [
-        'showRecordFieldList' => 'start'
     ],
     'columns' => [
         'day' => [

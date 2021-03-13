@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Factory;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -12,8 +14,6 @@ declare(strict_types=1);
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-
-namespace Evoweb\Sessionplaner\Domain\Factory;
 
 use Evoweb\Sessionplaner\Domain\Finisher\SuggestFormFinisher;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
@@ -34,20 +34,11 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class SuggestFormFactory extends AbstractFormFactory
 {
-    /**
-     * @var ObjectManagerInterface
-     */
-    protected $objectManager;
+    protected ObjectManagerInterface $objectManager;
 
-    /**
-     * @var ConfigurationService
-     */
-    protected $formConfigurationService;
+    protected ConfigurationService $formConfigurationService;
 
-    /**
-     * @var ConfigurationManagerInterface
-     */
-    protected $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
 
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -59,11 +50,6 @@ class SuggestFormFactory extends AbstractFormFactory
         $this->formConfigurationService = $formConfigurationService;
     }
 
-    /**
-     * @param array $configuration
-     * @param string $prototypeName
-     * @return FormDefinition
-     */
     public function build(array $configuration, string $prototypeName = null): FormDefinition
     {
         $prototypeName = 'standard';
@@ -213,7 +199,7 @@ class SuggestFormFactory extends AbstractFormFactory
 
         if ($settings['suggest']['confirmation']['pageUid']) {
             $form->createFinisher('Redirect', [
-                'pageUid' => (int) $settings['suggest']['confirmation']['pageUid'],
+                'pageUid' => (int)$settings['suggest']['confirmation']['pageUid'],
             ]);
         } else {
             $message = $settings['suggest']['confirmation']['message'] ??
@@ -227,9 +213,6 @@ class SuggestFormFactory extends AbstractFormFactory
         return $form;
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
     protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];

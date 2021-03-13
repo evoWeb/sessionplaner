@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Evoweb\Sessionplaner\Domain\Model;
+
 /*
  * This file is part of the package evoweb\sessionplaner.
  *
@@ -13,92 +15,53 @@ declare(strict_types=1);
  * LICENSE file that was distributed with this source code.
  */
 
-namespace Evoweb\Sessionplaner\Domain\Model;
-
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Speaker extends AbstractSlugEntity
 {
-    /**
-     * @var string
-     */
-    protected $slugField = 'path_segment';
+    protected string $slugField = 'path_segment';
+
+    protected string $tablename = 'tx_sessionplaner_domain_model_speaker';
+
+    protected bool $hidden = false;
+
+    protected string $name = '';
+
+    protected string $bio = '';
+
+    protected string $company = '';
+
+    protected string $website = '';
+
+    protected string $twitter = '';
+
+    protected string $linkedin = '';
+
+    protected string $xing = '';
+
+    protected string $email = '';
+
+    protected ?FileReference $picture = null;
 
     /**
-     * @var string
-     */
-    protected $tablename = 'tx_sessionplaner_domain_model_speaker';
-
-    /**
-     * @var bool
-     */
-    protected $hidden = false;
-
-    /**
-     * @var string
-     */
-    protected $name = '';
-
-    /**
-     * @var string
-     */
-    protected $bio = '';
-
-    /**
-     * @var string
-     */
-    protected $company = '';
-
-    /**
-     * @var string
-     */
-    protected $website = '';
-
-    /**
-     * @var string
-     */
-    protected $twitter = '';
-
-    /**
-     * @var string
-     */
-    protected $linkedin = '';
-
-    /**
-     * @var string
-     */
-    protected $xing = '';
-
-    /**
-     * @var string
-     */
-    protected $email = '';
-
-    /**
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $picture;
-
-    /**
+     * @var ObjectStorage<Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Session>
      */
-    protected $sessions;
+    protected ObjectStorage $sessions;
 
-    /**
-     * @var int
-     */
-    protected $detailPage;
+    protected int $detailPage = 0;
 
-    /**
-     * @var string
-     */
-    protected $pathSegment;
+    protected string $pathSegment = '';
+
+    public function __construct()
+    {
+        $this->initializeObject();
+    }
 
     public function initializeObject()
     {
-        $this->sessions = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->sessions =  new ObjectStorage();
     }
 
     public function setHidden(bool $hidden)
@@ -121,7 +84,7 @@ class Speaker extends AbstractSlugEntity
         return $this->pathSegment;
     }
 
-    public function setName(string $name): void
+    public function setName(string $name)
     {
         $this->name = $name;
     }
@@ -136,12 +99,12 @@ class Speaker extends AbstractSlugEntity
         return $this->sessions;
     }
 
-    public function setSessions(ObjectStorage $sessions): void
+    public function setSessions(ObjectStorage $sessions)
     {
         $this->sessions = $sessions;
     }
 
-    public function setCompany(string $company): void
+    public function setCompany(string $company)
     {
         $this->company = $company;
     }
@@ -151,7 +114,7 @@ class Speaker extends AbstractSlugEntity
         return $this->company;
     }
 
-    public function setWebsite(string $website): void
+    public function setWebsite(string $website)
     {
         $this->website = $website;
     }
@@ -161,7 +124,7 @@ class Speaker extends AbstractSlugEntity
         return $this->website;
     }
 
-    public function setTwitter(string $twitter): void
+    public function setTwitter(string $twitter)
     {
         $this->twitter = $twitter;
     }
@@ -171,7 +134,7 @@ class Speaker extends AbstractSlugEntity
         return $this->twitter;
     }
 
-    public function setLinkedin(string $linkedin): void
+    public function setLinkedin(string $linkedin)
     {
         $this->linkedin = $linkedin;
     }
@@ -181,7 +144,7 @@ class Speaker extends AbstractSlugEntity
         return $this->linkedin;
     }
 
-    public function setXing(string $xing): void
+    public function setXing(string $xing)
     {
         $this->xing = $xing;
     }
@@ -191,7 +154,7 @@ class Speaker extends AbstractSlugEntity
         return $this->xing;
     }
 
-    public function setEmail(string $email): void
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -201,16 +164,17 @@ class Speaker extends AbstractSlugEntity
         return $this->email;
     }
 
-    public function setPicture(FileReference $picture): void
+    public function setPicture(FileReference $picture)
     {
         $this->picture = $picture;
     }
+
     public function getPicture(): ?FileReference
     {
         return $this->picture;
     }
 
-    public function setDetailPage(int $detailPage): void
+    public function setDetailPage(int $detailPage)
     {
         $this->detailPage = $detailPage;
     }
@@ -220,7 +184,7 @@ class Speaker extends AbstractSlugEntity
         return $this->detailPage;
     }
 
-    public function setBio(string $bio): void
+    public function setBio(string $bio)
     {
         $this->bio = $bio;
     }
