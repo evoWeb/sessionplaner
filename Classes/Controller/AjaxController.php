@@ -216,7 +216,7 @@ class AjaxController
                 $this->parameter['session'],
                 Session::class
             );
-        $session->setPid($request->getParsedBody()['id']);
+        $session->setPid(intval ($request->getParsedBody()['id']));
         return $session;
     }
 

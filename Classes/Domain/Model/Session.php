@@ -128,13 +128,14 @@ class Session extends AbstractSlugEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Evoweb\Sessionplaner\Domain\Model\Link>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $links = null;
+    protected ObjectStorage $links;
 
     public function initializeObject()
     {
         $this->speakers = GeneralUtility::makeInstance(ObjectStorage::class);
         $this->documents = GeneralUtility::makeInstance(ObjectStorage::class);
         $this->tags = GeneralUtility::makeInstance(ObjectStorage::class);
+        $this->links = new ObjectStorage();
     }
 
     /**
