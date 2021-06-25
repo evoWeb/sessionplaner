@@ -20,6 +20,7 @@ class SessionLevelEnum
     public const OPTION_BEGINNER = 1;
     public const OPTION_ADVANCED = 2;
     public const OPTION_PRO = 3;
+    public const OPTION_ALL = 4;
 
     protected static $optionLabel = [
         self::OPTION_BEGINNER =>
@@ -27,7 +28,9 @@ class SessionLevelEnum
         self::OPTION_ADVANCED =>
             'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.advanced',
         self::OPTION_PRO =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro'
+	'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro',
+        self::OPTION_ALL =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.all'
     ];
 
     public static function getLabel(int $option): string
@@ -64,7 +67,8 @@ class SessionLevelEnum
         return [
             self::OPTION_BEGINNER,
             self::OPTION_ADVANCED,
-            self::OPTION_PRO
+	        self::OPTION_PRO,
+	        self::OPTION_ALL
         ];
     }
 }
