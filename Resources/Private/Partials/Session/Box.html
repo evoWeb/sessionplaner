@@ -41,9 +41,11 @@
                             <f:if condition="{session.type} == 1">{f:translate(key: 'type-talk')}</f:if>
                             <f:if condition="{session.type} == 2">{f:translate(key: 'type-tutorial')}</f:if>
                             <f:if condition="{session.type} == 3">{f:translate(key: 'type-workshop')}</f:if>
-                            <f:if condition="{session.type} == 4">{f:translate(key: 'type-other')}</f:if>
-                            <f:if condition="{session.type} == 5">{f:translate(key: 'type-break')}</f:if>
-                            <f:if condition="{session.type} == 6">{f:translate(key: 'type-wish')}</f:if>
+                            <f:if condition="{session.type} == 4">{f:translate(key: 'type-discussion')}</f:if>
+                            <f:if condition="{session.type} == 5">{f:translate(key: 'type-session')}</f:if>
+                            <f:if condition="{session.type} == 6">{f:translate(key: 'type-break')}</f:if>
+                            <f:if condition="{session.type} == 7">{f:translate(key: 'type-wish')}</f:if>
+                            <f:if condition="{session.type} == 8">{f:translate(key: 'type-other')}</f:if>
                         </span>
                     </span>
                 </f:if>
@@ -53,6 +55,7 @@
                             <f:if condition="{session.level} == 1">{f:translate(key: 'level-starter')}</f:if>
                             <f:if condition="{session.level} == 2">{f:translate(key: 'level-advanced')}</f:if>
                             <f:if condition="{session.level} == 3">{f:translate(key: 'level-pro')}</f:if>
+                            <f:if condition="{session.level} == 4">{f:translate(key: 'level-all')}</f:if>
                         </span>
                     </span>
                 </f:if>
