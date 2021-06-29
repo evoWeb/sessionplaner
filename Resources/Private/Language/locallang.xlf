@@ -139,6 +139,18 @@
             <trans-unit id="option.sessiontype.discussion" xml:space="preserve">
                 <source>Discussion</source>
             </trans-unit>
+            <trans-unit id="option.sessiontype.session" xml:space="preserve">
+                <source>Session</source>
+            </trans-unit>
+            <trans-unit id="option.sessiontype.break" xml:space="preserve">
+                <source>Break</source>
+            </trans-unit>
+            <trans-unit id="option.sessiontype.wish" xml:space="preserve">
+                <source>Wish</source>
+            </trans-unit>
+            <trans-unit id="option.sessiontype.other" xml:space="preserve">
+                <source>Other</source>
+            </trans-unit>
             <trans-unit id="option.sessionlevel.beginner" xml:space="preserve">
                 <source>Beginner</source>
             </trans-unit>
@@ -147,6 +159,9 @@
             </trans-unit>
             <trans-unit id="option.sessionlevel.pro" xml:space="preserve">
                 <source>Professional</source>
+            </trans-unit>
+            <trans-unit id="option.sessionlevel.all" xml:space="preserve">
+                <source>All</source>
             </trans-unit>
 
             <!-- Label -->

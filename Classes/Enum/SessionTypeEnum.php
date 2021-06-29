@@ -21,6 +21,10 @@ class SessionTypeEnum
     public const OPTION_TUTORIAL = 2;
     public const OPTION_WORKSHOP = 3;
     public const OPTION_DISCUSSION = 4;
+    public const OPTION_SESSION = 5;
+    public const OPTION_BREAK = 6;
+    public const OPTION_WISH = 7;
+    public const OPTION_OTHER = 8;
 
     protected static $optionLabel = [
         self::OPTION_TALK =>
@@ -30,7 +34,15 @@ class SessionTypeEnum
         self::OPTION_WORKSHOP =>
             'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.workshop',
         self::OPTION_DISCUSSION =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion'
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion',
+        self::OPTION_SESSION =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.session',
+        self::OPTION_BREAK =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.break',
+        self::OPTION_WISH =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.wish',
+        self::OPTION_OTHER =>
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.other'
     ];
 
     public static function getLabel(int $option): string
@@ -67,7 +79,11 @@ class SessionTypeEnum
             self::OPTION_TALK,
             self::OPTION_TUTORIAL,
             self::OPTION_WORKSHOP,
-            self::OPTION_DISCUSSION
+	        self::OPTION_DISCUSSION,
+            self::OPTION_SESSION,
+            self::OPTION_BREAK,
+            self::OPTION_WISH,
+            self::OPTION_OTHER
         ];
     }
 }
