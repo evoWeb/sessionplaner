@@ -187,8 +187,11 @@ class SuggestFormFactory extends AbstractFormFactory
         ) {
             $form->createFinisher('EmailToReceiver', [
                 'subject' => $settings['suggest']['notification']['subject'] ?? '',
-                'recipientAddress' => $settings['suggest']['notification']['recipientAddress'] ?? '',
-                'recipientName' => $settings['suggest']['notification']['recipientName'] ?? '',
+                'recipients' => $settings['suggest']['notification']['recipientAddress']
+                    ? [
+                        $settings['suggest']['notification']['recipientAddress'] => $settings['suggest']['notification']['recipientName'],
+                    ]
+                    : [],
                 'senderAddress' => $settings['suggest']['notification']['senderAddress'] ?? '',
                 'senderName' => $settings['suggest']['notification']['senderName'] ?? '',
                 'carbonCopyAddress' => $settings['suggest']['notification']['carbonCopyAddress'] ?? '',
