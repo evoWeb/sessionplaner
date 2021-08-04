@@ -20,7 +20,6 @@ use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
@@ -34,18 +33,14 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class SuggestFormFactory extends AbstractFormFactory
 {
-    protected ObjectManagerInterface $objectManager;
-
     protected ConfigurationService $formConfigurationService;
 
     protected ConfigurationManagerInterface $configurationManager;
 
     public function __construct(
-        ObjectManagerInterface $objectManager,
         ConfigurationManagerInterface $configurationManager,
         ConfigurationService $formConfigurationService
     ) {
-        $this->objectManager = $objectManager;
         $this->configurationManager = $configurationManager;
         $this->formConfigurationService = $formConfigurationService;
     }
@@ -63,7 +58,6 @@ class SuggestFormFactory extends AbstractFormFactory
 
         /** @var FormDefinition $form */
         $form = GeneralUtility::makeInstance(FormDefinition::class, 'suggest', $prototypeConfiguration);
-        $form->injectObjectManager($this->objectManager);
         $form->setRenderingOption('controllerAction', 'form');
         $form->setRenderingOption('submitButtonLabel', LocalizationUtility::translate('form.submit', 'sessionplaner'));
         $page = $form->createPage('suggestform');
