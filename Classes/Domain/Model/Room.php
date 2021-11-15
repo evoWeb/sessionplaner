@@ -85,7 +85,7 @@ class Room extends AbstractEntity
         $this->logo = $logo;
     }
 
-    public function getLogo(): FileReference
+    public function getLogo(): ?FileReference
     {
         return $this->logo;
     }
