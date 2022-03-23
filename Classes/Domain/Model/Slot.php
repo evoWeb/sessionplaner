@@ -30,7 +30,6 @@ class Slot extends AbstractEntity
 
     /**
      * @var ?Day
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $day = null;
 
