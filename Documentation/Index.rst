@@ -22,7 +22,7 @@ sessionplaner: TYPO3Camp Session planer
     forIntegrator
 
 :Copyright:
-    2013-2019
+    2013-2022
 
 :Author:
     evoWeb
