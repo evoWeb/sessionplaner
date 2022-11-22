@@ -22,11 +22,13 @@
 
         th, td {
             &.t3js-page-ce-dropzone-available.active {
+                position:relative !important;
                 background-color: #fbefdd;
             }
 
             &.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
                 background-color: #d1e2bd;
+                z-index: 300;
             }
         }
 
@@ -61,6 +63,7 @@
     min-height: 30px;
 
     &.t3js-page-ce-dropzone-available.active {
+        position:relative !important;
         background-color: #fbefdd;
     }
 
@@ -70,6 +73,10 @@
 
     .t3js-page-ce {
         margin: 10px;
+    }
+
+    .ui-draggable-dragging {
+        z-index: 700 !important;
     }
 }
 
