@@ -31,7 +31,11 @@
 	},
 
 	"config": {
-		"vendor-dir": ".Build/Web/vendor"
+		"vendor-dir": ".Build/Web/vendor",
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true
+		}
 	},
 	"extra": {
 		"typo3/cms": {
