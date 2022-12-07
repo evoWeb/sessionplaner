@@ -51,13 +51,13 @@ jobs:
       fail-fast: false
       matrix:
         env:
-          - { php: 7.4, TYPO3_VERSION: ^11.0, TESTING_FRAMEWORK: ^6.6.2 }
-          - { php: 7.4, TYPO3_VERSION: ^11.0, TESTING_FRAMEWORK: ^6.6.2, PREFER_LOWEST: "--prefer-lowest" }
-          - { php: 7.4, TYPO3_VERSION: "dev-master", TESTING_FRAMEWORK: ^6.6.2, experimental: true }
+          - { php: 7.4, TYPO3_VERSION: ^11.0 }
+          - { php: 7.4, TYPO3_VERSION: ^11.0, PREFER_LOWEST: "--prefer-lowest" }
+          - { php: 7.4, TYPO3_VERSION: "dev-master", experimental: true }
 
     env: ${{ matrix.env }}
 
-    name: Run unit and/or functional tests on TYPO3 ${{ matrix.env.TYPO3_VERSION }} with PHP${{ matrix.env.php }} and testing framework ${{ matrix.env.TESTING_FRAMEWORK }}
+    name: Run unit and/or functional tests on TYPO3 ${{ matrix.env.TYPO3_VERSION }} with PHP${{ matrix.env.php }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -86,10 +86,6 @@ jobs:
 
       - name: Install TYPO3 core
         run: composer require typo3/cms-core="${TYPO3_VERSION}" ${PREFER_LOWEST};
-
-      - name: Install testing framework ${{ matrix.env.TESTING_FRAMEWORK }}
-        if: ${{ matrix.env.TESTING_FRAMEWORK }}
-        run: composer require --dev typo3/testing-framework="${TESTING_FRAMEWORK}";
 
       - name: Reset composer.json
         run: git checkout composer.json;

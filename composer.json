@@ -20,7 +20,8 @@
 		"typo3/cms-form": "^11.5 || 12.*.*@dev"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^2.13"
+		"friendsofphp/php-cs-fixer": "^2.13",
+		"typo3/testing-framework": "7.x-dev"
 	},
 	"autoload": {
 		"psr-4": {
