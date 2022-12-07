@@ -10,17 +10,13 @@ on:
 jobs:
   xliff:
     runs-on: ubuntu-latest
-
-    name: XML Lint (Xliff)
+    name: "Xliff linter"
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install libxml2-utils
-        run: sudo apt install libxml2-utils
-
-      - name: Running xmllint (Xliff)
-        run: find Resources/Private/Language/ -name '*.xlf' -type f | xargs xmllint --noout --schema .Build/xliff-core-1.2-strict.xsd
+      - name: "Run the xliff lint"
+        uses: TYPO3-Continuous-Integration/TYPO3-CI-Xliff-Lint@v1
 
   build:
     runs-on: ubuntu-latest
