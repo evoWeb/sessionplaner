@@ -22,28 +22,7 @@ jobs:
       - name: Running xmllint (Xliff)
         run: find Resources/Private/Language/ -name '*.xlf' -type f | xargs xmllint --noout --schema .Build/xliff-core-1.2-strict.xsd
 
-  lint:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        php-versions: ['7.4', '8.0', '8.1']
-
-    name: Lint PHP ${{ matrix.php-versions }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-versions }}
-
-      - name: Running php lint with ${{ matrix.php-versions }}
-        run: errors=$(find . -name \*.php ! -path "./.Build/*" -exec php -d display_errors=stderr -l "{}" 2>&1 >/dev/null \;) && echo "${errors}" && test -z "${errors}"
-
-  phpunit:
-    needs: lint
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -62,9 +41,10 @@ jobs:
           - typo3: '^12'
             php: '8.0'
 
-    name: Run unit and/or functional tests on TYPO3 ${{ matrix.typo3 }} with PHP${{ matrix.php }}
+    name: Tests on TYPO3 ${{ matrix.typo3 }} with PHP${{ matrix.php }}
     steps:
-      - name: Checkout
+      - id: checkout
+        name: Checkout
         uses: actions/checkout@v3
 
       - id: setup_mysql
@@ -107,13 +87,22 @@ jobs:
           composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
           git checkout composer.json
 
+      - id: lint
+        name: Lint
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          composer test:php:lint
+
+      - id: cgl
+        name: CGL
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          composer cgl:ci
+
   TERUpload:
-    needs: [ xliff, lint, phpunit ]
+    needs: [ xliff, build ]
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
 
     name: TYPO3 TER release
     steps:

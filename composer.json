@@ -21,6 +21,7 @@
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^3.13",
+		"overtrue/phplint": "^5.3",
 		"typo3/testing-framework": "7.x-dev"
 	},
 	"autoload": {
@@ -50,6 +51,9 @@
 		],
 		"cgl:ci": [
 			"php-cs-fixer --diff -v --dry-run fix"
+		],
+		"test:php:lint": [
+			"phplint"
 		],
 		"prepare-release": [
 			"rm -rf .Build",

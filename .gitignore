@@ -6,3 +6,4 @@ node_modules
 composer.lock
 package-lock.json
 .php-cs-fixer.cache
+.phplint.cache
