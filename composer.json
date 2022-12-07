@@ -20,7 +20,7 @@
 		"typo3/cms-form": "^11.5 || 12.*.*@dev"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "^2.13",
+		"friendsofphp/php-cs-fixer": "^3.13",
 		"typo3/testing-framework": "7.x-dev"
 	},
 	"autoload": {
@@ -42,8 +42,15 @@
 			"web-dir": ".Build/Web"
 		}
 	},
+	"prefer-stable": true,
 	"scripts": {
 		"post-autoload-dump": "mkdir -p .Build/Web/typo3conf/ext/ && ln -snf ../../../.. .Build/Web/typo3conf/ext/sessionplaner",
+		"cgl": [
+			"php-cs-fixer --diff -v fix"
+		],
+		"cgl:ci": [
+			"php-cs-fixer --diff -v --dry-run fix"
+		],
 		"prepare-release": [
 			"rm -rf .Build",
 			"rm -rf .github",

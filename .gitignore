@@ -5,4 +5,4 @@
 node_modules
 composer.lock
 package-lock.json
-.php_cs.cache
+.php-cs-fixer.cache
