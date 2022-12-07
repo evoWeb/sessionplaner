@@ -21,7 +21,7 @@
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^3.13",
-		"overtrue/phplint": "^5.3",
+		"overtrue/phplint": "^3.2 || ^4.3 || ^5.3",
 		"typo3/testing-framework": "7.x-dev"
 	},
 	"autoload": {
