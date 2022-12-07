@@ -83,24 +83,21 @@ class SessionRepository extends Repository
         return $query->execute();
     }
 
-    public function findByDayAndHasSlotHasRoom(string $days): array
+    public function findByDayAndHasSlotHasRoom(string $days): QueryResultInterface
     {
         $days = GeneralUtility::intExplode(',', $days, true);
-        if (is_array($days) && count($days) > 0) {
-            $query = $this->createQuery();
-
-            $result = $query->matching(
-                $query->logicalAnd(
-                    [
-                        $query->in('day', $days),
-                        $query->logicalNot($query->equals('slot', 0)),
-                        $query->logicalNot($query->equals('room', 0))
-                    ]
-                )
-            )->execute(true);
-        } else {
-            $result = [];
+        if (empty($days)) {
+            $days = [-1];
         }
-        return $result;
+        $query = $this->createQuery();
+        return $query->matching(
+            $query->logicalAnd(
+                [
+                    $query->in('day', $days),
+                    $query->logicalNot($query->equals('slot', 0)),
+                    $query->logicalNot($query->equals('room', 0))
+                ]
+            )
+        )->execute();
     }
 }

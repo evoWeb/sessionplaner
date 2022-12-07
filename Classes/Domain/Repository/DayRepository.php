@@ -17,6 +17,7 @@ namespace Evoweb\Sessionplaner\Domain\Repository;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class DayRepository extends Repository
@@ -28,19 +29,17 @@ class DayRepository extends Repository
         'date' => QueryInterface::ORDER_ASCENDING
     ];
 
-    public function findByUidListRaw(string $uidList): array
+    public function findByUidList(string $uidList): QueryResultInterface
     {
-        $uid = GeneralUtility::intExplode(',', $uidList, true);
-        if (is_array($uid) && !empty($uid)) {
-            $query = $this->createQuery();
-            $result = $query->matching(
-                $query->logicalAnd(
-                    $query->in('uid', $uid)
-                )
-            )->execute(true);
-        } else {
-            $result = [];
+        $uids = GeneralUtility::intExplode(',', $uidList, true);
+        if (empty($uids)) {
+            $uids = [-1];
         }
-        return $result;
+        $query = $this->createQuery();
+        return $query->matching(
+            $query->logicalAnd(
+                $query->in('uid', $uids)
+            )
+        )->execute();
     }
 }
