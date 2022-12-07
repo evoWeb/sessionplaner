@@ -46,49 +46,66 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
 
-    continue-on-error: ${{ matrix.env.experimental == true }}
     strategy:
       fail-fast: false
       matrix:
-        env:
-          - { php: 7.4, TYPO3_VERSION: ^11.0 }
-          - { php: 7.4, TYPO3_VERSION: ^11.0, PREFER_LOWEST: "--prefer-lowest" }
-          - { php: 7.4, TYPO3_VERSION: "dev-main", experimental: true }
+        typo3: ['^11', '^12']
+        php: ['7.4', '8.0', '8.1']
+        mysql: ['5.7', '8.0']
+        exclude:
+          - typo3: '^11'
+            mysql: '8.0'
+          - typo3: '^12'
+            mysql: '5.7'
+          - typo3: '^12'
+            php: '7.4'
+          - typo3: '^12'
+            php: '8.0'
 
-    env: ${{ matrix.env }}
-
-    name: Run unit and/or functional tests on TYPO3 ${{ matrix.env.TYPO3_VERSION }} with PHP${{ matrix.env.php }}
+    name: Run unit and/or functional tests on TYPO3 ${{ matrix.typo3 }} with PHP${{ matrix.php }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup PHP
+      - id: setup_mysql
+        name: Set up MySQL ${{ matrix.mysql }}
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql version: ${{ matrix.mysql }}
+          mysql root password: 'root'
+
+      - id: setup_php
+        name: Set up PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.env.php }}
+          php-version: ${{ matrix.php }}
           tools: composer
           extensions: pdo, sqlite3
 
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-      - name: Cache dependencies
-        uses: actions/cache@v1
-        with:
-          path: ~/.composer/cache
-          key: dependencies-composer-${{ hashFiles('composer.json') }}
-
-      - name: Ensure stability dev
-        if: ${{ matrix.env.TYPO3_VERSION == 'dev-master' }}
+      - name: Composer Cache Vars
+        id: composer-cache-vars
         run: |
-          composer config minimum-stability dev
-          composer config prefer-stable true
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+          echo "timestamp=$(date +"%s")" >> $GITHUB_OUTPUT
 
-      - name: Install TYPO3 core
-        run: composer require typo3/cms-core="${TYPO3_VERSION}" ${PREFER_LOWEST};
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.composer-cache-vars.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-${{ steps.composer-cache-vars.outputs.timestamp }}
+          restore-keys: |
+            ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-
+            ${{ runner.os }}-composer-${{ matrix.php }}-
+            ${{ runner.os }}-composer-
 
-      - name: Reset composer.json
-        run: git checkout composer.json;
+      - id: install
+        name: Install
+        run: |
+          composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
+          git checkout composer.json
 
   TERUpload:
     needs: [ xliff, lint, phpunit ]
