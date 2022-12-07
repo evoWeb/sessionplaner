@@ -53,7 +53,7 @@ jobs:
         env:
           - { php: 7.4, TYPO3_VERSION: ^11.0 }
           - { php: 7.4, TYPO3_VERSION: ^11.0, PREFER_LOWEST: "--prefer-lowest" }
-          - { php: 7.4, TYPO3_VERSION: "dev-master", experimental: true }
+          - { php: 7.4, TYPO3_VERSION: "dev-main", experimental: true }
 
     env: ${{ matrix.env }}
 
