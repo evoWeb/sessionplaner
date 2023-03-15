@@ -176,6 +176,7 @@ return [
         'day' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-day',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -225,7 +226,7 @@ return [
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID### AND tx_sessionplaner_domain_model_slot.day = ###REC_FIELD_day###',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
