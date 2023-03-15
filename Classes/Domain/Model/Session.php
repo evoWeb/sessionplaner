@@ -248,7 +248,7 @@ class Session extends AbstractSlugEntity
 
     public function setDay(?Day $day)
     {
-        $this->day = $day ?? 0;
+        $this->day = $day;
     }
 
     public function getDay(): ?Day
@@ -262,7 +262,7 @@ class Session extends AbstractSlugEntity
 
     public function setRoom(?Room $room)
     {
-        $this->room = $room ?? 0;
+        $this->room = $room;
     }
 
     public function getRoom(): ?Room
@@ -276,7 +276,7 @@ class Session extends AbstractSlugEntity
 
     public function setSlot(?Slot $slot)
     {
-        $this->slot = $slot ?? 0;
+        $this->slot = $slot;
     }
 
     public function getSlot(): ?Slot

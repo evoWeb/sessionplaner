@@ -58,9 +58,9 @@ CREATE TABLE tx_sessionplaner_domain_model_session
 
     # references
     speakers        int(11) unsigned DEFAULT '0' NOT NULL,
-    day             int(11) unsigned DEFAULT '0' NOT NULL,
-    room            int(11) unsigned DEFAULT '0' NOT NULL,
-    slot            int(11) unsigned DEFAULT '0' NOT NULL,
+    day             int(11) unsigned,
+    room            int(11) unsigned,
+    slot            int(11) unsigned,
     tags            int(11) unsigned DEFAULT '0' NOT NULL,
     links           int(11) unsigned DEFAULT '0' NOT NULL,
     documents       int(11) unsigned DEFAULT '0' NOT NULL

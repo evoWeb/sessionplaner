@@ -72,7 +72,12 @@ class SessionRepository extends Repository
         $query->matching(
             $query->logicalAnd(
                 [
-                    $query->equals('slot', 0)
+                    $query->logicalOr(
+                        [
+                            $query->equals('slot', 0),
+                            $query->equals('slot', null)
+                        ]
+                    )
                 ]
             )
         );
