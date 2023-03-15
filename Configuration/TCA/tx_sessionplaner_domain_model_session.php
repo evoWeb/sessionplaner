@@ -139,6 +139,7 @@ return [
                 'rows' => 15,
                 'softref' => 'typolink_tag,images,email[subst],url',
                 'enableRichtext' => true,
+                'richtextConfiguration' => 'default'
             ],
         ],
         'documents' => [
