@@ -22,6 +22,11 @@ class Tca
         $start = TimeFormatUtility::getFormattedTime((int)$record['start']);
         $end = TimeFormatUtility::getFormattedTime((int)$record['start'] + ((int)$record['duration'] * 60));
         $breakInfo = $record['break'] === 1 ? ' - BREAK' : '';
-        $parameters['title'] = $start . ' - ' . $end . $breakInfo;
+        $dayInfo = '';
+        if (!empty($record['day'])) {
+            $day = BackendUtility::getRecord('tx_sessionplaner_domain_model_day', $record['day']);
+            $dayInfo = ' (' . $day['name'] . ')';
+        }
+        $parameters['title'] = $start . ' - ' . $end . $breakInfo . $dayInfo;
     }
 }
