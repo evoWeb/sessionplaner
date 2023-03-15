@@ -66,7 +66,7 @@ class AjaxController
         PersistenceManager $persistenceManager
     ) {
         $this->backendUser = $GLOBALS['BE_USER'];
-        $this->moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration']['web_SessionplanerTxSessionplanerM1'];
+        $this->moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration']['web_SessionplanerSessionplanerMain'];
 
         $this->configurationManager = $configurationManager;
         $this->sessionRepository = $sessionRepository;
