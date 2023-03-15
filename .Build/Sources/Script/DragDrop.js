@@ -104,6 +104,9 @@ define([
     // make the drop zones visible
     $(DragDrop.dropZoneIdentifier).each(function () {
       var $droppableElement = $(this);
+      if ($droppableElement.attr('id') === 'stash') {
+        $droppableElement.height('auto');
+      }
       if ($droppableElement.attr('id') === 'stash'
         || $droppableElement.children().length === 0
       ) {

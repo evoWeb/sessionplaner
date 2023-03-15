@@ -58,7 +58,8 @@ const tasks = {
       files: [`${paths.src}/Script/*.js`]
     },
     sass: {
-      files: [`${paths.src}/Sass/**/*.scss`]
+
+      files: [`${paths.src}/Sass/**/*.scss`, `${paths.src}/Sass/*.scss`]
     }
   }
 };
@@ -103,4 +104,4 @@ let watchTask = () => {
 exports.test = jshintTask;
 exports.js = series(jshintTask, terserTask);
 exports.build = series(sassTask, exports.js);
-exports.default = watchTask;
+exports.watch = watchTask;
