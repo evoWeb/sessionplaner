@@ -233,6 +233,9 @@ class SuggestFormFactory extends AbstractFormFactory
                 'senderName' => $settings['suggest']['notification']['senderName'] ?? '',
                 'carbonCopyAddress' => $settings['suggest']['notification']['carbonCopyAddress'] ?? '',
                 'blindCarbonCopyAddress' => $settings['suggest']['notification']['blindCarbonCopyAddress'] ?? '',
+                'replyToRecipients' => [
+                    '{email}'=> '{fullname}',
+                ],
                 'format' => 'html'
             ]);
         }
