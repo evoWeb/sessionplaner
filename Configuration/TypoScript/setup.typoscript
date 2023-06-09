@@ -31,6 +31,64 @@ plugin.tx_sessionplaner {
             hashtag = {$plugin.tx_sessionplaner.settings.twitterHashtag}
         }
         suggest {
+            form {
+                submitButtonLabel = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.submit
+                personalinformation = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:label.personalinformation
+                sessioninformation = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:label.sessioninformation
+                requiredField = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:label.required.field
+                requiredFieldExplanation = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:label.required.field.explanation
+            }
+            fields {
+                fullname {
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.fullname
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.fullname.description
+                }
+                email {
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.email
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.email.description
+                }
+                twitter {
+                    enable = 1
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.twitter
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.twitter.description
+                }
+                requesttype {
+                    enable = 0
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.requesttype
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.requesttype.description
+                    prependOptionLabel =
+                }
+                type {
+                    enable = 1
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.type
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.type.description
+                    prependOptionLabel =
+                }
+                title {
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.title
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.title.description
+                }
+                description {
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.description
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.description.description
+                }
+                length {
+                    enable = 1
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.estimatedlength
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.estimatedlength.description
+                }
+                level {
+                    enable = 1
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.level
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.level.description
+                    prependOptionLabel =
+                }
+                norecording {
+                    enable = 0
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.norecording
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.norecording.description
+                }
+            }
             notification {
                 enable = {$plugin.tx_sessionplaner.settings.suggest.notification.enable}
                 subject = {$plugin.tx_sessionplaner.settings.suggest.notification.subject}

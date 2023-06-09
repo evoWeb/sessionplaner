@@ -68,20 +68,31 @@ class SuggestFormFinisher extends AbstractFinisher
             $speaker->setHidden(true);
             $speaker->setName($data['fullname']);
             $speaker->setEmail($data['email']);
-            $speaker->setTwitter($data['twitter']);
+            if (!empty($data['twitter'])) {
+                $speaker->setTwitter($data['twitter']);
+            }
         }
         $session = new Session();
         $session->initializeObject();
         $session->setPid($storagePid);
         $session->setHidden(true);
         $session->setSuggestion(true);
-        $session->setRequesttype($data['requesttype']);
+        if (!empty($data['requesttype'])) {
+            $session->setRequesttype($data['requesttype']);
+        }
         $session->setTopic($data['title']);
         $session->setDescription($data['description']);
-        $session->setType($data['type']);
-        $session->setLevel($data['level']);
+        if (!empty($data['type'])) {
+            $session->setType($data['type']);
+        }
+        if (!empty($data['level'])) {
+            $session->setLevel($data['level']);
+        }
         $session->addSpeaker($speaker);
-        $session->setNorecording(boolval($data['norecording']));
+        if (!empty($data['norecording'])) {
+            $session->setNorecording(boolval($data['norecording']));
+        }
+        // length is unused / ignored
 
         $this->sessionRepository->add($session);
         $this->persistenceManager->persistAll();

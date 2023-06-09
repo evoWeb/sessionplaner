@@ -56,134 +56,158 @@ class SuggestFormFactory extends AbstractFormFactory
         /** @var FormDefinition $form */
         $form = GeneralUtility::makeInstance(FormDefinition::class, 'suggest', $prototypeConfiguration);
         $form->setRenderingOption('controllerAction', 'form');
-        $form->setRenderingOption('submitButtonLabel', LocalizationUtility::translate('form.submit', 'sessionplaner'));
+        $form->setRenderingOption('submitButtonLabel', $this->getLocalizedLabel($settings['suggest']['form']['submitButtonLabel']));
         $page = $form->createPage('suggestform');
 
         // Personal Information
         /** @var Section $personalInformation */
         $personalInformation = $page->createElement('personalinformation', 'Fieldset');
-        $personalInformation->setLabel(LocalizationUtility::translate('label.personalinformation', 'sessionplaner'));
+        $personalInformation->setLabel($this->getLocalizedLabel($settings['suggest']['form']['personalinformation']));
 
         /** @var GenericFormElement $fullnameField */
         $fullnameField = $personalInformation->createElement('fullname', 'Text');
-        $fullnameField->setLabel(LocalizationUtility::translate('form.fullname', 'sessionplaner'));
+        $fullnameField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['fullname']['label']));
         $fullnameField->setProperty(
             'elementDescription',
-            LocalizationUtility::translate('form.fullname.description', 'sessionplaner')
+            $this->getLocalizedLabel($settings['suggest']['fields']['fullname']['description'])
         );
         $fullnameField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
 
         /** @var GenericFormElement $emailField */
         $emailField = $personalInformation->createElement('email', 'Text');
-        $emailField->setLabel(LocalizationUtility::translate('form.email', 'sessionplaner'));
+        $emailField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['email']['label']));
         $emailField->setProperty(
             'elementDescription',
-            LocalizationUtility::translate('form.email.description', 'sessionplaner')
+            $this->getLocalizedLabel($settings['suggest']['fields']['email']['description'])
         );
         $emailField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
         $emailField->addValidator(GeneralUtility::makeInstance(EmailAddressValidator::class));
 
-        /** @var GenericFormElement $twitterField */
-        $twitterField = $personalInformation->createElement('twitter', 'Text');
-        $twitterField->setLabel(LocalizationUtility::translate('form.twitter', 'sessionplaner'));
-        $twitterField->setProperty(
-            'elementDescription',
-            LocalizationUtility::translate('form.twitter.description', 'sessionplaner')
-        );
+        if ($settings['suggest']['fields']['twitter']['enable']) {
+            /** @var GenericFormElement $twitterField */
+            $twitterField = $personalInformation->createElement('twitter', 'Text');
+            $twitterField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['twitter']['label']));
+            $twitterField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['twitter']['description'])
+            );
+        }
 
         // Session Information
         /** @var Section $sessionInformation */
         $sessionInformation = $page->createElement('sessioninformation', 'Fieldset');
-        $sessionInformation->setLabel(LocalizationUtility::translate('label.sessioninformation', 'sessionplaner'));
+        $sessionInformation->setLabel($this->getLocalizedLabel($settings['suggest']['form']['sessioninformation']));
 
-        /** @var GenericFormElement $requesttypeField */
-        $requesttypeField = $sessionInformation->createElement('requesttype', 'SingleSelect');
-        $requesttypeField->setLabel(LocalizationUtility::translate('form.requesttype', 'sessionplaner'));
-        $requesttypeField->setProperty(
-            'elementDescription',
-            LocalizationUtility::translate('form.requesttype.description', 'sessionplaner')
-        );
-        $requesttypeField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
-        $requesttypeFieldOptions = SessionRequestTypeEnum::getOptions();
-        foreach ($requesttypeFieldOptions as $requesttypeFieldOptionKey => $requesttypeFieldOptionValue) {
-            $requesttypeFieldOptions[$requesttypeFieldOptionKey] = LocalizationUtility::translate($requesttypeFieldOptionValue);
+        if ($settings['suggest']['fields']['requesttype']['enable']) {
+            /** @var GenericFormElement $requesttypeField */
+            $requesttypeField = $sessionInformation->createElement('requesttype', 'SingleSelect');
+            $requesttypeField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['label']));
+            $requesttypeField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['description'])
+            );
+            $requesttypeField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+            $requesttypeFieldOptions = SessionRequestTypeEnum::getOptions();
+            foreach ($requesttypeFieldOptions as $requesttypeFieldOptionKey => $requesttypeFieldOptionValue) {
+                $requesttypeFieldOptions[$requesttypeFieldOptionKey] = LocalizationUtility::translate($requesttypeFieldOptionValue);
+            }
+            $prependOptionLabel = ' ';
+            if (!empty($settings['suggest']['fields']['requesttype']['prependOptionLabel'])) {
+                $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['prependOptionLabel']);
+            }
+            $requesttypeField->setProperty('prependOptionLabel', $prependOptionLabel);
+            $requesttypeField->setProperty('options', $requesttypeFieldOptions);
         }
-        $requesttypeField->setProperty('prependOptionLabel', ' ');
-        $requesttypeField->setProperty('options', $requesttypeFieldOptions);
 
-        /** @var GenericFormElement $typeField */
-        $typeField = $sessionInformation->createElement('type', 'SingleSelect');
-        $typeField->setLabel(LocalizationUtility::translate('form.type', 'sessionplaner'));
-        $typeField->setProperty(
-            'elementDescription',
-            LocalizationUtility::translate('form.type.description', 'sessionplaner')
-        );
-        $typeField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
-        $typeFieldOptions = SessionTypeEnum::getOptions();
-        foreach ($typeFieldOptions as $typeFieldOptionKey => $typeFieldOptionValue) {
-            $typeFieldOptions[$typeFieldOptionKey] = LocalizationUtility::translate($typeFieldOptionValue);
+        if ($settings['suggest']['fields']['type']['enable']) {
+            /** @var GenericFormElement $typeField */
+            $typeField = $sessionInformation->createElement('type', 'SingleSelect');
+            $typeField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['type']['label']));
+            $typeField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['type']['description'])
+            );
+            $typeField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+            $typeFieldOptions = SessionTypeEnum::getOptions();
+            foreach ($typeFieldOptions as $typeFieldOptionKey => $typeFieldOptionValue) {
+                $typeFieldOptions[$typeFieldOptionKey] = LocalizationUtility::translate($typeFieldOptionValue);
+            }
+            $prependOptionLabel = ' ';
+            if (!empty($settings['suggest']['fields']['type']['prependOptionLabel'])) {
+                $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['type']['prependOptionLabel']);
+            }
+            $typeField->setProperty('prependOptionLabel', $prependOptionLabel);
+            $typeField->setProperty('options', $typeFieldOptions);
         }
-        $typeField->setProperty('prependOptionLabel', ' ');
-        $typeField->setProperty('options', $typeFieldOptions);
 
         /** @var GenericFormElement $titleField */
         $titleField = $sessionInformation->createElement('title', 'Text');
-        $titleField->setLabel(LocalizationUtility::translate('form.title', 'sessionplaner'));
+        $titleField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['title']['label']));
         $titleField->setProperty(
             'elementDescription',
-            LocalizationUtility::translate('form.title.description', 'sessionplaner')
+            $this->getLocalizedLabel($settings['suggest']['fields']['title']['description'])
         );
         $titleField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
 
         /** @var GenericFormElement $descriptionField */
         $descriptionField = $sessionInformation->createElement('description', 'Textarea');
-        $descriptionField->setLabel(LocalizationUtility::translate('form.description', 'sessionplaner'));
+        $descriptionField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['description']['label']));
         $descriptionField->setProperty(
             'elementDescription',
-            LocalizationUtility::translate('form.description.description', 'sessionplaner')
+            $this->getLocalizedLabel($settings['suggest']['fields']['description']['description'])
         );
         $descriptionField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
         $descriptionField->addValidator(GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]));
 
-        /** @var GenericFormElement $lengthField */
-        $lengthField = $sessionInformation->createElement('estimatedlength', 'SingleSelect');
-        $lengthField->setLabel(LocalizationUtility::translate('form.estimatedlength', 'sessionplaner'));
-        $lengthField->setProperty(
-            'elementDescription',
-            LocalizationUtility::translate('form.estimatedlength.description', 'sessionplaner')
-        );
-        $lengthField->setProperty('options', [
-            '45 Minutes' => '45 Minutes',
-            '90 Minutes' => '90 Minutes'
-        ]);
-
-        /** @var GenericFormElement $levelField */
-        $levelField = $sessionInformation->createElement('level', 'SingleSelect');
-        $levelField->setLabel(LocalizationUtility::translate('form.level', 'sessionplaner'));
-        $levelField->setProperty(
-            'elementDescription',
-            LocalizationUtility::translate('form.level.description', 'sessionplaner')
-        );
-        $levelField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
-        $levelFieldOptions = SessionLevelEnum::getOptions();
-        foreach ($levelFieldOptions as $levelFieldOptionKey => $levelFieldOptionValue) {
-            $levelFieldOptions[$levelFieldOptionKey] = LocalizationUtility::translate($levelFieldOptionValue);
+        if ($settings['suggest']['fields']['length']['enable']) {
+            /** @var GenericFormElement $lengthField */
+            $lengthField = $sessionInformation->createElement('estimatedlength', 'SingleSelect');
+            $lengthField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['length']['label']));
+            $lengthField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['length']['description'])
+            );
+            $lengthField->setProperty('options', [
+                '45 Minutes' => '45 Minutes',
+                '90 Minutes' => '90 Minutes'
+            ]);
         }
-        $levelField->setProperty('prependOptionLabel', ' ');
-        $levelField->setProperty('options', $levelFieldOptions);
 
-        $noRecordingField = $sessionInformation->createElement('norecording', 'Checkbox');
-        $noRecordingField->setLabel(LocalizationUtility::translate('form.norecording', 'sessionplaner'));
-        $noRecordingField->setProperty(
-            'elementDescription',
-            LocalizationUtility::translate('form.norecording.description', 'sessionplaner')
-        );
+        if ($settings['suggest']['fields']['level']['enable']) {
+            /** @var GenericFormElement $levelField */
+            $levelField = $sessionInformation->createElement('level', 'SingleSelect');
+            $levelField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['level']['label']));
+            $levelField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['level']['description'])
+            );
+            $levelField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+            $levelFieldOptions = SessionLevelEnum::getOptions();
+            foreach ($levelFieldOptions as $levelFieldOptionKey => $levelFieldOptionValue) {
+                $levelFieldOptions[$levelFieldOptionKey] = LocalizationUtility::translate($levelFieldOptionValue);
+            }
+            $prependOptionLabel = ' ';
+            if (!empty($settings['suggest']['fields']['level']['prependOptionLabel'])) {
+                $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['level']['prependOptionLabel']);
+            }
+            $levelField->setProperty('prependOptionLabel', $prependOptionLabel);
+            $levelField->setProperty('options', $levelFieldOptions);
+        }
+
+        if ($settings['suggest']['fields']['norecording']['enable']) {
+            $noRecordingField = $sessionInformation->createElement('norecording', 'Checkbox');
+            $noRecordingField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['norecording']['label']));
+            $noRecordingField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['norecording']['description'])
+            );
+        }
 
         $explanationText = $page->createElement('headline', 'StaticText');
         $explanationText->setProperty(
             'text',
-            LocalizationUtility::translate('label.required.field', 'sessionplaner')
-            . ' ' . LocalizationUtility::translate('label.required.field.explanation', 'sessionplaner')
+            $this->getLocalizedLabel($settings['suggest']['form']['requiredField'])
+            . ' ' . $this->getLocalizedLabel($settings['suggest']['form']['requiredFieldExplanation'])
         );
 
         /** @var SuggestFormFinisher $commentFinisher */
@@ -232,5 +256,13 @@ class SuggestFormFactory extends AbstractFormFactory
     protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
+    }
+
+    protected function getLocalizedLabel(string $label): string
+    {
+        if (strncmp($label, 'LLL:', 4) === 0) {
+            $label = LocalizationUtility::translate($label);
+        }
+        return $label;
     }
 }
