@@ -1,13 +1,13 @@
-.t3js-page-ce-dropzone-available.active {
+#sessionplaner .t3js-page-ce-dropzone-available.active {
     height: auto;
 }
 
-.topic,
-.speaker {
+#sessionplaner .topic,
+#sessionplaner .speaker {
     font-weight: 700;
 }
 
-.t3-grid-container {
+#sessionplaner .t3-grid-container {
     margin-left: 210px;
 
     table {
@@ -53,7 +53,7 @@
     }
 }
 
-#stash {
+#sessionplaner #stash {
     background-color: #fafafa;
     border-top: 1px solid #cdcdcd;
     border-bottom: 1px solid #cdcdcd;
@@ -80,7 +80,7 @@
     }
 }
 
-.t3-grid-cell #actions-document-new-in-grid {
+#sessionplaner .t3-grid-cell #actions-document-new-in-grid {
     display: block;
     width: 26px;
     margin: 0 auto;
