@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
 <f:be.pageRenderer includeCssFiles="{0: '{f:uri.resource(path: \'Stylesheets/backend.css\')}'}" />
-<f:be.container>
+<f:be.container pageTitle="Sessionplaner{f:if(condition: '{currentDay}', then: ' ({currentDay.name})')}">
 
     <div class="module" data-module-id="{moduleId}" data-module-name="{moduleName}">
         <div class="module-loading-indicator"></div>
