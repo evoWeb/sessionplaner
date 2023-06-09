@@ -13,6 +13,7 @@ namespace Evoweb\Sessionplaner\Domain\Factory;
 
 use Evoweb\Sessionplaner\Domain\Finisher\SuggestFormFinisher;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
+use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -95,6 +96,21 @@ class SuggestFormFactory extends AbstractFormFactory
         $sessionInformation = $page->createElement('sessioninformation', 'Fieldset');
         $sessionInformation->setLabel(LocalizationUtility::translate('label.sessioninformation', 'sessionplaner'));
 
+        /** @var GenericFormElement $requesttypeField */
+        $requesttypeField = $sessionInformation->createElement('requesttype', 'SingleSelect');
+        $requesttypeField->setLabel(LocalizationUtility::translate('form.requesttype', 'sessionplaner'));
+        $requesttypeField->setProperty(
+            'elementDescription',
+            LocalizationUtility::translate('form.requesttype.description', 'sessionplaner')
+        );
+        $requesttypeField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+        $requesttypeFieldOptions = SessionRequestTypeEnum::getOptions();
+        foreach ($requesttypeFieldOptions as $requesttypeFieldOptionKey => $requesttypeFieldOptionValue) {
+            $requesttypeFieldOptions[$requesttypeFieldOptionKey] = LocalizationUtility::translate($requesttypeFieldOptionValue);
+        }
+        $requesttypeField->setProperty('prependOptionLabel', ' ');
+        $requesttypeField->setProperty('options', $requesttypeFieldOptions);
+
         /** @var GenericFormElement $typeField */
         $typeField = $sessionInformation->createElement('type', 'SingleSelect');
         $typeField->setLabel(LocalizationUtility::translate('form.type', 'sessionplaner'));
@@ -155,6 +171,13 @@ class SuggestFormFactory extends AbstractFormFactory
         }
         $levelField->setProperty('prependOptionLabel', ' ');
         $levelField->setProperty('options', $levelFieldOptions);
+
+        $noRecordingField = $sessionInformation->createElement('norecording', 'Checkbox');
+        $noRecordingField->setLabel(LocalizationUtility::translate('form.norecording', 'sessionplaner'));
+        $noRecordingField->setProperty(
+            'elementDescription',
+            LocalizationUtility::translate('form.norecording.description', 'sessionplaner')
+        );
 
         $explanationText = $page->createElement('headline', 'StaticText');
         $explanationText->setProperty(

@@ -31,6 +31,7 @@ call_user_func(function () {
         'record-slot',
         'record-tag',
         'record-speaker',
+        'session-norecording'
     ];
     foreach ($icons as $icon) {
         $iconRegistry->registerIcon(

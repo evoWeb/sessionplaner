@@ -54,6 +54,8 @@ CREATE TABLE tx_sessionplaner_domain_model_session
     donotlink       tinyint(4) unsigned DEFAULT '0' NOT NULL,
     type            int(11) unsigned DEFAULT '0' NOT NULL,
     level           int(11) unsigned DEFAULT '0' NOT NULL,
+		requesttype     int(11) unsigned DEFAULT '0' NOT NULL,
+		norecording     tinyint(4) unsigned DEFAULT '0' NOT NULL,
     description     text,
 
     # references

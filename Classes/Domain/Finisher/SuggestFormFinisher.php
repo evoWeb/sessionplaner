@@ -75,11 +75,13 @@ class SuggestFormFinisher extends AbstractFinisher
         $session->setPid($storagePid);
         $session->setHidden(true);
         $session->setSuggestion(true);
+        $session->setRequesttype($data['requesttype']);
         $session->setTopic($data['title']);
         $session->setDescription($data['description']);
         $session->setType($data['type']);
         $session->setLevel($data['level']);
         $session->addSpeaker($speaker);
+        $session->setNorecording(boolval($data['norecording']));
 
         $this->sessionRepository->add($session);
         $this->persistenceManager->persistAll();

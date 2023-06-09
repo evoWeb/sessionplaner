@@ -186,6 +186,15 @@
             <trans-unit id="tx_sessionplaner_domain_model_session-download" xml:space="preserve">
                 <source>Download Link</source>
             </trans-unit>
+			<trans-unit id="tx_sessionplaner_domain_model_session-requesttype" xml:space="preserve">
+                <source>Request type</source>
+            </trans-unit>
+			<trans-unit id="tx_sessionplaner_domain_model_session-norecording" xml:space="preserve">
+                <source>No recording</source>
+            </trans-unit>
+			<trans-unit id="tx_sessionplaner_domain_model_session-norecording-description" xml:space="preserve">
+                <source>This should be set active when the session should not be recorded or streamed</source>
+            </trans-unit>
 
             <trans-unit id="tx_sessionplaner_domain_model_tag" xml:space="preserve">
                 <source>Tag</source>

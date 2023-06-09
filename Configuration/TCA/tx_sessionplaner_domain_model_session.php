@@ -272,6 +272,25 @@ return [
                 ],
             ],
         ],
+        'requesttype' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-requesttype',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum::getTcaOptions()),
+                'minitems' => 0,
+                'maxitems' => 1,
+            ],
+        ],
+        'norecording' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-norecording',
+            'description' => $languageFile . 'tx_sessionplaner_domain_model_session-norecording-description',
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
     ],
     'palettes' => [
         'options' => [
@@ -280,6 +299,7 @@ return [
                 suggestion,
                 social,
                 donotlink,
+                --linebreak--, norecording,
             '
         ],
         'speaker_free' => [
@@ -304,6 +324,7 @@ return [
                     links,
                     documents,
                 --div--;Relations,
+                    requesttype,
                     type,
                     level,
                     day,

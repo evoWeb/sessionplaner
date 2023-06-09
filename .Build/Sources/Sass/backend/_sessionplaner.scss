@@ -89,3 +89,17 @@
 #sessionplaner .t3-page-ce-header {
     min-width: auto;
 }
+
+#sessionplaner .t3-page-ce-header-icons-right {
+    display: flex;
+    width: 100%;
+
+    .norecording {
+        display: none;
+        margin-left: auto;
+    }
+}
+
+#sessionplaner .session-norecording .norecording {
+    display: inline-flex;
+}

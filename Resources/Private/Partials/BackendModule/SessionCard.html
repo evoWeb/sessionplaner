@@ -2,7 +2,7 @@
       xmlns:sessionplanervh="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers" data-namespace-typo3-fluid="true">
 
 <f:section name="Main">
-    <div class="t3-page-ce t3js-page-ce {f:if(condition: session.hidden, then: 't3-page-ce-hidden')}">
+    <div class="t3-page-ce t3js-page-ce {f:if(condition: session.hidden, then: 't3-page-ce-hidden')}{f:if(condition: session.norecording, then: ' session-norecording')}">
         <div class="t3-page-ce-dragitem">
             <div class="t3-page-ce-header t3-page-ce-header-draggable t3js-page-ce-draghandle">
                 <div class="t3-page-ce-header-icons-right">
@@ -12,6 +12,11 @@
                                 <sessionplanervh:be.buttons.icon uri="" iconKey="actions-edit-delete" class="btn btn-default btn-sm" />
                             </f:format.raw>
                         </a>
+                    </div>
+                    <div class="btn-group btn-group-sm norecording" role="group">
+                        <f:format.raw>
+                            <sessionplanervh:be.buttons.icon uri="" iconKey="sessionplaner-session-norecording" class="btn btn-default btn-sm" />
+                        </f:format.raw>
                     </div>
                 </div>
             </div>
@@ -35,11 +40,13 @@
                     <div class="hidden property description" data-name="description" data-value="{session.description}">{session.description}</div>
                     <div class="hidden property twitter" data-name="twitter" data-value="{session.twitter}">{session.twitter}</div>
                     <div class="hidden property attendees" data-name="attendees" data-value="{session.attendees}">{session.attendees}</div>
+                    <div class="hidden property requesttype" data-name="requesttype" data-value="{session.requesttype}">{session.requesttype}</div>
                     <div class="hidden property type" data-name="type" data-value="{session.type}">{session.type}</div>
                     <div class="hidden property level" data-name="level" data-value="{session.level}">{session.level}</div>
                     <div class="hidden property day" data-name="day" data-value="{session.day.uid}">{session.day.uid}</div>
                     <div class="hidden property room" data-name="room" data-value="{session.room.uid}">{session.room.uid}</div>
                     <div class="hidden property slot" data-name="slot" data-value="{session.slot.uid}">{session.slot.uid}</div>
+                    <div class="hidden property norecording" data-name="norecording" data-value="{session.norecording as integer}"></div>
                 </div>
             </div>
         </div>

@@ -86,6 +86,15 @@
                     </dd>
 
                     <dt>
+                        <label for="session-form-requesttype">
+                            <f:translate id="requesttype"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.select id="session-form-requesttype" name="requesttype" options="{formOptions.requesttypes}"/>
+                    </dd>
+
+                    <dt>
                         <label for="session-form-type">
                             <f:translate id="type"/>
                         </label>
@@ -102,6 +111,19 @@
                     <dd>
                         <f:form.select id="session-form-level" name="level" class="level" options="{formOptions.levels}"/>
                     </dd>
+
+                    <dt>
+                        <label for="session-form-norecording">
+                            <f:translate id="norecording"/>
+                        </label>
+                    </dt>
+                    <dd>
+                        <f:form.select id="session-form-norecording" name="norecording" options="{
+                            0: '{f:translate(id: \'norecording-0\')}',
+                            1: '{f:translate(id: \'norecording-1\')}'
+                        }"/>
+                    </dd>
+
                 </dl>
             </form>
             <div>

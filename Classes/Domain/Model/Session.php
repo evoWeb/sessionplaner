@@ -48,6 +48,10 @@ class Session extends AbstractSlugEntity
 
     protected int $level = 0;
 
+    protected int $requesttype = 0;
+
+    protected bool $norecording = false;
+
     protected ?Day $day = null;
 
     protected ?Room $room = null;
@@ -229,6 +233,31 @@ class Session extends AbstractSlugEntity
     public function getLevel(): int
     {
         return $this->level;
+    }
+
+    public function setRequesttype($requesttype)
+    {
+        $this->requesttype = (int)$requesttype;
+    }
+
+    public function getRequesttype(): int
+    {
+        return $this->requesttype;
+    }
+
+    public function setNorecording($norecording)
+    {
+        $this->norecording = (bool)$norecording;
+    }
+
+    public function isNorecording(): bool
+    {
+        return $this->norecording;
+    }
+
+    public function getNorecording(): bool
+    {
+        return $this->norecording;
     }
 
     public function setDocuments(ObjectStorage $documents)

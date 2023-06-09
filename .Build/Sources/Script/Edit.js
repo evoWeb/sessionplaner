@@ -43,12 +43,14 @@ define([
 
         $.each(serializedData, function (index, fieldNameAndValue) {
             if (fieldNameAndValue.name === 'attendees'
+                || fieldNameAndValue.name === 'requesttype'
                 || fieldNameAndValue.name === 'type'
                 || fieldNameAndValue.name === 'level'
                 || fieldNameAndValue.name === 'day'
                 || fieldNameAndValue.name === 'room'
                 || fieldNameAndValue.name === 'slot'
                 || fieldNameAndValue.name === 'hidden'
+                || fieldNameAndValue.name === 'norecording'
             ) {
                 fieldNameAndValue.value = parseInt(fieldNameAndValue.value) || 0;
             }
@@ -94,7 +96,13 @@ define([
             $card.removeClass('t3-page-ce-hidden');
         }
 
-        return $card;
+        if (sessionData.norecording) {
+            $card.addClass('session-norecording');
+        } else {
+            $card.removeClass('session-norecording');
+        }
+
+      return $card;
     };
 
     /**

@@ -14,6 +14,7 @@ namespace Evoweb\Sessionplaner\Controller;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
+use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
@@ -55,6 +56,10 @@ class BackendModuleController extends ActionController
             $day = $this->dayRepository->findAll()->getFirst();
         }
 
+        $requesttypeFieldOptions = SessionRequestTypeEnum::getOptions();
+        foreach ($requesttypeFieldOptions as $requesttypeFieldOptionKey => $requesttypeFieldOptionValue) {
+            $requesttypeFieldOptions[$requesttypeFieldOptionKey] = LocalizationUtility::translate($requesttypeFieldOptionValue);
+        }
         $typeFieldOptions = SessionTypeEnum::getOptions();
         foreach ($typeFieldOptions as $typeFieldOptionKey => $typeFieldOptionValue) {
             $typeFieldOptions[$typeFieldOptionKey] = LocalizationUtility::translate($typeFieldOptionValue);
@@ -65,6 +70,7 @@ class BackendModuleController extends ActionController
         }
 
         $this->view->assign('formOptions', [
+            'requesttypes' => $requesttypeFieldOptions,
             'types' => $typeFieldOptions,
             'levels' => $levelFieldOptions,
         ]);
