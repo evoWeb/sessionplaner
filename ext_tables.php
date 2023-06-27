@@ -9,14 +9,19 @@
 
 defined('TYPO3') or die('Access denied.');
 
-call_user_func(function () {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+use Evoweb\Sessionplaner\Controller\BackendModuleController;
+use TYPO3\CMS\Core\Information\Typo3Version;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
+if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+    ExtensionUtility::registerModule(
         'Sessionplaner',
         'web',
         'sessionplaner_main',
         '',
         [
-            \Evoweb\Sessionplaner\Controller\BackendModuleController::class => 'show',
+            BackendModuleController::class => 'show',
         ],
         [
             'access' => 'user,group',
@@ -24,4 +29,4 @@ call_user_func(function () {
             'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xlf',
         ]
     );
-});
+}

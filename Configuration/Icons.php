@@ -8,6 +8,10 @@
  */
 
 return [
+    'sessionplaner-module-show' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:sessionplaner/Resources/Public/Icons/module-sessionplaner-show.svg'
+    ],
     'sessionplaner-plugin-display' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:sessionplaner/Resources/Public/Icons/plugin-display.svg'
