@@ -20,9 +20,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class SessionRepository extends Repository
 {
-    /**
-     * Default Orderings
-     */
     protected $defaultOrderings = [
         'topic' => QueryInterface::ORDER_ASCENDING
     ];

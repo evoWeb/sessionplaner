@@ -18,9 +18,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class DayRepository extends Repository
 {
-    /**
-     * Default Orderings
-     */
     protected $defaultOrderings = [
         'date' => QueryInterface::ORDER_ASCENDING
     ];

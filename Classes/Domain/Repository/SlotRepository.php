@@ -16,9 +16,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class SlotRepository extends Repository
 {
-    /**
-     * Default Orderings
-     */
     protected $defaultOrderings = [
         'start' => QueryInterface::ORDER_ASCENDING
     ];
