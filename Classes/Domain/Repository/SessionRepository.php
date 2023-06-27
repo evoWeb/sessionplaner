@@ -43,11 +43,7 @@ class SessionRepository extends Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalAnd(
-                [
-                    $query->equals('suggestion', 1)
-                ]
-            )
+            $query->logicalAnd($query->equals('suggestion', 1))
         );
         return $query->execute();
     }
@@ -57,10 +53,8 @@ class SessionRepository extends Repository
         $query = $this->createQuery();
         $query->matching(
             $query->logicalAnd(
-                [
-                    $query->equals('day', $day),
-                    $query->equals('slot', 0)
-                ]
+                $query->equals('day', $day),
+                $query->equals('slot', 0)
             )
         );
         return $query->execute();
@@ -71,14 +65,10 @@ class SessionRepository extends Repository
         $query = $this->createQuery();
         $query->matching(
             $query->logicalAnd(
-                [
-                    $query->logicalOr(
-                        [
-                            $query->equals('slot', 0),
-                            $query->equals('slot', null)
-                        ]
-                    )
-                ]
+                $query->logicalOr(
+                    $query->equals('slot', 0),
+                    $query->equals('slot', null)
+                )
             )
         );
         return $query->execute();
@@ -93,11 +83,9 @@ class SessionRepository extends Repository
         $query = $this->createQuery();
         return $query->matching(
             $query->logicalAnd(
-                [
-                    $query->in('day', $days),
-                    $query->logicalNot($query->equals('slot', 0)),
-                    $query->logicalNot($query->equals('room', 0))
-                ]
+                $query->in('day', $days),
+                $query->logicalNot($query->equals('slot', 0)),
+                $query->logicalNot($query->equals('room', 0))
             )
         )->execute();
     }
