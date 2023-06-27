@@ -1,6 +1,6 @@
 name: ext-sessionplaner
 type: typo3
-docroot:
+docroot: .build/public
 php_version: "8.2"
 webserver_type: apache-fpm
 router_http_port: "80"
@@ -16,12 +16,12 @@ mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
 web_environment:
-- PATH=/var/www/html/.build/bin:$PATH
-- TYPO3_CONTEXT=Development
-- typo3DatabaseHost=db
-- typo3DatabaseName=t3func
-- typo3DatabasePassword=root
-- typo3DatabaseUsername=root
+  - PATH=/var/www/html/.build/bin:$PATH
+  - TYPO3_CONTEXT=Development
+  - typo3DatabaseHost=db
+  - typo3DatabaseName=t3func
+  - typo3DatabasePassword=root
+  - typo3DatabaseUsername=root
 nodejs_version: "16"
 
 # Key features of ddev's config.yaml:
