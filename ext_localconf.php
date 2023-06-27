@@ -15,33 +15,6 @@ call_user_func(function () {
         'Evoweb\\Sessionplaner\\ViewHelpers';
 
     /**
-     * Register Icons
-     *
-     * @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry
-     */
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-    $icons = [
-        'plugin-display',
-        'plugin-session',
-        'plugin-suggest',
-        'plugin-speaker',
-        'record-day',
-        'record-room',
-        'record-session',
-        'record-slot',
-        'record-tag',
-        'record-speaker',
-        'session-norecording'
-    ];
-    foreach ($icons as $icon) {
-        $iconRegistry->registerIcon(
-            'sessionplaner-' . $icon,
-            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            ['source' => 'EXT:sessionplaner/Resources/Public/Icons/' . $icon . '.svg']
-        );
-    }
-
-    /**
      * Add default PageTsConfig
      */
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
