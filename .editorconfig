@@ -7,46 +7,65 @@ root = true
 [*]
 charset = utf-8
 end_of_line = lf
-indent_style = space
-indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# TS/JS-Files
-[*.{ts,js}]
-indent_size = 2
+# CSS-Files
+[*.css]
+indent_style = space
+indent_size = 4
 
-# JSON-Files
-[*.json]
-indent_style = tab
+# HTML-Files
+[*.html]
+indent_style = space
+indent_size = 4
+
+# TMPL-Files
+[*.tmpl]
+indent_style = space
+indent_size = 4
+
+# JS-Files
+[*.js]
+indent_style = space
+indent_size = 4
+
+# PHP-Files
+[*.php]
+indent_style = space
+indent_size = 4
+
+# MD-Files
+[*.md]
+indent_style = space
+indent_size = 4
+max_line_length = 80
 
 # ReST-Files
-[*.rst]
+[*.{rst,rst.txt}]
+indent_style = space
 indent_size = 3
 max_line_length = 80
 
-# YAML-Files
-[*.{yaml,yml}]
+# TypoScript
+[*.typoscript]
+indent_style = space
+indent_size = 4
+
+# YML-Files
+[{*.yml,*.yaml}]
+indent_style = space
 indent_size = 2
 
 # package.json
-# .travis.yml
-[{package.json,.travis.yml}]
+[package.json]
+indent_style = space
 indent_size = 2
 
-# TypoScript
-[*.{typoscript,tsconfig}]
-indent_size = 2
+# composer.json
+[composer.json]
+indent_style = space
+indent_size = 4
 
-# XLF-Files
-[*.xlf]
-indent_style = tab
-
-# SQL-Files
-[*.sql]
-indent_style = tab
-indent_size = 2
-
-# .htaccess
-[{_.htaccess,.htaccess}]
+[*.neon]
 indent_style = tab
