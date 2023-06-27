@@ -7,7 +7,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3') or die();
+defined('TYPO3') or die('Access denied.');
 
 /**
  * Frontend Plugin Session Suggest

@@ -7,8 +7,6 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3') or die();
-
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_room');
