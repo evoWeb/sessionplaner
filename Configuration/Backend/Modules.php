@@ -10,7 +10,7 @@
 use Evoweb\Sessionplaner\Controller\BackendModuleController;
 
 return [
-    'sessionplaner_show' => [
+    'web_SessionplanerSessionplanerMain' => [
         'parent' => 'web',
         'access' => 'user',
         'path' => '/module/sessionplaner/show',
@@ -21,9 +21,6 @@ return [
             BackendModuleController::class => [
                 'show',
             ],
-        ],
-        'aliases' => [
-            'web_SessionplanerSessionplanerMain'
-        ],
+        ]
     ],
 ];
