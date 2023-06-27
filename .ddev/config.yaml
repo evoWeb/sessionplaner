@@ -1,21 +1,27 @@
 name: ext-sessionplaner
-type: php
-docroot: ""
-php_version: "8.1"
-webserver_type: nginx-fpm
+type: typo3
+docroot:
+php_version: "8.2"
+webserver_type: apache-fpm
 router_http_port: "80"
 router_https_port: "443"
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
-  type: mariadb
-  version: "10.4"
+  type: mysql
+  version: "8.0"
 nfs_mount_enabled: false
 mutagen_enabled: false
 use_dns_when_possible: true
 composer_version: "2"
-web_environment: []
+web_environment:
+- PATH=/var/www/html/.build/bin:$PATH
+- TYPO3_CONTEXT=Development
+- typo3DatabaseHost=db
+- typo3DatabaseName=t3func
+- typo3DatabasePassword=root
+- typo3DatabaseUsername=root
 nodejs_version: "16"
 
 # Key features of ddev's config.yaml:
@@ -255,3 +261,5 @@ nodejs_version: "16"
 # information on the commands that can be extended and the tasks you can define
 # for them. Example:
 #hooks:
+#  post-start:
+#    - exec: composer install -d /var/www/html

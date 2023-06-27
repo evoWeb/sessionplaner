@@ -10,10 +10,11 @@ import jshint from 'gulp-jshint';
 
 // CSS
 import nodeSass from 'node-sass';
-import sass from 'gulp-sass';
-sass.compiler = nodeSass;
+import gulpSass from 'gulp-sass';
 import autoprefixer from 'autoprefixer';
 import postcss from 'gulp-postcss';
+
+const sass = gulpSass(nodeSass);
 
 const paths = {
   src: './Sources/',

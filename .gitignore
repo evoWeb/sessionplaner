@@ -1,9 +1,6 @@
-.idea
-.Build/bin/**
-.Build/vendor/**
-.Build/Web/**
-node_modules
+.build
+Build/node_modules/*
+config/
+var/
+*.cache
 composer.lock
-package-lock.json
-.php-cs-fixer.cache
-.phplint.cache
