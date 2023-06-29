@@ -10,19 +10,19 @@
 use Evoweb\Sessionplaner\Controller\AjaxController;
 
 return [
-    // Dispatch the create action
     'evoweb_sessionplaner_create' => [
         'path' => '/evoweb/sessionplaner/create',
+        'methods' => ['POST'],
         'target' => AjaxController::class . '::createSessionAction'
     ],
-    // Dispatch the update action
     'evoweb_sessionplaner_update' => [
         'path' => '/evoweb/sessionplaner/update',
+        'methods' => ['POST'],
         'target' => AjaxController::class . '::updateSessionAction'
     ],
-    // Dispatch the delete action
     'evoweb_sessionplaner_delete' => [
         'path' => '/evoweb/sessionplaner/delete',
+        'methods' => ['POST'],
         'target' => AjaxController::class . '::deleteSessionAction'
     ]
 ];
