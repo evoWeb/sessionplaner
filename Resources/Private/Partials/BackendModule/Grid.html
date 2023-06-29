@@ -1,46 +1,59 @@
-<f:section name="Main">
-    <div id="gridButtonGroup" class="hidden">
-        <f:format.raw>
-            <sessionplanervh:be.buttons.icon uri="#" id="actions-document-new-in-grid" iconKey="actions-document-new" title="{f:translate(id: 'session-new')}" class="btn btn-default btn-sm t3js-page-new-ce" />
-        </f:format.raw>
-    </div>
-    <div class="t3-grid-container">
-        <table class="t3-grid-table">
-            <colgroup>
-                <col width="60px">
-                <f:for each="{day.rooms}" as="room">
-                    <col>
-                </f:for>
-            </colgroup>
-            <thead>
-                <tr>
-                    <th class="t3-page-column-header">&nbsp;</th>
-                    <f:for each="{day.rooms}" as="room">
-                        <th class="t3-page-column-header">{room.name}</th>
-                    </f:for>
-                </tr>
-            </thead>
-            <tbody>
-                <f:for each="{day.slots}" as="slot">
-                    <tr class="{f:if(condition: slot.break, then: 'break', else: 'active')}">
-                        <th class="t3-grid-cell time">
-                            <sessionplanervh:format.time value="{slot.start}" />
-                            <br>
-                            {slot.duration}
-                            <f:translate id="minutes" />
-                        </th>
+<div class="sessionplaner-container">
+    <div class="sessionplaner-grid">
+        <div class="sessionplaner-row">
+            <f:for each="{day.rooms}" as="room">
+                <div
+                    class="sessionplaner-col sessionplaner-col-header"
+                    data-sessionplaner-room-uid="{room.uid}"
+                    data-sessionplaner-room-type="{room.type}"
+                    >
+                    {room.name}
+                </div>
+            </f:for>
+        </div>
+        <f:for each="{day.slots}" as="slot">
+            <div class="sessionplaner-row">
+                <div class="sessionplaner-col sessionplaner-col-time">
+                            <strong><sessionplanervh:format.time value="{slot.start}" /></strong><br>
+                            <strong><sessionplanervh:format.time value="{slot.end}" /></strong><br>
+                            <small>{slot.duration} <f:translate id="minutes" /></small>
+                </div>
+                <f:if condition="{slot.break}">
+                    <f:then>
+                        <div class="sessionplaner-col sessionplaner-col-break">
+                            <div class="sessionplaner-cell">
+                                <div class="sessionplaner-cell-body">
+                                    <f:if condition="{slot.description}">
+                                        <f:then>
+                                            {slot.description}
+                                        </f:then>
+                                        <f:else>
+                                            BREAK
+                                        </f:else>
+                                    </f:if>
+                                </div>
+                            </div>
+                        </div>
+                    </f:then>
+                    <f:else>
                         <f:for each="{day.rooms}" as="room">
-                            <td class="t3-grid-cell t3-page-ce-dropzone-available {f:if(condition: slot.break, else: 't3js-page-ce-dropzone-available t3js-grid-cell')}" data-day="{day.uid}" data-room="{room.uid}" data-slot="{slot.uid}">
+                            <div
+                                class="sessionplaner-col sessionplaner-col-slot"
+                                data-day-uid="{day.uid}"
+                                data-room-uid="{room.uid}"
+                                data-slot-uid="{slot.uid}"
+                                data-sessionplaner-dragtarget="slot"
+                                >
                                 <f:for each="{room.sessions}" as="session">
                                     <f:if condition="{0: day, 1: slot} == {0: session.day, 1: session.slot}">
-                                        <f:render partial="BackendModule/SessionCard" section="Main" arguments="{session: session}" />
+                                        <f:render partial="BackendModule/SessionCard" arguments="{session: session}" />
                                     </f:if>
                                 </f:for>
-                            </td>
+                            </div>
                         </f:for>
-                    </tr>
-                </f:for>
-            </tbody>
-        </table>
+                    </f:else>
+                </f:if>
+            </div>
+        </f:for>
     </div>
-</f:section>
+</div>

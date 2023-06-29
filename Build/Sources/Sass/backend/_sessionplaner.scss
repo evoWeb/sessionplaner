@@ -1,105 +1,258 @@
-#sessionplaner .t3js-page-ce-dropzone-available.active {
-    height: auto;
+//
+// Sessionplaner
+//
+.sessionplaner {
+    --sessionplaner-grid-gap: 1rem;
+    --sessionplaner-grid-spacing: 2px;
+    --sessionplaner-grid-padding-y: .5rem;
+    --sessionplaner-grid-padding-x: .5rem;
+    --sessionplaner-grid-col-color: inherit;
+    --sessionplaner-grid-col-bg: transparent;
+    --sessionplaner-grid-col-min-height: 7.125rem;
+    --sessionplaner-grid-border-radius: 5px;
+
+    --sessionplaner-color-default: #313131;
+    --sessionplaner-color-active: #3280bf;
+    --sessionplaner-color-notice: #fafafa;
+    --sessionplaner-color-success: #c5df93;
+
+    --sessionplaner-sessionbox-spacing: .5rem;
+    --sessionplaner-sessionbox-color: var(--sessionplaner-color-default);
+    --sessionplaner-sessionbox-padding-y: .75rem;
+    --sessionplaner-sessionbox-padding-x: .75rem;
+    --sessionplaner-sessionbox-bg: #fff;
+    --sessionplaner-sessionbox-border-style: solid;
+    --sessionplaner-sessionbox-border-radius: 5px;
+    --sessionplaner-sessionbox-border-color: rgba(0,0,0,0.1);
+    --sessionplaner-sessionbox-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
+    --sessionplaner-sessionbox-suggestion-bg: #faead1;
+    --sessionplaner-sessionbox-hidden-bg: #f2f2f2;
+
+    --sessionplaner-room-main-color: #ffffff;
+    --sessionplaner-room-main-bg: #313131;
+    --sessionplaner-room-side-color: #ffffff;
+    --sessionplaner-room-side-bg: #515151;
+    --sessionplaner-time-color: inherit;
+    --sessionplaner-time-bg: #fafafa;
+    --sessionplaner-break-color: inherit;
+    --sessionplaner-break-bg: #faead1;
+    --sessionplaner-slot-color: inherit;
+    --sessionplaner-slot-bg: #f2f2f2;
+
+    --sessionplaner-tag-border-radius: 4px;
+    --sessionplaner-tag-bg: #999999;
+    --sessionplaner-tag-color: #ffffff;
+
+    --sessionplaner-stash-bg: var(--sessionplaner-color-notice);
+    --sessionplaner-stash-padding: 1rem;
+
+    display: grid;
+    grid-template-columns: 250px auto;
+    gap: var(--sessionplaner-grid-gap);
 }
-
-#sessionplaner .topic,
-#sessionplaner .speaker {
-    font-weight: 700;
-}
-
-#sessionplaner .t3-grid-container {
-    margin-left: 210px;
-
-    table {
-        width: 100%;
-    }
-
-    tbody {
-        th {
-            vertical-align: top;
-            border-bottom: 1px solid #cdcdcd;
-        }
-
-        th, td {
-            &.t3js-page-ce-dropzone-available.active {
-                position:relative !important;
-                background-color: #fbefdd;
-            }
-
-            &.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
-                background-color: #d1e2bd;
-                z-index: 300;
-            }
-        }
-
-        tr.break th,
-        tr.break td {
-            background-color: #d1d1d1;
-        }
-
-        .time,
-        .room {
-            min-height: 94px;
-        }
-
-        .time {
-            padding: 10px;
-        }
-    }
-
-    .t3js-page-ce {
-        width: inherit;
-        margin: 10px;
-    }
-}
-
-#sessionplaner #stash {
-    background-color: #fafafa;
-    border-top: 1px solid #cdcdcd;
-    border-bottom: 1px solid #cdcdcd;
-    float: left;
-    margin-top: 27px;
-    width: 200px;
-    min-height: 30px;
-
-    &.t3js-page-ce-dropzone-available.active {
-        position:relative !important;
-        background-color: #fbefdd;
-    }
-
-    &.t3js-page-ce-dropzone-available.active.t3js-page-ce-dropzone-possible {
-        background-color: #d1e2bd;
-    }
-
-    .t3js-page-ce {
-        margin: 10px;
-    }
-
-    .ui-draggable-dragging {
-        z-index: 700 !important;
+.sessionplaner-title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    h1 {
+        margin-bottom: 0;
     }
 }
-
-#sessionplaner .t3-grid-cell #actions-document-new-in-grid {
-    display: block;
-    width: 26px;
-    margin: 0 auto;
-}
-
-#sessionplaner .t3-page-ce-header {
-    min-width: auto;
-}
-
-#sessionplaner .t3-page-ce-header-icons-right {
+.sessionplaner-stash {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    gap: .25rem;
+    padding: var(--sessionplaner-stash-padding);
+    border-radius: var(--sessionplaner-grid-border-radius);
+    background-color: var(--sessionplaner-stash-bg);
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 5px,
+        rgba(0,0,0,.05) 5px,
+        rgba(0,0,0,.05) 10px
+    );
+    &.dragtarget {
+        --sessionplaner-stash-bg: var(--sessionplaner-color-success);
+    }
+}
+.sessionplaner-container {
+    container-type: inline-size;
+    display: flex;
+    overflow: auto;
+    border-radius: var(--sessionplaner-grid-border-radius);
+}
 
-    .norecording {
+//
+// Grid
+//
+.sessionplaner-grid {
+    display: flex;
+    flex: 1 1 0px;
+    flex-direction: column;
+    gap: var(--sessionplaner-grid-spacing);
+}
+.sessionplaner-row {
+    position: relative;
+    display: flex;
+    gap: var(--sessionplaner-grid-spacing);
+    flex-direction: column;
+    @container (min-width: 600px) {
+        flex-direction: row;
+        padding-left: calc(5rem + var(--sessionplaner-grid-spacing));
+    }
+}
+.sessionplaner-col {
+    overflow: hidden;
+    color: var(--sessionplaner-grid-col-color);
+    background: var(--sessionplaner-grid-col-bg);
+    padding: var(--sessionplaner-grid-padding-y) var(--sessionplaner-grid-padding-x);
+    min-height: calc(var(--sessionplaner-grid-col-min-height) + (var(--sessionplaner-grid-padding-y) * 2));
+    @container (min-width: 600px) {
+        flex: 1 1 0px;
+    }
+    &-header {
+        min-height: 0;
         display: none;
-        margin-left: auto;
+        @container (min-width: 600px) {
+            display: block;
+        }
+        &[data-sessionplaner-room-type="main"] {
+            --sessionplaner-grid-col-color: var(--sessionplaner-room-main-color);
+            --sessionplaner-grid-col-bg: var(--sessionplaner-room-main-bg);
+        }
+        &[data-sessionplaner-room-type="side"] {
+            --sessionplaner-grid-col-color: var(--sessionplaner-room-side-color);
+            --sessionplaner-grid-col-bg: var(--sessionplaner-room-side-bg);
+        }
+    }
+    &-time {
+        --sessionplaner-grid-col-color: var(--sessionplaner-time-color);
+        --sessionplaner-grid-col-bg: var(--sessionplaner-time-bg);
+        height: auto;
+        @container (min-width: 600px) {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5rem;
+            height: 100%;
+        }
+    }
+    &-break {
+        --sessionplaner-grid-col-color: var(--sessionplaner-break-color);
+        --sessionplaner-grid-col-bg: var(--sessionplaner-break-bg);
+        background-color: #faead1;
+    }
+    &-slot {
+        --sessionplaner-grid-col-color: var(--sessionplaner-slot-color);
+        --sessionplaner-grid-col-bg: var(--sessionplaner-slot-bg);
+        min-width: 260px;
+    }
+    &.dragtarget {
+        --sessionplaner-grid-col-bg: var(--sessionplaner-color-success);
     }
 }
 
-#sessionplaner .session-norecording .norecording {
+//
+// Sessionbox
+//
+.sessionbox {
+    position: relative;
+    padding: var(--sessionplaner-sessionbox-padding-y) var(--sessionplaner-sessionbox-padding-x);
+    background-color: var(--sessionplaner-sessionbox-bg);
+    border: 1px var(--sessionplaner-sessionbox-border-style) var(--sessionplaner-sessionbox-border-color);
+    border-radius: var(--sessionplaner-sessionbox-border-radius);
+    box-shadow: var(--sessionplaner-sessionbox-shadow);
+    display: grid;
+    gap: var(--sessionplaner-sessionbox-spacing) calc(var(--sessionplaner-sessionbox-spacing) * 2);
+    grid-template-columns: 16px auto;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "sessionbox-status sessionbox-header"
+        "sessionbox-status sessionbox-speaker"
+        "sessionbox-status sessionbox-tags";
+
+    &[data-session-suggestion="1"] {
+        --sessionplaner-sessionbox-bg: var(--sessionplaner-sessionbox-suggestion-bg);
+    }
+    &[data-session-hidden="1"] {
+        --sessionplaner-sessionbox-border-style: dashed;
+        --sessionplaner-sessionbox-bg: var(--sessionplaner-sessionbox-hidden-bg);
+    }
+}
+.sessionbox-status {
+    grid-area: sessionbox-status;
+}
+.sessionbox-header {
+    grid-area: sessionbox-header;
+}
+.sessionplaner-card-header {
+    display: -webkit-box;
+    font-weight: bold;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.sessionbox-speaker {
+    grid-area: sessionbox-speaker;
+}
+.sessionbox-tags {
+    grid-area: sessionbox-tags;
+}
+
+//
+// Header
+//
+.sessionbox-header {
+    font-weight: bold;
+    a {
+        text-decoration: underline;
+    }
+}
+
+//
+// Status
+//
+.sessionbox-status {
+    container-type: inline-size;
+}
+.sessionbox-status-items {
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+    @container (min-width: 110px) {
+        flex-direction: row;
+    }
+}
+.sessionbox-status-item {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .75;
+    &--disabled {
+        opacity: .15;
+    }
+}
+
+//
+// Tag
+//
+.sessionbox-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+.sessionbox-tag {
+    text-transform: uppercase;
+    font-size: 10px;
+    display: inline-block;
+    padding: 2px 5px;
+    color: var(--sessionplaner-tag-color);
+    background: var(--sessionplaner-tag-bg);
+    border-radius: var(--sessionplaner-tag-border-radius);
+}
+@each $name, $color in $session-colors {
+    .sessionbox-tag-#{$name} {
+        --sessionplaner-tag-color: #{color-contrast($color)};
+        --sessionplaner-tag-bg: #{$color};
+    }
 }

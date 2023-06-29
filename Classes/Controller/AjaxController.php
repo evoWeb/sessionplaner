@@ -25,36 +25,18 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 
-class AjaxController
+final class AjaxController
 {
-    protected ?array $moduleConfiguration = [];
-
-    protected array $parameter = [];
-
-    protected string $status = 'success';
-
-    protected string $message = '';
-
-    protected array $data = [];
-
     protected BackendUserAuthentication $backendUser;
-
     protected ConfigurationManager $configurationManager;
-
     protected SessionRepository $sessionRepository;
-
     protected DayRepository $dayRepository;
-
     protected RoomRepository $roomRepository;
-
     protected SlotRepository $slotRepository;
-
     protected PersistenceManager $persistenceManager;
 
     public function __construct(
@@ -66,8 +48,6 @@ class AjaxController
         PersistenceManager $persistenceManager
     ) {
         $this->backendUser = $GLOBALS['BE_USER'];
-        $this->moduleConfiguration = $GLOBALS['TBE_MODULES']['_configuration']['web_SessionplanerSessionplanerMain'];
-
         $this->configurationManager = $configurationManager;
         $this->sessionRepository = $sessionRepository;
         $this->dayRepository = $dayRepository;
@@ -76,119 +56,56 @@ class AjaxController
         $this->persistenceManager = $persistenceManager;
     }
 
-    protected function initializeAction(ServerRequestInterface $request): bool
-    {
-        $this->parameter = $request->getParsedBody()['tx_sessionplaner'];
-
-        if (!($this->backendUser->isAdmin() || $this->backendUser->modAccess($this->moduleConfiguration))) {
-            $this->errorAction();
-            return false;
-        }
-
-        $configuration = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-        );
-        if (empty($configuration['persistence']['storagePid'])) {
-            $currentPid['persistence']['storagePid'] = $request->getParsedBody()['id'];
-            $this->configurationManager->setConfiguration(array_merge($configuration, $currentPid));
-        }
-        return true;
-    }
-
-    protected function render(): ResponseInterface
-    {
-        return new JsonResponse(
-            [
-                'status' => $this->status,
-                'message' => $this->message,
-                'data' => $this->data,
-            ]
-        );
-    }
-
-    protected function errorAction()
-    {
-        $this->status = 'error';
-        $this->message = 'No access granted';
-    }
-
-    public function createSessionAction(ServerRequestInterface $request): ResponseInterface
-    {
-        $this->initializeAction($request);
-
-        $session = $this->getSessionFromRequest($request);
-        $validationResults = $this->validateSession($session);
-        if (!$validationResults->hasErrors()) {
-            $this->sessionRepository->add($session);
-            $this->persistAll();
-            $this->message = 'Session ' . $session->getTopic() . ' saved';
-            $this->data = $session->toArray();
-        } else {
-            $this->status = 'error';
-            $this->message = 'Request did not contain valid data';
-        }
-
-        return $this->render();
-    }
-
     public function updateSessionAction(ServerRequestInterface $request): ResponseInterface
     {
-        $this->initializeAction($request);
+        if(!$this->hasAccess()) {
+            return $this->renderResponse([
+                'status' => 'error',
+                'message' => 'No access granted'
+            ]);
+        }
 
-        $session = $this->sessionRepository->findAnyByUid((int)$this->parameter['session']['uid']);
-        $this->updateSessionFromRequest($session);
+        $data = $this->getParameter($request)['session'] ?? [];
+        $session = $this->sessionRepository->findAnyByUid((int)$data['uid']);
+        if ($session === null) {
+            return $this->renderResponse([
+                'status' => 'error',
+                'message' => 'Session not found'
+            ]);
+        }
+
+        $this->updateSession($session, $data);
 
         $validationResults = $this->validateSession($session);
         if (!$validationResults->hasErrors()) {
             $this->sessionRepository->update($session);
-            $this->persistAll();
-            $this->message = 'Session ' . $session->getTopic() . ' updated';
-            $this->data = $session->toArray();
-        } else {
-            $this->status = 'error';
-            $this->message = 'Request did not contain valid data';
+            $this->persistenceManager->persistAll();
+            return $this->renderResponse([
+                'message' => 'Session ' . $session->getTopic() . ' updated',
+                'data' => [
+                    'session' => $session->toArray()
+                ]
+            ]);
         }
 
-        return $this->render();
+        return $this->renderResponse([
+            'status' => 'error',
+            'message' => 'Request did not contain valid data'
+        ]);
     }
 
-    public function deleteSessionAction(ServerRequestInterface $request): ResponseInterface
+    protected function validateSession(Session $session): Result
     {
-        $this->initializeAction($request);
-
-        $session = $this->sessionRepository->findAnyByUid((int)$this->parameter['session']['uid']);
-        $validationResults = $this->validateSession($session);
-        if (!$validationResults->hasErrors()) {
-            $this->sessionRepository->remove($session);
-            $this->persistAll();
-            $this->message = 'Session ' . $session->getTopic() . ' deleted';
-        } else {
-            $this->status = 'error';
-            $this->message = 'Request did not contain valid data';
-        }
-
-        return $this->render();
+        /** @var ValidatorResolver $validationResolver */
+        $validationResolver = GeneralUtility::makeInstance(ValidatorResolver::class);
+        $validator = $validationResolver->getBaseValidatorConjunction(Session::class);
+        return $validator->validate($session);
     }
 
-    protected function getSessionFromRequest(ServerRequestInterface $request): Session
+    protected function updateSession(Session $session, array $data = []): void
     {
-        /** @var PropertyMapper $propertyMapper */
-        $propertyMapper = GeneralUtility::makeInstance(PropertyMapper::class);
-        $session = $propertyMapper
-            ->convert(
-                $this->parameter['session'],
-                Session::class
-            );
-        $session->setPid((int)($request->getParsedBody()['id']));
-        return $session;
-    }
-
-    protected function updateSessionFromRequest(Session $session)
-    {
-        $sessionData = $this->parameter['session'];
-        unset($sessionData['uid']);
-
-        foreach ($sessionData as $field => $value) {
+        unset($data['uid']);
+        foreach ($data as $field => $value) {
             switch ($field) {
                 case 'room':
                     /** @var Room $room */
@@ -211,16 +128,33 @@ class AjaxController
         }
     }
 
-    protected function validateSession(Session $session): Result
+    protected function hasAccess(): bool
     {
-        /** @var ValidatorResolver $validationResolver */
-        $validationResolver = GeneralUtility::makeInstance(ValidatorResolver::class);
-        $validator = $validationResolver->getBaseValidatorConjunction(Session::class);
-        return $validator->validate($session);
+        if (!($this->backendUser->isAdmin() || $this->backendUser->check('modules', 'web_SessionplanerSessionplanerMain'))) {
+            return false;
+        }
+
+        return true;
     }
 
-    protected function persistAll()
+    protected function getParameter(ServerRequestInterface $request): array
     {
-        $this->persistenceManager->persistAll();
+        try {
+            $payload = json_decode((string) $request->getBody(), true, 512, JSON_THROW_ON_ERROR);
+            return is_array($payload) ? $payload : [];
+        } catch (\JsonException $exception) {
+            return [];
+        }
+    }
+
+    protected function renderResponse(array $data): ResponseInterface
+    {
+        return new JsonResponse(
+            [
+                'status' => $data['status'] ?? 'success',
+                'message' => $data['message'] ?? 'ok',
+                'data' => $data['data'] ?? [],
+            ]
+        );
     }
 }
