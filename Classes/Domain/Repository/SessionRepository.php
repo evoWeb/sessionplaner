@@ -27,12 +27,14 @@ class SessionRepository extends Repository
     public function findAnyByUid(int $uid): ?Session
     {
         $query = $this->createQuery();
-        $query->getQuerySettings()
-            ->setIgnoreEnableFields(true)
-            ->setIncludeDeleted(true);
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->getQuerySettings()->setIncludeDeleted(true);
+        $query->getQuerySettings()->setRespectStoragePage(false);
         $query->matching($query->equals('uid', $uid));
-        /** @var Session $result */
+
+        /** @var ?Session $result */
         $result = $query->execute()->getFirst();
+
         return $result;
     }
 
