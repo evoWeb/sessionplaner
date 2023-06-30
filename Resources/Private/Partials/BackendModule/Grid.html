@@ -7,7 +7,9 @@
                     data-sessionplaner-room-uid="{room.uid}"
                     data-sessionplaner-room-type="{room.type}"
                     >
-                    {room.name}
+                    <sessionplanervh:link.be.room room="{room}">
+                        {room.name}
+                    </sessionplanervh:link.be.room>
                 </div>
             </f:for>
         </div>

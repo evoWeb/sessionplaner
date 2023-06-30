@@ -125,6 +125,9 @@
         @container (min-width: 600px) {
             display: block;
         }
+        a {
+            color: inherit;
+        }
         &[data-sessionplaner-room-type="main"] {
             --sessionplaner-grid-col-color: var(--sessionplaner-room-main-color);
             --sessionplaner-grid-col-bg: var(--sessionplaner-room-main-bg);
