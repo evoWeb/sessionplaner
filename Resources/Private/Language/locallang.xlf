@@ -3,6 +3,7 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
         <header/>
         <body>
+
             <trans-unit id="minutes">
                 <source>min</source>
             </trans-unit>
@@ -59,9 +60,9 @@
             <trans-unit id="attendees">
                 <source>Attendees</source>
             </trans-unit>
-			<trans-unit id="requesttype">
-				<source>Request Type</source>
-			</trans-unit>
+            <trans-unit id="requesttype">
+                <source>Request Type</source>
+            </trans-unit>
             <trans-unit id="type">
                 <source>Type</source>
             </trans-unit>
@@ -98,15 +99,15 @@
             <trans-unit id="tags">
                 <source>Tags</source>
             </trans-unit>
-			<trans-unit id="norecording">
-				<source>No recording</source>
-			</trans-unit>
-			<trans-unit id="norecording-1">
-				<source>Don't record, please</source>
-			</trans-unit>
-			<trans-unit id="norecording-0">
-				<source>Recording allowed</source>
-			</trans-unit>
+            <trans-unit id="norecording">
+                <source>No recording</source>
+            </trans-unit>
+            <trans-unit id="norecording-1">
+                <source>Don't record, please</source>
+            </trans-unit>
+            <trans-unit id="norecording-0">
+                <source>Recording allowed</source>
+            </trans-unit>
             <trans-unit id="back-to-overview">
                 <source>Back to overview</source>
             </trans-unit>
@@ -160,10 +161,10 @@
             <trans-unit id="option.sessionlevel.pro" xml:space="preserve">
                 <source>Professional</source>
             </trans-unit>
-			<trans-unit id="option.sessionrequesttype.offer" xml:space="preserve">
+            <trans-unit id="option.sessionrequesttype.offer" xml:space="preserve">
                 <source>Session offer</source>
             </trans-unit>
-			<trans-unit id="option.sessionrequesttype.wish" xml:space="preserve">
+            <trans-unit id="option.sessionrequesttype.wish" xml:space="preserve">
                 <source>Session wish</source>
             </trans-unit>
 
@@ -230,18 +231,18 @@
             <trans-unit id="form.estimatedlength.description">
                 <source>If you have a special topic or workshop we will validate an extension to 90 minutes</source>
             </trans-unit>
-			<trans-unit id="form.requesttype">
-				<source>Request type</source>
-			</trans-unit>
-			<trans-unit id="form.requesttype.description">
-				<source>Do you submit a session offer or do have a session wish?</source>
-			</trans-unit>
-			<trans-unit id="form.norecording">
-				<source>No recording</source>
-			</trans-unit>
-			<trans-unit id="form.norecording.description">
-				<source>you should set this active if your session should not be recorded or streamed</source>
-			</trans-unit>
+            <trans-unit id="form.requesttype">
+                <source>Request type</source>
+            </trans-unit>
+            <trans-unit id="form.requesttype.description">
+                <source>Do you submit a session offer or do have a session wish?</source>
+            </trans-unit>
+            <trans-unit id="form.norecording">
+                <source>No recording</source>
+            </trans-unit>
+            <trans-unit id="form.norecording.description">
+                <source>you should set this active if your session should not be recorded or streamed</source>
+            </trans-unit>
             <trans-unit id="form.submit">
                 <source>Submit</source>
             </trans-unit>
