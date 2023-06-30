@@ -64,9 +64,13 @@ class BackendModuleController extends ActionController
 
     public function showAction(): ResponseInterface
     {
-        $this->id = (int) ($this->request->getArgument('id') ?? 0);
-        if ($this->request->hasArgument('day')) {
-            $this->currentDay = $this->dayRepository->findByUid($this->request->getArgument('day'));
+        $parsedBody = $this->request->getParsedBody();
+        $queryParams = $this->request->getQueryParams();
+        $this->id = (int)($parsedBody['id'] ?? $queryParams['id'] ?? 0);
+
+        $day = (int)($parsedBody['day'] ?? $queryParams['day'] ?? 0);
+        if ($day !== 0) {
+            $this->currentDay = $this->dayRepository->findByUid($day);
         } else {
             $this->currentDay = $this->dayRepository->findAll()->getFirst();
         }

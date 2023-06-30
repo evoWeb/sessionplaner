@@ -58,7 +58,7 @@ final class AjaxController
 
     public function updateSessionAction(ServerRequestInterface $request): ResponseInterface
     {
-        if(!$this->hasAccess()) {
+        if (!$this->hasAccess()) {
             return $this->renderResponse([
                 'status' => 'error',
                 'message' => 'No access granted'
