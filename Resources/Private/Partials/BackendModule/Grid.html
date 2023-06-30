@@ -8,7 +8,7 @@
                     data-sessionplaner-room-type="{room.type}"
                     >
                     <sessionplanervh:link.be.room room="{room}">
-                        {room.name}
+                        {room.name} <f:if condition="{room.seats}">({room.seats})</f:if>
                     </sessionplanervh:link.be.room>
                 </div>
             </f:for>
