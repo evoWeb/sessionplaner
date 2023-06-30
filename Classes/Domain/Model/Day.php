@@ -19,7 +19,7 @@ class Day extends AbstractEntity
 {
     protected string $name = '';
 
-    protected string $date = '';
+    protected \DateTime $date;
 
     /**
      * @var ObjectStorage<Room>
@@ -44,12 +44,12 @@ class Day extends AbstractEntity
         $this->slots = new ObjectStorage();
     }
 
-    public function setDate(string $date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
     }
 
-    public function getDate(): string
+    public function getDate(): \DateTime
     {
         return $this->date;
     }

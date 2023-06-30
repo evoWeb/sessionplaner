@@ -4,7 +4,7 @@
 CREATE TABLE tx_sessionplaner_domain_model_day
 (
     name            varchar(255) DEFAULT '' NOT NULL,
-    date            varchar(255) DEFAULT '' NOT NULL,
+    date            int(11) DEFAULT '0' NOT NULL,
     rooms           int(11) unsigned DEFAULT '0' NOT NULL,
     slots           int(11) unsigned DEFAULT '0' NOT NULL
 );
@@ -54,8 +54,8 @@ CREATE TABLE tx_sessionplaner_domain_model_session
     donotlink       tinyint(4) unsigned DEFAULT '0' NOT NULL,
     type            int(11) unsigned DEFAULT '0' NOT NULL,
     level           int(11) unsigned DEFAULT '0' NOT NULL,
-		requesttype     int(11) unsigned DEFAULT '0' NOT NULL,
-		norecording     tinyint(4) unsigned DEFAULT '0' NOT NULL,
+    requesttype     int(11) unsigned DEFAULT '0' NOT NULL,
+    norecording     tinyint(4) unsigned DEFAULT '0' NOT NULL,
     description     text,
 
     # references

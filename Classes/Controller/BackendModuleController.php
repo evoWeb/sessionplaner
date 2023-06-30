@@ -100,7 +100,7 @@ class BackendModuleController extends ActionController
             $actionMenu->setIdentifier('actionMenu');
             $actionMenu->setLabel('');
             foreach ($days as $day) {
-                $title = $day->getDate() . ': ' . $day->getName();
+                $title = $day->getDate()->format('d.m.y') . ' - ' . $day->getName();
                 $actionMenu->addMenuItem(
                     $actionMenu->makeMenuItem()
                         ->setTitle((string) $title)
