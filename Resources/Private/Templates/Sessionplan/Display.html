@@ -8,7 +8,7 @@
                     {day.name}
                 </h1>
                 <div class="sessionplaner-day-date">
-                    <f:format.date format="d.m.Y">@{day.date}</f:format.date>
+                    <f:format.date format="d.m.Y" date="{day.date}" />
                 </div>
             </div>
             <f:if condition="{day.rooms} && {day.slots}">

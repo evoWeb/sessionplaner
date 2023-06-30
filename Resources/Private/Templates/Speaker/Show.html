@@ -67,7 +67,7 @@
                                         <div class="sessionplaner-sessionbox-info">
                                             <f:if condition="{session.day}">
                                                 <span class="sessionplaner-sessionbox-info-date">
-                                                    <f:format.date format="d.m.Y">@{session.day.date}</f:format.date>
+                                                    <f:format.date format="d.m.Y" date="{session.day.date}" />
                                                 </span>
                                             </f:if>
                                             <f:if condition="{session.slot}">
