@@ -9,7 +9,6 @@
     --sessionplaner-grid-col-color: inherit;
     --sessionplaner-grid-col-bg: transparent;
     --sessionplaner-grid-col-min-height: 7.125rem;
-    --sessionplaner-grid-border-radius: 5px;
 
     --sessionplaner-color-default: #313131;
     --sessionplaner-color-active: #3280bf;
@@ -43,12 +42,21 @@
     --sessionplaner-tag-bg: #999999;
     --sessionplaner-tag-color: #ffffff;
 
+    --sessionplaner-container-shadow: 0 0px 0 1px rgba(0,0,0,0.25);
+
     --sessionplaner-stash-bg: var(--sessionplaner-color-notice);
+    --sessionplaner-stash-shadow: 0 0px 0 1px rgba(0,0,0,0.25);
     --sessionplaner-stash-padding: 1rem;
 
     display: grid;
+    grid-template-rows: auto 1fr;
     grid-template-columns: 250px auto;
     gap: var(--sessionplaner-grid-gap);
+    position: fixed;
+    top: calc(var(--module-body-padding, 24px) + var(--module-docheader-height, 65px));
+    left: var(--module-body-padding, 24px);
+    right: var(--module-body-padding, 24px);
+    bottom: var(--module-body-padding, 24px);
 }
 .sessionplaner-title {
     grid-column-start: 1;
@@ -58,11 +66,12 @@
     }
 }
 .sessionplaner-stash {
+    overflow: auto;
     display: flex;
     flex-direction: column;
     gap: .25rem;
+    box-shadow: var(--sessionplaner-stash-shadow);
     padding: var(--sessionplaner-stash-padding);
-    border-radius: var(--sessionplaner-grid-border-radius);
     background-color: var(--sessionplaner-stash-bg);
     background-image: repeating-linear-gradient(
         -45deg,
@@ -79,7 +88,7 @@
     container-type: inline-size;
     display: flex;
     overflow: auto;
-    border-radius: var(--sessionplaner-grid-border-radius);
+    box-shadow: var(--sessionplaner-container-shadow);
 }
 
 //
