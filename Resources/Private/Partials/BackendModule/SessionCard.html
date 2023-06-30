@@ -57,7 +57,7 @@
     <div class="sessionbox-spaker">
         <f:if condition="{session.speakers}">
             <f:for each="{session.speakers}" as="speaker">
-                {speaker.name}
+                <sessionplanervh:link.be.speaker speaker="{speaker}">{speaker.name}</sessionplanervh:link.be.speaker>
             </f:for>
         </f:if>
         <f:if condition="!{session.speakers} && {session.speaker}">
