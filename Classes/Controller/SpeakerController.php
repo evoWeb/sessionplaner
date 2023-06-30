@@ -44,7 +44,7 @@ class SpeakerController extends ActionController
 
     public function showAction(Speaker $speaker): ResponseInterface
     {
-        if($speaker->hasActiveSessions()) {
+        if(!$speaker->hasActiveSessions()) {
             throw new PageNotFoundException('The requested speaker was not found', 1688129027);
         }
 
