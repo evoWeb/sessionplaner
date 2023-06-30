@@ -25,7 +25,7 @@ if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12)
         ],
         [
             'access' => 'user,group',
-            'icon' => 'EXT:sessionplaner/Resources/Public/Icons/module-sessionplaner.svg',
+            'iconIdentifier' => 'sessionplaner-module-show',
             'labels' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_mod.xlf',
         ]
     );
