@@ -8,18 +8,43 @@
     data-session-donotlink="{session.donotlink as integer}"
     data-session-social="{session.social as integer}"
     data-session-suggestion="{session.suggestion as integer}"
-    data-session-norecording="{session.norecording as integer}"
+    data-session-recording="{session.recording as integer}"
     data-sessionplaner-draggable="true"
     draggable="true"
     >
 
     <div class="sessionbox-status">
         <div class="sessionbox-status-items">
-            <span class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '!{session.hidden}', then: 'enabled', else: 'disabled')}"><core:icon identifier="actions-eye" /></span>
-            <span class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '!{session.donotlink}', then: 'enabled', else: 'disabled')}"><core:icon identifier="actions-link" /></span>
-            <span class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '{session.social}', then: 'enabled', else: 'disabled')}"><core:icon identifier="actions-share-alt" /></span>
-            <span class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '{session.suggestion}', then: 'enabled', else: 'disabled')}"><core:icon identifier="actions-lightbulb-on" /></span>
-            <span class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '{session.norecording}', then: 'enabled', else: 'disabled')}"><core:icon identifier="sessionplaner-session-norecording" /></span>
+            <span
+                class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '!{session.hidden}', then: 'enabled', else: 'disabled')}"
+                title="{f:translate(id:'backend.label.visible')}"
+                >
+                <core:icon identifier="actions-eye" />
+            </span>
+            <span
+                class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '!{session.donotlink}', then: 'enabled', else: 'disabled')}"
+                title="{f:translate(id:'backend.label.linked')}"
+                >
+                <core:icon identifier="actions-link" />
+            </span>
+            <span
+                class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '{session.social}', then: 'enabled', else: 'disabled')}"
+                title="{f:translate(id:'backend.label.social')}"
+                >
+                <core:icon identifier="actions-share-alt" />
+            </span>
+            <span
+                class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '{session.suggestion}', then: 'enabled', else: 'disabled')}"
+                title="{f:translate(id:'backend.label.suggestion')}"
+                >
+                <core:icon identifier="actions-lightbulb-on" />
+            </span>
+            <span
+                class="sessionbox-status-item sessionbox-status-item--{f:if(condition: '!{session.norecording}', then: 'enabled', else: 'disabled')}"
+                title="{f:translate(id:'backend.label.recording')}"
+                >
+                <core:icon identifier="sessionplaner-session-recording" />
+            </span>
         </div>
     </div>
 

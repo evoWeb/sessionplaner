@@ -52,8 +52,8 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:sessionplaner/Resources/Public/Icons/record-speaker.svg'
     ],
-    'sessionplaner-session-norecording' => [
+    'sessionplaner-session-recording' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => 'EXT:sessionplaner/Resources/Public/Icons/session-norecording.svg'
+        'source' => 'EXT:sessionplaner/Resources/Public/Icons/session-recording.svg'
     ],
 ];

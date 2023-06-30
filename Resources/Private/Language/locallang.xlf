@@ -251,6 +251,24 @@
             <trans-unit id="form.suggest.confirmation">
                 <source>Thank you for your application. We will be in contact with you soon.</source>
             </trans-unit>
+
+            <!-- Backend -->
+            <trans-unit id="backend.label.visible">
+                <source>Visible</source>
+            </trans-unit>
+            <trans-unit id="backend.label.linked">
+                <source>Linked</source>
+            </trans-unit>
+            <trans-unit id="backend.label.social">
+                <source>Social</source>
+            </trans-unit>
+            <trans-unit id="backend.label.suggestion">
+                <source>Suggestion</source>
+            </trans-unit>
+            <trans-unit id="backend.label.recording">
+                <source>Recording</source>
+            </trans-unit>
+
         </body>
     </file>
 </xliff>
