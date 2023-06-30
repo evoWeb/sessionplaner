@@ -16,9 +16,11 @@
         <f:for each="{day.slots}" as="slot">
             <div class="sessionplaner-row">
                 <div class="sessionplaner-col sessionplaner-col-time">
-                    <strong><sessionplanervh:format.time value="{slot.start}" /></strong><br>
-                    <strong><sessionplanervh:format.time value="{slot.end}" /></strong><br>
-                    <small>{slot.duration} <f:translate id="minutes" /></small>
+                    <sessionplanervh:link.be.slot slot="{slot}">
+                        <strong><sessionplanervh:format.time value="{slot.start}" /></strong><br>
+                        <strong><sessionplanervh:format.time value="{slot.end}" /></strong><br>
+                        <small>{slot.duration} <f:translate id="minutes" /></small>
+                    </sessionplanervh:link.be.slot>
                 </div>
                 <f:if condition="{slot.break}">
                     <f:then>
