@@ -3,7 +3,7 @@
 //
 .sessionplaner {
     --sessionplaner-grid-gap: 1rem;
-    --sessionplaner-grid-spacing: 2px;
+    --sessionplaner-grid-spacing: 1px;
     --sessionplaner-grid-padding-y: .5rem;
     --sessionplaner-grid-padding-x: .5rem;
     --sessionplaner-grid-col-color: inherit;
@@ -98,6 +98,7 @@
     display: flex;
     flex: 1 1 0px;
     flex-direction: column;
+    margin: var(--sessionplaner-grid-spacing);
     gap: var(--sessionplaner-grid-spacing);
 }
 .sessionplaner-row {
