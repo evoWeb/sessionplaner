@@ -6,7 +6,12 @@
 
             <div class="sessionplaner" id="sessionplaner">
                 <div class="sessionplaner-title">
-                    <h1>{currentDay.date -> f:format.date(format:'d.m.y')} - {currentDay.name}</h1>
+                    <h1>
+                        <sessionplanervh:link.be.day day="{currentDay}">
+                            {currentDay.date -> f:format.date(format:'d.m.y')} -
+                            {currentDay.name}
+                        </sessionplanervh:link.be.day>
+                    </h1>
                 </div>
                 <div
                     class="sessionplaner-stash"
