@@ -15,6 +15,7 @@ use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
 use Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -31,7 +32,10 @@ class SpeakerController extends ActionController
 
     public function listAction(): ResponseInterface
     {
-        $speakers = $this->speakerRepository->findAll();
+        $speakers = $this->speakerRepository->findAll()->toArray();
+        $speakers = array_filter($speakers, function (Speaker $speaker) {
+            return $speaker->hasActiveSessions();
+        });
 
         $this->view->assign('speakers', $speakers);
 
@@ -40,6 +44,10 @@ class SpeakerController extends ActionController
 
     public function showAction(Speaker $speaker): ResponseInterface
     {
+        if($speaker->hasActiveSessions()) {
+            throw new PageNotFoundException('The requested speaker was not found', 1688129027);
+        }
+
         /** @var SpeakerTitleTagProvider $provider */
         $provider = GeneralUtility::makeInstance(SpeakerTitleTagProvider::class);
         $provider->setTitle($speaker->getName());

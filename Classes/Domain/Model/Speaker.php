@@ -17,38 +17,25 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class Speaker extends AbstractSlugEntity
 {
     protected string $slugField = 'path_segment';
-
     protected string $tablename = 'tx_sessionplaner_domain_model_speaker';
-
     protected bool $hidden = false;
-
     protected string $name = '';
-
     protected string $bio = '';
-
     protected string $company = '';
-
     protected string $website = '';
-
     protected string $twitter = '';
-
     protected string $linkedin = '';
-
     protected string $xing = '';
-
     protected string $email = '';
-
     protected ?FileReference $picture = null;
+    protected int $detailPage = 0;
+    protected string $pathSegment = '';
 
     /**
      * @var ObjectStorage<Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected ObjectStorage $sessions;
-
-    protected int $detailPage = 0;
-
-    protected string $pathSegment = '';
 
     public function __construct()
     {
@@ -188,5 +175,16 @@ class Speaker extends AbstractSlugEntity
     public function getBio(): string
     {
         return $this->bio;
+    }
+
+    public function hasActiveSessions(): bool
+    {
+        foreach ($this->getSessions() as $session) {
+            if ($session->getDay() && $session->getSlot()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

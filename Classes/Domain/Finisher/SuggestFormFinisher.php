@@ -65,7 +65,6 @@ class SuggestFormFinisher extends AbstractFinisher
             $speaker = new Speaker();
             $speaker->initializeObject();
             $speaker->setPid($storagePid);
-            $speaker->setHidden(true);
             $speaker->setName($data['fullname']);
             $speaker->setEmail($data['email']);
             if (!empty($data['twitter'])) {
