@@ -53,10 +53,10 @@
     grid-template-columns: 250px auto;
     gap: var(--sessionplaner-grid-gap);
     position: fixed;
-    top: calc(var(--module-body-padding, 24px) + var(--module-docheader-height, 65px));
-    left: var(--module-body-padding, 24px);
-    right: var(--module-body-padding, 24px);
-    bottom: var(--module-body-padding, 24px);
+    top: calc(var(--module-body-padding-y, 24px) + var(--module-docheader-height, 65px));
+    left: var(--module-body-padding-x, 24px);
+    right: var(--module-body-padding-x, 24px);
+    bottom: var(--module-body-padding-y, 24px);
 }
 .sessionplaner-title {
     grid-column-start: 1;
