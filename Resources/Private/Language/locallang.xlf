@@ -13,8 +13,18 @@
                 For further information consult the documentation.]]></source>
             </trans-unit>
             <trans-unit id="session-new">
-                <source>Add new session</source>
+                <source>Create session</source>
             </trans-unit>
+            <trans-unit id="speaker-new">
+                <source>Create speaker</source>
+            </trans-unit>
+            <trans-unit id="room-new">
+                <source>Create room</source>
+            </trans-unit>
+            <trans-unit id="day-new">
+                <source>Create day</source>
+            </trans-unit>
+
             <trans-unit id="filter-tags">
                 <source>Tags</source>
             </trans-unit>

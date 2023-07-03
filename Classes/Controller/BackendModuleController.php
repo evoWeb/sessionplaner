@@ -86,8 +86,15 @@ class BackendModuleController extends ActionController
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
         $moduleTemplate->setTitle('Sessionplaner' . ($this->currentDay !== null ? ' ' . $this->currentDay->getName() : ''));
         $moduleTemplate->setContent($this->view->render());
-        $this->registerMenuDays($moduleTemplate->getDocHeaderComponent()->getMenuRegistry());
-        $this->registerButtonNewSession($moduleTemplate->getDocHeaderComponent()->getButtonBar());
+
+        $page = BackendUtility::getRecord('pages', $this->id);
+        if ($page !== null || $page['doktype'] === Constants::STORAGE_FOLDER_TYPE) {
+            $this->registerMenuDays($moduleTemplate->getDocHeaderComponent()->getMenuRegistry());
+            $this->registerButtonNewSession($moduleTemplate->getDocHeaderComponent()->getButtonBar());
+            $this->registerButtonNewSpeaker($moduleTemplate->getDocHeaderComponent()->getButtonBar());
+            $this->registerButtonNewRoom($moduleTemplate->getDocHeaderComponent()->getButtonBar());
+            $this->registerButtonNewDay($moduleTemplate->getDocHeaderComponent()->getButtonBar());
+        }
 
         return $this->htmlResponse($moduleTemplate->renderContent());
     }
@@ -114,18 +121,8 @@ class BackendModuleController extends ActionController
 
     protected function registerButtonNewSession(ButtonBar $buttonBar): void
     {
-        // Only render new session button on storage folders
-        $page = BackendUtility::getRecord('pages', $this->id);
-        if ($page === null || $page['doktype'] !== Constants::STORAGE_FOLDER_TYPE) {
-            return;
-        }
-
         $parameters = [
-            'edit' => [
-                'tx_sessionplaner_domain_model_session' => [
-                    $this->id => 'new',
-                ],
-            ],
+            'edit' => ['tx_sessionplaner_domain_model_session' => [$this->id => 'new']],
             'returnUrl' => $this->createModuleUri()
         ];
         $button = $buttonBar->makeLinkButton()
@@ -133,7 +130,49 @@ class BackendModuleController extends ActionController
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:session-new'))
             ->setShowLabelText(true)
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
-        $buttonBar->addButton($button);
+        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 1);
+    }
+
+    protected function registerButtonNewSpeaker(ButtonBar $buttonBar): void
+    {
+        $parameters = [
+            'edit' => ['tx_sessionplaner_domain_model_speaker' => [$this->id => 'new']],
+            'returnUrl' => $this->createModuleUri()
+        ];
+        $button = $buttonBar->makeLinkButton()
+            ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
+            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:speaker-new'))
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
+        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 2);
+    }
+
+    protected function registerButtonNewRoom(ButtonBar $buttonBar): void
+    {
+        $parameters = [
+            'edit' => ['tx_sessionplaner_domain_model_room' => [$this->id => 'new']],
+            'returnUrl' => $this->createModuleUri()
+        ];
+        $button = $buttonBar->makeLinkButton()
+            ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
+            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:room-new'))
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
+        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 3);
+    }
+
+    protected function registerButtonNewDay(ButtonBar $buttonBar): void
+    {
+        $parameters = [
+            'edit' => ['tx_sessionplaner_domain_model_day' => [$this->id => 'new']],
+            'returnUrl' => $this->createModuleUri()
+        ];
+        $button = $buttonBar->makeLinkButton()
+            ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
+            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:day-new'))
+            ->setShowLabelText(true)
+            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
+        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 4);
     }
 
     public function createModuleUri(array $params = []): string
