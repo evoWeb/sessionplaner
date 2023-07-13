@@ -70,53 +70,55 @@
                                                         <div class="sessionplaner-track-sessions">
                                                             <f:for each="{room.sessions}" as="session">
                                                                 <f:if condition="{session.day} == {day} && {session.slot} == {slot}">
-                                                                    <div class="sessionplaner-sessionbox">
-                                                                        <div class="sessionplaner-sessionbox-topic">
-                                                                            <f:if condition="{session.donotlink}">
-                                                                                <f:then>
-                                                                                    {session.topic}
-                                                                                </f:then>
-                                                                                <f:else>
-                                                                                    <f:link.action controller="Session" action="show" pluginName="Session" pageUid="{settings.singlePid}" arguments="{session:session}">{session.topic}</f:link.action>
-                                                                                </f:else>
+                                                                    <div class="sessionplaner-sessioninfo">
+                                                                        <div class="sessionplaner-sessionbox">
+                                                                            <div class="sessionplaner-sessionbox-topic">
+                                                                                <f:if condition="{session.donotlink}">
+                                                                                    <f:then>
+                                                                                        {session.topic}
+                                                                                    </f:then>
+                                                                                    <f:else>
+                                                                                        <f:link.action controller="Session" action="show" pluginName="Session" pageUid="{settings.singlePid}" arguments="{session:session}">{session.topic}</f:link.action>
+                                                                                    </f:else>
+                                                                                </f:if>
+                                                                            </div>
+                                                                            <f:if condition="{session.speakers}">
+                                                                                <div class="sessionplaner-sessionbox-speaker">
+                                                                                    <f:for each="{session.speakers}" as="speaker" iteration="iteration">
+                                                                                        {speaker.name}<f:if condition="!{iteration.isLast}">, </f:if>
+                                                                                    </f:for>
+                                                                                </div>
+                                                                            </f:if>
+                                                                            <f:if condition="!{session.speakers} && {session.speaker}">
+                                                                                <div class="sessionplaner-sessionbox-speaker">{session.speaker}</div>
+                                                                            </f:if>
+                                                                            <f:if condition="{session.tags} || {session.type} || {session.level}">
+                                                                                <div class="sessionplaner-sessionbox-tags">
+                                                                                    <div class="sessionplaner-tag-list">
+                                                                                        <f:if condition="{session.type}">
+                                                                                            <span class="sessionplaner-tag">
+                                                                                                <f:if condition="{session.type} == 1">{f:translate(id: 'type-talk')}</f:if>
+                                                                                                <f:if condition="{session.type} == 2">{f:translate(id: 'type-tutorial')}</f:if>
+                                                                                                <f:if condition="{session.type} == 3">{f:translate(id: 'type-workshop')}</f:if>
+                                                                                                <f:if condition="{session.type} == 4">{f:translate(id: 'type-discussion')}</f:if>
+                                                                                            </span>
+                                                                                        </f:if>
+                                                                                        <f:if condition="{session.level}">
+                                                                                            <span class="sessionplaner-tag">
+                                                                                                <f:if condition="{session.level} == 1">{f:translate(id: 'level-starter')}</f:if>
+                                                                                                <f:if condition="{session.level} == 2">{f:translate(id: 'level-advanced')}</f:if>
+                                                                                                <f:if condition="{session.level} == 3">{f:translate(id: 'level-pro')}</f:if>
+                                                                                            </span>
+                                                                                        </f:if>
+                                                                                        <f:if condition="{session.tags}">
+                                                                                            <f:for each="{session.tags}" as="tag">
+                                                                                                <span class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}">{tag.label}</span>
+                                                                                            </f:for>
+                                                                                        </f:if>
+                                                                                    </div>
+                                                                                </div>
                                                                             </f:if>
                                                                         </div>
-                                                                        <f:if condition="{session.speakers}">
-                                                                            <f:for each="{session.speakers}" as="speaker" iteration="iteration">
-                                                                                <div class="sessionplaner-sessionbox-speaker">
-                                                                                    {speaker.name}<f:if condition="!{iteration.isLast}">, </f:if>
-                                                                                </div>
-                                                                            </f:for>
-                                                                        </f:if>
-                                                                        <f:if condition="!{session.speakers} && {session.speaker}">
-                                                                            <div class="sessionplaner-sessionbox-speaker">{session.speaker}</div>
-                                                                        </f:if>
-                                                                        <f:if condition="{session.tags} || {session.type} || {session.level}">
-                                                                            <div class="sessionplaner-sessionbox-tags">
-                                                                                <div class="sessionplaner-tag-list">
-                                                                                    <f:if condition="{session.type}">
-                                                                                        <span class="sessionplaner-tag">
-                                                                                            <f:if condition="{session.type} == 1">{f:translate(id: 'type-talk')}</f:if>
-                                                                                            <f:if condition="{session.type} == 2">{f:translate(id: 'type-tutorial')}</f:if>
-                                                                                            <f:if condition="{session.type} == 3">{f:translate(id: 'type-workshop')}</f:if>
-                                                                                            <f:if condition="{session.type} == 4">{f:translate(id: 'type-discussion')}</f:if>
-                                                                                        </span>
-                                                                                    </f:if>
-                                                                                    <f:if condition="{session.level}">
-                                                                                        <span class="sessionplaner-tag">
-                                                                                            <f:if condition="{session.level} == 1">{f:translate(id: 'level-starter')}</f:if>
-                                                                                            <f:if condition="{session.level} == 2">{f:translate(id: 'level-advanced')}</f:if>
-                                                                                            <f:if condition="{session.level} == 3">{f:translate(id: 'level-pro')}</f:if>
-                                                                                        </span>
-                                                                                    </f:if>
-                                                                                    <f:if condition="{session.tags}">
-                                                                                        <f:for each="{session.tags}" as="tag">
-                                                                                            <span class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}">{tag.label}</span>
-                                                                                        </f:for>
-                                                                                    </f:if>
-                                                                                </div>
-                                                                            </div>
-                                                                        </f:if>
                                                                     </div>
                                                                 </f:if>
                                                             </f:for>

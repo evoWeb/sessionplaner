@@ -49,6 +49,7 @@
     --sessionplaner-stash-padding: 1rem;
 
     display: grid;
+    text-wrap: balance;
     grid-template-rows: auto 1fr;
     grid-template-columns: 250px auto;
     gap: var(--sessionplaner-grid-gap);

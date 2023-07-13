@@ -1,7 +1,7 @@
 <f:if condition="{session}">
     <div class="sessionplaner-sessioninfo">
         <div class="sessionplaner-sessioninfo-title">
-            <h2><f:link.action action="show" arguments="{session:session}" title="{session.topic}">{session.topic}</f:link.action></h2>
+            <f:link.action action="show" arguments="{session:session}" title="{session.topic}">{session.topic}</f:link.action>
         </div>
         <div class="sessionplaner-sessioninfo-teaser">
             <f:format.html><f:format.crop maxCharacters="200">{session.description}</f:format.crop></f:format.html>

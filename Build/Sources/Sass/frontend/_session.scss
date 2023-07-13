@@ -3,10 +3,18 @@
 //
 $session-sessioninfo-bg: #ffffff !default;
 $session-sessioninfo-color: #313131 !default;
-$session-sessioninfo-border: 1px solid rgba(0,0,0,.15) !default;
-$session-sessioninfo-border-radius: 2px;
-$session-sessioninfo-padding: 1.5rem;
-$session-sessioninfo-shadow: 0 2px 1px rgba(0,0,0,.15);
+$session-sessioninfo-border: 1px solid rgba(0,0,0,0.1) !default;
+$session-sessioninfo-border-radius: 5px;
+$session-sessioninfo-padding: 1rem;
+$session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
+:root {
+    --session-sessioninfo-bg: #{$session-sessioninfo-bg};
+    --session-sessioninfo-color: #{$session-sessioninfo-color};
+    --session-sessioninfo-border: #{$session-sessioninfo-border};
+    --session-sessioninfo-border-radius: #{$session-sessioninfo-border-radius};
+    --session-sessioninfo-padding: #{$session-sessioninfo-padding};
+    --session-sessioninfo-shadow: #{$session-sessioninfo-shadow};
+}
 
 //
 // Box
@@ -14,6 +22,19 @@ $session-sessioninfo-shadow: 0 2px 1px rgba(0,0,0,.15);
 .sessionplaner-sessionbox {
     display: flex;
     flex-direction: column;
+    text-wrap: balance;
+}
+.sessionplaner-sessionbox-topic {
+    font-weight: bold;
+    line-height: 1.25em;
+    margin-bottom: .25rem;
+    a {
+        color: inherit !important;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 .sessionplaner-sessionbox-info {
     > * + *:before {
@@ -30,22 +51,30 @@ $session-sessioninfo-shadow: 0 2px 1px rgba(0,0,0,.15);
 // Info
 //
 .sessionplaner-sessioninfo {
+    text-wrap: balance;
     position: relative;
     display: flex;
     flex-direction: column;
     word-wrap: break-word;
-    padding: $session-sessioninfo-padding;
-    color: $session-sessioninfo-color;
-    background-color: $session-sessioninfo-bg;
-    border: $session-sessioninfo-border;
-    border-radius: $session-sessioninfo-border-radius;
-    box-shadow: $session-sessioninfo-shadow;
+    padding: var(--session-sessioninfo-padding);
+    color: var(--session-sessioninfo-color);
+    background-color: var(--session-sessioninfo-bg);
+    border: var(--session-sessioninfo-border);
+    border-radius: var(--session-sessioninfo-border-radius);
+    box-shadow: var(--session-sessioninfo-shadow);
     height: 100%;
-
 }
 .sessionplaner-sessioninfo-title {
-    h2 {
-        font-size: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    line-height: 1.25em;
+    margin-bottom: .25rem;
+    a {
+        color: inherit !important;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 .sessionplaner-sessioninfo-teaser {
