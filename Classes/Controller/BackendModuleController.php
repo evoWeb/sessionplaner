@@ -88,7 +88,7 @@ class BackendModuleController extends ActionController
         $moduleTemplate->setContent($this->view->render());
 
         $page = BackendUtility::getRecord('pages', $this->id);
-        if ($page !== null || $page['doktype'] === Constants::STORAGE_FOLDER_TYPE) {
+        if ($page !== null && $page['doktype'] === Constants::STORAGE_FOLDER_TYPE) {
             $this->registerMenuDays($moduleTemplate->getDocHeaderComponent()->getMenuRegistry());
             $this->registerButtonNewSession($moduleTemplate->getDocHeaderComponent()->getButtonBar());
             $this->registerButtonNewSpeaker($moduleTemplate->getDocHeaderComponent()->getButtonBar());
