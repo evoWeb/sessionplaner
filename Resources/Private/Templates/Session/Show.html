@@ -36,7 +36,14 @@
             </f:if>
 
             <div class="sessionplaner-sessiondetail-backlink">
-                <f:link.action action="list">{f:translate(id: 'back-to-overview')}</f:link.action>
+                <f:if condition="{settings.sessionplanPid}">
+                    <f:then>
+                        <f:link.page pageUid="{settings.sessionplanPid}">{f:translate(id: 'back-to-overview')}</f:link.page>
+                    </f:then>
+                    <f:else>
+                        <f:link.action action="list">{f:translate(id: 'back-to-overview')}</f:link.action>
+                    </f:else>
+                </f:if>
             </div>
         </article>
         <f:render partial="Disqus/Index" arguments="{settings: settings}" />

@@ -66,6 +66,9 @@
             <trans-unit id="session_flexform.settings.speakerSinglePid" xml:space="preserve">
                 <source>Single Pid for speakers</source>
             </trans-unit>
+            <trans-unit id="session_flexform.settings.sessionplanPid" xml:space="preserve">
+                <source>Sessionplan Pid</source>
+            </trans-unit>
             <trans-unit id="session_flexform.settings.sessionSinglePid" xml:space="preserve">
                 <source>Single Pid for sessions</source>
             </trans-unit>
