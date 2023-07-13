@@ -85,14 +85,8 @@
             <trans-unit id="type-workshop">
                 <source>Workshop</source>
             </trans-unit>
-            <trans-unit id="type-other">
-                <source>Other</source>
-            </trans-unit>
-            <trans-unit id="type-wish">
-                <source>Wish</source>
-            </trans-unit>
-            <trans-unit id="type-break">
-                <source>Break</source>
+            <trans-unit id="type-discussion">
+                <source>Discussion</source>
             </trans-unit>
             <trans-unit id="level">
                 <source>Level</source>
