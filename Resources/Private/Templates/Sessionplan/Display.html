@@ -91,12 +91,29 @@
                                                                         <f:if condition="!{session.speakers} && {session.speaker}">
                                                                             <div class="sessionplaner-sessionbox-speaker">{session.speaker}</div>
                                                                         </f:if>
-                                                                        <f:if condition="{session.tags}">
+                                                                        <f:if condition="{session.tags} || {session.type} || {session.level}">
                                                                             <div class="sessionplaner-sessionbox-tags">
                                                                                 <div class="sessionplaner-tag-list">
-                                                                                    <f:for each="{session.tags}" as="tag">
-                                                                                        <span class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}">{tag.label}</span>
-                                                                                    </f:for>
+                                                                                    <f:if condition="{session.type}">
+                                                                                        <span class="sessionplaner-tag">
+                                                                                            <f:if condition="{session.type} == 1">{f:translate(id: 'type-talk')}</f:if>
+                                                                                            <f:if condition="{session.type} == 2">{f:translate(id: 'type-tutorial')}</f:if>
+                                                                                            <f:if condition="{session.type} == 3">{f:translate(id: 'type-workshop')}</f:if>
+                                                                                            <f:if condition="{session.type} == 4">{f:translate(id: 'type-discussion')}</f:if>
+                                                                                        </span>
+                                                                                    </f:if>
+                                                                                    <f:if condition="{session.level}">
+                                                                                        <span class="sessionplaner-tag">
+                                                                                            <f:if condition="{session.level} == 1">{f:translate(id: 'level-starter')}</f:if>
+                                                                                            <f:if condition="{session.level} == 2">{f:translate(id: 'level-advanced')}</f:if>
+                                                                                            <f:if condition="{session.level} == 3">{f:translate(id: 'level-pro')}</f:if>
+                                                                                        </span>
+                                                                                    </f:if>
+                                                                                    <f:if condition="{session.tags}">
+                                                                                        <f:for each="{session.tags}" as="tag">
+                                                                                            <span class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}">{tag.label}</span>
+                                                                                        </f:for>
+                                                                                    </f:if>
                                                                                 </div>
                                                                             </div>
                                                                         </f:if>
