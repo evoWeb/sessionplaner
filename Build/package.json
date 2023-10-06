@@ -13,7 +13,7 @@
 		"@babel/core": "^7.22.5",
 		"@babel/preset-env": "^7.22.5",
 		"@babel/register": "^7.22.5",
-		"autoprefixer": "^9.8.8",
+		"autoprefixer": "^10.4.16",
 		"gulp": "^4.0.2",
 		"gulp-babel": "^8.0.0",
 		"gulp-jshint": "^2.1.0",
