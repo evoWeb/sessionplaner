@@ -10,5 +10,8 @@ services:
   Evoweb\Sessionplaner\Controller\AjaxController:
     public: true
 
+  Evoweb\Sessionplaner\Domain\Factory\SuggestFormFactory:
+    public: true
+
   Evoweb\Sessionplaner\Domain\Finisher\SuggestFormFinisher:
     public: true
