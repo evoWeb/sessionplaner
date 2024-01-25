@@ -15,6 +15,7 @@ use Evoweb\Sessionplaner\Domain\Finisher\SuggestFormFinisher;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
 use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -157,7 +158,14 @@ class SuggestFormFactory extends AbstractFormFactory
             $this->getLocalizedLabel($settings['suggest']['fields']['description']['description'])
         );
         $descriptionField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
-        $descriptionField->addValidator(GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]));
+
+        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
+            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]);
+        } else {
+            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class);
+            $stringLengthValidator->setOptions(['minimum' => 5]);
+        }
+        $descriptionField->addValidator($stringLengthValidator);
 
         if ($settings['suggest']['fields']['length']['enable']) {
             /** @var GenericFormElement $lengthField */
