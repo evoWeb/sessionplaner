@@ -115,6 +115,17 @@ return [
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### '
                     . 'ORDER BY tx_sessionplaner_domain_model_speaker.name',
                 'MM' => 'tx_sessionplaner_session_speaker_mm',
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => false,
+                    ],
+                ],
             ],
             'onChange' => 'reload'
         ],
@@ -241,6 +252,17 @@ return [
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_tag.pid = ###CURRENT_PID###',
                 'MM' => 'tx_sessionplaner_session_tag_mm',
                 'minitems' => 0,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => false,
+                    ],
+                ],
             ],
         ],
         'links' => [

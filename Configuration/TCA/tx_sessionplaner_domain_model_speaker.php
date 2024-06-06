@@ -140,6 +140,17 @@ return [
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID###',
                 'MM' => 'tx_sessionplaner_session_speaker_mm',
                 'MM_opposite_field' => 'speakers',
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => false,
+                    ],
+                ],
             ],
         ],
         'detail_page' => [
