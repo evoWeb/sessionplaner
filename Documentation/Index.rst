@@ -51,6 +51,3 @@ a GNU/GPL CMS/Framework available from http://typo3.org
 
    Introduction/Index
    Installation/Index
-   Configuration/Index
-   Breaking/Index
-   Testing/Index
