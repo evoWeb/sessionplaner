@@ -69,3 +69,8 @@ indent_size = 4
 
 [*.neon]
 indent_style = tab
+
+# Makefile
+[{Makefile,**.mk}]
+# Use tabs for indentation (Makefiles require tabs)
+indent_style = tab

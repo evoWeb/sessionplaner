@@ -4,3 +4,5 @@ config/
 var/
 *.cache
 composer.lock
+.idea/
+Documentation-GENERATED-temp/
