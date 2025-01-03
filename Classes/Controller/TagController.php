@@ -11,10 +11,7 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Controller;
 
-use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Model\Tag;
-use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
-use Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider;
 use Evoweb\Sessionplaner\TitleTagProvider\TagTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
