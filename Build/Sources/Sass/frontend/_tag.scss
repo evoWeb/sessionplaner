@@ -22,9 +22,29 @@ $session-tag-border-radius: 4px !default;
     border-radius: $session-tag-border-radius;
     margin: 2px;
 }
+.sessionplaner-tag-title {
+    text-decoration-line: underline;
+    text-decoration-thickness: 5px;
+    text-decoration-skip-ink: none;
+}
 @each $name, $color in $session-colors {
     .sessionplaner-tag-#{$name} {
         color: color-contrast($color);
         background-color: $color;
     }
+    .sessionplaner-tag-title-#{$name} {
+        text-decoration-color: $color;
+    }
+}
+
+//
+// Detail
+//
+.sessionplaner-tagdetail {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sessionplaner-tagdetail-backlink {
+    margin-top: 2rem;
 }

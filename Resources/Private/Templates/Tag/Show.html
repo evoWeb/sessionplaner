@@ -1,0 +1,24 @@
+<f:layout name="Frontend" />
+<f:section name="Content">
+
+    <f:if condition="{tag}">
+        <article class="sessionplaner-tagdetail">
+            <div class="sessionplaner-tag-title{f:if(condition: tag.color, then: ' sessionplaner-tag-title-{tag.color}')}">
+                <h1>{tag.label}</h1>
+            </div>
+            <div class="sessionplaner-tagdetail-description">
+                <f:format.html>{tag.description}</f:format.html>
+            </div>
+
+            <f:render partial="General/Sessions" arguments="{sessions: tag.sessions, sessionSinglePid: settings.sessionSinglePid}"/>
+
+            <div class="sessionplaner-tagdetail-backlink">
+                <f:if condition="{settings.sessionplanPid}">
+                    <f:link.page pageUid="{settings.sessionplanPid}">{f:translate(id: 'back-to-overview')}</f:link.page>
+                </f:if>
+            </div>
+        </article>
+        <f:render partial="Disqus/Index" arguments="{settings: settings}" />
+    </f:if>
+
+</f:section>

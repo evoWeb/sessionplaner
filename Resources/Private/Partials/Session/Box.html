@@ -57,7 +57,26 @@
                 <f:if condition="{session.tags}">
                     <span class="sessionplaner-sessionbox-tags-tags">
                         <f:for each="{session.tags}" as="tag">
-                            <span class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}">{tag.label}</span>
+                            <f:if condition="{settings.tagSinglePid}">
+                                <f:then>
+                                    <f:link.action
+                                        extensionName="sessionplaner"
+                                        pluginName="tag"
+                                        controller="Tag"
+                                        action="show"
+                                        arguments="{tag:tag}"
+                                        pageUid="{settings.tagSinglePid}"
+                                        class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}"
+                                    >
+                                        {tag.label}
+                                    </f:link.action>
+                                </f:then>
+                                <f:else>
+                                    <span class="sessionplaner-tag{f:if(condition: tag.color, then: ' sessionplaner-tag-{tag.color}')}">
+                                        {tag.label}
+                                    </span>
+                                </f:else>
+                            </f:if>
                         </f:for>
                     </span>
                 </f:if>

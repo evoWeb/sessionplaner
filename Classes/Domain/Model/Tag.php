@@ -27,6 +27,16 @@ class Tag extends AbstractEntity
     protected string $color = '';
 
     /**
+     * @var string
+     */
+    protected string $description = '';
+
+    /**
+     * @var string
+     */
+    protected string $slug = '';
+
+    /**
      * @var ObjectStorage<Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
@@ -62,6 +72,26 @@ class Tag extends AbstractEntity
         return $this->color;
     }
 
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setSlug(string $slug): void
+    {
+        $this->slug = $slug;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
     public function setSessions(ObjectStorage $sessions)
     {
         $this->sessions = $sessions;
@@ -70,5 +100,16 @@ class Tag extends AbstractEntity
     public function getSessions(): ObjectStorage
     {
         return $this->sessions;
+    }
+
+    public function hasActiveSessions(): bool
+    {
+        foreach ($this->getSessions() as $session) {
+            if ($session->getDay() && $session->getSlot()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -71,3 +71,20 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplane
     'sessionplaner_speaker',
     'FILE:EXT:sessionplaner/Configuration/FlexForms/Speaker.xml'
 );
+
+/**
+ * Frontend Plugin Tag
+ */
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'sessionplaner',
+    'Tag',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_tag',
+    'sessionplaner-plugin-tag'
+);
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_tag'] =
+    'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplaner_tag'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'sessionplaner_tag',
+    'FILE:EXT:sessionplaner/Configuration/FlexForms/Tag.xml'
+);

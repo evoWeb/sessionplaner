@@ -36,6 +36,12 @@
             <trans-unit id="tt_content.list_type_speaker_description" xml:space="preserve">
                 <source>Displays the speakers</source>
             </trans-unit>
+            <trans-unit id="tt_content.list_type_tag" xml:space="preserve">
+                <source>Sessionplaner: Tag</source>
+            </trans-unit>
+            <trans-unit id="tt_content.list_type_tag_description" xml:space="preserve">
+                <source>Displays the tags</source>
+            </trans-unit>
             <trans-unit id="sessionplan_flexform.sheet_general" xml:space="preserve">
                 <source>Common settings</source>
             </trans-unit>
@@ -44,6 +50,9 @@
             </trans-unit>
             <trans-unit id="sessionplan_flexform.settings.singlePid" xml:space="preserve">
                 <source>Single Pid</source>
+            </trans-unit>
+            <trans-unit id="sessionplan_flexform.settings.tagSinglePid" xml:space="preserve">
+                <source>Single Pid for tags</source>
             </trans-unit>
             <trans-unit id="session_flexform.sheet_general" xml:space="preserve">
                 <source>Common settings</source>
