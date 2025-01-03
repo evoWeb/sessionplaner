@@ -9,12 +9,12 @@ import terser from 'gulp-terser';
 import jshint from 'gulp-jshint';
 
 // CSS
-import nodeSass from 'node-sass';
+import dartSass from 'sass';
 import gulpSass from 'gulp-sass';
 import autoprefixer from 'autoprefixer';
 import postcss from 'gulp-postcss';
 
-const sass = gulpSass(nodeSass);
+const sass = gulpSass(dartSass);
 
 const paths = {
   src: './Sources/',
