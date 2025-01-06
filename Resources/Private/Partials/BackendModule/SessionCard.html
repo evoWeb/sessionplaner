@@ -84,7 +84,11 @@
             </f:if>
             <f:if condition="{session.tags}">
                 <f:for each="{session.tags}" as="tag">
-                    <span class="sessionbox-tag{f:if(condition: tag.color, then: ' sessionbox-tag-{tag.color}')}">{tag.label}</span>
+                    <sessionplanervh:link.be.tag
+                        tag="{tag}"
+                        class="sessionbox-tag{f:if(condition: tag.color, then: ' sessionbox-tag-{tag.color}')}">
+                        {tag.label}
+                    </sessionplanervh:link.be.tag>
                 </f:for>
             </f:if>
         </div>

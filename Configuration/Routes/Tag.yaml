@@ -1,0 +1,14 @@
+routeEnhancers:
+    SessionplanerTag:
+        type: Extbase
+        extension: Sessionplaner
+        plugin: Tag
+        defaultController: 'Tag::show'
+        routes:
+            - { routePath: '/{tag}', _controller: 'Tag::show', _arguments: {'tag': 'tag'} }
+        aspects:
+            tag:
+                type: PersistedPatternMapper
+                tableName: 'tx_sessionplaner_domain_model_tag'
+                routeFieldPattern: '^(?P<path_segment>.+)-(?P<uid>\d+)$'
+                routeFieldResult: '{path_segment}-{uid}'

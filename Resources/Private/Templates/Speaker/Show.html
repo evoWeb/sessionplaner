@@ -45,48 +45,7 @@
                         </div>
                     </div>
                 </f:if>
-                <f:if condition="{speaker.sessions}">
-                    <div class="sessionplaner-bio-sessions">
-                        <f:if condition="{speaker.sessions -> f:count()} > 1">
-                            <f:then>
-                                <h2>Sessions</h2>
-                            </f:then>
-                            <f:else>
-                                <h2>Session</h2>
-                            </f:else>
-                        </f:if>
-                        <div class="sessionplaner-list">
-                            <f:for each="{speaker.sessions}" as="session">
-                                <div class="sessionplaner-list-item">
-                                    <div class="sessionplaner-sessionbox">
-                                        <div class="sessionplaner-sessionbox-topic">
-                                            <f:link.action pageUid="{settings.sessionSinglePid}" pluginName="Session" controller="Session" action="show" arguments="{session: session}">
-                                                {session.topic}
-                                            </f:link.action>
-                                        </div>
-                                        <div class="sessionplaner-sessionbox-info">
-                                            <f:if condition="{session.day}">
-                                                <span class="sessionplaner-sessionbox-info-date">
-                                                    <f:format.date format="d.m.Y" date="{session.day.date}" />
-                                                </span>
-                                            </f:if>
-                                            <f:if condition="{session.slot}">
-                                                <span class="sessionplaner-sessionbox-info-slot">
-                                                    <sessionplanervh:format.time value="{session.slot.start}" /> - <sessionplanervh:format.time value="{session.slot.end}" />
-                                                </span>
-                                            </f:if>
-                                            <f:if condition="{session.room}">
-                                                <span class="sessionplaner-sessionbox-info-room">
-                                                    {session.room.name}
-                                                </span>
-                                            </f:if>
-                                        </div>
-                                    </div>
-                                </div>
-                            </f:for>
-                        </div>
-                    </div>
-                </f:if>
+                <f:render partial="General/Sessions" arguments="{sessions: speaker.sessions, sessionSinglePid: settings.sessionSinglePid}"/>
             </div>
         </article>
     </f:if>

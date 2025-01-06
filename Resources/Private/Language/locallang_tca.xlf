@@ -205,6 +205,12 @@
             <trans-unit id="tx_sessionplaner_domain_model_tag-color" xml:space="preserve">
                 <source>Color</source>
             </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_tag-description" xml:space="preserve">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_tag-path_segment" xml:space="preserve">
+                <source>Path segment</source>
+            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_tag-sessions" xml:space="preserve">
                 <source>Sessions</source>
             </trans-unit>

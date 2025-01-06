@@ -21,7 +21,7 @@
 		"gulp-sass": "^5.1.0",
 		"gulp-terser": "^2.1.0",
 		"jshint": "^2.13.6",
-		"node-sass": "^9.0.0"
+		"sass": "^1.83.0"
 	},
 	"babel": {
 		"retainLines": true,

@@ -1,3 +1,4 @@
 imports:
     - { resource: "EXT:sessionplaner/Configuration/Routes/Speaker.yaml" }
     - { resource: "EXT:sessionplaner/Configuration/Routes/Session.yaml" }
+    - { resource: "EXT:sessionplaner/Configuration/Routes/Tag.yaml" }

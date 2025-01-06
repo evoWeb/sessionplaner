@@ -71,6 +71,34 @@ return [
                 'default' => '',
             ],
         ],
+        'description' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-description',
+            'config' => [
+                'type' => 'text',
+                'cols' => '80',
+                'rows' => '15',
+                'softref' => 'typolink_tag,email[subst],url',
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default'
+            ],
+        ],
+        'path_segment' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-path_segment',
+            'config' => [
+                'type' => 'slug',
+                'generatorOptions' => [
+                    'fields' => ['label'],
+                    'replacements' => [
+                        '/' => ''
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
+            ]
+        ],
         'sessions' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-sessions',
@@ -89,7 +117,9 @@ return [
         '0' => [
             'showitem' => '
                 label,
+                path_segment,
                 color,
+                description,
                 sessions
             '
         ]

@@ -11,6 +11,7 @@ use Evoweb\Sessionplaner\Controller\SessionController;
 use Evoweb\Sessionplaner\Controller\SessionplanController;
 use Evoweb\Sessionplaner\Controller\SpeakerController;
 use Evoweb\Sessionplaner\Controller\SuggestController;
+use Evoweb\Sessionplaner\Controller\TagController;
 use Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
@@ -69,6 +70,13 @@ ExtensionUtility::configurePlugin(
     ],
     [
         SuggestController::class => 'form',
+    ]
+);
+ExtensionUtility::configurePlugin(
+    'Sessionplaner',
+    'Tag',
+    [
+        TagController::class => 'show',
     ]
 );
 

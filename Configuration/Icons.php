@@ -28,6 +28,10 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:sessionplaner/Resources/Public/Icons/plugin-speaker.svg'
     ],
+    'sessionplaner-plugin-tag' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:sessionplaner/Resources/Public/Icons/plugin-tag.svg'
+    ],
     'sessionplaner-record-day' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:sessionplaner/Resources/Public/Icons/record-day.svg'
