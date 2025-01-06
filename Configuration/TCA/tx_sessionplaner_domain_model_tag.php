@@ -117,9 +117,9 @@ return [
         '0' => [
             'showitem' => '
                 label,
+                path_segment,
                 color,
                 description,
-                path_segment,
                 sessions
             '
         ]
