@@ -55,6 +55,9 @@
         "typo3/cms": {
             "extension-key": "sessionplaner",
             "web-dir": ".build/public"
+        },
+        "branch-alias": {
+            "dev-master": "5.0.x-dev"
         }
     },
     "prefer-stable": true,
