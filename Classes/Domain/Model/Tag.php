@@ -37,6 +37,11 @@ class Tag extends AbstractEntity
     protected string $slug = '';
 
     /**
+     * @var bool
+     */
+    protected bool $suggestFormOption = false;
+
+    /**
      * @var ObjectStorage<Session>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
@@ -90,6 +95,16 @@ class Tag extends AbstractEntity
     public function getSlug(): string
     {
         return $this->slug;
+    }
+
+    public function setSuggestFormOption(bool $suggestFormOption): void
+    {
+        $this->suggestFormOption = $suggestFormOption;
+    }
+
+    public function isSuggestFormOption(): bool
+    {
+        return $this->suggestFormOption;
     }
 
     public function setSessions(ObjectStorage $sessions)

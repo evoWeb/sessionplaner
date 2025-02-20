@@ -99,6 +99,23 @@ return [
                 'default' => ''
             ]
         ],
+        'suggest_form_option' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-suggest_form_option',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => false,
+                    ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
         'sessions' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-sessions',
@@ -120,6 +137,7 @@ return [
                 path_segment,
                 color,
                 description,
+                suggest_form_option,
                 sessions
             '
         ]

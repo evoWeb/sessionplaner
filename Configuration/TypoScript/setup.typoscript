@@ -64,6 +64,12 @@ plugin.tx_sessionplaner {
                     description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.type.description
                     prependOptionLabel =
                 }
+                tag {
+                    enable = 0
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.tag
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.tag.description
+                    prependOptionLabel =
+                }
                 title {
                     label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.title
                     description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.title.description

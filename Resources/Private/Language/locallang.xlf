@@ -223,6 +223,12 @@
             <trans-unit id="form.type.description">
                 <source>What type of session to you want to offer?</source>
             </trans-unit>
+            <trans-unit id="form.tag">
+                <source>Tag</source>
+            </trans-unit>
+            <trans-unit id="form.tag.description">
+                <source>What tag would you like to add to your session?</source>
+            </trans-unit>
             <trans-unit id="form.level">
                 <source>Level</source>
             </trans-unit>
