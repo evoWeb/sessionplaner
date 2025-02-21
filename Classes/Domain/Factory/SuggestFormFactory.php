@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\Domain\Factory;
 
 use Evoweb\Sessionplaner\Domain\Finisher\SuggestFormFinisher;
+use Evoweb\Sessionplaner\Domain\Repository\TagRepository;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
 use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
@@ -35,12 +36,16 @@ class SuggestFormFactory extends AbstractFormFactory
 
     protected ConfigurationManagerInterface $configurationManager;
 
+    protected TagRepository $tagRepository;
+
     public function __construct(
         ConfigurationManagerInterface $configurationManager,
-        ConfigurationService $formConfigurationService
+        ConfigurationService $formConfigurationService,
+        TagRepository $tagRepository
     ) {
         $this->configurationManager = $configurationManager;
         $this->formConfigurationService = $formConfigurationService;
+        $this->tagRepository = $tagRepository;
     }
 
     public function build(array $configuration, string $prototypeName = null): FormDefinition
@@ -139,6 +144,30 @@ class SuggestFormFactory extends AbstractFormFactory
             }
             $typeField->setProperty('prependOptionLabel', $prependOptionLabel);
             $typeField->setProperty('options', $typeFieldOptions);
+        }
+
+        if ($settings['suggest']['fields']['tag']['enable']) {
+            $tags = $this->tagRepository->findBy(['suggestFormOption' => true]);
+            if ($tags->current()) {
+                /** @var GenericFormElement $tagField */
+                $tagField = $sessionInformation->createElement('tag', 'SingleSelect');
+                $tagField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag']['label']));
+                $tagField->setProperty(
+                    'elementDescription',
+                    $this->getLocalizedLabel($settings['suggest']['fields']['tag']['description'])
+                );
+                $tagField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+                $tagFieldOptions = [];
+                foreach ($tags as $tag) {
+                    $tagFieldOptions[$tag->getUid()] = $tag->getLabel();
+                }
+                $prependOptionLabel = ' ';
+                if (!empty($settings['suggest']['fields']['tag']['prependOptionLabel'])) {
+                    $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['tag']['prependOptionLabel']);
+                }
+                $tagField->setProperty('prependOptionLabel', $prependOptionLabel);
+                $tagField->setProperty('options', $tagFieldOptions);
+            }
         }
 
         /** @var GenericFormElement $titleField */

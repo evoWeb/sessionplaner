@@ -211,6 +211,9 @@
             <trans-unit id="tx_sessionplaner_domain_model_tag-path_segment" xml:space="preserve">
                 <source>Path segment</source>
             </trans-unit>
+            <trans-unit id="tx_sessionplaner_domain_model_tag-suggest_form_option" xml:space="preserve">
+                <source>Use as option in suggest form</source>
+            </trans-unit>
             <trans-unit id="tx_sessionplaner_domain_model_tag-sessions" xml:space="preserve">
                 <source>Sessions</source>
             </trans-unit>

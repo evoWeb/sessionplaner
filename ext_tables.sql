@@ -73,11 +73,12 @@ CREATE TABLE tx_sessionplaner_domain_model_session
 #
 CREATE TABLE tx_sessionplaner_domain_model_tag
 (
-    label           varchar(255) DEFAULT '' NOT NULL,
-    color           varchar(255) DEFAULT '' NOT NULL,
-    description     text,
-    path_segment    varchar(2048),
-    sessions        int(11) unsigned DEFAULT '0' NOT NULL
+    label                  varchar(255) DEFAULT '' NOT NULL,
+    color                  varchar(255) DEFAULT '' NOT NULL,
+    description            text,
+    path_segment           varchar(2048),
+    suggest_form_option    smallint unsigned DEFAULT '0' NOT NULL,
+    sessions               int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 #

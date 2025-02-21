@@ -327,6 +327,16 @@ class Session extends AbstractSlugEntity
         return $this->tags;
     }
 
+    public function addTag(Tag $tag): void
+    {
+        $this->tags->attach($tag);
+    }
+
+    public function removeTag(Tag $tag): void
+    {
+        $this->tags->detach($tag);
+    }
+
     public function toArray(): array
     {
         $data = [];

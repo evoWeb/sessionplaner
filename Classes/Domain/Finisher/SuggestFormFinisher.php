@@ -15,6 +15,7 @@ use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
+use Evoweb\Sessionplaner\Domain\Repository\TagRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
@@ -27,6 +28,8 @@ class SuggestFormFinisher extends AbstractFinisher
     protected ?SpeakerRepository $speakerRepository = null;
 
     protected ?SessionRepository $sessionRepository = null;
+
+    protected ?TagRepository $tagRepository = null;
 
     protected ?PersistenceManagerInterface $persistenceManager = null;
 
@@ -43,6 +46,11 @@ class SuggestFormFinisher extends AbstractFinisher
     public function injectSessionRepository(SessionRepository $sessionRepository)
     {
         $this->sessionRepository = $sessionRepository;
+    }
+
+    public function injectTagRepository(TagRepository $tagRepository)
+    {
+        $this->tagRepository = $tagRepository;
     }
 
     public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
@@ -83,6 +91,9 @@ class SuggestFormFinisher extends AbstractFinisher
         $session->setDescription($data['description']);
         if (!empty($data['type'])) {
             $session->setType($data['type']);
+        }
+        if (!empty($data['tag']) && null !== ($tag = $this->tagRepository->findByUid($data['tag']))) {
+            $session->addTag($tag);
         }
         if (!empty($data['level'])) {
             $session->setLevel($data['level']);
