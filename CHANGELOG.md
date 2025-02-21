@@ -1,3 +1,17 @@
+# 5.1.0
+
+## FEATURE
+
+- d19df59 [FEATURE] Suggest tag for session
+
+## MISC
+
+- 9f7bd9f Load tags only if field is enabled
+
+## Contributors
+
+- Marvin Buchmann
+
 # 5.0.0
 
 ## FEATURE
