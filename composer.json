@@ -57,7 +57,7 @@
             "web-dir": ".build/public"
         },
         "branch-alias": {
-            "dev-master": "5.1.x-dev"
+            "dev-develop": "5.1.x-dev"
         }
     },
     "prefer-stable": true,
