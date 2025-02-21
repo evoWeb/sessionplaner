@@ -146,26 +146,28 @@ class SuggestFormFactory extends AbstractFormFactory
             $typeField->setProperty('options', $typeFieldOptions);
         }
 
-        $tags = $this->tagRepository->findBy(['suggestFormOption' => true]);
-        if ($settings['suggest']['fields']['tag']['enable'] && $tags->current()) {
-            /** @var GenericFormElement $tagField */
-            $tagField = $sessionInformation->createElement('tag', 'SingleSelect');
-            $tagField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag']['label']));
-            $tagField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['tag']['description'])
-            );
-            $tagField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
-            $tagFieldOptions = [];
-            foreach ($tags as $tag) {
-                $tagFieldOptions[$tag->getUid()] = $tag->getLabel();
+        if ($settings['suggest']['fields']['tag']['enable']) {
+            $tags = $this->tagRepository->findBy(['suggestFormOption' => true]);
+            if ($tags->current()) {
+                /** @var GenericFormElement $tagField */
+                $tagField = $sessionInformation->createElement('tag', 'SingleSelect');
+                $tagField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag']['label']));
+                $tagField->setProperty(
+                    'elementDescription',
+                    $this->getLocalizedLabel($settings['suggest']['fields']['tag']['description'])
+                );
+                $tagField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
+                $tagFieldOptions = [];
+                foreach ($tags as $tag) {
+                    $tagFieldOptions[$tag->getUid()] = $tag->getLabel();
+                }
+                $prependOptionLabel = ' ';
+                if (!empty($settings['suggest']['fields']['tag']['prependOptionLabel'])) {
+                    $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['tag']['prependOptionLabel']);
+                }
+                $tagField->setProperty('prependOptionLabel', $prependOptionLabel);
+                $tagField->setProperty('options', $tagFieldOptions);
             }
-            $prependOptionLabel = ' ';
-            if (!empty($settings['suggest']['fields']['tag']['prependOptionLabel'])) {
-                $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['tag']['prependOptionLabel']);
-            }
-            $tagField->setProperty('prependOptionLabel', $prependOptionLabel);
-            $tagField->setProperty('options', $tagFieldOptions);
         }
 
         /** @var GenericFormElement $titleField */
