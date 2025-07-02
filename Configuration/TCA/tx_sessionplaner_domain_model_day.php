@@ -9,8 +9,6 @@
 
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_day');
-
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_day',
@@ -24,8 +22,11 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
-            'default' => 'sessionplaner-record-day'
+            'default' => 'sessionplaner-record-day',
         ],
     ],
     'columns' => [
@@ -46,7 +47,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 20,
-                'eval' => 'date'
+                'eval' => 'date',
             ],
         ],
         'rooms' => [
@@ -74,7 +75,7 @@ return [
                 'appearance' => [
                     'collapseAll' => true,
                     'expandSingle' => true,
-                ]
+                ],
             ],
         ],
     ],
@@ -85,7 +86,7 @@ return [
             date,
             rooms,
             slots
-            '
-        ]
+            ',
+        ],
     ],
 ];

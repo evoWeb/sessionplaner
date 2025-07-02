@@ -20,7 +20,7 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
      */
     protected $tagName = 'img';
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerUniversalTagAttributes();
@@ -36,9 +36,9 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
         $defaultDefault = 'mm';
         $defaultRating = 'g';
         $email = $this->arguments['email'];
-        $size = ($this->arguments['size'] ?? $defaultSize) ?: $defaultSize;
-        $default = ($this->arguments['default'] ?? $defaultDefault) ?: $defaultDefault;
-        $rating = ($this->arguments['rating'] ?? $defaultRating) ?: $defaultRating;
+        $size = $this->arguments['size'] ?? $defaultSize;
+        $default = $this->arguments['default'] ?? $defaultDefault;
+        $rating = $this->arguments['rating'] ?? $defaultRating;
 
         $avatarUrl = 'https://www.gravatar.com/avatar/' . md5($email)
             . '?s=' . $size
@@ -46,8 +46,8 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
             . '&r=' . $rating;
 
         $this->tag->addAttribute('src', $avatarUrl);
-        $this->tag->addAttribute('width', (int)$size);
-        $this->tag->addAttribute('height', (int)$size);
+        $this->tag->addAttribute('width', $size);
+        $this->tag->addAttribute('height', $size);
         return $this->tag->render();
     }
 }

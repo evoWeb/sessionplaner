@@ -33,76 +33,101 @@ class SuggestFormFinisher extends AbstractFinisher
 
     protected ?PersistenceManagerInterface $persistenceManager = null;
 
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
         $this->configurationManager = $configurationManager;
     }
 
-    public function injectSpeakerRepository(SpeakerRepository $speakerRepository)
+    public function injectSpeakerRepository(SpeakerRepository $speakerRepository): void
     {
         $this->speakerRepository = $speakerRepository;
     }
 
-    public function injectSessionRepository(SessionRepository $sessionRepository)
+    public function injectSessionRepository(SessionRepository $sessionRepository): void
     {
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function injectTagRepository(TagRepository $tagRepository)
+    public function injectTagRepository(TagRepository $tagRepository): void
     {
         $this->tagRepository = $tagRepository;
     }
 
-    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager): void
     {
         $this->persistenceManager = $persistenceManager;
     }
 
-    protected function executeInternal()
+    protected function executeInternal(): void
     {
+        if ($this->configurationManager === null
+            || $this->speakerRepository === null
+            || $this->sessionRepository === null
+            || $this->tagRepository === null
+            || $this->persistenceManager === null
+        ) {
+            return;
+        }
+
         $settings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
             'sessionplaner'
         );
-        $storagePid = GeneralUtility::intExplode(',', $settings['persistence']['storagePid'])[0] ?? 0;
+
+        $storagePid = 0;
+        if (isset($settings['persistence']['storagePid'])) {
+            $exploded = GeneralUtility::intExplode(',', (string)$settings['persistence']['storagePid']);
+            $storagePid = max(0, (int)($exploded[0] ?? 0));
+        }
 
         $data = $this->finisherContext->getFormValues();
 
-        $speaker = $this->speakerRepository->findOneByEmailIncludeHidden($data['email']);
-        if (!$speaker) {
+        $speaker = $this->speakerRepository->findOneByEmailIncludeHidden($data['email'] ?? '');
+
+        if ($speaker === null) {
             $speaker = new Speaker();
             $speaker->initializeObject();
             $speaker->setPid($storagePid);
-            $speaker->setName($data['fullname']);
-            $speaker->setEmail($data['email']);
-            if (!empty($data['twitter'])) {
-                $speaker->setTwitter($data['twitter']);
+            $speaker->setName((string)($data['fullname'] ?? ''));
+            $speaker->setEmail((string)($data['email'] ?? ''));
+            if (isset($data['twitter']) && $data['twitter'] !== '') {
+                $speaker->setTwitter((string)$data['twitter']);
             }
         }
+
         $session = new Session();
         $session->initializeObject();
         $session->setPid($storagePid);
         $session->setHidden(true);
         $session->setSuggestion(true);
-        if (!empty($data['requesttype'])) {
-            $session->setRequesttype($data['requesttype']);
+
+        if (isset($data['requesttype']) && $data['requesttype'] !== '') {
+            $session->setRequesttype((int)$data['requesttype']);
         }
-        $session->setTopic($data['title']);
-        $session->setDescription($data['description']);
-        if (!empty($data['type'])) {
-            $session->setType($data['type']);
+
+        $session->setTopic((string)($data['title'] ?? ''));
+        $session->setDescription((string)($data['description'] ?? ''));
+
+        if (isset($data['type']) && $data['type'] !== '') {
+            $session->setType((int)$data['type']);
         }
-        if (!empty($data['tag']) && null !== ($tag = $this->tagRepository->findByUid($data['tag']))) {
-            $session->addTag($tag);
+
+        if (isset($data['tag']) && $data['tag'] !== '') {
+            $tag = $this->tagRepository->findByUid((int)$data['tag']);
+            if ($tag !== null) {
+                $session->addTag($tag);
+            }
         }
-        if (!empty($data['level'])) {
-            $session->setLevel($data['level']);
+
+        if (isset($data['level']) && $data['level'] !== '') {
+            $session->setLevel((int)$data['level']);
         }
+
         $session->addSpeaker($speaker);
-        if (!empty($data['norecording'])) {
-            $session->setNorecording(boolval($data['norecording']));
+
+        if (isset($data['norecording']) && $data['norecording'] !== '') {
+            $session->setNorecording((bool)$data['norecording']);
         }
-        // length is unused / ignored
 
         $this->sessionRepository->add($session);
         $this->persistenceManager->persistAll();

@@ -19,28 +19,17 @@ use TYPO3\CMS\Extbase\Mvc\Exception\NoSuchArgumentException;
 
 abstract class AbstractSlugEntity extends AbstractEntity
 {
-    /**
-     * @var string The name of the path segment field
-     */
     protected string $slugField;
-
-    /**
-     * @var string the tablename for this model
-     */
     protected string $tablename;
 
-    /**
-     * @throws NoSuchArgumentException
-     *
-     * @return bool
-     */
     public function _isNew(): bool
     {
         $isNew = parent::_isNew();
         if ($isNew) {
-            if (empty($this->slugField)) {
+            if ($this->slugField === '') {
                 throw new NoSuchArgumentException('The property "slugField" can not be empty', 1559731500);
             }
+
             $slugSetter = 'set' . GeneralUtility::underscoredToUpperCamelCase($this->slugField);
             if (!method_exists($this, $slugSetter)) {
                 throw new NoSuchArgumentException(
@@ -48,12 +37,17 @@ abstract class AbstractSlugEntity extends AbstractEntity
                     1559731501
                 );
             }
-            if (empty($this->tablename)) {
+
+            if ($this->tablename === '') {
                 throw new NoSuchArgumentException('The property "tablename" can not be empty', 1559731502);
             }
-            if (!$this->getPid()) {
+
+            $pid = $this->getPid();
+            if ($pid === null || $pid === 0) {
                 throw new NoSuchArgumentException('The property "pid" can not be empty', 1559731503);
             }
+
+            /** @phpstan-ignore-next-line */
             $this->{$slugSetter}($this->generateSlug());
         }
 
@@ -66,23 +60,29 @@ abstract class AbstractSlugEntity extends AbstractEntity
         $record = [];
 
         $fieldConfig = $GLOBALS['TCA'][$this->tablename]['columns'][$this->slugField]['config'];
-        $evalInfo = !empty($fieldConfig['eval']) ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true) : [];
+        $evalInfo = isset($fieldConfig['eval']) && $fieldConfig['eval'] !== ''
+            ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true)
+            : [];
+
         $hasToBeUniqueInSite = in_array('uniqueInSite', $evalInfo, true);
         $hasToBeUniqueInPid = in_array('uniqueInPid', $evalInfo, true);
         $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->tablename, $this->slugField, $fieldConfig);
 
         foreach ($properties as $k => $v) {
             $field = GeneralUtility::camelCaseToLowerCaseUnderscored($k);
-            $v = \is_object($v) && \method_exists($v, 'getUid') ? $v->getUid() :  $v;
+            $v = \is_object($v) && \method_exists($v, 'getUid') ? $v->getUid() : $v;
             $record[$field] = $v;
         }
 
-        $pid = (int)$record['pid'];
-        $slug = $slugHelper->generate($record, $this->getPid());
+        $pid = (int)($record['pid'] ?? 0);
+        $slug = $slugHelper->generate($record, $pid);
+
         $state = RecordStateFactory::forName($this->tablename)->fromArray($record, $pid, 'NEW');
+
         if ($hasToBeUniqueInSite && !$slugHelper->isUniqueInSite($slug, $state)) {
             $slug = $slugHelper->buildSlugForUniqueInSite($slug, $state);
         }
+
         if ($hasToBeUniqueInPid && !$slugHelper->isUniqueInPid($slug, $state)) {
             $slug = $slugHelper->buildSlugForUniqueInPid($slug, $state);
         }

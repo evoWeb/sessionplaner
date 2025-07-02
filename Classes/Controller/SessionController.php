@@ -34,9 +34,9 @@ class SessionController extends ActionController
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function listAction(Session $session = null): ResponseInterface
+    public function listAction(?Session $session = null): ResponseInterface
     {
-        if ($session) {
+        if ($session !== null) {
             $response = new ForwardResponse('show');
         } else {
             if ($this->settings['suggestions']) {
@@ -55,7 +55,7 @@ class SessionController extends ActionController
         return $response;
     }
 
-    public function showAction(Session $session = null): ResponseInterface
+    public function showAction(?Session $session = null): ResponseInterface
     {
         if ($session === null) {
             $response = new ForwardResponse('list');

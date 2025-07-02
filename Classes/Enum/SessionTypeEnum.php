@@ -26,7 +26,7 @@ class SessionTypeEnum
         self::OPTION_WORKSHOP =>
             'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.workshop',
         self::OPTION_DISCUSSION =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion'
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion',
     ];
 
     public static function getLabel(int $option): string
@@ -63,7 +63,7 @@ class SessionTypeEnum
             self::OPTION_TALK,
             self::OPTION_TUTORIAL,
             self::OPTION_WORKSHOP,
-            self::OPTION_DISCUSSION
+            self::OPTION_DISCUSSION,
         ];
     }
 }

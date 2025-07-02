@@ -9,8 +9,6 @@
 
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_link');
-
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_link',
@@ -23,8 +21,11 @@ return [
             'disabled' => 'hidden',
         ],
         'hideTable' => true,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
-            'default' => 'actions-link'
+            'default' => 'actions-link',
         ],
     ],
     'columns' => [
@@ -55,7 +56,7 @@ return [
                 --div--;General,
                     link_text,
                     link,
-            '
-        ]
+            ',
+        ],
     ],
 ];
