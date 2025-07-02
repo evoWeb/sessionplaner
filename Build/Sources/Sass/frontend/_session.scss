@@ -94,9 +94,42 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
 // Detail
 //
 .sessionplaner-sessiondetail {
-    max-width: 600px;
+    max-width: 900px;
     margin-left: auto;
     margin-right: auto;
+    display: grid;
+    grid-template-columns: 240px 1fr; // linker Bereich flexibel, rechts feste Sidebar
+    gap: 3rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+
+    .sessionplaner-sessiondetail-speakers {
+        align-self: start;
+
+        @media (max-width: 768px) {
+            order: 2;
+        }
+
+        .sessionplaner-sessiondetail-speakers-list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 1rem;
+
+            .sessionplaner-speaker {
+                max-width: 240px;
+                margin: unset;
+            }
+        }
+    }
+    .sessionplaner-sessiondetail-content {
+        .sessionplaner-sessiondetail-title {
+            margin-bottom: 3rem;
+        }
+    }
 }
 .sessionplaner-sessiondetail-links,
 .sessionplaner-sessiondetail-documents,

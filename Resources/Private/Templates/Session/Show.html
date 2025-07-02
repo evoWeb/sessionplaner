@@ -3,47 +3,64 @@
 
     <f:if condition="{session}">
         <article class="sessionplaner-sessiondetail">
-            <div class="sessionplaner-sessiondetail-title">
-                <h1>{session.topic}</h1>
-            </div>
-            <div class="sessionplaner-sessiondetail-description">
-                <f:format.html>{session.description}</f:format.html>
-            </div>
-            <div class="sessionplaner-sessiondetail-meta">
-                <f:render partial="Session/Box" arguments="{settings: settings, session: session}" />
-            </div>
-            <f:if condition="{session.links}">
-                <div class="sessionplaner-sessiondetail-links">
-                    <h4>{f:translate(id: 'links')}</h4>
-                    <ul>
-                        <f:for each="{session.links}" as="linkitem">
-                            <li>
-                                <f:link.typolink parameter="{linkitem.link}">{linkitem.linkText}</f:link.typolink>
-                            </li>
-                        </f:for>
-                    </ul>
-                </div>
+            <f:if condition="{session.speakers} || {session.speaker}">
+                <aside class="sessionplaner-sessiondetail-speakers">
+                    <div class="sessionplaner-sessiondetail-speakers-list">
+                        <f:if condition="{session.speakers}">
+                            <f:for each="{session.speakers}" as="speaker">
+                                <f:render partial="Speaker/Card" arguments="{settings: settings, speaker: speaker, size: 240}" />
+                            </f:for>
+                        </f:if>
+                        <f:if condition="!{session.speakers} && {session.speaker}">
+                            {session.speaker}
+                        </f:if>
+                    </div>
+                </aside>
             </f:if>
-            <f:if condition="{session.documents}">
-                <div class="sessionplaner-sessiondetail-documents">
-                    <h4>{f:translate(id: 'documents')}</h4>
-                    <ul>
-                        <f:for each="{session.documents}" as="document">
-                            <li><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></li>
-                        </f:for>
-                    </ul>
+            <div class="sessionplaner-sessiondetail-content">
+                <div class="sessionplaner-sessiondetail-title">
+                    <h1>{session.topic}</h1>
                 </div>
-            </f:if>
-
-            <div class="sessionplaner-sessiondetail-backlink">
-                <f:if condition="{settings.sessionplanPid}">
-                    <f:then>
-                        <f:link.page pageUid="{settings.sessionplanPid}">{f:translate(id: 'back-to-overview')}</f:link.page>
-                    </f:then>
-                    <f:else>
-                        <f:link.action action="list">{f:translate(id: 'back-to-overview')}</f:link.action>
-                    </f:else>
-                </f:if>
+                <div class="sessionplaner-sessiondetail-main">
+                    <div class="sessionplaner-sessiondetail-description">
+                        <f:format.html>{session.description}</f:format.html>
+                    </div>
+                    <div class="sessionplaner-sessiondetail-meta">
+                        <f:render partial="Session/Box" arguments="{settings: settings, session: session}" />
+                    </div>
+                    <f:if condition="{session.links}">
+                        <div class="sessionplaner-sessiondetail-links">
+                            <h4>{f:translate(id: 'links')}</h4>
+                            <ul>
+                                <f:for each="{session.links}" as="linkitem">
+                                    <li>
+                                        <f:link.typolink parameter="{linkitem.link}">{linkitem.linkText}</f:link.typolink>
+                                    </li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </f:if>
+                    <f:if condition="{session.documents}">
+                        <div class="sessionplaner-sessiondetail-documents">
+                            <h4>{f:translate(id: 'documents')}</h4>
+                            <ul>
+                                <f:for each="{session.documents}" as="document">
+                                    <li><a href="{document.publicUrl}"><i class="icon-doc"></i> {document.name}</a></li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </f:if>
+                    <div class="sessionplaner-sessiondetail-backlink">
+                        <f:if condition="{settings.sessionplanPid}">
+                            <f:then>
+                                <f:link.page pageUid="{settings.sessionplanPid}">{f:translate(id: 'back-to-overview')}</f:link.page>
+                            </f:then>
+                            <f:else>
+                                <f:link.action action="list">{f:translate(id: 'back-to-overview')}</f:link.action>
+                            </f:else>
+                        </f:if>
+                    </div>
+                </div>
             </div>
         </article>
         <f:render partial="Disqus/Index" arguments="{settings: settings}" />
