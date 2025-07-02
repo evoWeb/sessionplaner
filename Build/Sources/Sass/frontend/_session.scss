@@ -98,7 +98,7 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-columns: 240px 1fr; // linker Bereich flexibel, rechts feste Sidebar
+    grid-template-columns: 240px 1fr;
     gap: 3rem;
 
     @media (max-width: 768px) {

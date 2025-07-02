@@ -82,20 +82,6 @@
                                                                                     </f:else>
                                                                                 </f:if>
                                                                             </div>
-                                                                            <f:if condition="{session.speakers} || {session.speaker}">
-                                                                                <div class="sessionplaner-sessioninfo-speakers-list">
-                                                                                    <f:if condition="{session.speakers}">
-                                                                                        <f:for each="{session.speakers}" as="speaker">
-                                                                                            <f:render partial="Speaker/MiniCard" arguments="{settings: settings, speaker: speaker, size: 34}" />
-                                                                                        </f:for>
-                                                                                    </f:if>
-                                                                                    <f:if condition="!{session.speakers} && {session.speaker}">
-                                                                                        <div class="sessionplaner-sessionbox-speaker">
-                                                                                            {session.speaker}
-                                                                                        </div>
-                                                                                    </f:if>
-                                                                                </div>
-                                                                            </f:if>
                                                                             <f:if condition="{session.tags} || {session.type} || {session.level}">
                                                                                 <div class="sessionplaner-sessionbox-tags">
                                                                                     <div class="sessionplaner-tag-list">
@@ -139,6 +125,20 @@
                                                                                             </f:for>
                                                                                         </f:if>
                                                                                     </div>
+                                                                                </div>
+                                                                            </f:if>
+                                                                            <f:if condition="{session.speakers} || {session.speaker}">
+                                                                                <div class="sessionplaner-sessioninfo-speakers-list">
+                                                                                    <f:if condition="{session.speakers}">
+                                                                                        <f:for each="{session.speakers}" as="speaker">
+                                                                                            <f:render partial="Speaker/MiniCard" arguments="{settings: settings, speaker: speaker, size: 34}" />
+                                                                                        </f:for>
+                                                                                    </f:if>
+                                                                                    <f:if condition="!{session.speakers} && {session.speaker}">
+                                                                                        <div class="sessionplaner-sessionbox-speaker">
+                                                                                            {session.speaker}
+                                                                                        </div>
+                                                                                    </f:if>
                                                                                 </div>
                                                                             </f:if>
                                                                         </div>
