@@ -676,6 +676,11 @@
   }
 }
 
+.sessionplaner-bio-card {
+  display: flex;
+  align-items: flex-start;
+}
+
 .sessionplaner-bio-header > *:first-child {
   margin-top: 0;
 }
