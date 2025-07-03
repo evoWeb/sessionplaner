@@ -7,6 +7,7 @@ $session-sessioninfo-border: 1px solid rgba(0,0,0,0.1) !default;
 $session-sessioninfo-border-radius: 5px;
 $session-sessioninfo-padding: 1rem;
 $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
+
 :root {
     --session-sessioninfo-bg: #{$session-sessioninfo-bg};
     --session-sessioninfo-color: #{$session-sessioninfo-color};

@@ -11,11 +11,20 @@ $session-slot-track-type-main-color: #ffffff !default;
 $session-slot-track-type-side-bg: lighten($session-slot-track-type-main-bg, 10%) !default;
 $session-slot-track-type-side-color: $session-slot-track-type-main-color !default;
 
-
 //
 // Slot
 //
 .sessionplaner-slot {
+    --session-slot-time-bg: #{$session-slot-time-bg};
+    --session-slot-time-color: #{$session-slot-time-color};
+    --session-slot-padding: #{$session-slot-padding};
+    --session-slot-track-bg: #{$session-slot-track-bg};
+    --session-slot-track-break-bg: #{$session-slot-track-break-bg};
+    --session-slot-track-type-main-bg: #{$session-slot-track-type-main-bg};
+    --session-slot-track-type-main-color: #{$session-slot-track-type-main-color};
+    --session-slot-track-type-side-bg: #{$session-slot-track-type-side-bg};
+    --session-slot-track-type-side-color: #{$session-slot-track-type-side-color};
+
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -35,30 +44,30 @@ $session-slot-track-type-side-color: $session-slot-track-type-main-color !defaul
     left: 0;
     bottom: 0;
     width: 5rem;
-    padding: $session-slot-padding;
-    color: $session-slot-time-color;
-    background-color: $session-slot-time-bg;
+    padding: var(--session-slot-padding);
+    color: var(--session-slot-time-color);
+    background-color: var(--session-slot-time-bg);
 }
 .sessionplaner-slot-track {
     flex-shrink: 0;
     width: 100%;
-    padding: $session-slot-padding;
-    background-color: $session-slot-track-bg;
+    padding: var(--session-slot-padding);
+    background-color: var(--session-slot-track-bg);
 }
 .sessionplaner-slot-track-empty {
     padding: 0;
 }
 .sessionplaner-slot-track-break {
-    background-color: $session-slot-track-break-bg;
+    background-color: var(--session-slot-track-break-bg);
     width: 100% !important;
 }
 .sessionplaner-slot-track-type-main {
-    color: $session-slot-track-type-main-color;
-    background-color: $session-slot-track-type-main-bg;
+    color: var(--session-slot-track-type-main-color);
+    background-color: var(--session-slot-track-type-main-bg);
 }
 .sessionplaner-slot-track-type-side {
-    color: $session-slot-track-type-side-color;
-    background-color: $session-slot-track-type-side-bg;
+    color: var(--session-slot-track-type-side-color);
+    background-color: var(--session-slot-track-type-side-bg);
 }
 
 //
