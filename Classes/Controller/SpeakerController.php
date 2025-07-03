@@ -34,7 +34,7 @@ class SpeakerController extends ActionController
     protected function initializeAction()
     {
         if (!isset($this->settings['speakerSinglePid']) || $this->settings['speakerSinglePid'] === '') {
-            $this->settings['speakerSinglePid'] = (string) ($this->getTypoScriptFrontendController()?->id ?? '');
+            $this->settings['speakerSinglePid'] = (string) ($this->getTypoScriptFrontendController()->id ?? '');
         }
     }
 
@@ -74,7 +74,7 @@ class SpeakerController extends ActionController
         return new HtmlResponse($this->view->render());
     }
 
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }

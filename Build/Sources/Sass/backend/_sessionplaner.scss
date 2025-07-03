@@ -1,3 +1,5 @@
+@use "sass:map";
+
 //
 // Sessionplaner
 //
@@ -266,7 +268,7 @@
 }
 @each $name, $color in $session-colors {
     .sessionbox-tag-#{$name} {
-        --sessionplaner-tag-color: #{color-contrast($color)};
-        --sessionplaner-tag-bg: #{$color};
+        --sessionplaner-tag-color: #{map.get($color, text)};
+        --sessionplaner-tag-bg: #{map.get($color, bg)};
     }
 }

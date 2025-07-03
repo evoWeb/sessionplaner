@@ -1,33 +1,16 @@
 //
-// Variables
-//
-$session-speakerlist-space: 10px;
-
-$session-speaker-bg: #ffffff !default;
-$session-speaker-color: #616161 !default;
-$session-speaker-name-color: #ff8700 !default;
-$session-speaker-border: 1px solid rgba(0,0,0,0.1) !default;
-$session-speaker-border-radius: 5px;
-$session-speaker-padding: 1rem;
-$session-speaker-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
-
-:root {
-    --session-speakerlist-space: #{$session-speakerlist-space};
-
-    --session-speaker-bg: #{$session-speaker-bg};
-    --session-speaker-color: #{$session-speaker-color};
-    --session-speaker-name-color: #{$session-speaker-name-color};
-    --session-speaker-name-hover-color: colormix(in srgb, var(--session-speaker-name-color), var(--session-speaker-bg) 10%);
-    --session-speaker-border: #{$session-speaker-border};
-    --session-speaker-border-radius: #{$session-speaker-border-radius};
-    --session-speaker-padding: #{$session-speaker-padding};
-    --session-speaker-shadow: #{$session-speaker-shadow};
-}
-
-//
 // Speaker
 //
 .sessionplaner-speaker {
+    --session-speaker-bg: #ffffff;
+    --session-speaker-color: #616161;
+    --session-speaker-name-color: #ff8700;
+    --session-speaker-name-hover-color: colormix(in srgb, var(--session-speaker-name-color), var(--session-speaker-bg) 10%);
+    --session-speaker-border: 1px solid rgba(0,0,0,0.1);
+    --session-speaker-border-radius: 5px;
+    --session-speaker-padding: 1rem;
+    --session-speaker-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
+
     margin-left: auto;
     margin-right: auto;
     position: relative;

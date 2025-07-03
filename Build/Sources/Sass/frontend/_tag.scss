@@ -1,9 +1,4 @@
-//
-// Variables
-//
-$session-tag-bg: #999999 !default;
-$session-tag-color: #ffffff !default;
-$session-tag-border-radius: 4px !default;
+@use "sass:map";
 
 //
 // Tag
@@ -14,9 +9,9 @@ $session-tag-border-radius: 4px !default;
     gap: 2px;
 }
 .sessionplaner-tag {
-    --session-tag-bg: #{$session-tag-bg};
-    --session-tag-color: #{$session-tag-color};
-    --session-tag-border-radius: #{$session-tag-border-radius};
+    --session-tag-bg: #999999;
+    --session-tag-color: #ffffff;
+    --session-tag-border-radius: 4px;
 
     text-transform: uppercase;
     font-size: .75rem;
@@ -26,6 +21,7 @@ $session-tag-border-radius: 4px !default;
     background-color: var(--session-tag-bg);
     border-radius: var(--session-tag-border-radius);
 }
+
 .sessionplaner-tag-title {
     --session-tag-title-decoration-color: inherit;
     text-decoration-line: underline;
@@ -33,13 +29,14 @@ $session-tag-border-radius: 4px !default;
     text-decoration-skip-ink: none;
     text-decoration-color: var(--session-tag-title-decoration-color);
 }
+
 @each $name, $color in $session-colors {
-    .sessionplaner-tag-#{$name} {
-        --session-tag-bg: #{$color};
-        --session-tag-color: #{color-contrast($color)};
+    .sessionplaner-tag-#{"" + $name} {
+        --session-tag-bg: #{map.get($color, bg)};
+        --session-tag-color: #{map.get($color, text)};
     }
-    .sessionplaner-tag-title-#{$name} {
-        --session-tag-title-decoration-color: #{$color};
+    .sessionplaner-tag-title-#{"" + $name} {
+        --session-tag-title-decoration-color: #{map.get($color, bg)};
     }
 }
 

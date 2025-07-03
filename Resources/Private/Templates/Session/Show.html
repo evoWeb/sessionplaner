@@ -22,9 +22,11 @@
                     <h1>{session.topic}</h1>
                 </div>
                 <div class="sessionplaner-sessiondetail-main">
+                    <f:if condition="{session.description}">
                     <div class="sessionplaner-sessiondetail-description">
                         <f:format.html>{session.description}</f:format.html>
                     </div>
+                    </f:if>
                     <div class="sessionplaner-sessiondetail-meta">
                         <f:render partial="Session/Box" arguments="{settings: settings, session: session}" />
                     </div>

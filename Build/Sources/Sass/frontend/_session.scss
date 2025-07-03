@@ -1,24 +1,4 @@
 //
-// Variables
-//
-$session-sessioninfo-bg: #ffffff !default;
-$session-sessioninfo-color: #313131 !default;
-$session-sessioninfo-border: 1px solid rgba(0,0,0,0.1) !default;
-$session-sessioninfo-border-radius: 5px;
-$session-sessioninfo-padding: 1rem;
-$session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
-
-:root {
-    --session-sessioninfo-bg: #{$session-sessioninfo-bg};
-    --session-sessioninfo-color: #{$session-sessioninfo-color};
-    --session-sessioninfo-border: #{$session-sessioninfo-border};
-    --session-sessioninfo-border-radius: #{$session-sessioninfo-border-radius};
-    --session-sessioninfo-padding: #{$session-sessioninfo-padding};
-    --session-sessioninfo-shadow: #{$session-sessioninfo-shadow};
-    --session-sessioninfo-spacing: 1.5rem;
-}
-
-//
 // Box
 //
 .sessionplaner-sessionbox {
@@ -51,15 +31,22 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     gap: .25rem 1rem;
 }
 
-
 //
 // Info
 //
 .sessionplaner-sessioninfo {
+    --session-sessioninfo-bg: #ffffff;
+    --session-sessioninfo-color: #313131;
+    --session-sessioninfo-border: 1px solid rgba(0,0,0,0.1);
+    --session-sessioninfo-border-radius: 5px;
+    --session-sessioninfo-padding: 1rem;
+    --session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
+    --session-sessioninfo-spacing: .5rem;
+
     text-wrap: balance;
     position: relative;
     display: flex;
-    gap: .5rem;
+    gap: var(--session-sessioninfo-spacing);
     flex-direction: column;
     word-wrap: break-word;
     padding: var(--session-sessioninfo-padding);
@@ -96,6 +83,8 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
 // Detail
 //
 .sessionplaner-sessiondetail {
+    --session-sessiondetail-spacing: 1.5rem;
+
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -124,7 +113,7 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     .sessionplaner-sessiondetail-content {
         display: grid;
         align-content: baseline;
-        gap: var(--session-sessioninfo-spacing);
+        gap: var(--session-sessiondetail-spacing);
 
         .sessionplaner-sessiondetail-title {
             *:last-child {
@@ -135,7 +124,7 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
 
     .sessionplaner-sessiondetail-main {
         display: grid;
-        gap: var(--session-sessioninfo-spacing);
+        gap: var(--session-sessiondetail-spacing);
     }
 
     .sessionplaner-sessiondetail-description {
