@@ -21,6 +21,7 @@ use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 class SpeakerController extends ActionController
 {
@@ -40,8 +41,16 @@ class SpeakerController extends ActionController
 
     public function listAction(): ResponseInterface
     {
-        $speakers = $this->speakerRepository->findAll()->toArray();
-        $speakers = array_filter($speakers, function (Speaker $speaker) {
+        $queryResult = $this->speakerRepository->findAll();
+
+        $speakers = $queryResult instanceof QueryResultInterface
+            ? iterator_to_array($queryResult)
+            : (array)$queryResult;
+
+        $speakers = array_filter($speakers, function (object $speaker): bool {
+            if (!$speaker instanceof Speaker) {
+                return false;
+            }
             return $speaker->hasActiveSessions();
         });
 

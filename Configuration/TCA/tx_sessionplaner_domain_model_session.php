@@ -9,8 +9,6 @@
 
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_session');
-
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_session',
@@ -22,8 +20,11 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
-            'default' => 'sessionplaner-record-session'
+            'default' => 'sessionplaner-record-session',
         ],
     ],
     'columns' => [
@@ -46,7 +47,7 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-social',
             'config' => [
                 'type' => 'check',
-                'default' => 1
+                'default' => 1,
             ],
         ],
         'donotlink' => [
@@ -74,13 +75,13 @@ return [
                 'generatorOptions' => [
                     'fields' => ['topic'],
                     'replacements' => [
-                        '/' => ''
+                        '/' => '',
                     ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => 'uniqueInSite',
-                'default' => ''
-            ]
+                'default' => '',
+            ],
         ],
         'speaker' => [
             'exclude' => false,
@@ -91,7 +92,7 @@ return [
                 'eval' => 'trim',
                 'max' => 256,
             ],
-            'displayCond' => 'FIELD:speakers:REQ:false'
+            'displayCond' => 'FIELD:speakers:REQ:false',
         ],
         'twitter' => [
             'exclude' => false,
@@ -102,7 +103,7 @@ return [
                 'eval' => 'trim',
                 'max' => 256,
             ],
-            'displayCond' => 'FIELD:speakers:REQ:false'
+            'displayCond' => 'FIELD:speakers:REQ:false',
         ],
         'speakers' => [
             'exclude' => false,
@@ -127,7 +128,7 @@ return [
                     ],
                 ],
             ],
-            'onChange' => 'reload'
+            'onChange' => 'reload',
         ],
         'attendees' => [
             'exclude' => false,
@@ -148,17 +149,18 @@ return [
                 'rows' => 15,
                 'softref' => 'typolink_tag,email[subst],url',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default'
+                'richtextConfiguration' => 'default',
             ],
         ],
         'documents' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-download',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'documents',
-                ['maxitems' => 100],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'minitems' => 0,
+                'maxitems' => 100,
+            ],
         ],
         'type' => [
             'exclude' => false,
@@ -320,13 +322,13 @@ return [
                 social,
                 donotlink,
                 --linebreak--, norecording,
-            '
+            ',
         ],
         'speaker_free' => [
             'showitem' => '
                 speaker,
                 twitter,
-            '
+            ',
         ],
     ],
     'types' => [
@@ -351,7 +353,7 @@ return [
                     room,
                     slot,
                     tags,
-            '
-        ]
+            ',
+        ],
     ],
 ];

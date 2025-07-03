@@ -12,31 +12,17 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\ViewHelpers\Format;
 
 use Evoweb\Sessionplaner\Utility\TimeFormatUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 class TimeViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
-        $this->registerArgument('value', 'int', 'integer to format');
+        $this->registerArgument('value', 'int', 'integer to format', true, 0);
     }
 
-    /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
-     *
-     * @return string
-     */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
-        return TimeFormatUtility::getFormattedTime((int)$renderChildrenClosure());
+    public function render(): string
+    {
+        return TimeFormatUtility::getFormattedTime((int)$this->arguments['value']);
     }
 }

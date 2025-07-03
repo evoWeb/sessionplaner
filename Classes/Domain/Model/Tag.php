@@ -52,12 +52,12 @@ class Tag extends AbstractEntity
         $this->initializeObject();
     }
 
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->sessions = new ObjectStorage();
     }
 
-    public function setLabel(string $label)
+    public function setLabel(string $label): void
     {
         $this->label = $label;
     }
@@ -67,7 +67,7 @@ class Tag extends AbstractEntity
         return $this->label;
     }
 
-    public function setColor(string $color)
+    public function setColor(string $color): void
     {
         $this->color = $color;
     }
@@ -107,11 +107,17 @@ class Tag extends AbstractEntity
         return $this->suggestFormOption;
     }
 
-    public function setSessions(ObjectStorage $sessions)
+    /**
+     * @param ObjectStorage<Session> $sessions
+     */
+    public function setSessions(ObjectStorage $sessions): void
     {
         $this->sessions = $sessions;
     }
 
+    /**
+     * @return ObjectStorage<Session>
+     */
     public function getSessions(): ObjectStorage
     {
         return $this->sessions;
@@ -120,7 +126,7 @@ class Tag extends AbstractEntity
     public function hasActiveSessions(): bool
     {
         foreach ($this->getSessions() as $session) {
-            if ($session->getDay() && $session->getSlot()) {
+            if ($session->getDay() !== null && $session->getSlot() !== null) {
                 return true;
             }
         }

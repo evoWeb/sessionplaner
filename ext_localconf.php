@@ -12,7 +12,6 @@ use Evoweb\Sessionplaner\Controller\SessionplanController;
 use Evoweb\Sessionplaner\Controller\SpeakerController;
 use Evoweb\Sessionplaner\Controller\SuggestController;
 use Evoweb\Sessionplaner\Controller\TagController;
-use Evoweb\Sessionplaner\Updates\SessionPathSegmentUpdate;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
@@ -79,7 +78,3 @@ ExtensionUtility::configurePlugin(
         TagController::class => 'show',
     ]
 );
-
-// Upgrades
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][SessionPathSegmentUpdate::class]
-    = SessionPathSegmentUpdate::class;

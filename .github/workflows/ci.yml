@@ -24,30 +24,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        typo3: ['^11', '^12']
-        php: ['7.4', '8.0', '8.1']
-        mysql: ['5.7', '8.0']
-        exclude:
-          - typo3: '^11'
-            mysql: '8.0'
+        typo3: ['^12', '^13']
+        php: ['8.2', '8.3']
+        include:
           - typo3: '^12'
-            mysql: '5.7'
-          - typo3: '^12'
-            php: '7.4'
-          - typo3: '^12'
-            php: '8.0'
+            php: '8.1'
 
     name: Tests on TYPO3 ${{ matrix.typo3 }} with PHP${{ matrix.php }}
     steps:
       - id: checkout
-        name: Checkout
-        uses: actions/checkout@v3
+        name: Checkout Code
+        uses: actions/checkout@v4
 
       - id: setup_mysql
-        name: Set up MySQL ${{ matrix.mysql }}
+        name: Set up MySQL 8.0
         uses: mirromutth/mysql-action@v1.1
         with:
-          mysql version: ${{ matrix.mysql }}
+          mysql version: 8.0
           mysql root password: 'root'
 
       - id: setup_php
@@ -68,7 +61,7 @@ jobs:
           echo "timestamp=$(date +"%s")" >> $GITHUB_OUTPUT
 
       - name: Cache Composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache-vars.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-${{ steps.composer-cache-vars.outputs.timestamp }}
@@ -94,6 +87,12 @@ jobs:
         if: ${{ always() && steps.install.conclusion == 'success' }}
         run: |
           composer cgl:ci
+
+      - id: phpstan
+        name: PHPStan
+        if: ${{ always() && steps.install.conclusion == 'success' }}
+        run: |
+          composer phpstan -- --error-format=github
 
   TERUpload:
     needs: [ xliff, build ]

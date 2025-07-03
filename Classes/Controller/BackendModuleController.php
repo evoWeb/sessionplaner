@@ -27,6 +27,7 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 class BackendModuleController extends ActionController
 {
@@ -56,15 +57,18 @@ class BackendModuleController extends ActionController
         $this->backendUriBuilder = $backendUriBuilder;
     }
 
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
+        $this->pageRenderer->loadJavaScriptModule('@evoweb/sessionplaner/backend/sessionplaner.js');
         $this->pageRenderer->addCssFile('EXT:sessionplaner/Resources/Public/Stylesheets/backend.css');
-        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Sessionplaner/Sessionplaner');
     }
 
     public function showAction(): ResponseInterface
     {
         $parsedBody = $this->request->getParsedBody();
+        if (!is_array($parsedBody)) {
+            $parsedBody = [];
+        }
         $queryParams = $this->request->getQueryParams();
         $this->id = (int)($parsedBody['id'] ?? $queryParams['id'] ?? 0);
 
@@ -72,35 +76,42 @@ class BackendModuleController extends ActionController
         if ($day !== 0) {
             $this->currentDay = $this->dayRepository->findByUid($day);
         } else {
-            $this->currentDay = $this->dayRepository->findAll()->getFirst();
+            /** @var QueryResultInterface<int, Day> $allDays */
+            $allDays = $this->dayRepository->findAll();
+            $this->currentDay = $allDays->getFirst();
         }
 
         $days = $this->dayRepository->findAll();
-        $this->view->assignMultiple([
+        $view = $this->moduleTemplateFactory->create($this->request);
+        $view->assignMultiple([
             'currentDay' => $this->currentDay,
             'days' => $days,
             'unassignedSessions' => $this->sessionRepository->findUnassignedSessions(),
             'returnUri' => $this->createModuleUri(),
         ]);
 
-        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $moduleTemplate->setTitle('Sessionplaner' . ($this->currentDay !== null ? ' ' . $this->currentDay->getName() : ''));
-        $moduleTemplate->setContent($this->view->render());
+        $title = 'Sessionplaner';
+        if ($this->currentDay !== null) {
+            $title .= ' ' . $this->currentDay->getName();
+        }
+        $view->setTitle($title);
 
         $page = BackendUtility::getRecord('pages', $this->id);
-        if ($page !== null && $page['doktype'] === Constants::STORAGE_FOLDER_TYPE) {
-            $this->registerMenuDays($moduleTemplate->getDocHeaderComponent()->getMenuRegistry());
-            $this->registerButtonNewSession($moduleTemplate->getDocHeaderComponent()->getButtonBar());
-            $this->registerButtonNewSpeaker($moduleTemplate->getDocHeaderComponent()->getButtonBar());
-            $this->registerButtonNewRoom($moduleTemplate->getDocHeaderComponent()->getButtonBar());
-            $this->registerButtonNewDay($moduleTemplate->getDocHeaderComponent()->getButtonBar());
+        if ($page !== null && isset($page['doktype']) && (int)$page['doktype'] === Constants::STORAGE_FOLDER_TYPE) {
+            $docHeaderComponent = $view->getDocHeaderComponent();
+            $this->registerMenuDays($docHeaderComponent->getMenuRegistry());
+            $this->registerButtonNewSession($docHeaderComponent->getButtonBar());
+            $this->registerButtonNewSpeaker($docHeaderComponent->getButtonBar());
+            $this->registerButtonNewRoom($docHeaderComponent->getButtonBar());
+            $this->registerButtonNewDay($docHeaderComponent->getButtonBar());
         }
 
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $view->renderResponse('BackendModule/Show');
     }
 
     protected function registerMenuDays(MenuRegistry $menuRegistry): void
     {
+        /** @var QueryResultInterface<int, Day> $days */
         $days = $this->dayRepository->findAll();
         if ($days->count() > 0) {
             $actionMenu = $menuRegistry->makeMenu();
@@ -110,8 +121,8 @@ class BackendModuleController extends ActionController
                 $title = $day->getDate()->format('d.m.y') . ' - ' . $day->getName();
                 $actionMenu->addMenuItem(
                     $actionMenu->makeMenuItem()
-                        ->setTitle((string) $title)
-                        ->setHref((string) $this->createModuleUri(['day' => (string) $day->getUid()]))
+                        ->setTitle($title)
+                        ->setHref($this->createModuleUri(['day' => (string)$day->getUid()]))
                         ->setActive(($this->currentDay === $day))
                 );
             }
@@ -123,7 +134,7 @@ class BackendModuleController extends ActionController
     {
         $parameters = [
             'edit' => ['tx_sessionplaner_domain_model_session' => [$this->id => 'new']],
-            'returnUrl' => $this->createModuleUri()
+            'returnUrl' => $this->createModuleUri(),
         ];
         $button = $buttonBar->makeLinkButton()
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
@@ -137,7 +148,7 @@ class BackendModuleController extends ActionController
     {
         $parameters = [
             'edit' => ['tx_sessionplaner_domain_model_speaker' => [$this->id => 'new']],
-            'returnUrl' => $this->createModuleUri()
+            'returnUrl' => $this->createModuleUri(),
         ];
         $button = $buttonBar->makeLinkButton()
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
@@ -151,7 +162,7 @@ class BackendModuleController extends ActionController
     {
         $parameters = [
             'edit' => ['tx_sessionplaner_domain_model_room' => [$this->id => 'new']],
-            'returnUrl' => $this->createModuleUri()
+            'returnUrl' => $this->createModuleUri(),
         ];
         $button = $buttonBar->makeLinkButton()
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
@@ -165,7 +176,7 @@ class BackendModuleController extends ActionController
     {
         $parameters = [
             'edit' => ['tx_sessionplaner_domain_model_day' => [$this->id => 'new']],
-            'returnUrl' => $this->createModuleUri()
+            'returnUrl' => $this->createModuleUri(),
         ];
         $button = $buttonBar->makeLinkButton()
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
@@ -180,20 +191,18 @@ class BackendModuleController extends ActionController
         $request = $this->request;
         $route = $request->getAttribute('route');
         if (!$route instanceof Route) {
-            return null;
+            return '';
         }
 
         $baseParams = [
-            'id' => (string) $this->id,
-            'day' => $this->currentDay !== null ? (string) $this->currentDay->getUid() : '',
+            'id' => (string)$this->id,
+            'day' => $this->currentDay !== null ? (string)$this->currentDay->getUid() : '',
         ];
 
         $params = array_replace_recursive($baseParams, $params);
-        $params = array_filter($params, static function ($value) {
-            return $value !== null && trim($value) !== '';
-        });
+        $params = array_filter($params, static fn ($value) => $value !== null && trim((string)$value) !== '');
 
-        return (string) $this->backendUriBuilder->buildUriFromRoute($route->getOption('_identifier'), $params);
+        return (string)$this->backendUriBuilder->buildUriFromRoute($route->getOption('_identifier'), $params);
     }
 
     protected function getLanguageService(): LanguageService

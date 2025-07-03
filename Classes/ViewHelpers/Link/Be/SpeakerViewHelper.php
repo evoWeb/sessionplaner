@@ -26,11 +26,6 @@ class SpeakerViewHelper extends AbstractTagBasedViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-        $this->registerTagAttribute('target', 'string', 'Target of link');
-        $this->registerTagAttribute('itemprop', 'string', 'itemprop attribute');
-        $this->registerTagAttribute('rel', 'string', 'Specifies the relationship between the current document and the linked document');
-
         $this->registerArgument('speaker', Speaker::class, 'The speaker to link to', true);
         $this->registerArgument('returnUri', 'bool', 'return only uri', false, false);
     }

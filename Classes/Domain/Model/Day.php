@@ -38,13 +38,13 @@ class Day extends AbstractEntity
         $this->initializeObject();
     }
 
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->rooms = new ObjectStorage();
         $this->slots = new ObjectStorage();
     }
 
-    public function setDate(\DateTime $date)
+    public function setDate(\DateTime $date): void
     {
         $this->date = $date;
     }
@@ -54,7 +54,7 @@ class Day extends AbstractEntity
         return $this->date;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -64,21 +64,33 @@ class Day extends AbstractEntity
         return $this->name;
     }
 
-    public function setRooms(ObjectStorage $rooms)
+    /**
+     * @param ObjectStorage<Room> $rooms
+     */
+    public function setRooms(ObjectStorage $rooms): void
     {
         $this->rooms = $rooms;
     }
 
+    /**
+     * @return ObjectStorage<Room>
+     */
     public function getRooms(): ObjectStorage
     {
         return $this->rooms;
     }
 
-    public function setSlots(ObjectStorage $slots)
+    /**
+     * @param ObjectStorage<Slot> $slots
+     */
+    public function setSlots(ObjectStorage $slots): void
     {
         $this->slots = $slots;
     }
 
+    /**
+     * @return ObjectStorage<Slot>
+     */
     public function getSlots(): ObjectStorage
     {
         return ObjectStorageUtility::sort($this->slots, 'start');

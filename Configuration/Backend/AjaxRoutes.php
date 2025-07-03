@@ -13,6 +13,6 @@ return [
     'evoweb_sessionplaner_update' => [
         'path' => '/evoweb/sessionplaner/update',
         'methods' => ['POST'],
-        'target' => AjaxController::class . '::updateSessionAction'
-    ]
+        'target' => AjaxController::class . '::updateSessionAction',
+    ],
 ];

@@ -21,6 +21,6 @@ return [
             BackendModuleController::class => [
                 'show',
             ],
-        ]
+        ],
     ],
 ];
