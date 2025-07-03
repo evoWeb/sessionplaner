@@ -22,9 +22,9 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class TagController extends ActionController
 {
-    public function showAction(Tag $tag): ResponseInterface
+    public function showAction(?Tag $tag = null): ResponseInterface
     {
-        if (!$tag->hasActiveSessions()) {
+        if ($tag === null || !$tag->hasActiveSessions()) {
             throw new PageNotFoundException('The requested tag was not found', 1735908029);
         }
 

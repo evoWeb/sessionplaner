@@ -49,14 +49,14 @@ class Room extends AbstractEntity
         $this->initializeObject();
     }
 
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->days = new ObjectStorage();
         $this->slots = new ObjectStorage();
         $this->sessions = new ObjectStorage();
     }
 
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
@@ -66,7 +66,7 @@ class Room extends AbstractEntity
         return $this->type;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -76,7 +76,7 @@ class Room extends AbstractEntity
         return $this->name;
     }
 
-    public function setLogo(FileReference $logo)
+    public function setLogo(FileReference $logo): void
     {
         $this->logo = $logo;
     }
@@ -86,7 +86,7 @@ class Room extends AbstractEntity
         return $this->logo;
     }
 
-    public function setSeats(int $seats)
+    public function setSeats(int $seats): void
     {
         $this->seats = $seats;
     }
@@ -96,31 +96,49 @@ class Room extends AbstractEntity
         return $this->seats;
     }
 
-    public function setDays(ObjectStorage $days)
+    /**
+     * @param ObjectStorage<Day> $days
+     */
+    public function setDays(ObjectStorage $days): void
     {
         $this->days = $days;
     }
 
+    /**
+     * @return ObjectStorage<Day>
+     */
     public function getDays(): ObjectStorage
     {
         return $this->days;
     }
 
-    public function setSlots(ObjectStorage $slots)
+    /**
+     * @param ObjectStorage<Slot> $slots
+     */
+    public function setSlots(ObjectStorage $slots): void
     {
         $this->slots = $slots;
     }
 
+    /**
+     * @return ObjectStorage<Slot>
+     */
     public function getSlots(): ObjectStorage
     {
         return ObjectStorageUtility::sort($this->slots, 'start');
     }
 
-    public function setSessions(ObjectStorage $sessions)
+    /**
+     * @param ObjectStorage<Session> $sessions
+     */
+    public function setSessions(ObjectStorage $sessions): void
     {
         $this->sessions = $sessions;
     }
 
+    /**
+     * @return ObjectStorage<Session>
+     */
     public function getSessions(): ObjectStorage
     {
         return $this->sessions;

@@ -16,24 +16,27 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 class Tca
 {
-    public function slotLabel(array &$parameters)
+    public function slotLabel(array &$parameters): void
     {
         $record = BackendUtility::getRecord($parameters['table'], $parameters['row']['uid']);
         if ($record === null) {
             return;
         }
 
-        $record = BackendUtility::getRecord($parameters['table'], $parameters['row']['uid']);
-        $start = TimeFormatUtility::getFormattedTime((int)$record['start']);
-        $end = TimeFormatUtility::getFormattedTime((int)$record['start'] + ((int)$record['duration'] * 60));
-        $breakInfo = $record['break'] === 1 ? ' - BREAK' : '';
+        $start = isset($record['start']) ? (int)$record['start'] : 0;
+        $duration = isset($record['duration']) ? (int)$record['duration'] : 0;
+        $break = isset($record['break']) && (int)$record['break'] === 1 ? ' - BREAK' : '';
         $dayInfo = '';
 
-        if (!empty($record['day'])) {
-            $day = BackendUtility::getRecord('tx_sessionplaner_domain_model_day', $record['day']);
-            $dayInfo = ' (' . $day['name'] . ')';
+        if (isset($record['day']) && (int)$record['day'] > 0) {
+            $day = BackendUtility::getRecord('tx_sessionplaner_domain_model_day', (int)$record['day']);
+            if (is_array($day) && isset($day['name'])) {
+                $dayInfo = ' (' . $day['name'] . ')';
+            }
         }
 
-        $parameters['title'] = $start . ' - ' . $end . $breakInfo . $dayInfo;
+        $startFormatted = TimeFormatUtility::getFormattedTime($start);
+        $endFormatted = TimeFormatUtility::getFormattedTime($start + ($duration * 60));
+        $parameters['title'] = $startFormatted . ' - ' . $endFormatted . $break . $dayInfo;
     }
 }

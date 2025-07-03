@@ -42,12 +42,12 @@ class Speaker extends AbstractSlugEntity
         $this->initializeObject();
     }
 
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->sessions =  new ObjectStorage();
     }
 
-    public function setHidden(bool $hidden)
+    public function setHidden(bool $hidden): void
     {
         $this->hidden = $hidden;
     }
@@ -57,7 +57,7 @@ class Speaker extends AbstractSlugEntity
         return $this->hidden;
     }
 
-    public function setPathSegment(string $pathSegment)
+    public function setPathSegment(string $pathSegment): void
     {
         $this->pathSegment = $pathSegment;
     }
@@ -67,7 +67,7 @@ class Speaker extends AbstractSlugEntity
         return $this->pathSegment;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -77,17 +77,23 @@ class Speaker extends AbstractSlugEntity
         return $this->name;
     }
 
+    /**
+     * @param ObjectStorage<Session> $sessions
+     */
+    public function setSessions(ObjectStorage $sessions): void
+    {
+        $this->sessions = $sessions;
+    }
+
+    /**
+     * @return ObjectStorage<Session>
+     */
     public function getSessions(): ObjectStorage
     {
         return $this->sessions;
     }
 
-    public function setSessions(ObjectStorage $sessions)
-    {
-        $this->sessions = $sessions;
-    }
-
-    public function setCompany(string $company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
@@ -97,7 +103,7 @@ class Speaker extends AbstractSlugEntity
         return $this->company;
     }
 
-    public function setWebsite(string $website)
+    public function setWebsite(string $website): void
     {
         $this->website = $website;
     }
@@ -107,7 +113,7 @@ class Speaker extends AbstractSlugEntity
         return $this->website;
     }
 
-    public function setTwitter(string $twitter)
+    public function setTwitter(string $twitter): void
     {
         $this->twitter = $twitter;
     }
@@ -117,7 +123,7 @@ class Speaker extends AbstractSlugEntity
         return $this->twitter;
     }
 
-    public function setLinkedin(string $linkedin)
+    public function setLinkedin(string $linkedin): void
     {
         $this->linkedin = $linkedin;
     }
@@ -127,7 +133,7 @@ class Speaker extends AbstractSlugEntity
         return $this->linkedin;
     }
 
-    public function setXing(string $xing)
+    public function setXing(string $xing): void
     {
         $this->xing = $xing;
     }
@@ -137,7 +143,7 @@ class Speaker extends AbstractSlugEntity
         return $this->xing;
     }
 
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -147,7 +153,7 @@ class Speaker extends AbstractSlugEntity
         return $this->email;
     }
 
-    public function setPicture(FileReference $picture)
+    public function setPicture(FileReference $picture): void
     {
         $this->picture = $picture;
     }
@@ -157,7 +163,7 @@ class Speaker extends AbstractSlugEntity
         return $this->picture;
     }
 
-    public function setDetailPage(int $detailPage)
+    public function setDetailPage(int $detailPage): void
     {
         $this->detailPage = $detailPage;
     }
@@ -167,7 +173,7 @@ class Speaker extends AbstractSlugEntity
         return $this->detailPage;
     }
 
-    public function setBio(string $bio)
+    public function setBio(string $bio): void
     {
         $this->bio = $bio;
     }
@@ -180,7 +186,7 @@ class Speaker extends AbstractSlugEntity
     public function hasActiveSessions(): bool
     {
         foreach ($this->getSessions() as $session) {
-            if ($session->getDay() && $session->getSlot()) {
+            if ($session->getDay() !== null && $session->getSlot() !== null) {
                 return true;
             }
         }

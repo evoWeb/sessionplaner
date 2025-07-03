@@ -11,12 +11,16 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Repository;
 
+use Evoweb\Sessionplaner\Domain\Model\Slot;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Slot>
+ */
 class SlotRepository extends Repository
 {
     protected $defaultOrderings = [
-        'start' => QueryInterface::ORDER_ASCENDING
+        'start' => QueryInterface::ORDER_ASCENDING,
     ];
 }

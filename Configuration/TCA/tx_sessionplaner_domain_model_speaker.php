@@ -9,8 +9,6 @@
 
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_speaker');
-
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_speaker',
@@ -22,8 +20,11 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
-            'default' => 'sessionplaner-record-speaker'
+            'default' => 'sessionplaner-record-speaker',
         ],
     ],
     'columns' => [
@@ -52,13 +53,13 @@ return [
                 'generatorOptions' => [
                     'fields' => ['name'],
                     'replacements' => [
-                        '/' => ''
+                        '/' => '',
                     ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => 'uniqueInSite',
-                'default' => ''
-            ]
+                'default' => '',
+            ],
         ],
         'company' => [
             'exclude' => false,
@@ -73,11 +74,12 @@ return [
         'picture' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-picture',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'picture',
-                ['maxitems' => 1],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'minitems' => 0,
+                'maxitems' => 100,
+            ],
         ],
         'website' => [
             'exclude' => false,
@@ -163,8 +165,8 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'internal_type' => 'db',
-                'allowed' => 'pages'
-            ]
+                'allowed' => 'pages',
+            ],
         ],
         'bio' => [
             'exclude' => false,
@@ -175,7 +177,7 @@ return [
                 'rows' => '15',
                 'softref' => 'typolink_tag,email[subst],url',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default'
+                'richtextConfiguration' => 'default',
             ],
         ],
     ],
@@ -195,7 +197,7 @@ return [
                 email,
                 detail_page,
                 sessions,
-            '
-        ]
+            ',
+        ],
     ],
 ];

@@ -1,4 +1,4 @@
-require(['TYPO3/CMS/Backend/Notification'], function (Notification) {
+import Notification from '@typo3/backend/notification.js';
 
 class Sessionplaner {
     constructor() {
@@ -37,14 +37,11 @@ class Sessionplaner {
                 const session = JSON.parse(event.dataTransfer.getData('application/json') ?? '{}');
                 const sessionElement = document.querySelector('[data-session-uid="' + session.uid + '"]');
                 if (sessionElement) {
-                    this.updateSession(
-                        sessionElement,
-                        {
-                            room: event.target.dataset.roomUid ?? null,
-                            slot: event.target.dataset.slotUid ?? null,
-                            day: event.target.dataset.dayUid ?? null,
-                        }
-                    );
+                    this.updateSession(sessionElement, {
+                        room: event.target.dataset.roomUid ?? null,
+                        slot: event.target.dataset.slotUid ?? null,
+                        day: event.target.dataset.dayUid ?? null,
+                    });
                 }
             });
         });
@@ -61,7 +58,7 @@ class Sessionplaner {
             }
         };
         this.postData(endpoint, payload).then((response) => {
-            if(response.status === 'success') {
+            if (response.status === 'success') {
                 element.dataset.sessionRoom = response.data.session.room ?? null;
                 element.dataset.sessionSlot = response.data.session.slot ?? null;
                 element.dataset.sessionDay = response.data.session.day ?? null;
@@ -78,8 +75,10 @@ class Sessionplaner {
         slotSelector += '[data-room-uid="' + element.dataset.sessionRoom + '"]';
         slotSelector += '[data-slot-uid="' + element.dataset.sessionSlot + '"]';
         slotSelector += '[data-slot-uid="' + element.dataset.sessionSlot + '"]';
+
         const slotElement = document.querySelector(slotSelector);
         const stashElement = document.querySelector('[data-sessionplaner-dragtarget="stash"]');
+
         if (slotElement) {
             slotElement.append(element);
         } else if (stashElement) {
@@ -102,5 +101,3 @@ class Sessionplaner {
 }
 
 new Sessionplaner();
-
-});

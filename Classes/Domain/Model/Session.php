@@ -87,7 +87,7 @@ class Session extends AbstractSlugEntity
         $this->initializeObject();
     }
 
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->speakers = new ObjectStorage();
         $this->documents = new ObjectStorage();
@@ -95,9 +95,9 @@ class Session extends AbstractSlugEntity
         $this->links = new ObjectStorage();
     }
 
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden): void
     {
-        $this->hidden = (bool)$hidden;
+        $this->hidden = $hidden;
     }
 
     public function getHidden(): bool
@@ -105,9 +105,9 @@ class Session extends AbstractSlugEntity
         return $this->hidden;
     }
 
-    public function setSocial($social)
+    public function setSocial(bool $social): void
     {
-        $this->social = (bool)$social;
+        $this->social = $social;
     }
 
     public function getSocial(): bool
@@ -115,9 +115,9 @@ class Session extends AbstractSlugEntity
         return $this->social;
     }
 
-    public function setDonotlink($donotlink)
+    public function setDonotlink(bool $donotlink): void
     {
-        $this->donotlink = (bool)$donotlink;
+        $this->donotlink = $donotlink;
     }
 
     public function getDonotlink(): bool
@@ -125,9 +125,9 @@ class Session extends AbstractSlugEntity
         return $this->donotlink;
     }
 
-    public function setSuggestion($suggestion)
+    public function setSuggestion(bool $suggestion): void
     {
-        $this->suggestion = (bool)$suggestion;
+        $this->suggestion = $suggestion;
     }
 
     public function getSuggestion(): bool
@@ -135,7 +135,7 @@ class Session extends AbstractSlugEntity
         return $this->suggestion;
     }
 
-    public function setTopic(string $topic)
+    public function setTopic(string $topic): void
     {
         $this->topic = $topic;
     }
@@ -145,7 +145,7 @@ class Session extends AbstractSlugEntity
         return $this->topic;
     }
 
-    public function setPathSegment(string $pathSegment)
+    public function setPathSegment(string $pathSegment): void
     {
         $this->pathSegment = $pathSegment;
     }
@@ -155,7 +155,7 @@ class Session extends AbstractSlugEntity
         return $this->pathSegment;
     }
 
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -165,27 +165,33 @@ class Session extends AbstractSlugEntity
         return $this->description;
     }
 
-    public function addSpeaker(Speaker $speaker)
+    public function addSpeaker(Speaker $speaker): void
     {
         $this->speakers->attach($speaker);
     }
 
-    public function removeSpeaker(Speaker $speaker)
+    public function removeSpeaker(Speaker $speaker): void
     {
         $this->speakers->detach($speaker);
     }
 
+    /**
+     * @return ObjectStorage<Speaker>
+     */
     public function getSpeakers(): ObjectStorage
     {
         return $this->speakers;
     }
 
-    public function setSpeakers(ObjectStorage $speakers)
+    /**
+     * @param ObjectStorage<Speaker> $speakers
+     */
+    public function setSpeakers(ObjectStorage $speakers): void
     {
         $this->speakers = $speakers;
     }
 
-    public function setSpeaker(string $speaker)
+    public function setSpeaker(string $speaker): void
     {
         $this->speaker = $speaker;
     }
@@ -195,7 +201,7 @@ class Session extends AbstractSlugEntity
         return $this->speaker;
     }
 
-    public function setTwitter(string $twitter)
+    public function setTwitter(string $twitter): void
     {
         $this->twitter = $twitter;
     }
@@ -205,9 +211,9 @@ class Session extends AbstractSlugEntity
         return $this->twitter;
     }
 
-    public function setAttendees($attendees)
+    public function setAttendees(int $attendees): void
     {
-        $this->attendees = (int)$attendees;
+        $this->attendees = $attendees;
     }
 
     public function getAttendees(): int
@@ -215,9 +221,9 @@ class Session extends AbstractSlugEntity
         return $this->attendees;
     }
 
-    public function setType($type)
+    public function setType(int $type): void
     {
-        $this->type = (int)$type;
+        $this->type = $type;
     }
 
     public function getType(): int
@@ -225,9 +231,9 @@ class Session extends AbstractSlugEntity
         return $this->type;
     }
 
-    public function setLevel($level)
+    public function setLevel(int $level): void
     {
-        $this->level = (int)$level;
+        $this->level = $level;
     }
 
     public function getLevel(): int
@@ -235,9 +241,9 @@ class Session extends AbstractSlugEntity
         return $this->level;
     }
 
-    public function setRequesttype($requesttype)
+    public function setRequesttype(int $requesttype): void
     {
-        $this->requesttype = (int)$requesttype;
+        $this->requesttype = $requesttype;
     }
 
     public function getRequesttype(): int
@@ -245,9 +251,9 @@ class Session extends AbstractSlugEntity
         return $this->requesttype;
     }
 
-    public function setNorecording($norecording)
+    public function setNorecording(bool $norecording): void
     {
-        $this->norecording = (bool)$norecording;
+        $this->norecording = $norecording;
     }
 
     public function isNorecording(): bool
@@ -260,7 +266,10 @@ class Session extends AbstractSlugEntity
         return $this->norecording;
     }
 
-    public function setDocuments(ObjectStorage $documents)
+    /**
+     * @param ObjectStorage<FileReference> $documents
+     */
+    public function setDocuments(ObjectStorage $documents): void
     {
         $this->documents = $documents;
     }
@@ -275,53 +284,47 @@ class Session extends AbstractSlugEntity
         return $result;
     }
 
-    public function setDay(?Day $day)
+    public function setDay(?Day $day): void
     {
         $this->day = $day;
     }
 
     public function getDay(): ?Day
     {
-        $day = $this->day;
-        if (!empty($day) && $day !== 0) {
-            return $day;
-        }
-        return null;
+        return $this->day;
     }
 
-    public function setRoom(?Room $room)
+    public function setRoom(?Room $room): void
     {
         $this->room = $room;
     }
 
     public function getRoom(): ?Room
     {
-        $room = $this->room;
-        if (!empty($room) && $room !== 0) {
-            return $room;
-        }
-        return null;
+        return $this->room;
     }
 
-    public function setSlot(?Slot $slot)
+    public function setSlot(?Slot $slot): void
     {
         $this->slot = $slot;
     }
 
     public function getSlot(): ?Slot
     {
-        $slot = $this->slot;
-        if (!empty($slot) && $slot !== 0) {
-            return $slot;
-        }
-        return null;
+        return $this->slot;
     }
 
-    public function setTags(ObjectStorage $tags)
+    /**
+     * @param ObjectStorage<Tag> $tags
+     */
+    public function setTags(ObjectStorage $tags): void
     {
         $this->tags = $tags;
     }
 
+    /**
+     * @return ObjectStorage<Tag>
+     */
     public function getTags(): ObjectStorage
     {
         return $this->tags;
@@ -350,12 +353,18 @@ class Session extends AbstractSlugEntity
         return $data;
     }
 
+    /**
+     * @return ObjectStorage<Link>
+     */
     public function getLinks(): ObjectStorage
     {
         return $this->links;
     }
 
-    public function setLinks(ObjectStorage $links)
+    /**
+     * @param ObjectStorage<Link> $links
+     */
+    public function setLinks(ObjectStorage $links): void
     {
         $this->links = $links;
     }

@@ -16,6 +16,7 @@ use Evoweb\Sessionplaner\Domain\Repository\TagRepository;
 use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
 use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -48,7 +49,7 @@ class SuggestFormFactory extends AbstractFormFactory
         $this->tagRepository = $tagRepository;
     }
 
-    public function build(array $configuration, string $prototypeName = null): FormDefinition
+    public function build(array $configuration, ?string $prototypeName = null, ?ServerRequestInterface $request = null): FormDefinition
     {
         $prototypeName = 'standard';
 
@@ -89,7 +90,7 @@ class SuggestFormFactory extends AbstractFormFactory
         $emailField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
         $emailField->addValidator(GeneralUtility::makeInstance(EmailAddressValidator::class));
 
-        if ($settings['suggest']['fields']['twitter']['enable']) {
+        if (isset($settings['suggest']['fields']['twitter']['enable']) && (bool)$settings['suggest']['fields']['twitter']['enable'] === true) {
             /** @var GenericFormElement $twitterField */
             $twitterField = $personalInformation->createElement('twitter', 'Text');
             $twitterField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['twitter']['label']));
@@ -104,7 +105,7 @@ class SuggestFormFactory extends AbstractFormFactory
         $sessionInformation = $page->createElement('sessioninformation', 'Fieldset');
         $sessionInformation->setLabel($this->getLocalizedLabel($settings['suggest']['form']['sessioninformation']));
 
-        if ($settings['suggest']['fields']['requesttype']['enable']) {
+        if (isset($settings['suggest']['fields']['requesttype']['enable']) && (bool)$settings['suggest']['fields']['requesttype']['enable'] === true) {
             /** @var GenericFormElement $requesttypeField */
             $requesttypeField = $sessionInformation->createElement('requesttype', 'SingleSelect');
             $requesttypeField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['label']));
@@ -118,14 +119,14 @@ class SuggestFormFactory extends AbstractFormFactory
                 $requesttypeFieldOptions[$requesttypeFieldOptionKey] = LocalizationUtility::translate($requesttypeFieldOptionValue);
             }
             $prependOptionLabel = ' ';
-            if (!empty($settings['suggest']['fields']['requesttype']['prependOptionLabel'])) {
+            if (isset($settings['suggest']['fields']['requesttype']['prependOptionLabel']) && $settings['suggest']['fields']['requesttype']['prependOptionLabel'] !== '') {
                 $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['prependOptionLabel']);
             }
             $requesttypeField->setProperty('prependOptionLabel', $prependOptionLabel);
             $requesttypeField->setProperty('options', $requesttypeFieldOptions);
         }
 
-        if ($settings['suggest']['fields']['type']['enable']) {
+        if (isset($settings['suggest']['fields']['type']['enable']) && (bool)$settings['suggest']['fields']['type']['enable'] === true) {
             /** @var GenericFormElement $typeField */
             $typeField = $sessionInformation->createElement('type', 'SingleSelect');
             $typeField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['type']['label']));
@@ -139,16 +140,16 @@ class SuggestFormFactory extends AbstractFormFactory
                 $typeFieldOptions[$typeFieldOptionKey] = LocalizationUtility::translate($typeFieldOptionValue);
             }
             $prependOptionLabel = ' ';
-            if (!empty($settings['suggest']['fields']['type']['prependOptionLabel'])) {
+            if (isset($settings['suggest']['fields']['type']['prependOptionLabel']) && $settings['suggest']['fields']['type']['prependOptionLabel'] !== '') {
                 $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['type']['prependOptionLabel']);
             }
             $typeField->setProperty('prependOptionLabel', $prependOptionLabel);
             $typeField->setProperty('options', $typeFieldOptions);
         }
 
-        if ($settings['suggest']['fields']['tag']['enable']) {
+        if (isset($settings['suggest']['fields']['tag']['enable']) && (bool)$settings['suggest']['fields']['tag']['enable'] === true) {
             $tags = $this->tagRepository->findBy(['suggestFormOption' => true]);
-            if ($tags->current()) {
+            if ($tags->current() !== false && $tags->current() !== null) {
                 /** @var GenericFormElement $tagField */
                 $tagField = $sessionInformation->createElement('tag', 'SingleSelect');
                 $tagField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag']['label']));
@@ -162,7 +163,7 @@ class SuggestFormFactory extends AbstractFormFactory
                     $tagFieldOptions[$tag->getUid()] = $tag->getLabel();
                 }
                 $prependOptionLabel = ' ';
-                if (!empty($settings['suggest']['fields']['tag']['prependOptionLabel'])) {
+                if (isset($settings['suggest']['fields']['tag']['prependOptionLabel']) && $settings['suggest']['fields']['tag']['prependOptionLabel'] !== '') {
                     $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['tag']['prependOptionLabel']);
                 }
                 $tagField->setProperty('prependOptionLabel', $prependOptionLabel);
@@ -196,7 +197,7 @@ class SuggestFormFactory extends AbstractFormFactory
         }
         $descriptionField->addValidator($stringLengthValidator);
 
-        if ($settings['suggest']['fields']['length']['enable']) {
+        if (isset($settings['suggest']['fields']['length']['enable']) && (bool)$settings['suggest']['fields']['length']['enable'] === true) {
             /** @var GenericFormElement $lengthField */
             $lengthField = $sessionInformation->createElement('estimatedlength', 'SingleSelect');
             $lengthField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['length']['label']));
@@ -206,11 +207,11 @@ class SuggestFormFactory extends AbstractFormFactory
             );
             $lengthField->setProperty('options', [
                 '45 Minutes' => '45 Minutes',
-                '90 Minutes' => '90 Minutes'
+                '90 Minutes' => '90 Minutes',
             ]);
         }
 
-        if ($settings['suggest']['fields']['level']['enable']) {
+        if (isset($settings['suggest']['fields']['level']['enable']) && (bool)$settings['suggest']['fields']['level']['enable'] === true) {
             /** @var GenericFormElement $levelField */
             $levelField = $sessionInformation->createElement('level', 'SingleSelect');
             $levelField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['level']['label']));
@@ -224,14 +225,15 @@ class SuggestFormFactory extends AbstractFormFactory
                 $levelFieldOptions[$levelFieldOptionKey] = LocalizationUtility::translate($levelFieldOptionValue);
             }
             $prependOptionLabel = ' ';
-            if (!empty($settings['suggest']['fields']['level']['prependOptionLabel'])) {
+            if (isset($settings['suggest']['fields']['level']['prependOptionLabel']) && $settings['suggest']['fields']['level']['prependOptionLabel'] !== '') {
                 $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['level']['prependOptionLabel']);
             }
             $levelField->setProperty('prependOptionLabel', $prependOptionLabel);
             $levelField->setProperty('options', $levelFieldOptions);
         }
 
-        if ($settings['suggest']['fields']['norecording']['enable']) {
+        if (isset($settings['suggest']['fields']['norecording']['enable']) && (bool)$settings['suggest']['fields']['norecording']['enable'] === true) {
+            /** @var GenericFormElement $noRecordingField */
             $noRecordingField = $sessionInformation->createElement('norecording', 'Checkbox');
             $noRecordingField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['norecording']['label']));
             $noRecordingField->setProperty(
@@ -241,6 +243,12 @@ class SuggestFormFactory extends AbstractFormFactory
         }
 
         $explanationText = $page->createElement('headline', 'StaticText');
+        if (!$explanationText instanceof GenericFormElement) {
+            throw new \RuntimeException(sprintf(
+                'Expected instance of GenericFormElement for headline, got %s',
+                get_class($explanationText)
+            ));
+        }
         $explanationText->setProperty(
             'text',
             $this->getLocalizedLabel($settings['suggest']['form']['requiredField'])
@@ -252,32 +260,38 @@ class SuggestFormFactory extends AbstractFormFactory
         $form->addFinisher($commentFinisher);
 
         if (
-            $settings['suggest']['notification']['enable'] &&
-            !empty($settings['suggest']['notification']['subject']) &&
-            !empty($settings['suggest']['notification']['recipientAddress']) &&
-            !empty($settings['suggest']['notification']['recipientName']) &&
-            !empty($settings['suggest']['notification']['senderAddress']) &&
-            !empty($settings['suggest']['notification']['senderName'])
+            isset(
+                $settings['suggest']['notification']['enable'],
+                $settings['suggest']['notification']['subject'],
+                $settings['suggest']['notification']['recipientAddress'],
+                $settings['suggest']['notification']['recipientName'],
+                $settings['suggest']['notification']['senderAddress'],
+                $settings['suggest']['notification']['senderName']
+            )
+            && (bool)$settings['suggest']['notification']['enable'] === true
+            && $settings['suggest']['notification']['subject'] !== ''
+            && $settings['suggest']['notification']['recipientAddress'] !== ''
+            && $settings['suggest']['notification']['recipientName'] !== ''
+            && $settings['suggest']['notification']['senderAddress'] !== ''
+            && $settings['suggest']['notification']['senderName'] !== ''
         ) {
             $form->createFinisher('EmailToReceiver', [
                 'subject' => $settings['suggest']['notification']['subject'] ?? '',
-                'recipients' => $settings['suggest']['notification']['recipientAddress']
-                    ? [
-                        $settings['suggest']['notification']['recipientAddress'] => $settings['suggest']['notification']['recipientName'],
-                    ]
-                    : [],
+                'recipients' => [
+                    $settings['suggest']['notification']['recipientAddress'] => $settings['suggest']['notification']['recipientName'],
+                ],
                 'senderAddress' => $settings['suggest']['notification']['senderAddress'] ?? '',
                 'senderName' => $settings['suggest']['notification']['senderName'] ?? '',
                 'carbonCopyAddress' => $settings['suggest']['notification']['carbonCopyAddress'] ?? '',
                 'blindCarbonCopyAddress' => $settings['suggest']['notification']['blindCarbonCopyAddress'] ?? '',
                 'replyToRecipients' => [
-                    '{email}'=> '{fullname}',
+                    '{email}' => '{fullname}',
                 ],
-                'format' => 'html'
+                'format' => 'html',
             ]);
         }
 
-        if ($settings['suggest']['confirmation']['pageUid']) {
+        if (isset($settings['suggest']['confirmation']['pageUid']) && $settings['suggest']['confirmation']['pageUid'] !== '') {
             $form->createFinisher('Redirect', [
                 'pageUid' => (int)$settings['suggest']['confirmation']['pageUid'],
             ]);
@@ -285,7 +299,7 @@ class SuggestFormFactory extends AbstractFormFactory
             $message = $settings['suggest']['confirmation']['message'] ??
                 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
             $form->createFinisher('Confirmation', [
-                'message' => LocalizationUtility::translate($message),
+                'message' => LocalizationUtility::translate($message) ?? '',
             ]);
         }
 
@@ -301,7 +315,7 @@ class SuggestFormFactory extends AbstractFormFactory
     protected function getLocalizedLabel(string $label): string
     {
         if (strncmp($label, 'LLL:', 4) === 0) {
-            $label = LocalizationUtility::translate($label);
+            return LocalizationUtility::translate($label) ?? '';
         }
         return $label;
     }

@@ -11,12 +11,16 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Repository;
 
+use Evoweb\Sessionplaner\Domain\Model\Tag;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Tag>
+ */
 class TagRepository extends Repository
 {
     protected $defaultOrderings = [
-        'label' => QueryInterface::ORDER_ASCENDING
+        'label' => QueryInterface::ORDER_ASCENDING,
     ];
 }

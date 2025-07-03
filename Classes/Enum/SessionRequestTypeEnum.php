@@ -55,7 +55,7 @@ class SessionRequestTypeEnum
     {
         return [
             self::OPTION_OFFER,
-            self::OPTION_WISH
+            self::OPTION_WISH,
         ];
     }
 }

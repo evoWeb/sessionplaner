@@ -14,25 +14,34 @@ namespace Evoweb\Sessionplaner\Utility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
+/**
+ * @template T of object
+ */
 class ObjectStorageUtility
 {
-    /**
-     * @const string
-     */
     public const SORT_ASCENDING = 'ASC';
-
-    /**
-     * @const string
-     */
     public const SORT_DESCENDING = 'DESC';
 
+    /**
+     * @template TEntity of object
+     * @param ObjectStorage<TEntity> $objectStorage
+     * @param string $property
+     * @param string $order
+     * @return ObjectStorage<TEntity>
+     */
     public static function sort(
         ObjectStorage $objectStorage,
         string $property,
         string $order = self::SORT_ASCENDING
     ): ObjectStorage {
+        /** @var array<string, TEntity> $inventory */
         $inventory = [];
+
         foreach ($objectStorage as $item) {
+            if (!method_exists($item, '_getProperty')) {
+                continue;
+            }
+
             $key = $item->_getProperty($property) . '-' . $item->_getProperty('uid');
             $inventory[$key] = $item;
         }
@@ -43,7 +52,7 @@ class ObjectStorageUtility
             krsort($inventory);
         }
 
-        /** @var ObjectStorage $storage */
+        /** @var ObjectStorage<TEntity> $storage */
         $storage = GeneralUtility::makeInstance(ObjectStorage::class);
         foreach ($inventory as $item) {
             $storage->attach($item);
