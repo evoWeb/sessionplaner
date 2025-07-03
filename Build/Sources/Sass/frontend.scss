@@ -4,13 +4,9 @@
 @import 'variables';
 
 //
-// Mixins
-//
-@import 'mixins/color';
-
-//
 // Imports
 //
+@import 'frontend/general';
 @import 'frontend/day';
 @import 'frontend/tag';
 @import 'frontend/track';

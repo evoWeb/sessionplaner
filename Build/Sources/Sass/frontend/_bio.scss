@@ -1,24 +1,16 @@
-$session-bio-card-size-sm: 200px;
-$session-bio-card-size-md: 250px;
-$session-bio-card-size-lg: 275px;
-$session-bio-card-size-xl: 300px;
-
-
 //
 // Bio
 //
 .sessionplaner-bio {
-    margin-left: auto;
-    margin-right: auto;
     max-width: 900px;
-    display: flex;
-    flex-wrap: wrap;
-}
-.sessionplaner-bio-card {
     margin-left: auto;
     margin-right: auto;
-    .sessionplaner-speaker {
-        height: auto;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 3rem;
+
+    @container (max-width: 768px) {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -34,26 +26,17 @@ $session-bio-card-size-xl: 300px;
     }
 }
 .sessionplaner-bio-name {
-    font-size: 2rem;
     margin-bottom: 0;
 }
-
 
 //
 // Body
 //
 .sessionplaner-bio-body {
-    h2 {
-        font-size: 1.5rem;
-        margin-bottom: .25rem;
-    }
-    h3 {
-        font-size: 1.25rem;
-        margin-bottom: .25rem;
-    }
-    h4 {
-        font-size: 1.15rem;
-        margin-bottom: .25rem;
+    align-self: start;
+
+    @container (max-width: 768px) {
+        order: 2;
     }
 
     > * + * {
@@ -69,50 +52,5 @@ $session-bio-card-size-xl: 300px;
     ul {
         list-style: none;
         padding-left: 0;
-    }
-}
-
-
-//
-// Variants
-//
-.sessionplaner-bio-card {
-    margin-bottom: 2rem;
-}
-@media only screen and (min-width: $session-breakpoint-sm) {
-    .sessionplaner-bio-card {
-        margin-bottom: 0;
-        width: $session-bio-card-size-sm;
-    }
-    .sessionplaner-bio-body {
-        padding-left: 3rem;
-        width: calc(100% - #{$session-bio-card-size-sm});
-    }
-}
-@media only screen and (min-width: $session-breakpoint-md) {
-    .sessionplaner-bio-card {
-        width: $session-bio-card-size-md;
-    }
-    .sessionplaner-bio-body {
-        padding-left: 3rem;
-        width: calc(100% - #{$session-bio-card-size-md});
-    }
-}
-@media only screen and (min-width: $session-breakpoint-lg) {
-    .sessionplaner-bio-card {
-        width: $session-bio-card-size-lg;
-    }
-    .sessionplaner-bio-body {
-        padding-left: 3rem;
-        width: calc(100% - #{$session-bio-card-size-lg});
-    }
-}
-@media only screen and (min-width: $session-breakpoint-xl) {
-    .sessionplaner-bio-card {
-        width: $session-bio-card-size-xl;
-    }
-    .sessionplaner-bio-body {
-        padding-left: 3rem;
-        width: calc(100% - #{$session-bio-card-size-xl});
     }
 }
