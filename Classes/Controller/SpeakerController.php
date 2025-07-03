@@ -20,8 +20,8 @@ use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class SpeakerController extends ActionController
 {
@@ -32,7 +32,7 @@ class SpeakerController extends ActionController
         $this->speakerRepository = $speakerRepository;
     }
 
-    protected function initializeAction()
+    protected function initializeAction(): void
     {
         if (!isset($this->settings['speakerSinglePid']) || $this->settings['speakerSinglePid'] === '') {
             $this->settings['speakerSinglePid'] = (string) ($this->getTypoScriptFrontendController()->id ?? '');

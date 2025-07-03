@@ -15,6 +15,16 @@ parameters:
 
 		-
 			message: """
+				#^Return type of method Evoweb\\\\Sessionplaner\\\\Controller\\\\SpeakerController\\:\\:getTypoScriptFrontendController\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
+				since TYPO3 v13, will vanish during v14 development\\. There are some
+				            remaining internal usages that can be adapted without further \\.rst
+				            files\\. The class should vanish together with \\$GLOBALS\\['TSFE'\\] in v14\\.$#
+			"""
+			count: 1
+			path: ../Classes/Controller/SpeakerController.php
+
+		-
+			message: """
 				#^Return type of method Evoweb\\\\Sessionplaner\\\\Domain\\\\Factory\\\\SuggestFormFactory\\:\\:getTypoScriptFrontendController\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
 				since TYPO3 v13, will vanish during v14 development\\. There are some
 				            remaining internal usages that can be adapted without further \\.rst
