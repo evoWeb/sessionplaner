@@ -5,7 +5,6 @@
         </f:link.page>
     </f:then>
     <f:else>
-        <f:variable name="detailPid" value="" />
         <f:if condition="{settings.speakerSinglePid}">
             <f:then>
                 <f:link.action pageUid="{settings.speakerSinglePid}" pluginName="Speaker" controller="Speaker" action="show" arguments="{speaker: speaker}" title="{speaker.name}">

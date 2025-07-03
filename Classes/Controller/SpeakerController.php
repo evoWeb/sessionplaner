@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class SpeakerController extends ActionController
 {
@@ -28,6 +29,13 @@ class SpeakerController extends ActionController
     public function __construct(SpeakerRepository $speakerRepository)
     {
         $this->speakerRepository = $speakerRepository;
+    }
+
+    protected function initializeAction()
+    {
+        if (!isset($this->settings['speakerSinglePid']) || $this->settings['speakerSinglePid'] === '') {
+            $this->settings['speakerSinglePid'] = (string) ($this->getTypoScriptFrontendController()?->id ?? '');
+        }
     }
 
     public function listAction(): ResponseInterface
@@ -64,5 +72,10 @@ class SpeakerController extends ActionController
         $this->view->assign('speaker', $speaker);
 
         return new HtmlResponse($this->view->render());
+    }
+
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 }

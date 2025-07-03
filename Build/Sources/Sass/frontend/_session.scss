@@ -15,6 +15,7 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     --session-sessioninfo-border-radius: #{$session-sessioninfo-border-radius};
     --session-sessioninfo-padding: #{$session-sessioninfo-padding};
     --session-sessioninfo-shadow: #{$session-sessioninfo-shadow};
+    --session-sessioninfo-spacing: 1.5rem;
 }
 
 //
@@ -23,12 +24,13 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
 .sessionplaner-sessionbox {
     display: flex;
     flex-direction: column;
+    gap: .75rem;
     text-wrap: balance;
 }
 .sessionplaner-sessionbox-topic {
+    flex-grow: 1;
     font-weight: bold;
     line-height: 1.25em;
-    margin-bottom: .25rem;
     a {
         color: inherit !important;
         text-decoration: none;
@@ -43,10 +45,12 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
         opacity: .25;
     }
 }
-.sessionplaner-sessionbox-tags {
-    margin-top: auto;
-    padding-top: .5rem;
+.sessionplaner-sessioninfo-speakers-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem 1rem;
 }
+
 
 //
 // Info
@@ -55,6 +59,7 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     text-wrap: balance;
     position: relative;
     display: flex;
+    gap: .5rem;
     flex-direction: column;
     word-wrap: break-word;
     padding: var(--session-sessioninfo-padding);
@@ -69,7 +74,6 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     font-size: 1.25rem;
     font-weight: bold;
     line-height: 1.25em;
-    margin-bottom: .25rem;
     a {
         color: inherit !important;
         text-decoration: none;
@@ -87,9 +91,6 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
         margin-bottom: 0;
     }
 }
-.sesionplaner-sessioninfo-info {
-    margin-top: 1rem;
-}
 
 //
 // Detail
@@ -102,38 +103,44 @@ $session-sessioninfo-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     grid-template-columns: 240px 1fr;
     gap: 3rem;
 
-    @media (max-width: 768px) {
+    @container (max-width: 768px) {
         grid-template-columns: 1fr;
     }
 
     .sessionplaner-sessiondetail-speakers {
         align-self: start;
 
-        @media (max-width: 768px) {
+        @container (max-width: 768px) {
             order: 2;
         }
 
         .sessionplaner-sessiondetail-speakers-list {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-start;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1rem;
+        }
+    }
 
-            .sessionplaner-speaker {
-                max-width: 240px;
-                margin: unset;
+    .sessionplaner-sessiondetail-content {
+        display: grid;
+        align-content: baseline;
+        gap: var(--session-sessioninfo-spacing);
+
+        .sessionplaner-sessiondetail-title {
+            *:last-child {
+                margin-bottom: 0;
             }
         }
     }
-    .sessionplaner-sessiondetail-content {
-        .sessionplaner-sessiondetail-title {
-            margin-bottom: 3rem;
+
+    .sessionplaner-sessiondetail-main {
+        display: grid;
+        gap: var(--session-sessioninfo-spacing);
+    }
+
+    .sessionplaner-sessiondetail-description {
+        *:last-child {
+            margin-bottom: 0;
         }
     }
-}
-.sessionplaner-sessiondetail-links,
-.sessionplaner-sessiondetail-documents,
-.sessionplaner-sessiondetail-backlink {
-    margin-top: 2rem;
 }

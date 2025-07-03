@@ -1,12 +1,17 @@
 //
 // Social
 //
+.sessionplaner-connect {
+    display: flex;
+    gap: .5rem;
+}
+
 .sessionplaner-connect-icon {
     display: inline-block;
     height: 1.25rem;
     width: 1.25rem;
     vertical-align: text-bottom;
-    margin-right: .5rem;
+
     svg {
         display: block;
         height: 100%;

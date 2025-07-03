@@ -9,7 +9,9 @@ $session-tag-border-radius: 4px !default;
 // Tag
 //
 .sessionplaner-tag-list {
-    margin: -2px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
 }
 .sessionplaner-tag {
     --session-tag-bg: #{$session-tag-bg};
@@ -20,10 +22,9 @@ $session-tag-border-radius: 4px !default;
     font-size: .75rem;
     display: inline-block;
     padding: 0.25em 0.5em;
-    color: var(--session-tag-bg);
+    color: var(--session-tag-color);
     background-color: var(--session-tag-bg);
     border-radius: var(--session-tag-border-radius);
-    margin: 2px;
 }
 .sessionplaner-tag-title {
     --session-tag-title-decoration-color: inherit;

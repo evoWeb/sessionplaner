@@ -20,6 +20,11 @@
                 </f:if>
                 <f:render partial="Speaker/Connect" arguments="{settings: settings, speaker: speaker}" />
                 <f:render partial="General/Sessions" arguments="{sessions: speaker.sessions, sessionSinglePid: settings.sessionSinglePid}"/>
+                <f:if condition="{settings.speakerSinglePid}">
+                    <div class="sessionplaner-bio-backlink">
+                        <f:link.page pageUid="{settings.speakerSinglePid}">{f:translate(id: 'back-to-overview')}</f:link.page>
+                    </div>
+                </f:if>
             </div>
         </article>
     </f:if>
