@@ -2,11 +2,13 @@
 // Tracks
 //
 .sessionplaner-track {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: .25rem;
     height: 100%;
+
     .sessionplaner-slot-track-break & {
         justify-content: center;
+        align-items: center;
     }
 }
 .sessionplaner-track-header {
@@ -14,9 +16,10 @@
     font-weight: bold;
 }
 .sessionplaner-track-description {
-    flex-grow: 1;
-    align-items: center;
-    display: flex;
+    text-align: center;
+    > * {
+        margin-bottom: .25rem;
+    }
     > *:first-child {
         margin-top: 0;
     }
@@ -26,8 +29,8 @@
 }
 .sessionplaner-track-sessions {
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: .25rem;
 
     .sessionplaner-sessionbox {
         flex-grow: 1;
