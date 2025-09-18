@@ -112,9 +112,6 @@ return [
                         'invertStateDisplay' => false,
                     ],
                 ],
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true,
-                ],
             ],
         ],
         'sessions' => [
