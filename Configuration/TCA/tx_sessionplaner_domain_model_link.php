@@ -17,6 +17,10 @@ return [
         'crdate' => 'crdate',
         'sortby' => 'sorting',
         'delete' => 'deleted',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -32,6 +36,8 @@ return [
         'link_text' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_link-linktext',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'input',
                 'max' => 255,
@@ -41,6 +47,8 @@ return [
         'link' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_link-link',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',
@@ -48,14 +56,12 @@ return [
             ],
         ],
     ],
-    'palettes' => [
-    ],
     'types' => [
         '0' => [
             'showitem' => '
-                --div--;General,
-                    link_text,
-                    link,
+                hidden,
+                link_text,
+                link,
             ',
         ],
     ],

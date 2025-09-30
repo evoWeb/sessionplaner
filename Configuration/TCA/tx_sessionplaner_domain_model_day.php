@@ -19,6 +19,10 @@ return [
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY date',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -43,6 +47,8 @@ return [
         'date' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
@@ -53,11 +59,13 @@ return [
         'rooms' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-rooms',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID### AND tx_sessionplaner_domain_model_room.sys_language_uid IN (-1,0)',
                 'MM' => 'tx_sessionplaner_day_room_mm',
                 'size' => 6,
                 'minitems' => 0,
@@ -68,6 +76,8 @@ return [
         'slots' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-slots',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
@@ -82,10 +92,11 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-            name,
-            date,
-            rooms,
-            slots
+                hidden,
+                name,
+                date,
+                rooms,
+                slots
             ',
         ],
     ],

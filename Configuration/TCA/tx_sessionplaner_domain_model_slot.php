@@ -14,11 +14,15 @@ return [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_slot',
         'label' => 'start',
         'label_userFunc' => \Evoweb\Sessionplaner\Userfuncs\Tca::class . '->slotLabel',
-        'hideTable' => true,
+        'hideTable' => false, // @TEMP DISABLED
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY start',
         'delete' => 'deleted',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -33,11 +37,13 @@ return [
         'day' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-day',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid=###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid=###CURRENT_PID### AND (tx_sessionplaner_domain_model_day.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_day.sys_language_uid = ###REC_FIELD_sys_language_uid###)',
                 'maxitems' => 1,
                 'default' => 0,
             ],
@@ -45,6 +51,8 @@ return [
         'start' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-start',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
@@ -54,6 +62,8 @@ return [
         'duration' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-duration',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -65,6 +75,8 @@ return [
         'break' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-break',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'check',
             ],
@@ -85,11 +97,13 @@ return [
         'rooms' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-rooms',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID### AND (tx_sessionplaner_domain_model_room.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_room.sys_language_uid = ###REC_FIELD_sys_language_uid###)',
                 'MM' => 'tx_sessionplaner_room_slot_mm',
                 'MM_opposite_field' => 'slots',
                 'size' => 10,
@@ -102,6 +116,7 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
+                hidden,
                 day,
                 start,
                 duration,
