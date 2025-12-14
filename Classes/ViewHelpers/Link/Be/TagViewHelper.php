@@ -45,7 +45,7 @@ class TagViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $params = [
-            'edit' => ['tx_sessionplaner_domain_model_tag' => [$tag->getUid() => 'edit']],
+            'edit' => ['tx_sessionplaner_domain_model_tag' => [(int)$tag->getUid() => 'edit']],
             'returnUrl' => $request->getAttribute('normalizedParams')->getRequestUri(),
         ];
         $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', $params);

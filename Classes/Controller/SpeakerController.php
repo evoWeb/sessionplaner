@@ -35,6 +35,7 @@ class SpeakerController extends ActionController
     protected function initializeAction(): void
     {
         if (!isset($this->settings['speakerSinglePid']) || $this->settings['speakerSinglePid'] === '') {
+            // @phpstan-ignore property.deprecatedClass
             $this->settings['speakerSinglePid'] = (string) ($this->getTypoScriptFrontendController()->id ?? '');
         }
     }
@@ -83,6 +84,7 @@ class SpeakerController extends ActionController
         return new HtmlResponse($this->view->render());
     }
 
+    // @phpstan-ignore return.deprecatedClass
     protected function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
