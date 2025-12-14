@@ -1,3 +1,27 @@
+# 5.2.0
+
+## FEATURE
+
+- 1df2ffb [FEATURE] Add two-column layout, speaker mini view and refactored speaker links (#44)
+
+## TASK
+
+- 8bdf600 [TASK] Add host_db_port configuration to port mount
+- 8e1ccfc [TASK] Add initial support for v13 (#45)
+
+## BUGFIX
+
+- 7c471df [BUGFIX] Remove invalid TCA option
+- 9a6a30c [BUGFIX] Remove unwanted characters from template
+- bb1998f [BUGFIX] Correct display of speaker image in bio view
+
+## Contributors
+
+- Alexander Hahn
+- Benjamin Kott
+- Marvin Buchmann
+- Sebastian Fischer
+
 # 5.1.0
 
 ## FEATURE

@@ -9,8 +9,6 @@
 
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_tag');
-
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_tag',
@@ -22,8 +20,11 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
-            'default' => 'sessionplaner-record-tag'
+            'default' => 'sessionplaner-record-tag',
         ],
     ],
     'columns' => [
@@ -80,7 +81,7 @@ return [
                 'rows' => '15',
                 'softref' => 'typolink_tag,email[subst],url',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default'
+                'richtextConfiguration' => 'default',
             ],
         ],
         'path_segment' => [
@@ -91,13 +92,13 @@ return [
                 'generatorOptions' => [
                     'fields' => ['label'],
                     'replacements' => [
-                        '/' => ''
+                        '/' => '',
                     ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => 'uniqueInSite',
-                'default' => ''
-            ]
+                'default' => '',
+            ],
         ],
         'suggest_form_option' => [
             'exclude' => false,
@@ -110,9 +111,6 @@ return [
                         'label' => '',
                         'invertStateDisplay' => false,
                     ],
-                ],
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true,
                 ],
             ],
         ],
@@ -139,7 +137,7 @@ return [
                 description,
                 suggest_form_option,
                 sessions
-            '
-        ]
+            ',
+        ],
     ],
 ];

@@ -1,52 +1,47 @@
+@use "sass:map";
+
 //
 // Sessionplaner
 //
 .sessionplaner {
-    --sessionplaner-grid-gap: 1rem;
-    --sessionplaner-grid-spacing: 1px;
-    --sessionplaner-grid-padding-y: .5rem;
-    --sessionplaner-grid-padding-x: .5rem;
+    --sessionplaner-grid-gap: 1.5rem;
+    --sessionplaner-grid-spacing: 2px;
+    --sessionplaner-grid-padding-y: .75rem;
+    --sessionplaner-grid-padding-x: .75rem;
+    --sessionplaner-grid-border-radius: .5rem;
+    --sessionplaner-grid-col-min-height: 7.125rem;
     --sessionplaner-grid-col-color: inherit;
     --sessionplaner-grid-col-bg: transparent;
-    --sessionplaner-grid-col-min-height: 7.125rem;
+    --sessionplaner-grid-col-time-color: inherit;
+    --sessionplaner-grid-col-time-bg: var(--typo3-surface-container-high, #fafafa);
+    --sessionplaner-grid-col-slot-color: inherit;
+    --sessionplaner-grid-col-slot-bg: var(--typo3-surface-container-base, #f2f2f2);
+    --sessionplaner-grid-col-main-color: var(--typo3-surface-primary-text, #ffffff);
+    --sessionplaner-grid-col-main-bg: var(--typo3-surface-primary, #313131);
+    --sessionplaner-grid-col-side-color: var(--typo3-surface-secondary-text, #ffffff);
+    --sessionplaner-grid-col-side-bg: var(--typo3-surface-secondary, #515151);
+    --sessionplaner-grid-col-break-color: var(--typo3-surface-container-warning-text, inherit);
+    --sessionplaner-grid-col-break-bg: var(--typo3-surface-container-warning, #faead1);
 
-    --sessionplaner-color-default: #313131;
-    --sessionplaner-color-active: #3280bf;
-    --sessionplaner-color-notice: #fafafa;
-    --sessionplaner-color-success: #c5df93;
-
-    --sessionplaner-sessionbox-spacing: .5rem;
-    --sessionplaner-sessionbox-color: var(--sessionplaner-color-default);
-    --sessionplaner-sessionbox-padding-y: .75rem;
-    --sessionplaner-sessionbox-padding-x: .75rem;
-    --sessionplaner-sessionbox-bg: #fff;
-    --sessionplaner-sessionbox-border-style: solid;
-    --sessionplaner-sessionbox-border-radius: 5px;
-    --sessionplaner-sessionbox-border-color: rgba(0,0,0,0.1);
-    --sessionplaner-sessionbox-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
-    --sessionplaner-sessionbox-suggestion-bg: #faead1;
-    --sessionplaner-sessionbox-hidden-bg: #f2f2f2;
-
-    --sessionplaner-room-main-color: #ffffff;
-    --sessionplaner-room-main-bg: #313131;
-    --sessionplaner-room-side-color: #ffffff;
-    --sessionplaner-room-side-bg: #515151;
-    --sessionplaner-time-color: inherit;
-    --sessionplaner-time-bg: #fafafa;
-    --sessionplaner-break-color: inherit;
-    --sessionplaner-break-bg: #faead1;
-    --sessionplaner-slot-color: inherit;
-    --sessionplaner-slot-bg: #f2f2f2;
+    --sessionplaner-color-default: var(--typo3-text-color-base, #313131);
+    --sessionplaner-color-primary: var(--typo3-text-color-primary, #3280bf);
+    --sessionplaner-bg-success: var(--typo3-surface-container-success, #c5df93);
 
     --sessionplaner-tag-border-radius: 4px;
-    --sessionplaner-tag-bg: #999999;
-    --sessionplaner-tag-color: #ffffff;
+    --sessionplaner-tag-color: var(--typo3-surface-notice-text, #ffffff);
+    --sessionplaner-tag-bg: var(--typo3-surface-notice, #999999);
+    --sessionplaner-tag-shadow: var(--typo3-shadow-2, 0 0px 0 1px rgba(0,0,0,0.25));
 
-    --sessionplaner-container-shadow: 0 0px 0 1px rgba(0,0,0,0.25);
+    --sessionplaner-container-bg: var(--typo3-surface-container-base, #fafafa);
+    --sessionplaner-container-border-color: color-mix(in srgb, var(--sessionplaner-container-bg), currentColor 15%);
+    --sessionplaner-container-border-radius: .5rem;
+    --sessionplaner-container-shadow: var(--typo3-shadow-4, 0 0px 0 1px rgba(0,0,0,0.25));
 
-    --sessionplaner-stash-bg: var(--sessionplaner-color-notice);
-    --sessionplaner-stash-shadow: 0 0px 0 1px rgba(0,0,0,0.25);
+    --sessionplaner-stash-bg: var(--typo3-surface-container-base, #fafafa);
+    --sessionplaner-stash-border-color: color-mix(in srgb, var(--sessionplaner-stash-bg), currentColor 15%);
+    --sessionplaner-stash-border-radius: .5rem;
     --sessionplaner-stash-padding: 1rem;
+    --sessionplaner-stash-shadow: var(--typo3-shadow-4, 0 0px 0 1px rgba(0,0,0,0.25));
 
     display: grid;
     text-wrap: balance;
@@ -71,6 +66,8 @@
     display: flex;
     flex-direction: column;
     gap: .25rem;
+    border: 1px solid var(--sessionplaner-stash-border-color);
+    border-radius: var(--sessionplaner-stash-border-radius);
     box-shadow: var(--sessionplaner-stash-shadow);
     padding: var(--sessionplaner-stash-padding);
     background-color: var(--sessionplaner-stash-bg);
@@ -78,17 +75,21 @@
         -45deg,
         transparent,
         transparent 5px,
-        rgba(0,0,0,.05) 5px,
-        rgba(0,0,0,.05) 10px
+        light-dark(rgba(0,0,0,.05), rgba(255,255,255,.05)) 5px,
+        light-dark(rgba(0,0,0,.05), rgba(255,255,255,.05)) 10px
     );
     &.dragtarget {
-        --sessionplaner-stash-bg: var(--sessionplaner-color-success);
+        --sessionplaner-stash-bg: var(--sessionplaner-bg-success);
     }
 }
 .sessionplaner-container {
     container-type: inline-size;
     display: flex;
     overflow: auto;
+    padding: var(--sessionplaner-grid-spacing);
+    border: 1px solid var(--sessionplaner-container-border-color);
+    border-radius: var(--sessionplaner-container-border-radius);
+    background-color: var(--sessionplaner-container-bg);
     box-shadow: var(--sessionplaner-container-shadow);
 }
 
@@ -99,7 +100,6 @@
     display: flex;
     flex: 1 1 0px;
     flex-direction: column;
-    margin: var(--sessionplaner-grid-spacing);
     gap: var(--sessionplaner-grid-spacing);
 }
 .sessionplaner-row {
@@ -107,10 +107,32 @@
     display: flex;
     gap: var(--sessionplaner-grid-spacing);
     flex-direction: column;
+
+    &:first-child {
+        display: none;
+        @container (min-width: 600px) {
+            display: flex;
+        }
+    }
     @container (min-width: 600px) {
         flex-direction: row;
         padding-left: calc(5rem + var(--sessionplaner-grid-spacing));
     }
+
+    &:nth-child(2) .sessionplaner-col:first-child {
+        border-start-start-radius: calc(var(--sessionplaner-container-border-radius) - 2px);
+        border-start-end-radius: calc(var(--sessionplaner-container-border-radius) - 2px);
+        @container (min-width: 600px) {
+            border-radius: 0;
+        }
+    }
+
+    &:first-child .sessionplaner-col:last-child {
+        @container (min-width: 600px) {
+            border-start-end-radius: calc(var(--sessionplaner-container-border-radius) - 2px);
+        }
+    }
+
 }
 .sessionplaner-col {
     overflow: hidden;
@@ -123,25 +145,21 @@
     }
     &-header {
         min-height: 0;
-        display: none;
-        @container (min-width: 600px) {
-            display: block;
-        }
         a {
             color: inherit;
         }
         &[data-sessionplaner-room-type="main"] {
-            --sessionplaner-grid-col-color: var(--sessionplaner-room-main-color);
-            --sessionplaner-grid-col-bg: var(--sessionplaner-room-main-bg);
+            --sessionplaner-grid-col-color: var(--sessionplaner-grid-col-main-color);
+            --sessionplaner-grid-col-bg: var(--sessionplaner-grid-col-main-bg);
         }
         &[data-sessionplaner-room-type="side"] {
-            --sessionplaner-grid-col-color: var(--sessionplaner-room-side-color);
-            --sessionplaner-grid-col-bg: var(--sessionplaner-room-side-bg);
+            --sessionplaner-grid-col-color: var(--sessionplaner-grid-col-side-color);
+            --sessionplaner-grid-col-bg: var(--sessionplaner-grid-col-side-bg);
         }
     }
     &-time {
-        --sessionplaner-grid-col-color: var(--sessionplaner-time-color);
-        --sessionplaner-grid-col-bg: var(--sessionplaner-time-bg);
+        --sessionplaner-grid-col-color: var(--sessionplaner-grid-col-time-color);
+        --sessionplaner-grid-col-bg: var(--sessionplaner-grid-col-time-bg);
         height: auto;
         @container (min-width: 600px) {
             position: absolute;
@@ -152,17 +170,16 @@
         }
     }
     &-break {
-        --sessionplaner-grid-col-color: var(--sessionplaner-break-color);
-        --sessionplaner-grid-col-bg: var(--sessionplaner-break-bg);
-        background-color: #faead1;
+        --sessionplaner-grid-col-color: var(--sessionplaner-grid-col-break-color);
+        --sessionplaner-grid-col-bg: var(--sessionplaner-grid-col-break-bg);
     }
     &-slot {
-        --sessionplaner-grid-col-color: var(--sessionplaner-slot-color);
-        --sessionplaner-grid-col-bg: var(--sessionplaner-slot-bg);
+        --sessionplaner-grid-col-color: var(--sessionplaner-grid-col-slot-color);
+        --sessionplaner-grid-col-bg: var(--sessionplaner-grid-col-slot-bg);
         min-width: 260px;
     }
     &.dragtarget {
-        --sessionplaner-grid-col-bg: var(--sessionplaner-color-success);
+        --sessionplaner-grid-col-bg: var(--sessionplaner-bg-success);
     }
 }
 
@@ -170,6 +187,18 @@
 // Sessionbox
 //
 .sessionbox {
+    --sessionplaner-sessionbox-spacing: .5rem;
+    --sessionplaner-sessionbox-color: var(--sessionplaner-color-default);
+    --sessionplaner-sessionbox-padding-y: .75rem;
+    --sessionplaner-sessionbox-padding-x: .75rem;
+    --sessionplaner-sessionbox-bg: var(--typo3-surface-bright, #fff);
+    --sessionplaner-sessionbox-suggestion-bg: var(--typo3-surface-container-warning, #faead1);
+    --sessionplaner-sessionbox-hidden-bg: var(--typo3-surface-container-notice, #f2f2f2);
+    --sessionplaner-sessionbox-border-style: solid;
+    --sessionplaner-sessionbox-border-radius: 5px;
+    --sessionplaner-sessionbox-border-color: color-mix(in srgb, var(--sessionplaner-sessionbox-bg), currentColor 15%);
+    --sessionplaner-sessionbox-shadow: var(--typo3-shadow-4, 0 1px 0px 0px rgba(0,0,0,0.15));
+
     position: relative;
     padding: var(--sessionplaner-sessionbox-padding-y) var(--sessionplaner-sessionbox-padding-x);
     background-color: var(--sessionplaner-sessionbox-bg);
@@ -261,12 +290,14 @@
     display: inline-block;
     padding: 2px 5px;
     color: var(--sessionplaner-tag-color);
+    border: 1px solid color-mix(in srgb, var(--sessionplaner-tag-bg), currentColor 15%);
     background: var(--sessionplaner-tag-bg);
     border-radius: var(--sessionplaner-tag-border-radius);
+    box-shadow: var(--sessionplaner-tag-shadow);
 }
 @each $name, $color in $session-colors {
     .sessionbox-tag-#{$name} {
-        --sessionplaner-tag-color: #{color-contrast($color)};
-        --sessionplaner-tag-bg: #{$color};
+        --sessionplaner-tag-color: #{map.get($color, text)};
+        --sessionplaner-tag-bg: #{map.get($color, bg)};
     }
 }

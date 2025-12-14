@@ -18,10 +18,16 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Session>
+ */
 class SessionRepository extends Repository
 {
+    /**
+     * @var array<non-empty-string, 'ASC'|'DESC'>
+     */
     protected $defaultOrderings = [
-        'topic' => QueryInterface::ORDER_ASCENDING
+        'topic' => QueryInterface::ORDER_ASCENDING,
     ];
 
     public function findAnyByUid(int $uid): ?Session
@@ -32,21 +38,29 @@ class SessionRepository extends Repository
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->matching($query->equals('uid', $uid));
 
-        /** @var ?Session $result */
+        /** @var Session|null $result */
         $result = $query->execute()->getFirst();
 
         return $result;
     }
 
+    /**
+     * @return QueryResultInterface<int, Session>
+     */
     public function findSuggested(): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalAnd($query->equals('suggestion', 1))
+            $query->logicalAnd(
+                $query->equals('suggestion', 1)
+            )
         );
         return $query->execute();
     }
 
+    /**
+     * @return QueryResultInterface<int, Session>
+     */
     public function findByDayAndEmptySlot(Day $day): QueryResultInterface
     {
         $query = $this->createQuery();
@@ -59,6 +73,9 @@ class SessionRepository extends Repository
         return $query->execute();
     }
 
+    /**
+     * @return QueryResultInterface<int, Session>
+     */
     public function findUnassignedSessions(): QueryResultInterface
     {
         $query = $this->createQuery();
@@ -73,10 +90,13 @@ class SessionRepository extends Repository
         return $query->execute();
     }
 
+    /**
+     * @return QueryResultInterface<int, Session>
+     */
     public function findByDayAndHasSlotHasRoom(string $days): QueryResultInterface
     {
         $days = GeneralUtility::intExplode(',', $days, true);
-        if (empty($days)) {
+        if ($days === []) {
             $days = [-1];
         }
         $query = $this->createQuery();

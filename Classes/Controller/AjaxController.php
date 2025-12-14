@@ -61,7 +61,7 @@ final class AjaxController
         if (!$this->hasAccess()) {
             return $this->renderResponse([
                 'status' => 'error',
-                'message' => 'No access granted'
+                'message' => 'No access granted',
             ]);
         }
 
@@ -70,7 +70,7 @@ final class AjaxController
         if ($session === null) {
             return $this->renderResponse([
                 'status' => 'error',
-                'message' => 'Session not found'
+                'message' => 'Session not found',
             ]);
         }
 
@@ -83,14 +83,14 @@ final class AjaxController
             return $this->renderResponse([
                 'message' => 'Session ' . $session->getTopic() . ' updated',
                 'data' => [
-                    'session' => $session->toArray()
-                ]
+                    'session' => $session->toArray(),
+                ],
             ]);
         }
 
         return $this->renderResponse([
             'status' => 'error',
-            'message' => 'Request did not contain valid data'
+            'message' => 'Request did not contain valid data',
         ]);
     }
 

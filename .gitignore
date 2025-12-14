@@ -1,8 +1,10 @@
 .build
+.idea/
+.ddev/docker-compose.local.yaml
+*.cache
 Build/node_modules/*
+Documentation-GENERATED-temp/
 config/
 var/
-*.cache
 composer.lock
-.idea/
-Documentation-GENERATED-temp/
+FIRST_INSTALL

@@ -9,8 +9,6 @@
 
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_room');
-
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_room',
@@ -22,8 +20,11 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
-            'default' => 'sessionplaner-record-room'
+            'default' => 'sessionplaner-record-room',
         ],
     ],
     'columns' => [
@@ -37,7 +38,7 @@ return [
                     ['', ''],
                     [$languageFile . 'tx_sessionplaner_domain_model_room-type-main', 'main'],
                     [$languageFile . 'tx_sessionplaner_domain_model_room-type-side', 'side'],
-                ]
+                ],
             ],
         ],
         'name' => [
@@ -53,11 +54,12 @@ return [
         'logo' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-logo',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                'logo',
-                ['maxitems' => 100],
-                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-            ),
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-image-types',
+                'minitems' => 0,
+                'maxitems' => 100,
+            ],
         ],
         'seats' => [
             'exclude' => false,
@@ -108,7 +110,7 @@ return [
                 'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_session',
                 'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID###',
-                'foreign_field' => 'room'
+                'foreign_field' => 'room',
             ],
         ],
     ],
@@ -121,7 +123,7 @@ return [
             seats,
             days,
             slots,
-            '
-        ]
+            ',
+        ],
     ],
 ];

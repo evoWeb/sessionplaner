@@ -1,0 +1,27 @@
+<f:if condition="{speaker.website} || {speaker.twitter} || {speaker.linkedin} || {speaker.xing}">
+    <div class="sessionplaner-bio-connect">
+        <h2>Connect</h2>
+        <div class="sessionplaner-connect">
+            <f:if condition="{speaker.website}">
+                <a href="{speaker.website}" class="sessionplaner-connect-link sessionplaner-connect-link-website" target="_blank" itemprop="url">
+                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Website" optional="true" /></span>
+                </a>
+            </f:if>
+            <f:if condition="{speaker.twitter}">
+                <a href="https://twitter.com/{speaker.twitter}" class="sessionplaner-connect-link sessionplaner-connect-link-twitter" target="_blank" itemprop="url">
+                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Twitter" optional="true" /></span>
+                </a>
+            </f:if>
+            <f:if condition="{speaker.linkedin}">
+                <a href="https://www.linkedin.com/in/{speaker.linkedin}" class="sessionplaner-connect-link sessionplaner-connect-link-linkedin" target="_blank" itemprop="url">
+                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="LinkedIn" optional="true" /></span>
+                </a>
+            </f:if>
+            <f:if condition="{speaker.xing}">
+                <a href="https://www.xing.com/profile/{speaker.xing}" class="sessionplaner-connect-link sessionplaner-connect-link-xing" target="_blank" itemprop="url">
+                    <span class="sessionplaner-connect-icon"><f:render partial="General/SocialIcons" section="Xing" optional="true" /></span>
+                </a>
+            </f:if>
+        </div>
+    </div>
+</f:if>

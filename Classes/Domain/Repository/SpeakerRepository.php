@@ -15,10 +15,13 @@ use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Speaker>
+ */
 class SpeakerRepository extends Repository
 {
     protected $defaultOrderings = [
-        'name' => QueryInterface::ORDER_ASCENDING
+        'name' => QueryInterface::ORDER_ASCENDING,
     ];
 
     public function findByDetailPage(int $pageId): ?Speaker

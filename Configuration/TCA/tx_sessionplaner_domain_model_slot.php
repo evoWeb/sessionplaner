@@ -9,8 +9,6 @@
 
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sessionplaner_domain_model_slot');
-
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_slot',
@@ -24,8 +22,11 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'typeicon_classes' => [
-            'default' => 'sessionplaner-record-slot'
+            'default' => 'sessionplaner-record-slot',
         ],
     ],
     'columns' => [
@@ -59,7 +60,7 @@ return [
                 'eval' => 'int,trim,required',
                 'default' => 45,
                 'max' => 256,
-            ]
+            ],
         ],
         'break' => [
             'exclude' => false,
@@ -77,9 +78,9 @@ return [
                 'rows' => '15',
                 'softref' => 'typolink_tag,email[subst],url',
                 'enableRichtext' => true,
-                'richtextConfiguration' => 'default'
+                'richtextConfiguration' => 'default',
             ],
-            'displayCond' => 'FIELD:break:REQ:true'
+            'displayCond' => 'FIELD:break:REQ:true',
         ],
         'rooms' => [
             'exclude' => false,
@@ -107,7 +108,7 @@ return [
                 break,
                 description,
                 rooms,
-            '
-        ]
+            ',
+        ],
     ],
 ];

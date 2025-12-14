@@ -1,34 +1,27 @@
 //
-// Variables
-//
-$session-speakerlist-space: 10px;
-
-$session-speaker-bg: #ffffff !default;
-$session-speaker-color: #616161 !default;
-$session-speaker-name-color: #ff8700 !default;
-$session-speaker-name-hover-color: darken($session-speaker-name-color, 10%) !default;
-$session-speaker-border: 1px solid rgba(0,0,0,0.1) !default;
-$session-speaker-border-radius: 5px;
-$session-speaker-padding: 1rem;
-$session-speaker-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
-
-
-//
 // Speaker
 //
 .sessionplaner-speaker {
+    --session-speaker-bg: #ffffff;
+    --session-speaker-color: #616161;
+    --session-speaker-name-color: #ff8700;
+    --session-speaker-name-hover-color: colormix(in srgb, var(--session-speaker-name-color), var(--session-speaker-bg) 10%);
+    --session-speaker-border: 1px solid rgba(0,0,0,0.1);
+    --session-speaker-border-radius: 5px;
+    --session-speaker-padding: 1rem;
+    --session-speaker-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
+
     margin-left: auto;
     margin-right: auto;
     position: relative;
     display: flex;
     flex-direction: column;
     word-wrap: break-word;
-    color: $session-speaker-color;
-    background-color: $session-speaker-bg;
-    height: 100%;
-    border: $session-speaker-border;
-    border-radius: $session-speaker-border-radius;
-    box-shadow: $session-speaker-shadow;
+    color: var(--session-speaker-color);
+    background-color: var(--session-speaker-bg);
+    border: var(--session-speaker-border);
+    border-radius: var(--session-speaker-border-radius);
+    box-shadow: var(--session-speaker-shadow);
     overflow: hidden;
 }
 .sessionplaner-speaker-image {
@@ -38,17 +31,18 @@ $session-speaker-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     }
 }
 .sessionplaner-speaker-body {
-    padding: $session-speaker-padding;
+    padding: var(--session-speaker-padding);
 }
 .sessionplaner-speaker-name {
     font-weight: bold;
     font-size: 1rem;
-    color: $session-speaker-name-color !important;
-    &:hover {
-        color: $session-speaker-name-hover-color !important;
-    }
+    color: var(--session-speaker-name-color) !important;
     a {
-        color: inherit !important
+        color: inherit !important;
+        &:focus,
+        &:hover {
+            color: var(--session-speaker-name-hover-color) !important;
+        }
     }
 }
 .sessionplaner-speaker-company {
@@ -56,26 +50,65 @@ $session-speaker-shadow: 0 1px 0px 0px rgba(0,0,0,0.15);
     font-size: .75rem;
 }
 
+.sessionplaner-speaker-mini {
+    display: inline-flex;
+    gap: .5rem;
+    flex-direction: row;
+    align-items: center;
+
+    .sessionplaner-speaker-mini-image {
+        flex-shrink: 0;
+        width: 34px;
+        height: 34px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .sessionplaner-speaker-mini-name {
+        font-weight: normal !important;
+        font-family: unset;
+        color: unset !important;
+        font-weight: unset;
+        text-shadow: unset;
+        font-size: 1rem;
+        line-height: 1;
+        margin-bottom: 0;
+    }
+}
+
+
 
 //
 // List
 //
 .sessionplaner-speakerlist {
+    --sessionplaner-speakerlist-gap-min: .5rem;
+    --sessionplaner-speakerlist-gap-sm: .5rem;
+    --sessionplaner-speakerlist-gap-md: 1rem;
+    --sessionplaner-speakerlist-gap: var(--sessionplaner-speakerlist-gap-min);
+    --sessionplaner-speakerlist-item-width-min: 140px;
+    --sessionplaner-speakerlist-item-width-sm: 185px;
+    --sessionplaner-speakerlist-item-width-md: 230px;
+    --sessionplaner-speakerlist-item-width: var(--sessionplaner-speakerlist-item-width-min);
+
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: -($session-speakerlist-space / 2);
-    @media only screen and (min-width: $session-breakpoint-sm) {
-        margin: -$session-speakerlist-space;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, var(--sessionplaner-speakerlist-item-width));
+    gap: var(--sessionplaner-speakerlist-gap);
+
+    @container (min-width: 576px) {
+        --sessionplaner-speakerlist-item-width: var(--sessionplaner-speakerlist-item-width-sm);
+        --sessionplaner-speakerlist-gap: var(--sessionplaner-speakerlist-gap-sm);
+    }
+
+    @container (min-width: 768px) {
+        --sessionplaner-speakerlist-item-width: var(--sessionplaner-speakerlist-item-width-md);
+        --sessionplaner-speakerlist-gap: var(--sessionplaner-speakerlist-gap-md);
     }
 }
+
 .sessionplaner-speakerlist-item {
-    padding: ($session-speakerlist-space / 2);
-    @media only screen and (min-width: $session-breakpoint-sm) {
-        padding: $session-speakerlist-space;
-    }
-    width: calc(100% / 2);
-    @media only screen and (min-width: $session-breakpoint-md) {
-        width: 230px;
-    }
+    display: flex;
 }

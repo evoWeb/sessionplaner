@@ -50,8 +50,12 @@ class SpeakerProcessor implements DataProcessorInterface
         $speaker = $this->speakerRepository->findByDetailPage((int)$processedData['data']['uid']);
 
         if ($speaker instanceof Speaker) {
-            $targetVariableName = $cObj->stdWrapValue('as', $processorConfiguration) ?: 'speaker';
-            $processedData[$targetVariableName] = $speaker;
+            $targetVariableName = (string) $cObj->stdWrapValue('as', $processorConfiguration);
+            if ($targetVariableName !== '') {
+                $processedData[$targetVariableName] = $speaker;
+            } else {
+                $processedData['speaker'] = $speaker;
+            }
         }
 
         return $processedData;

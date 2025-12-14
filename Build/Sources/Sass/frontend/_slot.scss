@@ -1,27 +1,24 @@
 //
-// Variables
-//
-$session-slot-time-bg: #313131 !default;
-$session-slot-time-color: #ffffff !default;
-$session-slot-padding: 1rem !default;
-$session-slot-track-bg: #f2f2f2 !default;
-$session-slot-track-break-bg: #faead1 !default;
-$session-slot-track-type-main-bg: #ff8700 !default;
-$session-slot-track-type-main-color: #ffffff !default;
-$session-slot-track-type-side-bg: lighten($session-slot-track-type-main-bg, 10%) !default;
-$session-slot-track-type-side-color: $session-slot-track-type-main-color !default;
-
-
-//
 // Slot
 //
 .sessionplaner-slot {
+    --session-slot-border-color: transparent;
+    --session-slot-time-bg: #313131;
+    --session-slot-time-color: #ffffff;
+    --session-slot-padding: 1rem;
+    --session-slot-track-bg: #f2f2f2;
+    --session-slot-track-break-bg: #faead1;
+    --session-slot-track-type-main-bg: #ff8700;
+    --session-slot-track-type-main-color: #ffffff;
+    --session-slot-track-type-side-bg: color-mix(in srgb, var(--session-slot-track-type-main-bg), white 20%);
+    --session-slot-track-type-side-color: var(--session-slot-track-type-main-color);
+
     position: relative;
     display: flex;
     flex-wrap: wrap;
     padding-left: 5rem;
     min-height: 5rem;
-    border-top: 1px solid transparent;
+    border-top: 1px solid var(--session-slot-border-color);
 }
 .sessionplaner-slot-header {
     border-top: none;
@@ -35,30 +32,35 @@ $session-slot-track-type-side-color: $session-slot-track-type-main-color !defaul
     left: 0;
     bottom: 0;
     width: 5rem;
-    padding: $session-slot-padding;
-    color: $session-slot-time-color;
-    background-color: $session-slot-time-bg;
+    padding: var(--session-slot-padding);
+    color: var(--session-slot-time-color);
+    background: var(--session-slot-time-background, initial);
+    background-color: var(--session-slot-time-bg);
 }
 .sessionplaner-slot-track {
     flex-shrink: 0;
     width: 100%;
-    padding: $session-slot-padding;
-    background-color: $session-slot-track-bg;
+    padding: var(--session-slot-padding);
+    background: var(--session-slot-track-background, initial);
+    background-color: var(--session-slot-track-bg);
 }
 .sessionplaner-slot-track-empty {
     padding: 0;
 }
 .sessionplaner-slot-track-break {
-    background-color: $session-slot-track-break-bg;
+    background: var(--session-slot-track-break-background, initial);
+    background-color: var(--session-slot-track-break-bg);
     width: 100% !important;
 }
 .sessionplaner-slot-track-type-main {
-    color: $session-slot-track-type-main-color;
-    background-color: $session-slot-track-type-main-bg;
+    color: var(--session-slot-track-type-main-color);
+    background: var(--session-slot-track-type-main-background, initial);
+    background-color: var(--session-slot-track-type-main-bg);
 }
 .sessionplaner-slot-track-type-side {
-    color: $session-slot-track-type-side-color;
-    background-color: $session-slot-track-type-side-bg;
+    color: var(--session-slot-track-type-side-color);
+    background: var(--session-slot-track-type-side-background, initial);
+    background-color: var(--session-slot-track-type-side-bg);
 }
 
 //
