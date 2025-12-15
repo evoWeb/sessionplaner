@@ -1,3 +1,18 @@
+# 5.2.1
+
+## TASK
+
+- 58d8b99 [TASK] Update runTests.sh
+- 9ece257 [TASK] Update CI pipeline, move relevant config files and fix warnings
+
+## MISC
+
+- 22a200e Merge tag '5.2.0' into develop
+
+## Contributors
+
+- Sebastian Fischer
+
 # 5.2.0
 
 ## FEATURE
@@ -6,6 +21,7 @@
 
 ## TASK
 
+- e5c139b [TASK] Raise version number and update CHANGELOG
 - 8bdf600 [TASK] Add host_db_port configuration to port mount
 - 8e1ccfc [TASK] Add initial support for v13 (#45)
 
