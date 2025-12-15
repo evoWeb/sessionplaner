@@ -60,7 +60,7 @@
             "web-dir": "Build/public"
         },
         "branch-alias": {
-            "dev-develop": "5.2.x-dev"
+            "dev-release/5.2.1": "5.2.x-dev"
         }
     },
     "scripts": {
