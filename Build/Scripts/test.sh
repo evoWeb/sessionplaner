@@ -15,27 +15,23 @@ cd "$THIS_SCRIPT_DIR" || exit 1
 checkResources () {
     clear
     echo "#################################################################" >&2
-    echo " Checking documentation, TypeScript, Scss and Xliff files" >&2
+    echo " Checking Documentation, TypeScript and Scss files" >&2
     echo "#################################################################" >&2
     echo "" >&2
 
-#    ./runTests.sh -s lintScss
-#    EXIT_CODE_SCSS=$?
-#
+    ./runTests.sh -s lintScss
+    EXIT_CODE_SCSS=$?
+
 #    ./runTests.sh -s lintTypescript
 #    EXIT_CODE_TYPESCRIPT=$?
-
-    ./additionalTests.sh -s lintXliff
-    EXIT_CODE_XLIFF=$?
 
     ./runTests.sh -s checkRstRenderingSingle
     EXIT_CODE_DOCUMENTATION=$?
 
     echo "#################################################################" >&2
-    echo " Checked documentation, TypeScript, Scss and Xliff files" >&2
+    echo " Checked Documentation, TypeScript and Scss files" >&2
     if [[ ${EXIT_CODE_SCSS} -eq 0 ]] && \
         [[ ${EXIT_CODE_TYPESCRIPT} -eq 0 ]] && \
-        [[ ${EXIT_CODE_XLIFF} -eq 0 ]] && \
         [[ ${EXIT_CODE_DOCUMENTATION} -eq 0 ]]
     then
         echo -e "${GREEN}Resources valid${NC}" >&2
@@ -47,7 +43,6 @@ checkResources () {
     echo "" >&2
 
     ./runTests.sh -s clean
-    ./additionalTests.sh -s clean
 }
 
 #################################################
@@ -77,8 +72,6 @@ runFunctionalTests () {
     echo "###########################################################################" >&2
     echo "" >&2
 
-    ./runTests.sh -s cleanTests
-
     ./runTests.sh \
         -p ${PHP_VERSION} \
         -s lintPhp || exit 1 ; \
@@ -102,12 +95,17 @@ runFunctionalTests () {
     ./runTests.sh \
         -p ${PHP_VERSION} \
         -s cgl || exit 1 ; \
-        EXIT_CODE_LINT=$?
+        EXIT_CODE_CGL=$?
 
     ./runTests.sh \
         -p ${PHP_VERSION} \
         -s phpstan || exit 1 ; \
-        EXIT_CODE_LINT=$?
+        EXIT_CODE_PHPSTAN=$?
+
+    ./runTests.sh \
+        -p ${PHP_VERSION} \
+        -n -s normalizeXliff || exit 1 ; \
+        EXIT_CODE_XLIFF=$?
 
 #    ./runTests.sh \
 #        -p ${PHP_VERSION} \
@@ -128,10 +126,12 @@ runFunctionalTests () {
     echo " - Test path ${TEST_PATH}">&2
     echo " - Additional ${PREFER_LOWEST}">&2
     if [[ ${EXIT_CODE_LINT} -eq 0 ]] && \
-        [[ ${EXIT_CODE_INSTALL} -eq 0 ]] && \
         [[ ${EXIT_CODE_CORE} -eq 0 ]] && \
         [[ ${EXIT_CODE_FRAMEWORK} -eq 0 ]] && \
         [[ ${EXIT_CODE_VALIDATE} -eq 0 ]] && \
+        [[ ${EXIT_CODE_CGL} -eq 0 ]] && \
+        [[ ${EXIT_CODE_PHPSTAN} -eq 0 ]] && \
+        [[ ${EXIT_CODE_XLIFF} -eq 0 ]] && \
         [[ ${EXIT_CODE_UNIT} -eq 0 ]] && \
         [[ ${EXIT_CODE_FUNCTIONAL} -eq 0 ]]
     then
@@ -142,17 +142,8 @@ runFunctionalTests () {
     fi
     echo "#################################################################" >&2
     echo "" >&2
-    cleanup
-}
 
-#################################################
-# Removes all files created by tests.
-# Arguments:
-#   none
-#################################################
-cleanup () {
     ./runTests.sh -s clean
-    ./additionalTests.sh -s clean
 }
 
 LOWEST="--prefer-lowest"
@@ -185,7 +176,7 @@ if [[ $DEBUG_TESTS != true ]]; then
     runFunctionalTests "8.5" ${TCORE} ${TFRAMEWORK} ${TPATH} || exit 1
     runFunctionalTests "8.5" ${TCORE} ${TFRAMEWORK} ${TPATH} ${LOWEST} || exit 1
 else
-    #cleanup
+    #./runTests.sh -s clean
     runFunctionalTests "8.4" "^13.4" "^9.2.1" ${TPATH} ${LOWEST} || exit 1
     # ./runTests.sh -x -p 8.2 -d sqlite -s functional -e "--group selected" Tests/Functional
     # ./runTests.sh -x -p 8.2 -d sqlite -s functional Tests/Functional
