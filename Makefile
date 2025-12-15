@@ -28,8 +28,19 @@ install: ##@ Composer install
 cleanup: ##@ Cleanup project folder
 	echo "Cleanup started"
 	Build/Scripts/runTests.sh -s clean
-	Build/Scripts/additionalTests.sh -s clean
 	echo "Cleanup finished"
+
+.PHONY: npm-update
+npm-update: ##@ Update packages with npm
+	echo "Npm update started"
+	Build/Scripts/runTests.sh -s npm update
+	echo "Npm update finished"
+
+.PHONY: npm-build
+npm-build: ##@ Call npm build script
+	echo "Npm build started"
+	Build/Scripts/runTests.sh -s npm run build
+	echo "Npm build finished"
 
 help:
 	@printf "\nUsage: make \033[32m<command>\033[0m\n"

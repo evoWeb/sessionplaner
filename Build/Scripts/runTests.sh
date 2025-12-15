@@ -176,10 +176,17 @@ cleanTestFiles() {
     # test related
     echo -n "Clean test related files ... "
     rm -rf \
+        bin/ \
+        Build/public/ \
+        Build/vendor/ \
         Build/phpunit/FunctionalTests-Job-*.xml \
+        Documentation-GENERATED-temp/ \
         typo3/sysext/core/Tests/AcceptanceTests-Job-* \
         typo3/sysext/core/Tests/Acceptance/Support/_generated \
-        typo3temp/var/tests/
+        typo3temp/ \
+        config \
+        composer.lock
+    git checkout composer.json
     echo "done"
 }
 
@@ -402,7 +409,7 @@ executeRstRenderingWithWatch() {
             fi
 
             local fullTargetFile="${systemExtensionFolder}/Documentation/${newFile}"
-            local templateFile="rstTemplate${issueType}.rst"
+            local templateFile="../rstTemplates/rstTemplate${issueType}.rst"
 
             # This will also be triggered for a filename "interactive", since this will not yet exist
             if [[ ! -f "${fullTargetFile}" ]]; then
@@ -447,7 +454,7 @@ executeRstRenderingWithWatch() {
     echo "  - Leaving the process running for a long time may cause memory leaks / consumption"
     echo ""
     echo "After the initial rendering is done, you can access the local browser and edit the file"
-    echo "simultaneously. Every time the file is changed, your browser will automaticelly reload"
+    echo "simultaneously. Every time the file is changed, your browser will automatically reload"
     echo "the page, and scroll to the last position."
     echo ""
 
@@ -531,6 +538,7 @@ Options:
             - lintServicesYaml: YAML Linting Services.yaml files with enabled tags parsing.
             - lintTypescript: TS linting
             - lintYaml: YAML Linting (excluding Services.yaml)
+            - normalizeXliff: normalize .xlf files
             - npm: "npm" command dispatcher, to execute various npm commands directly
             - accessibility: accessibility tests (use accessibility-prepare for manual execution)
             - e2e: end to end tests (use e2e-prepare for manual execution)
@@ -631,8 +639,8 @@ Options:
         is not listening on default port.
 
     -n
-        Only with -s cgl|cglGit|cglHeader|cglHeaderGit
-        Activate dry-run in CGL check that does not actively change files and only prints broken ones.
+        Only with -s cgl|cglGit|cglHeader|cglHeaderGit|normalizeXliff
+        Activate dry-run: do not modify files, only report issues.
 
     -u
         Update existing typo3/core-testing-* container images and remove obsolete dangling image versions.
@@ -683,6 +691,12 @@ Examples:
 
     # Run lintTypescript fixer
     ./Build/Scripts/runTests.sh -s lintTypescript -- --fix
+
+    # Run ReST live (hot reload) rendering with provided local webserver
+    ./Build/Scripts/runTests.sh -s watchRst core interactive
+    ./Build/Scripts/runTests.sh -s watchRst core Changelog/14.0/Breaking-123456-something.rst
+    ./Build/Scripts/runTests.sh -s watchRst form
+    ./Build/Scripts/runTests.sh -s watchRst felogin KnownProblems/Index.rst
 EOF
 }
 
@@ -713,7 +727,7 @@ DATABASE_DRIVER=""
 CHUNKS=0
 THISCHUNK=0
 CONTAINER_BIN=""
-COMPOSER_ROOT_VERSION="14.0.x-dev"
+COMPOSER_ROOT_VERSION="14.1.x-dev"
 PHPSTAN_CONFIG_FILE="phpstan.local.neon"
 CONTAINER_INTERACTIVE="-it --init"
 HOST_UID=$(id -u)
@@ -900,9 +914,9 @@ case ${TEST_SUITE} in
         if [ "${CHUNKS}" -gt 0 ]; then
             ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name ac-splitter-${SUFFIX} ${IMAGE_PHP} php -dxdebug.mode=off Build/Scripts/splitAcceptanceTests.php -v ${CHUNKS}
             SUITE_EXIT_CODE=$? && [[ "${SUITE_EXIT_CODE}" -ne 0 ]] && printSummary
-            COMMAND=(bin/codecept run Application -d -g AcceptanceTests-Job-${THISCHUNK} -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
+            COMMAND=(php -d register_argc_argv=On bin/codecept run Application -d -g AcceptanceTests-Job-${THISCHUNK} -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
         else
-            COMMAND=(bin/codecept run Application -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
+            COMMAND=(php -d register_argc_argv=On bin/codecept run Application -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
         fi
         SELENIUM_GRID=""
         if [ "${ACCEPTANCE_HEADLESS}" -eq 0 ]; then
@@ -1015,9 +1029,9 @@ case ${TEST_SUITE} in
             if [ "${CHUNKS}" -gt 0 ]; then
                 ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name ac-splitter-${SUFFIX} ${IMAGE_PHP} php -dxdebug.mode=off Build/Scripts/splitAcceptanceTests.php -v ${CHUNKS}
                 SUITE_EXIT_CODE=$? && [[ "${SUITE_EXIT_CODE}" -ne 0 ]] && printSummary
-                COMMAND=(bin/codecept run Application -d -g AcceptanceTests-Job-${THISCHUNK} -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
+                COMMAND=(php -d register_argc_argv=On bin/codecept run Application -d -g AcceptanceTests-Job-${THISCHUNK} -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
             else
-                COMMAND=(bin/codecept run Application -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
+                COMMAND=(php -d register_argc_argv=On bin/codecept run Application -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} "$@" --html reports.html)
             fi
             SELENIUM_GRID=""
             if [ "${ACCEPTANCE_HEADLESS}" -eq 0 ]; then
@@ -1094,7 +1108,7 @@ case ${TEST_SUITE} in
                 SUITE_EXIT_CODE=$? && [[ "${SUITE_EXIT_CODE}" -ne 0 ]] && printSummary
                 waitFor mariadb-ac-install-${SUFFIX} 3306
                 CONTAINERPARAMS="-e typo3InstallMysqlDatabaseName=func_test -e typo3InstallMysqlDatabaseUsername=root -e typo3InstallMysqlDatabasePassword=funcp -e typo3InstallMysqlDatabaseHost=mariadb-ac-install-${SUFFIX}"
-                COMMAND="bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
+                COMMAND="php -d register_argc_argv=On bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
                 ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name ac-install-mariadb ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} ${COMMAND}
                 SUITE_EXIT_CODE=$?
                 ;;
@@ -1107,7 +1121,7 @@ case ${TEST_SUITE} in
                 SUITE_EXIT_CODE=$? && [[ "${SUITE_EXIT_CODE}" -ne 0 ]] && printSummary
                 waitFor mysql-ac-install-${SUFFIX} 3306
                 CONTAINERPARAMS="-e typo3InstallMysqlDatabaseName=func_test -e typo3InstallMysqlDatabaseUsername=root -e typo3InstallMysqlDatabasePassword=funcp -e typo3InstallMysqlDatabaseHost=mysql-ac-install-${SUFFIX}"
-                COMMAND="bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
+                COMMAND="php -d register_argc_argv=On bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
                 ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name ac-install-mysql ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} ${COMMAND}
                 SUITE_EXIT_CODE=$?
                 ;;
@@ -1120,7 +1134,7 @@ case ${TEST_SUITE} in
                 SUITE_EXIT_CODE=$? && [[ "${SUITE_EXIT_CODE}" -ne 0 ]] && printSummary
                 waitFor postgres-ac-install-${SUFFIX} 5432
                 CONTAINERPARAMS="-e typo3InstallPostgresqlDatabasePort=5432 -e typo3InstallPostgresqlDatabaseName=${USER} -e typo3InstallPostgresqlDatabaseHost=postgres-ac-install-${SUFFIX} -e typo3InstallPostgresqlDatabaseUsername=funcu -e typo3InstallPostgresqlDatabasePassword=funcp"
-                COMMAND="bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
+                COMMAND="php -d register_argc_argv=On bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
                 ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name ac-install-postgres ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} ${COMMAND}
                 SUITE_EXIT_CODE=$?
                 ;;
@@ -1134,7 +1148,7 @@ case ${TEST_SUITE} in
                     CODECEPION_ENV="--env ci,sqlite,headless"
                 fi
                 CONTAINERPARAMS="-e typo3DatabaseDriver=pdo_sqlite"
-                COMMAND="bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
+                COMMAND="php -d register_argc_argv=On bin/codecept run Install -d -c typo3/sysext/core/Tests/codeception.yml ${CODECEPION_ENV} --html reports.html"
                 ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name ac-install-sqlite ${XDEBUG_MODE} -e XDEBUG_CONFIG="${XDEBUG_CONFIG}" ${CONTAINERPARAMS} ${IMAGE_PHP} ${COMMAND}
                 SUITE_EXIT_CODE=$?
                 ;;
@@ -1404,7 +1418,7 @@ case ${TEST_SUITE} in
         SUITE_EXIT_CODE=$?
         ;;
     lintScss)
-        COMMAND="cd Build; npm ci || exit 1; npm run lint:css"
+        COMMAND="cd Build; npm ci || exit 1; npm run lint:scss"
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name lint-css-${SUFFIX} -e HOME=${CORE_ROOT}/.cache ${IMAGE_NODEJS} /bin/sh -c "${COMMAND}"
         SUITE_EXIT_CODE=$?
         ;;
@@ -1414,7 +1428,7 @@ case ${TEST_SUITE} in
         SUITE_EXIT_CODE=$?
         ;;
     lintTypescript)
-        COMMAND="cd Build; npm ci || exit 1; npm run lint:ts"
+        COMMAND="cd Build; npm ci || exit 1; node_modules/grunt/bin/grunt eslint $@"
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name lint-typescript-${SUFFIX} -e HOME=${CORE_ROOT}/.cache ${IMAGE_NODEJS} /bin/sh -c "${COMMAND}"
         SUITE_EXIT_CODE=$?
         ;;
@@ -1422,6 +1436,18 @@ case ${TEST_SUITE} in
         EXCLUDE_INVALID_FIXTURE_YAML_FILES="--exclude typo3/sysext/form/Tests/Unit/Mvc/Configuration/Fixtures/Invalid.yaml --exclude typo3/sysext/core/Tests/Functional/Fixtures/Extensions/test_sets/Configuration/Sets/InvalidSettings/settings.yaml --exclude typo3/sysext/core/Tests/Functional/Configuration/Loader/Fixtures/InvalidYamlFiles/LoadEmptyYaml.yaml --exclude typo3/sysext/core/Tests/Functional/Configuration/Loader/Fixtures/InvalidYamlFiles/LoadInvalidYaml.yaml"
         COMMAND="php -v | grep '^PHP'; find typo3/ \\( -name '*.yaml' -o -name '*.yml' \\) ! -name 'Services.yaml' | xargs -r php -dxdebug.mode=off bin/yaml-lint --no-parse-tags ${EXCLUDE_INVALID_FIXTURE_YAML_FILES}"
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name lint-php-${SUFFIX} ${IMAGE_PHP} /bin/sh -c "${COMMAND}"
+        SUITE_EXIT_CODE=$?
+        ;;
+    normalizeXliff)
+        NORMALIZE_ARGS=""
+        if [ -n "${CGLCHECK_DRY_RUN}" ]; then
+            NORMALIZE_ARGS="-n"
+        fi
+
+        ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} \
+            --name normalize-xliff-${SUFFIX} \
+            ${IMAGE_PHP} php -dxdebug.mode=off Build/Scripts/xliffNormalizer.php \
+            --root Resources ${NORMALIZE_ARGS} "$@"
         SUITE_EXIT_CODE=$?
         ;;
     npm)
