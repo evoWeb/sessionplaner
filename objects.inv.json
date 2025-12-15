@@ -1,0 +1,98 @@
+{
+    "std:doc": {
+        "Index": [
+            "sessionplaner",
+            "-",
+            "Index.html",
+            "sessionplaner: TYPO3Camp Session planer"
+        ],
+        "Installation\/Index": [
+            "sessionplaner",
+            "-",
+            "Installation\/Index.html",
+            "Installation"
+        ],
+        "Introduction\/Index": [
+            "sessionplaner",
+            "-",
+            "Introduction\/Index.html",
+            "Introduction"
+        ],
+        "Sitemap": [
+            "sessionplaner",
+            "-",
+            "Sitemap.html",
+            "<Unknown>"
+        ]
+    },
+    "std:label": {
+        "start": [
+            "sessionplaner",
+            "-",
+            "Index.html#start",
+            "sessionplaner: TYPO3Camp Session planer"
+        ],
+        "installation": [
+            "sessionplaner",
+            "-",
+            "Installation\/Index.html#installation",
+            "Installation"
+        ],
+        "introduction": [
+            "sessionplaner",
+            "-",
+            "Introduction\/Index.html#introduction",
+            "Introduction"
+        ],
+        "sitemap": [
+            "sessionplaner",
+            "-",
+            "Sitemap.html#Sitemap",
+            "-"
+        ]
+    },
+    "std:title": {
+        "sessionplaner-typo3camp-session-planer": [
+            "sessionplaner",
+            "-",
+            "Index.html#start",
+            "sessionplaner: TYPO3Camp Session planer"
+        ],
+        "installation-1": [
+            "sessionplaner",
+            "-",
+            "Installation\/Index.html#installation",
+            "Installation"
+        ],
+        "download-via-extension-manager": [
+            "sessionplaner",
+            "-",
+            "Installation\/Index.html#download-via-extension-manager",
+            "Download via Extension Manager"
+        ],
+        "download-via-composer": [
+            "sessionplaner",
+            "-",
+            "Installation\/Index.html#download-via-composer",
+            "Download via Composer"
+        ],
+        "introduction-1": [
+            "sessionplaner",
+            "-",
+            "Introduction\/Index.html#introduction",
+            "Introduction"
+        ],
+        "what-does-it-do": [
+            "sessionplaner",
+            "-",
+            "Introduction\/Index.html#what-does-it-do",
+            "What does it do?"
+        ],
+        "features": [
+            "sessionplaner",
+            "-",
+            "Introduction\/Index.html#features",
+            "Features"
+        ]
+    }
+}
