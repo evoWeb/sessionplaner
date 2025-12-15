@@ -1,6 +1,6 @@
 name: ext-sessionplaner
 type: typo3
-docroot: .build/public
+docroot: Build/public
 php_version: "8.2"
 webserver_type: apache-fpm
 xdebug_enabled: false
@@ -12,7 +12,7 @@ database:
 use_dns_when_possible: true
 composer_version: "2"
 web_environment:
-    - PATH=/var/www/html/.build/bin:$PATH
+    - PATH=/var/www/html/bin:$PATH
     - TYPO3_CONTEXT=Development
     - typo3DatabaseHost=db
     - typo3DatabaseName=t3func

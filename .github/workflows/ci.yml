@@ -2,107 +2,187 @@ name: build
 
 on:
   push:
-    branches: [ develop, master ]
+    branches: [ feature/runTest-update, develop, main ]
     tags: [ '*' ]
   pull_request:
     branches: [ develop ]
 
 jobs:
-  xliff:
+  resources:
+    name: Resources tests
     runs-on: ubuntu-latest
-    name: "Xliff linter"
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: "Run the xliff lint"
-        uses: TYPO3-Continuous-Integration/TYPO3-CI-Xliff-Lint@v1
-
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        typo3: ['^12', '^13']
-        php: ['8.2', '8.3']
-        include:
-          - typo3: '^12'
-            php: '8.1'
-
-    name: Tests on TYPO3 ${{ matrix.typo3 }} with PHP${{ matrix.php }}
-    steps:
-      - id: checkout
-        name: Checkout Code
         uses: actions/checkout@v4
 
-      - id: setup_mysql
-        name: Set up MySQL 8.0
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: 8.0
-          mysql root password: 'root'
+      - name: "Run the xliff lint"
+        run: Build/Scripts/runTests.sh -s lintScss
 
-      - id: setup_php
-        name: Set up PHP ${{ matrix.php }}
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          tools: composer
-          extensions: pdo, sqlite3
+      - name: "Test building the documentation"
+        run: Build/Scripts/runTests.sh -s checkRstRenderingSingle
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+  testsuite:
+    name: All php tests for TYPO3 ${{ matrix.packages.core }} with PHP ${{ matrix.packages.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        packages:
 
-      - name: Composer Cache Vars
-        id: composer-cache-vars
+          - php: '8.1'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.2'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.2'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.3'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.3'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.4'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.4'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.5'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.5'
+            core: '^12.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.2'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.2'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.3'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.3'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.4'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.4'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.5'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.5'
+            core: '^13.4'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint php
         run: |
-          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-          echo "timestamp=$(date +"%s")" >> $GITHUB_OUTPUT
+          Build/Scripts/runTests.sh \
+            -p ${{ matrix.packages.php }} \
+            -s lintPhp
 
-      - name: Cache Composer dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache-vars.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-${{ steps.composer-cache-vars.outputs.timestamp }}
-          restore-keys: |
-            ${{ runner.os }}-composer-${{ matrix.php }}-${{ matrix.typo3 }}-
-            ${{ runner.os }}-composer-${{ matrix.php }}-
-            ${{ runner.os }}-composer-
-
-      - id: install
-        name: Install
+      - name: Composer install core
         run: |
-          composer require typo3/cms-core:${{ matrix.typo3 }} --no-progress
-          git checkout composer.json
+          Build/Scripts/runTests.sh \
+            -p ${{ matrix.packages.php }} \
+            -s composer require ${{ matrix.packages.prefer }} "typo3/cms-core:${{ matrix.packages.core }}"
 
-      - id: lint
-        name: Lint
-        if: ${{ always() && steps.install.conclusion == 'success' }}
+      - name: Composer validate
         run: |
-          composer test:php:lint
+          Build/Scripts/runTests.sh \
+            -p ${{ matrix.packages.php }} \
+            -s composerValidate
 
-      - id: cgl
-        name: CGL
-        if: ${{ always() && steps.install.conclusion == 'success' }}
+      - name: CGL
         run: |
-          composer cgl:ci
+          Build/Scripts/runTests.sh \
+          -p ${{ matrix.packages.php }} \
+          -s cgl
 
-      - id: phpstan
-        name: PHPStan
-        if: ${{ always() && steps.install.conclusion == 'success' }}
+      - name: PHPStan
         run: |
-          composer phpstan -- --error-format=github
+          Build/Scripts/runTests.sh \
+          -p ${{ matrix.packages.php }} \
+          -s phpstan
+
+      - name: "Run the xliff lint"
+        run: |
+          Build/Scripts/runTests.sh \
+          -p ${{ matrix.packages.php }} \
+          -n -s normalizeXliff
+
+      - name: Cleanup
+        run: Build/Scripts/runTests.sh -s clean
 
   TERUpload:
-    needs: [ xliff, build ]
+    needs: [ resources, testsuite ]
     if: startsWith(github.ref, 'refs/tags/')
+
     runs-on: ubuntu-latest
 
     name: TYPO3 TER release
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Publish to TER
         uses: tomasnorre/typo3-upload-ter@v2

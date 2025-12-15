@@ -160,7 +160,7 @@ class SuggestFormFactory extends AbstractFormFactory
                 $tagField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
                 $tagFieldOptions = [];
                 foreach ($tags as $tag) {
-                    $tagFieldOptions[$tag->getUid()] = $tag->getLabel();
+                    $tagFieldOptions[(int)$tag->getUid()] = $tag->getLabel();
                 }
                 $prependOptionLabel = ' ';
                 if (isset($settings['suggest']['fields']['tag']['prependOptionLabel']) && $settings['suggest']['fields']['tag']['prependOptionLabel'] !== '') {
@@ -307,6 +307,7 @@ class SuggestFormFactory extends AbstractFormFactory
         return $form;
     }
 
+    // @phpstan-ignore return.deprecatedClass
     protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];

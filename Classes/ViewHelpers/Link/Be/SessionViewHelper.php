@@ -45,7 +45,7 @@ class SessionViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $params = [
-            'edit' => ['tx_sessionplaner_domain_model_session' => [$session->getUid() => 'edit']],
+            'edit' => ['tx_sessionplaner_domain_model_session' => [(int)$session->getUid() => 'edit']],
             'returnUrl' => $request->getAttribute('normalizedParams')->getRequestUri(),
         ];
         $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', $params);

@@ -14,7 +14,7 @@
                interlink-shortcode="evoweb/sessionplaner"
     />
     <project title="sessionplaner"
-             release="5.2.0"
+             release="5.2.1"
              copyright="since 2013 by evoWeb"
     />
 </guides>

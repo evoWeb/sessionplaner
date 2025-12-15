@@ -45,7 +45,7 @@ class DayViewHelper extends AbstractTagBasedViewHelper
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $params = [
-            'edit' => ['tx_sessionplaner_domain_model_day' => [$day->getUid() => 'edit']],
+            'edit' => ['tx_sessionplaner_domain_model_day' => [(int)$day->getUid() => 'edit']],
             'returnUrl' => $request->getAttribute('normalizedParams')->getRequestUri(),
         ];
         $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', $params);

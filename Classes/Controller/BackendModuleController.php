@@ -140,6 +140,7 @@ class BackendModuleController extends ActionController
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:session-new'))
             ->setShowLabelText(true)
+            // @phpstan-ignore classConstant.deprecated
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
         $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 1);
     }
@@ -154,6 +155,7 @@ class BackendModuleController extends ActionController
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:speaker-new'))
             ->setShowLabelText(true)
+            // @phpstan-ignore classConstant.deprecated
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
         $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 2);
     }
@@ -168,6 +170,7 @@ class BackendModuleController extends ActionController
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:room-new'))
             ->setShowLabelText(true)
+            // @phpstan-ignore classConstant.deprecated
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
         $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 3);
     }
@@ -182,6 +185,7 @@ class BackendModuleController extends ActionController
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:day-new'))
             ->setShowLabelText(true)
+            // @phpstan-ignore classConstant.deprecated
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
         $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 4);
     }

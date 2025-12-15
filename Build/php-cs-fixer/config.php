@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file represents the configuration for Code Sniffing PSR-2-related
  * automatic checks of coding guidelines
@@ -27,17 +29,25 @@ For the full copyright and license information, please read the
 LICENSE file that was distributed with this source code.
 EOF;
 
-return (new PhpCsFixer\Config())
+return (new \PhpCsFixer\Config())
     ->setRiskyAllowed(true)
+    ->setFinder(
+        \PhpCsFixer\Finder::create()
+            ->in(__DIR__ . '/../../')
+            ->exclude('bin')
+            ->exclude('Build')
+            ->exclude('config')
+            ->exclude('var')
+    )
     ->setRules([
         '@PSR2' => true,
         'header_comment' => [
-            'header' => $header
+            'header' => $header,
         ],
         'general_phpdoc_annotation_remove' => [
             'annotations' => [
-                'author'
-            ]
+                'author',
+            ],
         ],
         'no_leading_import_slash' => true,
         'no_trailing_comma_in_singleline' => true,
@@ -68,12 +78,4 @@ return (new PhpCsFixer\Config())
                 'arrays',
             ],
         ],
-    ])
-    ->setFinder(
-        PhpCsFixer\Finder::create()
-            ->exclude('.build')
-            ->exclude('Build/node_modules')
-            ->exclude('Contrib')
-            ->exclude('var')
-            ->in(__DIR__)
-    );
+    ]);
