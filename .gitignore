@@ -2,9 +2,12 @@
 .idea/
 .ddev/docker-compose.local.yaml
 *.cache
+bin/
 Build/node_modules/*
+Build/public/
+Build/vendor/
+config
 Documentation-GENERATED-temp/
-config/
 var/
 composer.lock
 FIRST_INSTALL

@@ -123,7 +123,11 @@ final class AjaxController
                     $session->setDay($day);
                     break;
                 default:
-                    $session->{'set' . GeneralUtility::underscoredToUpperCamelCase($field)}($value);
+                    $methodName = 'set' . GeneralUtility::underscoredToUpperCamelCase($field);
+                    if (method_exists($session, $methodName)) {
+                        // @phpstan-ignore method.dynamicName
+                        $session->{$methodName}($value);
+                    }
             }
         }
     }
