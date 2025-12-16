@@ -1,3 +1,5 @@
+@use '../variables' as v;
+
 //
 // Slot
 //
@@ -67,7 +69,7 @@
 // Variants
 //
 [data-sessionplaner-columns="2"] {
-    @media only screen and (min-width: $session-breakpoint-sm) {
+    @media only screen and (min-width: v.$session-breakpoint-sm) {
         &.sessionplaner-slot-header {
             display: flex;
         }
@@ -80,7 +82,7 @@
     }
 }
 [data-sessionplaner-columns="3"] {
-    @media only screen and (min-width: $session-breakpoint-md) {
+    @media only screen and (min-width: v.$session-breakpoint-md) {
         &.sessionplaner-slot-header {
             display: flex;
         }
@@ -93,12 +95,12 @@
     }
 }
 [data-sessionplaner-columns="4"] {
-    @media only screen and (min-width: $session-breakpoint-sm) {
+    @media only screen and (min-width: v.$session-breakpoint-sm) {
         .sessionplaner-slot-track {
             width: calc(100% / 2);
         }
     }
-    @media only screen and (min-width: $session-breakpoint-md) {
+    @media only screen and (min-width: v.$session-breakpoint-md) {
         &.sessionplaner-slot-header {
             display: flex;
         }
@@ -111,12 +113,12 @@
     }
 }
 [data-sessionplaner-columns="5"] {
-    @media only screen and (min-width: $session-breakpoint-sm) {
+    @media only screen and (min-width: v.$session-breakpoint-sm) {
         .sessionplaner-slot-track {
             width: calc(100% / 2);
         }
     }
-    @media only screen and (min-width: $session-breakpoint-lg) {
+    @media only screen and (min-width: v.$session-breakpoint-lg) {
         &.sessionplaner-slot-header {
             display: flex;
         }

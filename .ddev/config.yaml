@@ -18,7 +18,7 @@ web_environment:
     - typo3DatabaseName=t3func
     - typo3DatabasePassword=root
     - typo3DatabaseUsername=root
-nodejs_version: "16"
+nodejs_version: "v24"
 corepack_enable: false
 host_db_port: "59013"
 

@@ -1,6 +1,6 @@
 # TYPO3 Extension ``sessionplaner``
 
-![build](https://github.com/evoWeb/sessionplaner/workflows/build/badge.svg?branch=develop)
+![build](https://github.com/evoWeb/sessionplaner/actions/workflows/ci.yml/badge.svg?branch=develop)
 [![Latest Stable Version](https://poser.pugx.org/evoweb/sessionplaner/v/stable)](https://packagist.org/packages/evoweb/sessionplaner)
 [![Monthly Downloads](https://poser.pugx.org/evoweb/sessionplaner/d/monthly)](https://packagist.org/packages/evoweb/sessionplaner)
 [![Total Downloads](https://poser.pugx.org/evoweb/sessionplaner/downloads)](https://packagist.org/packages/evoweb/sessionplaner)
@@ -18,4 +18,4 @@ The recommended way to install TYPO3 Console is by using [Composer](https://getc
 Download and install the extension with the extension manager module or directly from the
 [TER](https://extensions.typo3.org/extension/sessionplaner/).
 
-See full documentation at https://docs.typo3.org/typo3cms/extensions/sessionplaner/Index.html
+See full documentation at https://extensions.typo3.org/extension/sessionplaner

@@ -1,3 +1,5 @@
+@use '../variables' as v;
+
 //
 // Day
 //
@@ -24,7 +26,7 @@
     .sessionplaner-day-list-item {
         padding: 10px;
         width: 100%;
-        @media only screen and (min-width: $session-breakpoint-md) {
+        @media only screen and (min-width: v.$session-breakpoint-md) {
             width: calc(100% / 2);
         }
     }

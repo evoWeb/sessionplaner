@@ -38,6 +38,12 @@ cleanup: ##@ Cleanup project folder
 	Build/Scripts/runTests.sh -s clean
 	echo "Cleanup finished"
 
+.PHONY: npm-install
+npm-install: ##@ Install packages with npm
+	echo "Npm install started"
+	Build/Scripts/runTests.sh -s npm install
+	echo "Npm install finished"
+
 .PHONY: npm-update
 npm-update: ##@ Update packages with npm
 	echo "Npm update started"
@@ -49,6 +55,24 @@ npm-build: ##@ Call npm build script
 	echo "Npm build started"
 	Build/Scripts/runTests.sh -s npm run build
 	echo "Npm build finished"
+
+.PHONY: npm-build-css
+npm-build-css: ##@ Call npm build:css script
+	echo "Npm build started"
+	Build/Scripts/runTests.sh -s npm run build:css
+	echo "Npm build finished"
+
+.PHONY: npm-build-js
+npm-build-js: ##@ Call npm build:js script
+	echo "Npm build started"
+	Build/Scripts/runTests.sh -s npm run compile:ts
+	echo "Npm build finished"
+
+.PHONY: npm-watch
+npm-watch: ##@ Call npm watch script
+	echo "Npm watch started"
+	Build/Scripts/runTests.sh -s npm run watch
+	echo "Npm watch finished"
 
 help:
 	@printf "\nUsage: make \033[32m<command>\033[0m\n"
