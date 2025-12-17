@@ -10,15 +10,19 @@ _ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 # ...and turn them into do-nothing targets
 $(eval $(_ARGS):;@:)
 
+##@ Docs
+
 .PHONY: docs
 docs: ##@ Generate projects documentation (from "Documentation" directory)
 	mkdir -p Documentation-GENERATED-temp
-	docker run --rm --pull always -v "$(shell pwd)":/project -t ghcr.io/typo3-documentation/render-guides:latest --config=Documentation
+	Build/Scripts/runTests.sh -s checkRstRenderingSingle
 
 .PHONY: test-docs
 test-docs: ##@ Test the documentation rendering
 	mkdir -p Documentation-GENERATED-temp
 	docker run --rm --pull always -v "$(shell pwd)":/project -t ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress --minimal-test
+
+##@ Release
 
 .PHONY: changelog
 changelog: ##@ Update changelog
@@ -28,48 +32,56 @@ changelog: ##@ Update changelog
 version: ##@ Update version
 	ddev php bin/extension-helper version:set $(_ARGS)
 
-.PHONY: install
-install: ##@ Composer install
-	ddev composer install
-
 .PHONY: cleanup
-cleanup: ##@ Cleanup project folder
+cleanup: ##@ Cleanup project folder of all files that are not part of the sessionplaner package
 	echo "Cleanup started"
 	Build/Scripts/runTests.sh -s clean
 	echo "Cleanup finished"
 
+##@ Install/Update
+
+.PHONY: composer-install
+composer-install: ##@ Install composer packages
+	Build/Scripts/runTests.sh -s composer install
+
+.PHONY: composer-update
+composer-update: ##@ Update composer packages
+	Build/Scripts/runTests.sh -s composer update
+
 .PHONY: npm-install
-npm-install: ##@ Install packages with npm
+npm-install: ##@ Install npm packages
 	echo "Npm install started"
 	Build/Scripts/runTests.sh -s npm install
 	echo "Npm install finished"
 
 .PHONY: npm-update
-npm-update: ##@ Update packages with npm
+npm-update: ##@ Update npm packages
 	echo "Npm update started"
 	Build/Scripts/runTests.sh -s npm update
 	echo "Npm update finished"
 
+##@ Compile frontend resources
+
 .PHONY: npm-build
-npm-build: ##@ Call npm build script
+npm-build: ##@ Build CSS and JavaScript files, after development is finished, right before commiting
 	echo "Npm build started"
 	Build/Scripts/runTests.sh -s npm run build
 	echo "Npm build finished"
 
 .PHONY: npm-build-css
-npm-build-css: ##@ Call npm build:css script
+npm-build-css: ##@ Build CSS files, only while in development
 	echo "Npm build started"
 	Build/Scripts/runTests.sh -s npm run build:css
 	echo "Npm build finished"
 
 .PHONY: npm-build-js
-npm-build-js: ##@ Call npm build:js script
+npm-build-js: ##@ Build JavaScript files, only while in development
 	echo "Npm build started"
 	Build/Scripts/runTests.sh -s npm run compile:ts
 	echo "Npm build finished"
 
 .PHONY: npm-watch
-npm-watch: ##@ Call npm watch script
+npm-watch: ##@ Watch Scss and Typescript files and build CSS and JavaScript files immediately, only while in development
 	echo "Npm watch started"
 	Build/Scripts/runTests.sh -s npm run watch
 	echo "Npm watch finished"
