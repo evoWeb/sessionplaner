@@ -184,6 +184,7 @@ cleanTestFiles() {
         typo3/sysext/core/Tests/AcceptanceTests-Job-* \
         typo3/sysext/core/Tests/Acceptance/Support/_generated \
         typo3temp/ \
+        var/ \
         config \
         composer.lock
     git checkout composer.json
