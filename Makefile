@@ -40,13 +40,30 @@ cleanup: ##@ Cleanup project folder of all files that are not part of the sessio
 
 ##@ Install/Update
 
+.PHONY: switch-core
+switch-core: ##@ Require core version. Needs version number given as argument. [^12.4|^13.4]
+	@if [[ $(_ARGS) != \^12.* ]] && [[ $(_ARGS) != \^13.* ]];
+	then \
+    	echo "This version of sessionplaner only supports v12.4 and v13.4";
+		exit;
+	else
+		echo "Composer require typo3/cms-core:$(_ARGS) started"
+		Build/Scripts/runTests.sh -s clean
+		Build/Scripts/runTests.sh -s composer require -W "typo3/cms-core:$(_ARGS)"
+		echo "Composer require typo3/cms-core:$(_ARGS) finished"
+	fi
+
 .PHONY: composer-install
 composer-install: ##@ Install composer packages
+	echo "Composer install started"
 	Build/Scripts/runTests.sh -s composer install
+	echo "Composer install finished"
 
 .PHONY: composer-update
 composer-update: ##@ Update composer packages
+	echo "Composer update started"
 	Build/Scripts/runTests.sh -s composer update
+	echo "Composer update finished"
 
 .PHONY: npm-install
 npm-install: ##@ Install npm packages
