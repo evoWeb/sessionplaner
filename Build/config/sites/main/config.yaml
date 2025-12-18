@@ -1,5 +1,4 @@
 base: 'https://ext-sessionplaner.ddev.site/'
-errorHandling: {  }
 languages:
   -
     title: English
@@ -7,7 +6,21 @@ languages:
     languageId: 0
     base: /
     locale: en_US.UTF-8
+    hreflang: en-GB
+    websiteTitle: ''
     navigationTitle: English
-    flag: us
-rootPageId: 3
-routes: {  }
+    flag: gb
+  -
+    title: Deutsch
+    enabled: true
+    languageId: 1
+    base: /de
+    locale: de_DE.utf8
+    hreflang: de-DE
+    websiteTitle: ''
+    navigationTitle: Deutsch
+    fallbackType: strict
+    fallbacks: ''
+    flag: de
+rootPageId: 1
+websiteTitle: ''
