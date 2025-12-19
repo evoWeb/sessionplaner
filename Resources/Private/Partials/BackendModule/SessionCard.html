@@ -71,17 +71,17 @@
         <div class="sessionbox-tags">
             <f:if condition="{session.type}">
                 <span class="sessionbox-tag">
-                    <f:if condition="{session.type} == 1">{f:translate(id: 'type-talk')}</f:if>
-                    <f:if condition="{session.type} == 2">{f:translate(id: 'type-tutorial')}</f:if>
-                    <f:if condition="{session.type} == 3">{f:translate(id: 'type-workshop')}</f:if>
-                    <f:if condition="{session.type} == 4">{f:translate(id: 'type-discussion')}</f:if>
+                    <f:if condition="{session.type} == 1"><f:translate id="type-talk"/></f:if>
+                    <f:if condition="{session.type} == 2"><f:translate id="type-tutorial"/></f:if>
+                    <f:if condition="{session.type} == 3"><f:translate id="type-workshop"/></f:if>
+                    <f:if condition="{session.type} == 4"><f:translate id="type-discussion"/></f:if>
                 </span>
             </f:if>
             <f:if condition="{session.level}">
                 <span class="sessionbox-tag">
-                    <f:if condition="{session.level} == 1">{f:translate(id: 'level-starter')}</f:if>
-                    <f:if condition="{session.level} == 2">{f:translate(id: 'level-advanced')}</f:if>
-                    <f:if condition="{session.level} == 3">{f:translate(id: 'level-pro')}</f:if>
+                    <f:if condition="{session.level} == 1"><f:translate id="level-starter"/></f:if>
+                    <f:if condition="{session.level} == 2"><f:translate id="level-advanced"/></f:if>
+                    <f:if condition="{session.level} == 3"><f:translate id="level-pro"/></f:if>
                 </span>
             </f:if>
             <f:if condition="{session.tags}">
