@@ -68,9 +68,11 @@ class SessionController extends ActionController
             $metaTagRegistry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
 
             $ogMetaTagManager = $metaTagRegistry->getManagerForProperty('og:title');
+            // @extensionScannerIgnoreLine
             $ogMetaTagManager->addProperty('og:title', $session->getTopic());
 
             $twitterMetaTagManager = $metaTagRegistry->getManagerForProperty('twitter:title');
+            // @extensionScannerIgnoreLine
             $twitterMetaTagManager->addProperty('twitter:title', $session->getTopic());
 
             $this->view->assign('session', $session);

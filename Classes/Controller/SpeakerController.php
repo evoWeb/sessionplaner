@@ -35,6 +35,7 @@ class SpeakerController extends ActionController
     protected function initializeAction(): void
     {
         if (!isset($this->settings['speakerSinglePid']) || $this->settings['speakerSinglePid'] === '') {
+            // @extensionScannerIgnoreLine
             // @phpstan-ignore property.deprecatedClass
             $this->settings['speakerSinglePid'] = (string) ($this->getTypoScriptFrontendController()->id ?? '');
         }
@@ -74,9 +75,11 @@ class SpeakerController extends ActionController
         $metaTagRegistry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
 
         $ogMetaTagManager = $metaTagRegistry->getManagerForProperty('og:title');
+        // @extensionScannerIgnoreLine
         $ogMetaTagManager->addProperty('og:title', $speaker->getName());
 
         $twitterMetaTagManager = $metaTagRegistry->getManagerForProperty('twitter:title');
+        // @extensionScannerIgnoreLine
         $twitterMetaTagManager->addProperty('twitter:title', $speaker->getName());
 
         $this->view->assign('speaker', $speaker);

@@ -193,6 +193,7 @@ class SuggestFormFactory extends AbstractFormFactory
             $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]);
         } else {
             $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class);
+            // @extensionScannerIgnoreLine
             $stringLengthValidator->setOptions(['minimum' => 5]);
         }
         $descriptionField->addValidator($stringLengthValidator);

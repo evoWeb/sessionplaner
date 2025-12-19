@@ -36,9 +36,11 @@ class TagController extends ActionController
         $metaTagRegistry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
 
         $ogMetaTagManager = $metaTagRegistry->getManagerForProperty('og:title');
+        // @extensionScannerIgnoreLine
         $ogMetaTagManager->addProperty('og:title', $tag->getLabel());
 
         $twitterMetaTagManager = $metaTagRegistry->getManagerForProperty('twitter:title');
+        // @extensionScannerIgnoreLine
         $twitterMetaTagManager->addProperty('twitter:title', $tag->getLabel());
 
         $this->view->assign('tag', $tag);

@@ -46,6 +46,7 @@ class RoomViewHelper extends AbstractTagBasedViewHelper
 
         $params = [
             'edit' => ['tx_sessionplaner_domain_model_room' => [(int)$room->getUid() => 'edit']],
+            // @extensionScannerIgnoreLine
             'returnUrl' => $request->getAttribute('normalizedParams')->getRequestUri(),
         ];
         $uri = (string)$uriBuilder->buildUriFromRoute('record_edit', $params);

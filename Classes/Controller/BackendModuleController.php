@@ -70,6 +70,7 @@ class BackendModuleController extends ActionController
             $parsedBody = [];
         }
         $queryParams = $this->request->getQueryParams();
+        // @extensionScannerIgnoreLine
         $this->id = (int)($parsedBody['id'] ?? $queryParams['id'] ?? 0);
 
         $day = (int)($parsedBody['day'] ?? $queryParams['day'] ?? 0);
@@ -96,6 +97,7 @@ class BackendModuleController extends ActionController
         }
         $view->setTitle($title);
 
+        // @extensionScannerIgnoreLine
         $page = BackendUtility::getRecord('pages', $this->id);
         if ($page !== null && isset($page['doktype']) && (int)$page['doktype'] === Constants::STORAGE_FOLDER_TYPE) {
             $docHeaderComponent = $view->getDocHeaderComponent();
@@ -133,6 +135,7 @@ class BackendModuleController extends ActionController
     protected function registerButtonNewSession(ButtonBar $buttonBar): void
     {
         $parameters = [
+            // @extensionScannerIgnoreLine
             'edit' => ['tx_sessionplaner_domain_model_session' => [$this->id => 'new']],
             'returnUrl' => $this->createModuleUri(),
         ];
@@ -148,6 +151,7 @@ class BackendModuleController extends ActionController
     protected function registerButtonNewSpeaker(ButtonBar $buttonBar): void
     {
         $parameters = [
+            // @extensionScannerIgnoreLine
             'edit' => ['tx_sessionplaner_domain_model_speaker' => [$this->id => 'new']],
             'returnUrl' => $this->createModuleUri(),
         ];
@@ -163,6 +167,7 @@ class BackendModuleController extends ActionController
     protected function registerButtonNewRoom(ButtonBar $buttonBar): void
     {
         $parameters = [
+            // @extensionScannerIgnoreLine
             'edit' => ['tx_sessionplaner_domain_model_room' => [$this->id => 'new']],
             'returnUrl' => $this->createModuleUri(),
         ];
@@ -178,6 +183,7 @@ class BackendModuleController extends ActionController
     protected function registerButtonNewDay(ButtonBar $buttonBar): void
     {
         $parameters = [
+            // @extensionScannerIgnoreLine
             'edit' => ['tx_sessionplaner_domain_model_day' => [$this->id => 'new']],
             'returnUrl' => $this->createModuleUri(),
         ];
@@ -199,6 +205,7 @@ class BackendModuleController extends ActionController
         }
 
         $baseParams = [
+            // @extensionScannerIgnoreLine
             'id' => (string)$this->id,
             'day' => $this->currentDay !== null ? (string)$this->currentDay->getUid() : '',
         ];
