@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -33,8 +34,8 @@ class Speaker extends AbstractSlugEntity
 
     /**
      * @var ObjectStorage<Session>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $sessions;
 
     public function __construct()

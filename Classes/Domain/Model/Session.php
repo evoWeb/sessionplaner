@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -60,26 +61,26 @@ class Session extends AbstractSlugEntity
 
     /**
      * @var ObjectStorage<Speaker>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $speakers;
 
     /**
      * @var ObjectStorage<FileReference>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $documents;
 
     /**
      * @var ObjectStorage<Tag>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $tags;
 
     /**
      * @var ObjectStorage<Link>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $links;
 
     public function __construct()

@@ -11,40 +11,26 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 class Tag extends AbstractEntity
 {
-    /**
-     * @var string
-     */
     protected string $label = '';
 
-    /**
-     * @var string
-     */
     protected string $color = '';
 
-    /**
-     * @var string
-     */
     protected string $description = '';
 
-    /**
-     * @var string
-     */
     protected string $slug = '';
 
-    /**
-     * @var bool
-     */
     protected bool $suggestFormOption = false;
 
     /**
      * @var ObjectStorage<Session>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $sessions;
 
     public function __construct()

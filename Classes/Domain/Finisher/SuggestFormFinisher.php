@@ -77,7 +77,7 @@ class SuggestFormFinisher extends AbstractFinisher
         $storagePid = 0;
         if (isset($settings['persistence']['storagePid'])) {
             $exploded = GeneralUtility::intExplode(',', (string)$settings['persistence']['storagePid']);
-            $storagePid = max(0, (int)($exploded[0] ?? 0));
+            $storagePid = max(0, ($exploded[0] ?? 0));
         }
 
         $data = $this->finisherContext->getFormValues();

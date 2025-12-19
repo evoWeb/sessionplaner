@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use DateTime;
 use Evoweb\Sessionplaner\Utility\ObjectStorageUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -19,18 +21,18 @@ class Day extends AbstractEntity
 {
     protected string $name = '';
 
-    protected \DateTime $date;
+    protected DateTime $date;
 
     /**
      * @var ObjectStorage<Room>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     public ObjectStorage $rooms;
 
     /**
      * @var ObjectStorage<Slot>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     public ObjectStorage $slots;
 
     public function __construct()
@@ -44,12 +46,12 @@ class Day extends AbstractEntity
         $this->slots = new ObjectStorage();
     }
 
-    public function setDate(\DateTime $date): void
+    public function setDate(DateTime $date): void
     {
         $this->date = $date;
     }
 
-    public function getDate(): \DateTime
+    public function getDate(): DateTime
     {
         return $this->date;
     }

@@ -17,7 +17,7 @@ use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
 use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
 use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Information\Typo3Version;
+use RuntimeException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -29,7 +29,6 @@ use TYPO3\CMS\Form\Domain\Factory\AbstractFormFactory;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
 use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
 use TYPO3\CMS\Form\Domain\Model\FormElements\Section;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class SuggestFormFactory extends AbstractFormFactory
 {
@@ -189,13 +188,9 @@ class SuggestFormFactory extends AbstractFormFactory
         );
         $descriptionField->addValidator(GeneralUtility::makeInstance(NotEmptyValidator::class));
 
-        if ((GeneralUtility::makeInstance(Typo3Version::class))->getMajorVersion() < 12) {
-            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class, ['minimum' => 5]);
-        } else {
-            $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class);
-            // @extensionScannerIgnoreLine
-            $stringLengthValidator->setOptions(['minimum' => 5]);
-        }
+        $stringLengthValidator = GeneralUtility::makeInstance(StringLengthValidator::class);
+        // @extensionScannerIgnoreLine
+        $stringLengthValidator->setOptions(['minimum' => 5]);
         $descriptionField->addValidator($stringLengthValidator);
 
         if (isset($settings['suggest']['fields']['length']['enable']) && (bool)$settings['suggest']['fields']['length']['enable'] === true) {
@@ -245,7 +240,7 @@ class SuggestFormFactory extends AbstractFormFactory
 
         $explanationText = $page->createElement('headline', 'StaticText');
         if (!$explanationText instanceof GenericFormElement) {
-            throw new \RuntimeException(sprintf(
+            throw new RuntimeException(sprintf(
                 'Expected instance of GenericFormElement for headline, got %s',
                 get_class($explanationText)
             ));
@@ -277,12 +272,12 @@ class SuggestFormFactory extends AbstractFormFactory
             && $settings['suggest']['notification']['senderName'] !== ''
         ) {
             $form->createFinisher('EmailToReceiver', [
-                'subject' => $settings['suggest']['notification']['subject'] ?? '',
+                'subject' => $settings['suggest']['notification']['subject'],
                 'recipients' => [
                     $settings['suggest']['notification']['recipientAddress'] => $settings['suggest']['notification']['recipientName'],
                 ],
-                'senderAddress' => $settings['suggest']['notification']['senderAddress'] ?? '',
-                'senderName' => $settings['suggest']['notification']['senderName'] ?? '',
+                'senderAddress' => $settings['suggest']['notification']['senderAddress'],
+                'senderName' => $settings['suggest']['notification']['senderName'],
                 'carbonCopyAddress' => $settings['suggest']['notification']['carbonCopyAddress'] ?? '',
                 'blindCarbonCopyAddress' => $settings['suggest']['notification']['blindCarbonCopyAddress'] ?? '',
                 'replyToRecipients' => [
@@ -306,12 +301,6 @@ class SuggestFormFactory extends AbstractFormFactory
 
         $this->triggerFormBuildingFinished($form);
         return $form;
-    }
-
-    // @phpstan-ignore return.deprecatedClass
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
     }
 
     protected function getLocalizedLabel(string $label): string
