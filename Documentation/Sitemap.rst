@@ -1,14 +1,11 @@
-:orphan:
+:template: sitemap.html
 
-.. include:: Includes.txt
+.. include:: /Includes.rst.txt
 
-.. only:: html
+..  _sitemap:
 
-   .. _Sitemap:
+=======
+Sitemap
+=======
 
-   Sitemap
-   =======
-
-   .. toctree::
-
-      Index
+.. The sitemap.html template will insert here the page tree automatically.

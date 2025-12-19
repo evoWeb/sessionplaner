@@ -1,21 +1,22 @@
-.. include:: ../Includes.txt
+.. include:: /Includes.rst.txt
 
-.. _introduction:
+..  _introduction:
 
 ============
 Introduction
 ============
 
+..  _what-it-does:
 
 What does it do?
-----------------
+================
 
 In the backend a module assists the planing process by adding sessions
 in a grid of all possible time slots and available rooms. It helps keeping
 an overview of which slots are booked and which are free.
 
 .. figure:: ../Images/sessionplaner-backend.png
-   :alt: Example of the frontend rendering with sessionplaner
+   :alt: Example of the backend module of the sessionplaner
 
 
 In frontend the session plan is rendered in a table style. For example look
