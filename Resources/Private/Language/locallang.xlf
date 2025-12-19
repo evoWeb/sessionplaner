@@ -141,6 +141,9 @@
       <trans-unit id="option.unknown" xml:space="preserve">
         <source>Unknown Option</source>
       </trans-unit>
+      <trans-unit id="option.none" xml:space="preserve">
+        <source>None selected</source>
+      </trans-unit>
       <trans-unit id="option.sessiontype.talk" xml:space="preserve">
         <source>Talk</source>
       </trans-unit>

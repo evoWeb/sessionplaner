@@ -16,59 +16,25 @@ use Evoweb\Sessionplaner\Domain\Model\Speaker;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
 use Evoweb\Sessionplaner\Domain\Repository\TagRepository;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface;
 use TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher;
 
+#[Autoconfigure(public: true)]
 class SuggestFormFinisher extends AbstractFinisher
 {
-    protected ?ConfigurationManagerInterface $configurationManager = null;
-
-    protected ?SpeakerRepository $speakerRepository = null;
-
-    protected ?SessionRepository $sessionRepository = null;
-
-    protected ?TagRepository $tagRepository = null;
-
-    protected ?PersistenceManagerInterface $persistenceManager = null;
-
-    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
-    {
-        $this->configurationManager = $configurationManager;
-    }
-
-    public function injectSpeakerRepository(SpeakerRepository $speakerRepository): void
-    {
-        $this->speakerRepository = $speakerRepository;
-    }
-
-    public function injectSessionRepository(SessionRepository $sessionRepository): void
-    {
-        $this->sessionRepository = $sessionRepository;
-    }
-
-    public function injectTagRepository(TagRepository $tagRepository): void
-    {
-        $this->tagRepository = $tagRepository;
-    }
-
-    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager): void
-    {
-        $this->persistenceManager = $persistenceManager;
-    }
+    public function __construct(
+        protected readonly ConfigurationManagerInterface $configurationManager,
+        protected readonly SpeakerRepository $speakerRepository,
+        protected readonly SessionRepository $sessionRepository,
+        protected readonly TagRepository $tagRepository,
+        protected readonly PersistenceManagerInterface $persistenceManager,
+    ) {}
 
     protected function executeInternal()
     {
-        if ($this->configurationManager === null
-            || $this->speakerRepository === null
-            || $this->sessionRepository === null
-            || $this->tagRepository === null
-            || $this->persistenceManager === null
-        ) {
-            return null;
-        }
-
         $settings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
             'sessionplaner'
@@ -86,7 +52,6 @@ class SuggestFormFinisher extends AbstractFinisher
 
         if ($speaker === null) {
             $speaker = new Speaker();
-            $speaker->initializeObject();
             $speaker->setPid($storagePid);
             $speaker->setName((string)($data['fullname'] ?? ''));
             $speaker->setEmail((string)($data['email'] ?? ''));
@@ -96,7 +61,6 @@ class SuggestFormFinisher extends AbstractFinisher
         }
 
         $session = new Session();
-        $session->initializeObject();
         $session->setPid($storagePid);
         $session->setHidden(true);
         $session->setSuggestion(true);

@@ -29,9 +29,7 @@ class SpeakerRepository extends Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->matching($query->equals('detailPage', $pageId));
-        /** @var Speaker $result */
-        $result = $query->execute()->getFirst();
-        return $result;
+        return $query->execute()->getFirst();
     }
 
     public function findOneByEmailIncludeHidden(string $email): ?Speaker
@@ -39,9 +37,6 @@ class SpeakerRepository extends Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
         $query->matching($query->equals('email', trim($email)));
-
-        /** @var Speaker $speaker */
-        $speaker = $query->execute()->getFirst();
-        return $speaker;
+        return $query->execute()->getFirst();
     }
 }

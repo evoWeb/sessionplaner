@@ -7,6 +7,10 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
+use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
+use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 return [
@@ -168,7 +172,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionTypeEnum::getTcaOptions()),
+                'items' => SessionTypeEnum::getTcaOptions(),
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
@@ -179,7 +183,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionLevelEnum::getTcaOptions()),
+                'items' => SessionLevelEnum::getTcaOptions(),
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
@@ -300,7 +304,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum::getTcaOptions()),
+                'items' => SessionRequestTypeEnum::getTcaOptions(),
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
