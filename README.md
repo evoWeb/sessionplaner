@@ -19,3 +19,9 @@ Download and install the extension with the extension manager module or directly
 [TER](https://extensions.typo3.org/extension/sessionplaner/).
 
 See full documentation at https://extensions.typo3.org/extension/sessionplaner
+
+## Contribution guidelines
+
+- we use PER-CS-1 as coding standard.
+- supported PHP versions are 8.1 to 8.4
+- the Makefile needs to be changed if a different PHP version should be used for development. Default is 8.1.
