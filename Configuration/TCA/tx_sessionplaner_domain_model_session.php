@@ -67,7 +67,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 40,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256,
             ],
         ],
@@ -138,9 +139,8 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-attendees',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 20,
-                'eval' => 'int',
                 'max' => 256,
             ],
         ],
@@ -198,8 +198,8 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        $languageFile . 'notassigned',
-                        0,
+                        'label' => $languageFile . 'notassigned',
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
@@ -218,8 +218,8 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        $languageFile . 'notassigned',
-                        0,
+                        'label' => $languageFile . 'notassigned',
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
@@ -237,8 +237,8 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        $languageFile . 'notassigned',
-                        0,
+                        'label' => $languageFile . 'notassigned',
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',

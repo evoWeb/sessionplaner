@@ -24,3 +24,5 @@ languages:
     flag: de
 rootPageId: 1
 websiteTitle: ''
+imports:
+  - { resource: "EXT:sessionplaner/Configuration/Routes/Default.yaml" }

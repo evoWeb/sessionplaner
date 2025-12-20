@@ -46,18 +46,18 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-start',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'time,required',
+                'type' => 'datetime',
+                'format' => 'time',
+                'required' => true,
             ],
         ],
         'duration' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-duration',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 20,
-                'eval' => 'int,trim,required',
+                'required' => true,
                 'default' => 45,
                 'max' => 256,
             ],
@@ -102,12 +102,13 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                day,
-                start,
-                duration,
-                break,
-                description,
-                rooms,
+                --div--;General,
+                    day,
+                    start,
+                    duration,
+                    break,
+                    description,
+                    rooms,
             ',
         ],
     ],

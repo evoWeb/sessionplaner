@@ -35,20 +35,18 @@ return [
             'config' => [
                 'type' => 'input',
                 'max' => 255,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'link' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_link-link',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputLink',
-                'eval' => 'required',
+                'type' => 'link',
+                'required' => true,
             ],
         ],
-    ],
-    'palettes' => [
     ],
     'types' => [
         '0' => [

@@ -1,5 +1,7 @@
 <?php
 
+defined('TYPO3') or die('Access denied.');
+
 /*
  * This file is part of the package evoweb/sessionplaner.
  *
@@ -7,84 +9,97 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3') or die('Access denied.');
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
+ExtensionManagementUtility::addTcaSelectItemGroup(
+    'tt_content',
+    'list_type',
+    'sessionplaner',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.group',
+);
 
 /**
  * Frontend Plugin Session Suggest
  */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+$pluginSignature = ExtensionUtility::registerPlugin(
     'sessionplaner',
     'Suggest',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest',
-    'sessionplaner-plugin-suggest'
+    'sessionplaner-plugin-suggest',
+    'sessionplaner',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_suggest_description',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_suggest'] =
-    'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout, select_key';
 
 /**
  * Frontend Plugin Session
  */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+$pluginSignature = ExtensionUtility::registerPlugin(
     'sessionplaner',
     'Session',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session',
-    'sessionplaner-plugin-session'
+    'sessionplaner-plugin-session',
+    'sessionplaner',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_session_description',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_session'] =
-    'layout, select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplaner_session'] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'sessionplaner_session',
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
     'FILE:EXT:sessionplaner/Configuration/FlexForms/Session.xml'
 );
 
 /**
  * Frontend Plugin Sessionplan
  */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+$pluginSignature = ExtensionUtility::registerPlugin(
     'sessionplaner',
     'Sessionplan',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan',
-    'sessionplaner-plugin-display'
+    'sessionplaner-plugin-display',
+    'sessionplaner',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_sessionplan_description',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_sessionplan'] =
-    'layout, select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplaner_sessionplan'] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'sessionplaner_sessionplan',
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
     'FILE:EXT:sessionplaner/Configuration/FlexForms/Sessionplan.xml'
 );
 
 /**
  * Frontend Plugin Speaker
  */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+$pluginSignature = ExtensionUtility::registerPlugin(
     'sessionplaner',
     'Speaker',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker',
-    'sessionplaner-plugin-speaker'
+    'sessionplaner-plugin-speaker',
+    'sessionplaner',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_speaker_description',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_speaker'] =
-    'layout, select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplaner_speaker'] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'sessionplaner_speaker',
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
     'FILE:EXT:sessionplaner/Configuration/FlexForms/Speaker.xml'
 );
 
 /**
  * Frontend Plugin Tag
  */
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+$pluginSignature = ExtensionUtility::registerPlugin(
     'sessionplaner',
     'Tag',
     'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_tag',
-    'sessionplaner-plugin-tag'
+    'sessionplaner-plugin-tag',
+    'sessionplaner',
+    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_be.xlf:tt_content.list_type_tag_description',
 );
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sessionplaner_tag'] =
-    'layout, select_key';
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sessionplaner_tag'] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'sessionplaner_tag',
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout, select_key';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
     'FILE:EXT:sessionplaner/Configuration/FlexForms/Tag.xml'
 );

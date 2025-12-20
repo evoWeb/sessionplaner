@@ -35,9 +35,9 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', ''],
-                    [$languageFile . 'tx_sessionplaner_domain_model_room-type-main', 'main'],
-                    [$languageFile . 'tx_sessionplaner_domain_model_room-type-side', 'side'],
+                    ['label' => '', 'value' => ''],
+                    ['label' => $languageFile . 'tx_sessionplaner_domain_model_room-type-main', 'value' => 'main'],
+                    ['label' => $languageFile . 'tx_sessionplaner_domain_model_room-type-side', 'value' => 'side'],
                 ],
             ],
         ],
@@ -47,7 +47,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256,
             ],
         ],
@@ -65,9 +66,8 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-seats',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 20,
-                'eval' => 'int',
                 'max' => 256,
             ],
         ],
@@ -117,12 +117,13 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-            type,
-            name,
-            logo,
-            seats,
-            days,
-            slots,
+                --div--;General,
+                    type,
+                    name,
+                    logo,
+                    seats,
+                    days,
+                    slots,
             ',
         ],
     ],
