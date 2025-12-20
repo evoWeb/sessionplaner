@@ -10,6 +10,8 @@ _ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 # ...and turn them into do-nothing targets
 $(eval $(_ARGS):;@:)
 
+PHP_VERSION := "8.1"
+
 ##@ Docs
 
 .PHONY: docs
@@ -21,6 +23,20 @@ docs: ##@ Generate projects documentation (from "Documentation" directory)
 test-docs: ##@ Test the documentation rendering
 	mkdir -p Documentation-GENERATED-temp
 	docker run --rm --pull always -v "$(shell pwd)":/project -t ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress --minimal-test
+
+##@ Tests
+
+.PHONY: phpstan
+phpstan: ##@ Static code analysis with php-cs-fixer
+	echo "Checking with phpstan started"
+	Build/Scripts//runTests.sh -p ${PHP_VERSION} -s phpstan
+	echo "Checking with phpstan finished"
+
+.PHONY: cgl
+cgl: ##@ Coding guideline check with
+	echo "Coding guideline check with phpstan started"
+	Build/Scripts//runTests.sh -p ${PHP_VERSION} -s cgl -n
+	echo "Coding guideline check with phpstan finished"
 
 ##@ Release
 
@@ -56,13 +72,13 @@ switch-core: ##@ Require core version. Needs version number given as argument. [
 .PHONY: composer-install
 composer-install: ##@ Install composer packages
 	echo "Composer install started"
-	Build/Scripts/runTests.sh -s composer install
+	Build/Scripts/runTests.sh -p ${PHP_VERSION} -s composer install
 	echo "Composer install finished"
 
 .PHONY: composer-update
 composer-update: ##@ Update composer packages
 	echo "Composer update started"
-	Build/Scripts/runTests.sh -s composer update
+	Build/Scripts/runTests.sh -p ${PHP_VERSION} -s composer update
 	echo "Composer update finished"
 
 .PHONY: npm-install

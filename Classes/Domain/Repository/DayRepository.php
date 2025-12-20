@@ -40,10 +40,7 @@ class DayRepository extends Repository
         }
 
         $query = $this->createQuery();
-        return $query->matching(
-            $query->logicalAnd(
-                $query->in('uid', $uids)
-            )
-        )->execute();
+        $query->matching($query->in('uid', $uids));
+        return $query->execute();
     }
 }

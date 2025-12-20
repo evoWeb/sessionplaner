@@ -18,18 +18,12 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class SessionplanController extends ActionController
 {
-    protected DayRepository $dayRepository;
-
-    public function __construct(DayRepository $dayRepository)
-    {
-        $this->dayRepository = $dayRepository;
-    }
+    public function __construct(protected readonly DayRepository $dayRepository) {}
 
     public function displayAction(): ResponseInterface
     {
         $day = $this->dayRepository->findByUid($this->settings['day']);
         $this->view->assign('day', $day);
-
         return new HtmlResponse($this->view->render());
     }
 }

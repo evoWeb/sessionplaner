@@ -18,6 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
+use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -25,18 +26,14 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class SpeakerController extends ActionController
 {
-    protected SpeakerRepository $speakerRepository;
-
-    public function __construct(SpeakerRepository $speakerRepository)
-    {
-        $this->speakerRepository = $speakerRepository;
-    }
+    public function __construct(protected readonly SpeakerRepository $speakerRepository) {}
 
     protected function initializeAction(): void
     {
-        if (!isset($this->settings['speakerSinglePid']) || $this->settings['speakerSinglePid'] === '') {
-            // @phpstan-ignore property.deprecatedClass
-            $this->settings['speakerSinglePid'] = (string) ($this->getTypoScriptFrontendController()->id ?? '');
+        if (($this->settings['speakerSinglePid'] ?? '') === '') {
+            /** @var PageArguments $pageArguments */
+            $pageArguments = $this->request->getAttribute('routing');
+            $this->settings['speakerSinglePid'] = (string)$pageArguments->getPageId();
         }
     }
 
@@ -74,19 +71,15 @@ class SpeakerController extends ActionController
         $metaTagRegistry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
 
         $ogMetaTagManager = $metaTagRegistry->getManagerForProperty('og:title');
+        // @extensionScannerIgnoreLine
         $ogMetaTagManager->addProperty('og:title', $speaker->getName());
 
         $twitterMetaTagManager = $metaTagRegistry->getManagerForProperty('twitter:title');
+        // @extensionScannerIgnoreLine
         $twitterMetaTagManager->addProperty('twitter:title', $speaker->getName());
 
         $this->view->assign('speaker', $speaker);
 
         return new HtmlResponse($this->view->render());
-    }
-
-    // @phpstan-ignore return.deprecatedClass
-    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'];
     }
 }

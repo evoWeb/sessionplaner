@@ -36,7 +36,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256,
             ],
         ],
@@ -44,10 +45,9 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
+                'format' => 'date',
                 'size' => 20,
-                'eval' => 'date',
             ],
         ],
         'rooms' => [
@@ -82,10 +82,11 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-            name,
-            date,
-            rooms,
-            slots
+                --div--;General,
+                    name,
+                    date,
+                    rooms,
+                    slots
             ',
         ],
     ],

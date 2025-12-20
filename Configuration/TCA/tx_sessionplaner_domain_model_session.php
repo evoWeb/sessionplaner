@@ -7,6 +7,10 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use Evoweb\Sessionplaner\Enum\SessionLevelEnum;
+use Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum;
+use Evoweb\Sessionplaner\Enum\SessionTypeEnum;
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 return [
@@ -63,7 +67,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 40,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256,
             ],
         ],
@@ -134,9 +139,8 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-attendees',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 20,
-                'eval' => 'int',
                 'max' => 256,
             ],
         ],
@@ -168,7 +172,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionTypeEnum::getTcaOptions()),
+                'items' => SessionTypeEnum::getTcaOptions(),
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
@@ -179,7 +183,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionLevelEnum::getTcaOptions()),
+                'items' => SessionLevelEnum::getTcaOptions(),
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
@@ -194,8 +198,8 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        $languageFile . 'notassigned',
-                        0,
+                        'label' => $languageFile . 'notassigned',
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
@@ -214,8 +218,8 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        $languageFile . 'notassigned',
-                        0,
+                        'label' => $languageFile . 'notassigned',
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
@@ -233,8 +237,8 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        $languageFile . 'notassigned',
-                        0,
+                        'label' => $languageFile . 'notassigned',
+                        'value' => 0,
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
@@ -300,7 +304,7 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array_merge([['', 0]], \Evoweb\Sessionplaner\Enum\SessionRequestTypeEnum::getTcaOptions()),
+                'items' => SessionRequestTypeEnum::getTcaOptions(),
                 'minitems' => 0,
                 'maxitems' => 1,
             ],

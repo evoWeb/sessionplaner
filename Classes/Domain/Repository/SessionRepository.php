@@ -37,11 +37,7 @@ class SessionRepository extends Repository
         $query->getQuerySettings()->setIncludeDeleted(true);
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->matching($query->equals('uid', $uid));
-
-        /** @var Session|null $result */
-        $result = $query->execute()->getFirst();
-
-        return $result;
+        return $query->execute()->getFirst();
     }
 
     /**
@@ -50,11 +46,7 @@ class SessionRepository extends Repository
     public function findSuggested(): QueryResultInterface
     {
         $query = $this->createQuery();
-        $query->matching(
-            $query->logicalAnd(
-                $query->equals('suggestion', 1)
-            )
-        );
+        $query->matching($query->equals('suggestion', 1));
         return $query->execute();
     }
 
@@ -80,11 +72,9 @@ class SessionRepository extends Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalAnd(
-                $query->logicalOr(
-                    $query->equals('slot', 0),
-                    $query->equals('slot', null)
-                )
+            $query->logicalOr(
+                $query->equals('slot', 0),
+                $query->equals('slot', null)
             )
         );
         return $query->execute();
@@ -100,12 +90,13 @@ class SessionRepository extends Repository
             $days = [-1];
         }
         $query = $this->createQuery();
-        return $query->matching(
+        $query->matching(
             $query->logicalAnd(
                 $query->in('day', $days),
                 $query->logicalNot($query->equals('slot', 0)),
                 $query->logicalNot($query->equals('room', 0))
             )
-        )->execute();
+        );
+        return $query->execute();
     }
 }

@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -38,7 +39,7 @@ class ObjectStorageUtility
         $inventory = [];
 
         foreach ($objectStorage as $item) {
-            if (!method_exists($item, '_getProperty')) {
+            if (!method_exists($item, '_getProperty') || !property_exists($item, $property)) {
                 continue;
             }
 

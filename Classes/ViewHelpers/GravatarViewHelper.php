@@ -24,20 +24,17 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     {
         parent::initializeArguments();
         $this->registerArgument('email', 'string', 'Email address', true);
-        $this->registerArgument('size', 'int', '[ 1 - 2048 ]');
-        $this->registerArgument('default', 'string', '[ 404 | mm | identicon | monsterid | wavatar ]');
-        $this->registerArgument('rating', 'string', '[ g | pg | r | x ]');
+        $this->registerArgument('size', 'int', '[ 1 - 2048 ]', false, 80);
+        $this->registerArgument('default', 'string', '[ 404 | mm | identicon | monsterid | wavatar ]', false, 'mm');
+        $this->registerArgument('rating', 'string', '[ g | pg | r | x ]', false, 'g');
     }
 
     public function render(): string
     {
-        $defaultSize = 80;
-        $defaultDefault = 'mm';
-        $defaultRating = 'g';
         $email = $this->arguments['email'];
-        $size = $this->arguments['size'] ?? $defaultSize;
-        $default = $this->arguments['default'] ?? $defaultDefault;
-        $rating = $this->arguments['rating'] ?? $defaultRating;
+        $size = $this->arguments['size'];
+        $default = $this->arguments['default'];
+        $rating = $this->arguments['rating'];
 
         $avatarUrl = 'https://www.gravatar.com/avatar/' . md5($email)
             . '?s=' . $size

@@ -13,7 +13,7 @@ namespace Evoweb\Sessionplaner\TitleTagProvider;
 
 use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
 
-class EventTitleTagProvider extends AbstractPageTitleProvider
+class SessionTitleTagProvider extends AbstractPageTitleProvider
 {
     public function setTitle(string $title): void
     {
