@@ -33,6 +33,27 @@ return [
         ],
     ],
     'columns' => [
+        'hidden' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'language',
+            ],
+        ],
         'link_text' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_link-linktext',
@@ -59,9 +80,11 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                hidden,
-                link_text,
-                link,
+                --div--;General,
+                    hidden,
+                    sys_language_uid,
+                    link_text,
+                    link,
             ',
         ],
     ],
