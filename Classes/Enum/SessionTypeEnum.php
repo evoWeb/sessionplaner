@@ -53,7 +53,7 @@ class SessionTypeEnum
             [
                 'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.none',
                 'value' => 0,
-            ]
+            ],
         ];
         $options = self::getAvailableOptions();
         foreach ($options as $option) {

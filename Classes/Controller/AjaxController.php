@@ -11,10 +11,7 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Controller;
 
-use Evoweb\Sessionplaner\Domain\Model\Day;
-use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Session;
-use Evoweb\Sessionplaner\Domain\Model\Slot;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\RoomRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;

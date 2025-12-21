@@ -15,8 +15,8 @@
                interlink-shortcode="evoweb/sessionplaner"
     />
     <project title="Sessionplaner extension"
-             release="5.2.1"
-             version="5.2.1"
+             release="6.0.0"
+             version="6.0.0"
              copyright="since 2013 by evoWeb"
     />
 </guides>
