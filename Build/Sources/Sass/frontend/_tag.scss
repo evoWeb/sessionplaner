@@ -1,4 +1,5 @@
-@use "sass:map";
+@use '../variables' as v;
+@use 'sass:map';
 
 //
 // Tag
@@ -30,7 +31,7 @@
     text-decoration-color: var(--session-tag-title-decoration-color);
 }
 
-@each $name, $color in $session-colors {
+@each $name, $color in v.$session-colors {
     .sessionplaner-tag-#{"" + $name} {
         --session-tag-bg: #{map.get($color, bg)};
         --session-tag-color: #{map.get($color, text)};

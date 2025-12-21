@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -24,21 +25,18 @@ class Slot extends AbstractEntity
 
     protected ?string $description = '';
 
-    /**
-     * @var ?Day
-     */
-    protected $day = null;
+    protected ?Day $day = null;
 
     /**
      * @var ObjectStorage<Room>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $rooms;
 
     /**
      * @var ObjectStorage<Session>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $sessions;
 
     public function __construct()

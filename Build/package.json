@@ -1,26 +1,48 @@
 {
   "name": "sessionplaner",
   "description": "Bundles all resources for the usage",
-  "homepage": "http://www.evoweb.de/",
+  "homepage": "https://github.com/evoWeb/sessionplaner/",
   "author": {
     "name": "Sebastian Fischer",
     "email": "typo3@evoweb.de"
   },
   "license": "GPL-2.0+",
-  "version": "5.2.0-dev",
+  "version": "5.2.1",
   "devDependencies": {
+		"@stylistic/eslint-plugin": "^2.6.2",
+		"@typescript-eslint/eslint-plugin": "^8.39.0",
+		"@typescript-eslint/parser": "^8.39.0",
+		"@typescript-eslint/typescript-estree": "^8.39.0",
     "autoprefixer": "^10.4.16",
-    "gulp": "^5.0.0",
-    "gulp-postcss": "^9.1.0",
-    "gulp-sass": "^6.0.1",
-    "sass": "^1.89.2"
+		"chokidar-cli": "^3.0.0",
+		"concurrently": "^9.2.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "postcss-scss": "^4.0.9",
+    "sass": "^1.89.2",
+    "stylelint": "^14.16.1",
+    "stylelint-order": "^5.0.0",
+    "stylelint-scss": "^5.3.2"
   },
   "browserslist": [
     "> 1%",
     "last 5 versions"
   ],
   "scripts": {
-    "build": "gulp build",
-    "watch": "gulp watch"
+		"build": "npm run build:css && npm run build:js",
+
+		"build:css": "npm run scss:build && npm run css:prefix",
+		"lint:scss": "stylelint Sources/Sass/*.scss",
+		"scss:build": "sass --embed-source-map Sources/Sass/backend.scss:../Resources/Public/Stylesheets/backend.css Sources/Sass/frontend.scss:../Resources/Public/Stylesheets/frontend.css",
+		"css:prefix": "postcss ../Resources/Public/Stylesheets/backend.css --use autoprefixer --replace && postcss ../Resources/Public/Stylesheets/frontend.css --use autoprefixer --replace",
+
+		"watch": "concurrently -k -n sass,postcss -c blue,green \"npm run watch:sass\" \"npm run watch:prefix\" \"npm run watch:typescript\"",
+		"watch:sass": "sass --embed-source-map --watch Sources/Sass/backend.scss:../Resources/Public/Stylesheets/backend.css Sources/Sass/frontend.scss:../Resources/Public/Stylesheets/frontend.css",
+		"watch:prefix": "SHELL=/bin/sh chokidar \"../Resources/Public/Stylesheets/*.css\" \"!../Resources/Public/Stylesheets/*.css.map\" -c \"postcss {path} --use autoprefixer --replace\"",
+		"watch:typescript": "tsc --watch",
+
+		"build:js": "npm run lint:ts && npm run compile:ts",
+		"lint:ts": "eslint -c eslint.config.mjs Sources/TypeScript/**/*.ts",
+		"compile:ts": "tsc --build --force tsconfig.json"
   }
 }

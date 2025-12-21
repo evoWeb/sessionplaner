@@ -1,3 +1,4 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Frontend" />
 <f:section name="Content">
 
@@ -14,7 +15,7 @@
 
             <div class="sessionplaner-tagdetail-backlink">
                 <f:if condition="{settings.sessionplanPid}">
-                    <f:link.page pageUid="{settings.sessionplanPid}">{f:translate(id: 'back-to-overview')}</f:link.page>
+                    <f:link.page pageUid="{settings.sessionplanPid}"><f:translate id="back-to-overview"/></f:link.page>
                 </f:if>
             </div>
         </article>
@@ -22,3 +23,4 @@
     </f:if>
 
 </f:section>
+</html>

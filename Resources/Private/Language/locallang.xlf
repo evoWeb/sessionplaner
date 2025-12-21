@@ -1,284 +1,279 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
-        <header/>
-        <body>
-
-            <trans-unit id="minutes">
-                <source>min</source>
-            </trans-unit>
-            <trans-unit id="storageFolderEmpty">
-                <source><![CDATA[The selected storage folder does not contain any rooms.<br/>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="messages" date="2017-06-23T05:48:28Z" product-name="sessionplaner">
+    <header/>
+    <body>
+      <trans-unit id="minutes">
+        <source>min</source>
+      </trans-unit>
+      <trans-unit id="storageFolderEmpty">
+        <source><![CDATA[The selected storage folder does not contain any rooms.<br/>
                 Please create days, rooms and slots previous planing sessions.<br/>
                 For further information consult the documentation.]]></source>
-            </trans-unit>
-            <trans-unit id="session-new">
-                <source>Create session</source>
-            </trans-unit>
-            <trans-unit id="speaker-new">
-                <source>Create speaker</source>
-            </trans-unit>
-            <trans-unit id="room-new">
-                <source>Create room</source>
-            </trans-unit>
-            <trans-unit id="day-new">
-                <source>Create day</source>
-            </trans-unit>
-
-            <trans-unit id="filter-tags">
-                <source>Tags</source>
-            </trans-unit>
-            <trans-unit id="filter-user">
-                <source>Slideshare available</source>
-            </trans-unit>
-            <trans-unit id="filter-time">
-                <source>Current time</source>
-            </trans-unit>
-            <trans-unit id="filter-headline">
-                <source>Sessionfilter</source>
-            </trans-unit>
-            <trans-unit id="filter-comment">
-                <source>Entries are marked and stored in a cookie by double click an item. Filter are list after a reload.</source>
-            </trans-unit>
-            <trans-unit id="by">
-                <source>von</source>
-            </trans-unit>
-            <trans-unit id="sessionpool">
-                <source>Sessionpool</source>
-            </trans-unit>
-            <trans-unit id="hidden">
-                <source>Hidden</source>
-            </trans-unit>
-            <trans-unit id="hidden-1">
-                <source>Yes</source>
-            </trans-unit>
-            <trans-unit id="hidden-0">
-                <source>No</source>
-            </trans-unit>
-            <trans-unit id="topic">
-                <source>Topic</source>
-            </trans-unit>
-            <trans-unit id="description">
-                <source>Description</source>
-            </trans-unit>
-            <trans-unit id="speaker">
-                <source>Speaker</source>
-            </trans-unit>
-            <trans-unit id="twitter">
-                <source>Twitter</source>
-            </trans-unit>
-            <trans-unit id="attendees">
-                <source>Attendees</source>
-            </trans-unit>
-            <trans-unit id="requesttype">
-                <source>Request Type</source>
-            </trans-unit>
-            <trans-unit id="type">
-                <source>Type</source>
-            </trans-unit>
-            <trans-unit id="type-talk">
-                <source>Talk</source>
-            </trans-unit>
-            <trans-unit id="type-tutorial">
-                <source>Tutorial</source>
-            </trans-unit>
-            <trans-unit id="type-workshop">
-                <source>Workshop</source>
-            </trans-unit>
-            <trans-unit id="type-discussion">
-                <source>Discussion</source>
-            </trans-unit>
-            <trans-unit id="level">
-                <source>Level</source>
-            </trans-unit>
-            <trans-unit id="level-starter">
-                <source>Starter / Overview</source>
-            </trans-unit>
-            <trans-unit id="level-advanced">
-                <source>Advanced / Basic knowledge</source>
-            </trans-unit>
-            <trans-unit id="level-pro">
-                <source>Pro / Detailed</source>
-            </trans-unit>
-            <trans-unit id="tags">
-                <source>Tags</source>
-            </trans-unit>
-            <trans-unit id="norecording">
-                <source>No recording</source>
-            </trans-unit>
-            <trans-unit id="norecording-1">
-                <source>Don't record, please</source>
-            </trans-unit>
-            <trans-unit id="norecording-0">
-                <source>Recording allowed</source>
-            </trans-unit>
-            <trans-unit id="back-to-overview">
-                <source>Back to overview</source>
-            </trans-unit>
-            <trans-unit id="tweet">
-                <source>Tweet</source>
-            </trans-unit>
-            <trans-unit id="documents">
-                <source>Documents</source>
-            </trans-unit>
-            <trans-unit id="links">
-                <source>Links</source>
-            </trans-unit>
-            <trans-unit id="suggest">
-                <source>submit suggestion</source>
-            </trans-unit>
-            <trans-unit id="mandatory">
-                <source>Mandatory fields are marked with an *</source>
-            </trans-unit>
-            <trans-unit id="slideshare_download">
-                <source>Slideshare download</source>
-            </trans-unit>
-            <trans-unit id="field_1221560718">
-                <source>The field %s may not be empty</source>
-            </trans-unit>
-            <trans-unit id="warning-nosessionsfound">
-                <source>No Sessions found.</source>
-            </trans-unit>
-
-            <!-- Options -->
-            <trans-unit id="option.unknown" xml:space="preserve">
-                <source>Unknown Option</source>
-            </trans-unit>
-            <trans-unit id="option.sessiontype.talk" xml:space="preserve">
-                <source>Talk</source>
-            </trans-unit>
-            <trans-unit id="option.sessiontype.tutorial" xml:space="preserve">
-                <source>Tutorial</source>
-            </trans-unit>
-            <trans-unit id="option.sessiontype.workshop" xml:space="preserve">
-                <source>Workshop</source>
-            </trans-unit>
-            <trans-unit id="option.sessiontype.discussion" xml:space="preserve">
-                <source>Discussion</source>
-            </trans-unit>
-            <trans-unit id="option.sessionlevel.beginner" xml:space="preserve">
-                <source>Beginner</source>
-            </trans-unit>
-            <trans-unit id="option.sessionlevel.advanced" xml:space="preserve">
-                <source>Advanced</source>
-            </trans-unit>
-            <trans-unit id="option.sessionlevel.pro" xml:space="preserve">
-                <source>Professional</source>
-            </trans-unit>
-            <trans-unit id="option.sessionrequesttype.offer" xml:space="preserve">
-                <source>Session offer</source>
-            </trans-unit>
-            <trans-unit id="option.sessionrequesttype.wish" xml:space="preserve">
-                <source>Session wish</source>
-            </trans-unit>
-
-            <!-- Label -->
-            <trans-unit id="label.personalinformation" xml:space="preserve">
-                <source>Personal Information</source>
-            </trans-unit>
-            <trans-unit id="label.sessioninformation" xml:space="preserve">
-                <source>Session Information</source>
-            </trans-unit>
-            <trans-unit id="label.required.field" xml:space="preserve">
-                <source>*</source>
-            </trans-unit>
-            <trans-unit id="label.required.field.explanation" xml:space="preserve">
-                <source>These fields are required</source>
-            </trans-unit>
-
-            <!-- Form -->
-            <trans-unit id="form.fullname">
-                <source>Full Name</source>
-            </trans-unit>
-            <trans-unit id="form.fullname.description">
-                <source>Please provide your full name</source>
-            </trans-unit>
-            <trans-unit id="form.email">
-                <source>Email</source>
-            </trans-unit>
-            <trans-unit id="form.email.description">
-                <source>Please provide your email address so we can get in touch with you</source>
-            </trans-unit>
-            <trans-unit id="form.twitter">
-                <source>Twitter</source>
-            </trans-unit>
-            <trans-unit id="form.twitter.description">
-                <source>Provide your twitter account for social engagement</source>
-            </trans-unit>
-            <trans-unit id="form.title">
-                <source>Title</source>
-            </trans-unit>
-            <trans-unit id="form.title.description">
-                <source>A descriptive title for your submission</source>
-            </trans-unit>
-            <trans-unit id="form.description">
-                <source>Description</source>
-            </trans-unit>
-            <trans-unit id="form.description.description">
-                <source>A description of your submission</source>
-            </trans-unit>
-            <trans-unit id="form.type">
-                <source>Type</source>
-            </trans-unit>
-            <trans-unit id="form.type.description">
-                <source>What type of session to you want to offer?</source>
-            </trans-unit>
-            <trans-unit id="form.tag">
-                <source>Tag</source>
-            </trans-unit>
-            <trans-unit id="form.tag.description">
-                <source>What tag would you like to add to your session?</source>
-            </trans-unit>
-            <trans-unit id="form.level">
-                <source>Level</source>
-            </trans-unit>
-            <trans-unit id="form.level.description">
-                <source>Who's the talk for?</source>
-            </trans-unit>
-            <trans-unit id="form.estimatedlength">
-                <source>Estimated Length</source>
-            </trans-unit>
-            <trans-unit id="form.estimatedlength.description">
-                <source>If you have a special topic or workshop we will validate an extension to 90 minutes</source>
-            </trans-unit>
-            <trans-unit id="form.requesttype">
-                <source>Request type</source>
-            </trans-unit>
-            <trans-unit id="form.requesttype.description">
-                <source>Do you submit a session offer or do have a session wish?</source>
-            </trans-unit>
-            <trans-unit id="form.norecording">
-                <source>No recording</source>
-            </trans-unit>
-            <trans-unit id="form.norecording.description">
-                <source>you should set this active if your session should not be recorded or streamed</source>
-            </trans-unit>
-            <trans-unit id="form.submit">
-                <source>Submit</source>
-            </trans-unit>
-
-            <!-- Confirmation -->
-            <trans-unit id="form.suggest.confirmation">
-                <source>Thank you for your application. We will be in contact with you soon.</source>
-            </trans-unit>
-
-            <!-- Backend -->
-            <trans-unit id="backend.label.visible">
-                <source>Visible</source>
-            </trans-unit>
-            <trans-unit id="backend.label.linked">
-                <source>Linked</source>
-            </trans-unit>
-            <trans-unit id="backend.label.social">
-                <source>Social</source>
-            </trans-unit>
-            <trans-unit id="backend.label.suggestion">
-                <source>Suggestion</source>
-            </trans-unit>
-            <trans-unit id="backend.label.recording">
-                <source>Recording</source>
-            </trans-unit>
-
-        </body>
-    </file>
+      </trans-unit>
+      <trans-unit id="session-new">
+        <source>Create session</source>
+      </trans-unit>
+      <trans-unit id="speaker-new">
+        <source>Create speaker</source>
+      </trans-unit>
+      <trans-unit id="room-new">
+        <source>Create room</source>
+      </trans-unit>
+      <trans-unit id="day-new">
+        <source>Create day</source>
+      </trans-unit>
+      <trans-unit id="filter-tags">
+        <source>Tags</source>
+      </trans-unit>
+      <trans-unit id="filter-user">
+        <source>Slideshare available</source>
+      </trans-unit>
+      <trans-unit id="filter-time">
+        <source>Current time</source>
+      </trans-unit>
+      <trans-unit id="filter-headline">
+        <source>Sessionfilter</source>
+      </trans-unit>
+      <trans-unit id="filter-comment">
+        <source>Entries are marked and stored in a cookie by double click an item. Filter are list after a reload.</source>
+      </trans-unit>
+      <trans-unit id="by">
+        <source>von</source>
+      </trans-unit>
+      <trans-unit id="sessionpool">
+        <source>Sessionpool</source>
+      </trans-unit>
+      <trans-unit id="hidden">
+        <source>Hidden</source>
+      </trans-unit>
+      <trans-unit id="hidden-1">
+        <source>Yes</source>
+      </trans-unit>
+      <trans-unit id="hidden-0">
+        <source>No</source>
+      </trans-unit>
+      <trans-unit id="topic">
+        <source>Topic</source>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="speaker">
+        <source>Speaker</source>
+      </trans-unit>
+      <trans-unit id="twitter">
+        <source>Twitter</source>
+      </trans-unit>
+      <trans-unit id="attendees">
+        <source>Attendees</source>
+      </trans-unit>
+      <trans-unit id="requesttype">
+        <source>Request Type</source>
+      </trans-unit>
+      <trans-unit id="type">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="type-talk">
+        <source>Talk</source>
+      </trans-unit>
+      <trans-unit id="type-tutorial">
+        <source>Tutorial</source>
+      </trans-unit>
+      <trans-unit id="type-workshop">
+        <source>Workshop</source>
+      </trans-unit>
+      <trans-unit id="type-discussion">
+        <source>Discussion</source>
+      </trans-unit>
+      <trans-unit id="level">
+        <source>Level</source>
+      </trans-unit>
+      <trans-unit id="level-starter">
+        <source>Starter / Overview</source>
+      </trans-unit>
+      <trans-unit id="level-advanced">
+        <source>Advanced / Basic knowledge</source>
+      </trans-unit>
+      <trans-unit id="level-pro">
+        <source>Pro / Detailed</source>
+      </trans-unit>
+      <trans-unit id="tags">
+        <source>Tags</source>
+      </trans-unit>
+      <trans-unit id="norecording">
+        <source>No recording</source>
+      </trans-unit>
+      <trans-unit id="norecording-1">
+        <source>Don't record, please</source>
+      </trans-unit>
+      <trans-unit id="norecording-0">
+        <source>Recording allowed</source>
+      </trans-unit>
+      <trans-unit id="back-to-overview">
+        <source>Back to overview</source>
+      </trans-unit>
+      <trans-unit id="tweet">
+        <source>Tweet</source>
+      </trans-unit>
+      <trans-unit id="documents">
+        <source>Documents</source>
+      </trans-unit>
+      <trans-unit id="links">
+        <source>Links</source>
+      </trans-unit>
+      <trans-unit id="suggest">
+        <source>submit suggestion</source>
+      </trans-unit>
+      <trans-unit id="mandatory">
+        <source>Mandatory fields are marked with an *</source>
+      </trans-unit>
+      <trans-unit id="slideshare_download">
+        <source>Slideshare download</source>
+      </trans-unit>
+      <trans-unit id="field_1221560718">
+        <source>The field %s may not be empty</source>
+      </trans-unit>
+      <trans-unit id="warning-nosessionsfound">
+        <source>No Sessions found.</source>
+      </trans-unit>
+      <!-- Options -->
+      <trans-unit id="option.unknown" xml:space="preserve">
+        <source>Unknown Option</source>
+      </trans-unit>
+      <trans-unit id="option.none" xml:space="preserve">
+        <source>None selected</source>
+      </trans-unit>
+      <trans-unit id="option.sessiontype.talk" xml:space="preserve">
+        <source>Talk</source>
+      </trans-unit>
+      <trans-unit id="option.sessiontype.tutorial" xml:space="preserve">
+        <source>Tutorial</source>
+      </trans-unit>
+      <trans-unit id="option.sessiontype.workshop" xml:space="preserve">
+        <source>Workshop</source>
+      </trans-unit>
+      <trans-unit id="option.sessiontype.discussion" xml:space="preserve">
+        <source>Discussion</source>
+      </trans-unit>
+      <trans-unit id="option.sessionlevel.beginner" xml:space="preserve">
+        <source>Beginner</source>
+      </trans-unit>
+      <trans-unit id="option.sessionlevel.advanced" xml:space="preserve">
+        <source>Advanced</source>
+      </trans-unit>
+      <trans-unit id="option.sessionlevel.pro" xml:space="preserve">
+        <source>Professional</source>
+      </trans-unit>
+      <trans-unit id="option.sessionrequesttype.offer" xml:space="preserve">
+        <source>Session offer</source>
+      </trans-unit>
+      <trans-unit id="option.sessionrequesttype.wish" xml:space="preserve">
+        <source>Session wish</source>
+      </trans-unit>
+      <!-- Label -->
+      <trans-unit id="label.personalinformation" xml:space="preserve">
+        <source>Personal Information</source>
+      </trans-unit>
+      <trans-unit id="label.sessioninformation" xml:space="preserve">
+        <source>Session Information</source>
+      </trans-unit>
+      <trans-unit id="label.required.field" xml:space="preserve">
+        <source>*</source>
+      </trans-unit>
+      <trans-unit id="label.required.field.explanation" xml:space="preserve">
+        <source>These fields are required</source>
+      </trans-unit>
+      <!-- Form -->
+      <trans-unit id="form.fullname">
+        <source>Full Name</source>
+      </trans-unit>
+      <trans-unit id="form.fullname.description">
+        <source>Please provide your full name</source>
+      </trans-unit>
+      <trans-unit id="form.email">
+        <source>Email</source>
+      </trans-unit>
+      <trans-unit id="form.email.description">
+        <source>Please provide your email address so we can get in touch with you</source>
+      </trans-unit>
+      <trans-unit id="form.twitter">
+        <source>Twitter</source>
+      </trans-unit>
+      <trans-unit id="form.twitter.description">
+        <source>Provide your twitter account for social engagement</source>
+      </trans-unit>
+      <trans-unit id="form.title">
+        <source>Title</source>
+      </trans-unit>
+      <trans-unit id="form.title.description">
+        <source>A descriptive title for your submission</source>
+      </trans-unit>
+      <trans-unit id="form.description">
+        <source>Description</source>
+      </trans-unit>
+      <trans-unit id="form.description.description">
+        <source>A description of your submission</source>
+      </trans-unit>
+      <trans-unit id="form.type">
+        <source>Type</source>
+      </trans-unit>
+      <trans-unit id="form.type.description">
+        <source>What type of session to you want to offer?</source>
+      </trans-unit>
+      <trans-unit id="form.tag">
+        <source>Tag</source>
+      </trans-unit>
+      <trans-unit id="form.tag.description">
+        <source>What tag would you like to add to your session?</source>
+      </trans-unit>
+      <trans-unit id="form.level">
+        <source>Level</source>
+      </trans-unit>
+      <trans-unit id="form.level.description">
+        <source>Who's the talk for?</source>
+      </trans-unit>
+      <trans-unit id="form.estimatedlength">
+        <source>Estimated Length</source>
+      </trans-unit>
+      <trans-unit id="form.estimatedlength.description">
+        <source>If you have a special topic or workshop we will validate an extension to 90 minutes</source>
+      </trans-unit>
+      <trans-unit id="form.requesttype">
+        <source>Request type</source>
+      </trans-unit>
+      <trans-unit id="form.requesttype.description">
+        <source>Do you submit a session offer or do have a session wish?</source>
+      </trans-unit>
+      <trans-unit id="form.norecording">
+        <source>No recording</source>
+      </trans-unit>
+      <trans-unit id="form.norecording.description">
+        <source>you should set this active if your session should not be recorded or streamed</source>
+      </trans-unit>
+      <trans-unit id="form.submit">
+        <source>Submit</source>
+      </trans-unit>
+      <!-- Confirmation -->
+      <trans-unit id="form.suggest.confirmation">
+        <source>Thank you for your application. We will be in contact with you soon.</source>
+      </trans-unit>
+      <!-- Backend -->
+      <trans-unit id="backend.label.visible">
+        <source>Visible</source>
+      </trans-unit>
+      <trans-unit id="backend.label.linked">
+        <source>Linked</source>
+      </trans-unit>
+      <trans-unit id="backend.label.social">
+        <source>Social</source>
+      </trans-unit>
+      <trans-unit id="backend.label.suggestion">
+        <source>Suggestion</source>
+      </trans-unit>
+      <trans-unit id="backend.label.recording">
+        <source>Recording</source>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>

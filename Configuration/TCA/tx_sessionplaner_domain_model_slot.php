@@ -54,9 +54,9 @@ return [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'time,required',
+                'type' => 'datetime',
+                'format' => 'time',
+                'required' => true,
             ],
         ],
         'duration' => [
@@ -65,9 +65,9 @@ return [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 20,
-                'eval' => 'int,trim,required',
+                'required' => true,
                 'default' => 45,
                 'max' => 256,
             ],
@@ -116,13 +116,14 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                hidden,
-                day,
-                start,
-                duration,
-                break,
-                description,
-                rooms,
+                --div--;General,
+                    hidden,
+                    day,
+                    start,
+                    duration,
+                    break,
+                    description,
+                    rooms,
             ',
         ],
     ],

@@ -1,0 +1,21 @@
+includes:
+  - %currentWorkingDirectory%/Build/vendor/phpstan/phpstan-phpunit/extension.neon
+  - %currentWorkingDirectory%/Build/vendor/phpstan/phpstan-strict-rules/rules.neon
+  - %currentWorkingDirectory%/Build/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - phpstan-baseline.neon
+
+parameters:
+  # Use local .cache dir instead of /tmp
+  tmpDir: ../../.cache/phpstan
+
+  level: 8
+  reportUnmatchedIgnoredErrors: false
+
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    - "#Casting to string something that's already string.#"
+    - "#Casting to int something that's already int.#"
+
+  paths:
+    - %currentWorkingDirectory%/Classes/
+    - %currentWorkingDirectory%/Configuration/

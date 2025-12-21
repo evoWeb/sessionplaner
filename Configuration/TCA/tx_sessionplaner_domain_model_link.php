@@ -41,7 +41,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'max' => 255,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'link' => [
@@ -50,9 +51,8 @@ return [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputLink',
-                'eval' => 'required',
+                'type' => 'link',
+                'required' => true,
             ],
         ],
     ],

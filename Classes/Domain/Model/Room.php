@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\Domain\Model;
 
 use Evoweb\Sessionplaner\Utility\ObjectStorageUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -28,20 +29,20 @@ class Room extends AbstractEntity
 
     /**
      * @var ObjectStorage<Day>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $days;
 
     /**
      * @var ObjectStorage<Slot>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $slots;
 
     /**
      * @var ObjectStorage<Session>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $sessions;
 
     public function __construct()

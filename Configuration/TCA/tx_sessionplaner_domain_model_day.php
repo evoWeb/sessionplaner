@@ -40,7 +40,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 20,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
                 'max' => 256,
             ],
         ],
@@ -50,10 +51,9 @@ return [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
+                'type' => 'datetime',
+                'format' => 'date',
                 'size' => 20,
-                'eval' => 'date',
             ],
         ],
         'rooms' => [
@@ -92,11 +92,12 @@ return [
     'types' => [
         '0' => [
             'showitem' => '
-                hidden,
-                name,
-                date,
-                rooms,
-                slots
+                --div--;General,
+                    hidden,
+                    name,
+                    date,
+                    rooms,
+                    slots
             ',
         ],
     ],
