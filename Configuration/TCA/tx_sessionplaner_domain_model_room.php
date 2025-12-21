@@ -32,6 +32,27 @@ return [
         ],
     ],
     'columns' => [
+        'hidden' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'language',
+            ],
+        ],
         'type' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-type',
@@ -137,6 +158,8 @@ return [
         '0' => [
             'showitem' => '
                 --div--;General,
+                    hidden,
+                    sys_language_uid,
                     type,
                     name,
                     logo,

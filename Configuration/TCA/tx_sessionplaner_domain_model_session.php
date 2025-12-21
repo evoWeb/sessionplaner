@@ -38,9 +38,23 @@ return [
     'columns' => [
         'hidden' => [
             'exclude' => false,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
             'config' => [
                 'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'language',
             ],
         ],
         'suggestion' => [
@@ -409,6 +423,8 @@ return [
         'options' => [
             'showitem' => '
                 hidden,
+                sys_language_uid,
+                --linebreak--,
                 donotlink,
                 --linebreak--,
                 suggestion,
