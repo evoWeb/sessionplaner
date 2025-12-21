@@ -27,30 +27,30 @@
         }
     },
     "require": {
-        "php": ">=8.1.0",
-        "typo3/cms-backend": "^12.4 || ^13.4",
-        "typo3/cms-core": "^12.4 || ^13.4",
-        "typo3/cms-extbase": "^12.4 || ^13.4",
-        "typo3/cms-fluid": "^12.4 || ^13.4",
-        "typo3/cms-form": "^12.4 || ^13.4",
-        "typo3/cms-frontend": "^12.4 || ^13.4"
+        "php": ">=8.2.0",
+        "typo3/cms-backend": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-core": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-extbase": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-fluid": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-form": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-frontend": "^13.4 || ^14.0 || 14.*.*@dev"
     },
     "require-dev": {
-        "bk2k/bootstrap-package": "^15.0",
+        "bk2k/bootstrap-package": "^16.0",
         "bk2k/extension-helper": "^2.1",
         "friendsofphp/php-cs-fixer": "^3.91.0",
         "phpstan/phpstan": "^2.1.32",
         "phpstan/phpstan-deprecation-rules": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^10.5.52 || ^11.5.0",
-        "typo3/cms-belog": "^12.4 || ^13.4",
-        "typo3/cms-beuser": "^12.4 || ^13.4",
-        "typo3/cms-filelist": "^12.4 || ^13.4",
-        "typo3/cms-install": "^12.4 || ^13.4",
-        "typo3/cms-lowlevel": "^12.4 || ^13.4",
-        "typo3/cms-setup": "^12.4 || ^13.4",
-        "typo3/cms-tstemplate": "^12.4 || ^13.4"
+        "phpunit/phpunit": "^11.5.0",
+        "typo3/cms-belog": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-beuser": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-filelist": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-install": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-lowlevel": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-setup": "^13.4 || ^14.0 || 14.*.*@dev",
+        "typo3/cms-tstemplate": "^13.4 || ^14.0 || 14.*.*@dev"
     },
     "prefer-stable": true,
     "extra": {

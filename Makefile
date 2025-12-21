@@ -10,7 +10,7 @@ _ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 # ...and turn them into do-nothing targets
 $(eval $(_ARGS):;@:)
 
-PHP_VERSION := "8.1"
+PHP_VERSION := "8.2"
 
 ##@ Docs
 

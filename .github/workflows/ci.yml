@@ -28,104 +28,98 @@ jobs:
       matrix:
         packages:
 
-          - php: '8.1'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: ''
-            testpath: 'Tests/Functional'
-
-          - php: '8.2'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: ''
-            testpath: 'Tests/Functional'
-
-          - php: '8.2'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: '--prefer-lowest'
-            testpath: 'Tests/Functional'
-
-          - php: '8.3'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: ''
-            testpath: 'Tests/Functional'
-
-          - php: '8.3'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: '--prefer-lowest'
-            testpath: 'Tests/Functional'
-
-          - php: '8.4'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: ''
-            testpath: 'Tests/Functional'
-
-          - php: '8.4'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: '--prefer-lowest'
-            testpath: 'Tests/Functional'
-
-          - php: '8.5'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: ''
-            testpath: 'Tests/Functional'
-
-          - php: '8.5'
-            core: '^12.4'
-            framework: 'dev-main'
-            prefer: '--prefer-lowest'
-            testpath: 'Tests/Functional'
-
           - php: '8.2'
             core: '^13.4'
-            framework: 'dev-main'
+            framework: '^9.2.1'
             prefer: ''
             testpath: 'Tests/Functional'
 
           - php: '8.2'
             core: '^13.4'
-            framework: 'dev-main'
+            framework: '^9.2.1'
             prefer: '--prefer-lowest'
             testpath: 'Tests/Functional'
 
           - php: '8.3'
             core: '^13.4'
-            framework: 'dev-main'
+            framework: '^9.2.1'
             prefer: ''
             testpath: 'Tests/Functional'
 
           - php: '8.3'
             core: '^13.4'
-            framework: 'dev-main'
+            framework: '^9.2.1'
             prefer: '--prefer-lowest'
             testpath: 'Tests/Functional'
 
           - php: '8.4'
             core: '^13.4'
-            framework: 'dev-main'
+            framework: '^9.2.1'
             prefer: ''
             testpath: 'Tests/Functional'
 
           - php: '8.4'
             core: '^13.4'
-            framework: 'dev-main'
+            framework: '^9.2.1'
             prefer: '--prefer-lowest'
             testpath: 'Tests/Functional'
 
           - php: '8.5'
             core: '^13.4'
-            framework: 'dev-main'
+            framework: '^9.2.1'
             prefer: ''
             testpath: 'Tests/Functional'
 
           - php: '8.5'
             core: '^13.4'
+            framework: '^9.2.1'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.2'
+            core: '^14.0'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.2'
+            core: '^14.0'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.3'
+            core: '^14.0'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.3'
+            core: '^14.0'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.4'
+            core: '^14.0'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.4'
+            core: '^14.0'
+            framework: 'dev-main'
+            prefer: '--prefer-lowest'
+            testpath: 'Tests/Functional'
+
+          - php: '8.5'
+            core: '^14.0'
+            framework: 'dev-main'
+            prefer: ''
+            testpath: 'Tests/Functional'
+
+          - php: '8.5'
+            core: '^14.0'
             framework: 'dev-main'
             prefer: '--prefer-lowest'
             testpath: 'Tests/Functional'
@@ -156,7 +150,7 @@ jobs:
         run: |
           Build/Scripts/runTests.sh \
           -p ${{ matrix.packages.php }} \
-          -s cgl
+          -s cgl -n
 
       - name: PHPStan
         run: |
