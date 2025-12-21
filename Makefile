@@ -29,13 +29,13 @@ test-docs: ##@ Test the documentation rendering
 .PHONY: phpstan
 phpstan: ##@ Static code analysis with php-cs-fixer
 	echo "Checking with phpstan started"
-	Build/Scripts//runTests.sh -p ${PHP_VERSION} -s phpstan
+	Build/Scripts/runTests.sh -p ${PHP_VERSION} -s phpstan
 	echo "Checking with phpstan finished"
 
 .PHONY: cgl
 cgl: ##@ Coding guideline check with
 	echo "Coding guideline check with phpstan started"
-	Build/Scripts//runTests.sh -p ${PHP_VERSION} -s cgl -n
+	Build/Scripts/runTests.sh -p ${PHP_VERSION} -s cgl -n
 	echo "Coding guideline check with phpstan finished"
 
 ##@ Release

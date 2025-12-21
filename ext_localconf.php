@@ -23,13 +23,18 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] =
 // Register Title Provider
 ExtensionManagementUtility::addTypoScriptSetup(trim('
 config.pageTitleProviders {
-    event {
+    sessionplanerSession {
         provider = Evoweb\Sessionplaner\TitleTagProvider\SessionTitleTagProvider
         before = seo
         after = altPageTitle
     }
-    speaker {
+    sessionplanerSpeaker {
         provider = Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider
+        before = seo
+        after = altPageTitle
+    }
+    sessionplanerTag {
+        provider = Evoweb\Sessionplaner\TitleTagProvider\TagTitleTagProvider
         before = seo
         after = altPageTitle
     }

@@ -66,7 +66,13 @@ abstract class AbstractSlugEntity extends AbstractEntity
 
         $hasToBeUniqueInSite = in_array('uniqueInSite', $evalInfo, true);
         $hasToBeUniqueInPid = in_array('uniqueInPid', $evalInfo, true);
-        $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->tablename, $this->slugField, $fieldConfig);
+        /** @var SlugHelper $slugHelper */
+        $slugHelper = GeneralUtility::makeInstance(
+            SlugHelper::class,
+            $this->tablename,
+            $this->slugField,
+            $fieldConfig
+        );
 
         foreach ($properties as $k => $v) {
             $field = GeneralUtility::camelCaseToLowerCaseUnderscored($k);

@@ -22,8 +22,8 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\Components\MenuRegistry;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -150,8 +150,7 @@ class BackendModuleController extends ActionController
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:' . $labelKey))
             ->setShowLabelText(true)
-            // @phpstan-ignore classConstant.deprecated
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
+            ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL));
         $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, $buttonGroup);
     }
 

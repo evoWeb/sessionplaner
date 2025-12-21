@@ -1,34 +1,52 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Variable method call on Evoweb\\\\Sessionplaner\\\\Domain\\\\Model\\\\Session\\.$#"
+			message: '''
+				#^Call to deprecated method makeLinkButton\(\) of class TYPO3\\CMS\\Backend\\Template\\Components\\ButtonBar\:
+				since v14, will be removed in v15\. Inject ComponentFactory and use ComponentFactory\:\:createLinkButton\(\) instead\.$#
+			'''
+			identifier: method.deprecated
 			count: 1
-			path: ../Classes/Controller/AjaxController.php
+			path: ../../Classes/Controller/BackendModuleController.php
 
 		-
-			message: """
-				#^Fetching deprecated class constant SIZE_SMALL of class TYPO3\\\\CMS\\\\Core\\\\Imaging\\\\Icon\\:
-				Use TYPO3\\\\CMS\\\\Core\\\\Imaging\\\\IconSize\\:\\:SMALL instead$#
-			"""
-			count: 4
-			path: ../Classes/Controller/BackendModuleController.php
+			message: '''
+				#^Call to deprecated method makeMenu\(\) of class TYPO3\\CMS\\Backend\\Template\\Components\\MenuRegistry\:
+				since v14, will be removed in v15\. Use GeneralUtility\:\:makeInstance\(Menu\:\:class\) directly or inject ComponentFactory and use createMenu\(\)\.$#
+			'''
+			identifier: method.deprecated
+			count: 1
+			path: ../../Classes/Controller/BackendModuleController.php
 
 		-
-			message: """
-				#^Return type of method Evoweb\\\\Sessionplaner\\\\Controller\\\\SpeakerController\\:\\:getTypoScriptFrontendController\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
-				since TYPO3 v13, will vanish during v14 development\\. There are some
-				            remaining internal usages that can be adapted without further \\.rst
-				            files\\. The class should vanish together with \\$GLOBALS\\['TSFE'\\] in v14\\.$#
-			"""
+			message: '''
+				#^Call to deprecated method makeMenuItem\(\) of class TYPO3\\CMS\\Backend\\Template\\Components\\Menu\\Menu\:
+				since v14, will be removed in v15\. Use GeneralUtility\:\:makeInstance\(MenuItem\:\:class\) directly or inject ComponentFactory and use createMenuItem\(\)\.$#
+			'''
+			identifier: method.deprecated
 			count: 1
-			path: ../Classes/Controller/SpeakerController.php
+			path: ../../Classes/Controller/BackendModuleController.php
 
 		-
-			message: """
-				#^Return type of method Evoweb\\\\Sessionplaner\\\\Domain\\\\Factory\\\\SuggestFormFactory\\:\\:getTypoScriptFrontendController\\(\\) has typehint with deprecated class TYPO3\\\\CMS\\\\Frontend\\\\Controller\\\\TypoScriptFrontendController\\:
-				since TYPO3 v13, will vanish during v14 development\\. There are some
-				            remaining internal usages that can be adapted without further \\.rst
-				            files\\. The class should vanish together with \\$GLOBALS\\['TSFE'\\] in v14\\.$#
-			"""
+			message: '#^Attribute class TYPO3\\CMS\\Install\\Attribute\\UpgradeWizard is deprecated\: since v14\.0, will be removed in TYPO34 v15\.0\. Use \\TYPO3\\CMS\\Core\\Attribute\\UpgradeWizard instead\.$#'
+			identifier: attribute.deprecated
 			count: 1
-			path: ../Classes/Domain/Factory/SuggestFormFactory.php
+			path: ../../Classes/Updates/SessionplanerCTypeMigration.php
+
+		-
+			message: '''
+				#^Class Evoweb\\Sessionplaner\\Updates\\SessionplanerCTypeMigration extends deprecated class TYPO3\\CMS\\Install\\Updates\\AbstractListTypeToCTypeUpdate\:
+				since v14\.0, will be removed in TYPO34 v15\.0\. Use \\TYPO3\\CMS\\Core\\Upgrades\\AbstractListTypeToCTypeUpdate instead\.$#
+			'''
+			identifier: class.extendsDeprecatedClass
+			count: 1
+			path: ../../Classes/Updates/SessionplanerCTypeMigration.php
+
+		-
+			message: '''
+				#^Call to deprecated method addPiFlexFormValue\(\) of class TYPO3\\CMS\\Core\\Utility\\ExtensionManagementUtility\:
+				Will be removed in TYPO3 v15$#
+			'''
+			identifier: staticMethod.deprecated
+			count: 1
+			path: ../../Configuration/TCA/Overrides/tt_content.php

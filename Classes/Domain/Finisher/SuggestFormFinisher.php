@@ -33,7 +33,7 @@ class SuggestFormFinisher extends AbstractFinisher
         protected readonly PersistenceManagerInterface $persistenceManager,
     ) {}
 
-    protected function executeInternal()
+    protected function executeInternal(): null
     {
         $settings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
