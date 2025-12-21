@@ -17,9 +17,6 @@ use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die('Access denied.');
 
-// PageTS
-ExtensionManagementUtility::addPageTSConfig('@import \'EXT:sessionplaner/Configuration/PageTS/ModWizards.tsconfig\'');
-
 // Register "sessionplannervh" as global fluid namespace
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['sessionplanervh'][] = 'Evoweb\\Sessionplaner\\ViewHelpers';
 
@@ -45,21 +42,27 @@ ExtensionUtility::configurePlugin(
     'Session',
     [
         SessionController::class => 'list, show',
-    ]
+    ],
+    [],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 ExtensionUtility::configurePlugin(
     'Sessionplaner',
     'Sessionplan',
     [
         SessionplanController::class => 'display',
-    ]
+    ],
+    [],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 ExtensionUtility::configurePlugin(
     'Sessionplaner',
     'Speaker',
     [
         SpeakerController::class => 'list, show',
-    ]
+    ],
+    [],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 ExtensionUtility::configurePlugin(
     'Sessionplaner',
@@ -69,12 +72,15 @@ ExtensionUtility::configurePlugin(
     ],
     [
         SuggestController::class => 'form',
-    ]
+    ],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
 ExtensionUtility::configurePlugin(
     'Sessionplaner',
     'Tag',
     [
         TagController::class => 'show',
-    ]
+    ],
+    [],
+    ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT,
 );
