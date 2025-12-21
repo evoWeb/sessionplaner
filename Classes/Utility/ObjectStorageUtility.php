@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\Utility;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
