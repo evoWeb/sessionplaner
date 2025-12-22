@@ -14,7 +14,6 @@ namespace Evoweb\Sessionplaner\Controller;
 use Evoweb\Sessionplaner\Domain\Model\Tag;
 use Evoweb\Sessionplaner\TitleTagProvider\TagTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

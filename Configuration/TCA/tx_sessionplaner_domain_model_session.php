@@ -370,8 +370,8 @@ return [
                 --linebreak--,
                 length,
                 level,
-            '
-        ]
+            ',
+        ],
     ],
     'types' => [
         '0' => [

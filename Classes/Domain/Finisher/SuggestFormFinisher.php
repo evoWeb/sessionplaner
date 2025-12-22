@@ -52,6 +52,9 @@ class SuggestFormFinisher extends AbstractFinisher
         return null;
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function getStoragePid(array $settings): int
     {
         $storagePid = 0;
@@ -62,6 +65,9 @@ class SuggestFormFinisher extends AbstractFinisher
         return $storagePid;
     }
 
+    /**
+     * @param int<0, max> $storagePid
+     */
     public function createSession(int $storagePid, array $data): Session
     {
         $session = new Session();
@@ -105,6 +111,9 @@ class SuggestFormFinisher extends AbstractFinisher
         return $session;
     }
 
+    /**
+     * @param int<0, max> $storagePid
+     */
     public function getSpeaker(array $data, int $storagePid): Speaker
     {
         $speaker = $this->speakerRepository->findOneByEmailIncludeHidden($data['email'] ?? '');
