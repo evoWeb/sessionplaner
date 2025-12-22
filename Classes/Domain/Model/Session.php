@@ -47,6 +47,8 @@ class Session extends AbstractSlugEntity
 
     protected int $type = 0;
 
+    protected int $length = 0;
+
     protected int $level = 0;
 
     protected int $requesttype = 0;
@@ -230,6 +232,16 @@ class Session extends AbstractSlugEntity
     public function getType(): int
     {
         return $this->type;
+    }
+
+    public function setLength(int $length): void
+    {
+        $this->length = $length;
+    }
+
+    public function getLength(): int
+    {
+        return $this->length;
     }
 
     public function setLevel(int $level): void

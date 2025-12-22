@@ -179,6 +179,31 @@ return [
                 'maxitems' => 1,
             ],
         ],
+        'length' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-length',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    [
+                        'value' => 0,
+                        'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.none',
+                    ],
+                    [
+                        'value' => 45,
+                        'label' => '45 Minutes',
+                    ],
+                    [
+                        'value' => 90,
+                        'label' => '90 Minutes',
+                    ],
+                ],
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 45,
+            ],
+        ],
         'level' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
@@ -324,10 +349,12 @@ return [
         'options' => [
             'showitem' => '
                 hidden,
+                donotlink,
+                --linebreak--,
                 suggestion,
                 social,
-                donotlink,
-                --linebreak--, norecording,
+                --linebreak--,
+                norecording,
             ',
         ],
         'speaker_free' => [
@@ -336,6 +363,15 @@ return [
                 twitter,
             ',
         ],
+        'types' => [
+            'showitem' => '
+                requesttype,
+                type,
+                --linebreak--,
+                length,
+                level,
+            '
+        ]
     ],
     'types' => [
         '0' => [
@@ -349,16 +385,14 @@ return [
                 . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
                     speakers,
                     attendees,
-                    links,
-                    documents,
+                    tags,
                 --div--;Relations,
-                    requesttype,
-                    type,
-                    level,
+                    --palette--;;types,
                     day,
                     room,
                     slot,
-                    tags,
+                    links,
+                    documents,
             ',
         ],
     ],
