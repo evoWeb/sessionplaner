@@ -1,4 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:if condition="{settings.cssFile}">
+    <f:asset.css identifier="sessionplaner_css" href="{settings.cssFile}" />
+</f:if>
 <div class="sessionplaner">
     <f:render section="Content" />
 </div>

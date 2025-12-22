@@ -17,6 +17,7 @@ plugin.tx_sessionplaner {
     storagePid = {$plugin.tx_sessionplaner.persistence.storagePid}
   }
   settings {
+    cssFile = {$plugin.tx_sessionplaner.settings.cssFile}
     disqusShortname = {$plugin.tx_sessionplaner.settings.disqusShortname}
     twitter {
       account = {$plugin.tx_sessionplaner.settings.twitterAccount}
@@ -102,14 +103,5 @@ plugin.tx_sessionplaner {
         pageUid = {$plugin.tx_sessionplaner.settings.suggest.confirmation.pageUid}
       }
     }
-  }
-}
-
-##############
-#### PAGE ####
-##############
-page {
-  includeCSS {
-    sessionplaner = {$plugin.tx_sessionplaner.settings.cssFile}
   }
 }
