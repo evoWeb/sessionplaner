@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:sessionplaner/Configuration/Sets/Sessionplaner/labels.xlf" date="2025-12-21T19:16:00Z" product-name="sessionplaner">
+		<header/>
+		<body>
+			<trans-unit id="label" resname="label">
+				<source>Sessionplaner</source>
+			</trans-unit>
+
+			<trans-unit id="categories.sessionplaner" resname="categories.sessionplaner">
+				<source>Sessionplaner</source>
+			</trans-unit>
+			<trans-unit id="categories.sessionplaner.template" resname="categories.sessionplaner.template">
+				<source>Template</source>
+			</trans-unit>
+			<trans-unit id="categories.sessionplaner.persistence" resname="categories.sessionplaner.persistence">
+				<source>Persistence</source>
+			</trans-unit>
+			<trans-unit id="categories.sessionplaner.settings" resname="categories.sessionplaner.settings">
+				<source>Settings</source>
+			</trans-unit>
+			<trans-unit id="categories.sessionplaner.suggest.mail" resname="categories.sessionplaner.suggest.mail">
+				<source>Suggest Notifications</source>
+			</trans-unit>
+			<trans-unit id="categories.sessionplaner.suggest.confirmation" resname="categories.sessionplaner.suggest.confirmation">
+				<source>Suggest Confirmation</source>
+			</trans-unit>
+
+			<trans-unit id="settings.plugin.tx_sessionplaner.view.templateRootPath" resname="settings.plugin.tx_sessionplaner.view.templateRootPath">
+			  <source>Path to template root (FE)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.view.partialRootPath" resname="settings.plugin.tx_sessionplaner.view.partialRootPath">
+			  <source>Path to template partials (FE)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.view.layoutRootPath" resname="settings.plugin.tx_sessionplaner.view.layoutRootPath">
+			  <source>Path to template layouts (FE)</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.persistence.storagePid" resname="settings.plugin.tx_sessionplaner.persistence.storagePid">
+			  <source>Default storage PID</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.cssFile" resname="settings.plugin.tx_sessionplaner.settings.cssFile">
+			  <source>CSS File</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.disqusShortname" resname="settings.plugin.tx_sessionplaner.settings.disqusShortname">
+			  <source>Disqus Shortname</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.twitterHashtag" resname="settings.plugin.tx_sessionplaner.settings.twitterHashtag">
+			  <source>Twitter Hashtag</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.twitterAccount" resname="settings.plugin.tx_sessionplaner.settings.twitterAccount">
+			  <source>Twitter Account</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.enable" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.enable">
+			  <source>Enable</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.subject" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.subject">
+			  <source>Subject</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.recipientAddress" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.recipientAddress">
+			  <source>Recipient Address</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.recipientName" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.recipientName">
+			  <source>Recipient Name</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.senderAddress" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.senderAddress">
+			  <source>Sender Address</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.senderName" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.senderName">
+			  <source>Sender Name</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress">
+			  <source>Carbon Copy Address</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress" resname="settings.plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress">
+			  <source>Blind Carbon Copy Address</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.confirmation.message" resname="settings.plugin.tx_sessionplaner.settings.suggest.confirmation.message">
+			  <source>Confirmation Message</source>
+			</trans-unit>
+			<trans-unit id="settings.plugin.tx_sessionplaner.settings.suggest.confirmation.pageUid" resname="settings.plugin.tx_sessionplaner.settings.suggest.confirmation.pageUid">
+			  <source>Confirmation Page: If confirmation page is set, the user will be redirected to this page after submission instead of showing a message.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
