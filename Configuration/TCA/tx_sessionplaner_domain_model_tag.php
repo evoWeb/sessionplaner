@@ -36,7 +36,7 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'color' => [

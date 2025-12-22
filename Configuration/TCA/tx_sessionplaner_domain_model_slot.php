@@ -56,10 +56,11 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_slot-duration',
             'config' => [
                 'type' => 'number',
-                'size' => 20,
                 'required' => true,
                 'default' => 45,
-                'max' => 256,
+                'range' => [
+                    'lower' => 1,
+                ],
             ],
         ],
         'break' => [

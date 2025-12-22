@@ -69,7 +69,7 @@ return [
                 'size' => 40,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'path_segment' => [
@@ -95,7 +95,7 @@ return [
                 'type' => 'input',
                 'size' => 40,
                 'eval' => 'trim',
-                'max' => 256,
+                'max' => 255,
             ],
             'displayCond' => 'FIELD:speakers:REQ:false',
         ],
@@ -106,7 +106,7 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
-                'max' => 256,
+                'max' => 255,
             ],
             'displayCond' => 'FIELD:speakers:REQ:false',
         ],
@@ -141,7 +141,9 @@ return [
             'config' => [
                 'type' => 'number',
                 'size' => 20,
-                'max' => 256,
+                'range' => [
+                    'lower' => 1,
+                ],
             ],
         ],
         'description' => [
