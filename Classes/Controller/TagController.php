@@ -25,7 +25,7 @@ class TagController extends ActionController
     public function showAction(?Tag $tag = null): ResponseInterface
     {
         if ($tag === null || !$tag->hasActiveSessions()) {
-            throw new PageNotFoundException('The requested tag was not found', 1735908029);
+            return new HtmlResponse($this->view->render());
         }
 
         /** @var TagTitleTagProvider $provider */
