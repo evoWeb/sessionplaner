@@ -153,7 +153,6 @@ cleanBuildFiles() {
 cleanCacheFiles() {
     echo -n "Clean caches ... "
     rm -rf \
-        .cache \
         Build/.cache \
         Build/composer/.cache/ \
         .php-cs-fixer.cache
