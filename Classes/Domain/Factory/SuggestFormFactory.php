@@ -44,11 +44,9 @@ class SuggestFormFactory extends AbstractFormFactory
 
     public function build(
         array $configuration,
-        ?string $prototypeName = null,
+        ?string $prototypeName = 'standard',
         ?ServerRequestInterface $request = null
     ): FormDefinition {
-        $prototypeName = 'standard';
-
         $prototypeConfiguration = $this->formConfigurationService->getPrototypeConfiguration($prototypeName);
 
         $settings = $this->configurationManager->getConfiguration(
@@ -186,9 +184,18 @@ class SuggestFormFactory extends AbstractFormFactory
             'elementDescription',
             $this->getLocalizedLabel($settings['suggest']['fields']['title']['description'])
         );
-        /** @var NotEmptyValidator $titleValidator */
-        $titleValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-        $titleField->addValidator($titleValidator);
+        $titleStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['title']['validation']['min'] ?? 1];
+        if ($settings['suggest']['fields']['title']['validation']['max'] ?? false) {
+            $titleStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['title']['validation']['max'];
+        }
+        /** @var StringLengthValidator $titleStringLengthValidator */
+        $titleStringLengthValidator = $this->validatorResolver->createValidator(StringLengthValidator::class, $titleStringLengthValidatorOptions);
+        $titleField->addValidator($titleStringLengthValidator);
+        if ($titleStringLengthValidatorOptions['minimum'] > 0) {
+            /** @var NotEmptyValidator $titleNotEmptyValidator */
+            $titleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+            $titleField->addValidator($titleNotEmptyValidator);
+        }
 
         /** @var GenericFormElement $descriptionField */
         $descriptionField = $sessionInformation->createElement('description', 'Textarea');
