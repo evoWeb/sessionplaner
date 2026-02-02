@@ -167,6 +167,17 @@ return [
                 'richtextConfiguration' => 'default',
             ],
         ],
+        'tag_suggestion' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-tag_suggestion',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'eval' => 'trim',
+                'required' => false,
+                'max' => 256,
+            ],
+        ],
         'documents' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-download',

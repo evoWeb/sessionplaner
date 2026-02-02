@@ -72,6 +72,7 @@ class SuggestFormFinisher extends AbstractFinisher
         $session->setTopic((string)($data['title'] ?? ''));
         $session->setTopicAddition((string)($data['subtitle'] ?? ''));
         $session->setDescription((string)($data['description'] ?? ''));
+        $session->setTagSuggestion((string)($data['tag_suggestion'] ?? ''));
 
         if (isset($data['type']) && $data['type'] !== '') {
             $session->setType((int)$data['type']);

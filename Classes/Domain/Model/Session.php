@@ -41,6 +41,8 @@ class Session extends AbstractSlugEntity
 
     protected string $description = '';
 
+    protected string $tagSuggestion = '';
+
     protected string $speaker = '';
 
     protected string $twitter = '';
@@ -176,6 +178,16 @@ class Session extends AbstractSlugEntity
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function setTagSuggestion(string $tagSuggestion): void
+    {
+        $this->tagSuggestion = $tagSuggestion;
+    }
+
+    public function getTagSuggestion(): string
+    {
+        return $this->tagSuggestion;
     }
 
     public function addSpeaker(Speaker $speaker): void

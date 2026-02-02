@@ -221,6 +221,12 @@
       <trans-unit id="form.description.description">
         <source>A description of your submission</source>
       </trans-unit>
+      <trans-unit id="form.tag_suggestion">
+        <source>Tag Suggestion</source>
+      </trans-unit>
+      <trans-unit id="form.tag_suggestion.description">
+        <source>A descriptive tag you would add to your submission</source>
+      </trans-unit>
       <trans-unit id="form.type">
         <source>Type</source>
       </trans-unit>

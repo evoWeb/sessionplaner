@@ -240,6 +240,31 @@ class SuggestFormFactory extends AbstractFormFactory
         );
         $descriptionField->addValidator($stringLengthValidator);
 
+        if ((bool)($settings['suggest']['fields']['tag_suggestion']['enable'] ?? false) === true) {
+            /** @var GenericFormElement $tagSuggestionField */
+            $tagSuggestionField = $sessionInformation->createElement('tag_suggestion', 'Text');
+            $tagSuggestionField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag_suggestion']['label']));
+            $tagSuggestionField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['tag_suggestion']['description'])
+            );
+            $tagSuggestionStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['tag_suggestion']['validation']['min'] ?? 1];
+            if ($settings['suggest']['fields']['tag_suggestion']['validation']['max'] ?? false) {
+                $tagSuggestionStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['tag_suggestion']['validation']['max'];
+            }
+            /** @var StringLengthValidator $tagSuggestionStringLengthValidator */
+            $tagSuggestionStringLengthValidator = $this->validatorResolver->createValidator(
+                StringLengthValidator::class,
+                $tagSuggestionStringLengthValidatorOptions
+            );
+            $tagSuggestionField->addValidator($tagSuggestionStringLengthValidator);
+            if ($tagSuggestionStringLengthValidatorOptions['minimum'] > 0) {
+                /** @var NotEmptyValidator $tagSuggestionNotEmptyValidator */
+                $tagSuggestionNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+                $tagSuggestionField->addValidator($tagSuggestionNotEmptyValidator);
+            }
+        }
+
         if ((bool)($settings['suggest']['fields']['length']['enable'] ?? false) === true) {
             /** @var GenericFormElement $lengthField */
             $lengthField = $sessionInformation->createElement('estimatedlength', 'SingleSelect');

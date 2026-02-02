@@ -132,6 +132,9 @@
       <trans-unit id="tx_sessionplaner_domain_model_session-donotlink" xml:space="preserve">
         <source>Do not link</source>
       </trans-unit>
+      <trans-unit id="tx_sessionplaner_domain_model_session-tag_suggestion" xml:space="preserve">
+        <source>Tag Suggestion</source>
+      </trans-unit>
       <trans-unit id="tx_sessionplaner_domain_model_session-topic" xml:space="preserve">
         <source>Topic</source>
       </trans-unit>
