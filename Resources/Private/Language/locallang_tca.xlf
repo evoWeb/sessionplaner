@@ -135,6 +135,9 @@
       <trans-unit id="tx_sessionplaner_domain_model_session-topic" xml:space="preserve">
         <source>Topic</source>
       </trans-unit>
+      <trans-unit id="tx_sessionplaner_domain_model_session-topic_addition" xml:space="preserve">
+        <source>Topic Addition</source>
+      </trans-unit>
       <trans-unit id="tx_sessionplaner_domain_model_session-path_segment" xml:space="preserve">
         <source>Path Segment</source>
       </trans-unit>

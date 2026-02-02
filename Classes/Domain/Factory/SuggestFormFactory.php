@@ -197,6 +197,31 @@ class SuggestFormFactory extends AbstractFormFactory
             $titleField->addValidator($titleNotEmptyValidator);
         }
 
+        if ((bool)($settings['suggest']['fields']['subtitle']['enable'] ?? false) === true) {
+            /** @var GenericFormElement $subtitleField */
+            $subtitleField = $sessionInformation->createElement('subtitle', 'Text');
+            $subtitleField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['subtitle']['label']));
+            $subtitleField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['subtitle']['description'])
+            );
+            $subtitleStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['subtitle']['validation']['min'] ?? 1];
+            if ($settings['suggest']['fields']['subtitle']['validation']['max'] ?? false) {
+                $subtitleStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['subtitle']['validation']['max'];
+            }
+            /** @var StringLengthValidator $subtitleStringLengthValidator */
+            $subtitleStringLengthValidator = $this->validatorResolver->createValidator(
+                StringLengthValidator::class,
+                $subtitleStringLengthValidatorOptions
+            );
+            $subtitleField->addValidator($subtitleStringLengthValidator);
+            if ($subtitleStringLengthValidatorOptions['minimum'] > 0) {
+                /** @var NotEmptyValidator $subtitleNotEmptyValidator */
+                $subtitleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+                $subtitleField->addValidator($subtitleNotEmptyValidator);
+            }
+        }
+
         /** @var GenericFormElement $descriptionField */
         $descriptionField = $sessionInformation->createElement('description', 'Textarea');
         $descriptionField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['description']['label']));

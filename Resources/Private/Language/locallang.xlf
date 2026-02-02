@@ -209,6 +209,12 @@
       <trans-unit id="form.title.description">
         <source>A descriptive title for your submission</source>
       </trans-unit>
+      <trans-unit id="form.subtitle">
+        <source>Subtitle</source>
+      </trans-unit>
+      <trans-unit id="form.subtitle.description">
+        <source>A descriptive subtitle for your submission</source>
+      </trans-unit>
       <trans-unit id="form.description">
         <source>Description</source>
       </trans-unit>

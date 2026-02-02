@@ -78,6 +78,15 @@ plugin.tx_sessionplaner {
                         max = 255
                     }
                 }
+                subtitle {
+                    enable = 0
+                    label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.subtitle
+                    description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.subtitle.description
+                    validation {
+                        min = 0
+                        max = 255
+                    }
+                }
                 description {
                     label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.description
                     description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.description.description

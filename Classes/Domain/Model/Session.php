@@ -35,6 +35,8 @@ class Session extends AbstractSlugEntity
      */
     protected string $topic = '';
 
+    protected string $topicAddition = '';
+
     protected string $pathSegment = '';
 
     protected string $description = '';
@@ -144,6 +146,16 @@ class Session extends AbstractSlugEntity
     public function getTopic(): string
     {
         return $this->topic;
+    }
+
+    public function setTopicAddition(string $topicAddition): void
+    {
+        $this->topicAddition = $topicAddition;
+    }
+
+    public function getTopicAddition(): string
+    {
+        return $this->topicAddition;
     }
 
     public function setPathSegment(string $pathSegment): void
