@@ -38,7 +38,7 @@ class ObjectStorageUtility
         $inventory = [];
 
         foreach ($objectStorage as $item) {
-            if (!method_exists($item, '_getProperty')) {
+            if (!method_exists($item, '_getProperty') || !property_exists($item, $property)) {
                 continue;
             }
 

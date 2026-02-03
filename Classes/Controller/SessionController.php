@@ -14,7 +14,7 @@ namespace Evoweb\Sessionplaner\Controller;
 use Evoweb\Sessionplaner\Domain\Model\Session;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
-use Evoweb\Sessionplaner\TitleTagProvider\EventTitleTagProvider;
+use Evoweb\Sessionplaner\TitleTagProvider\SessionTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
@@ -24,15 +24,10 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class SessionController extends ActionController
 {
-    protected DayRepository $dayRepository;
-
-    protected SessionRepository $sessionRepository;
-
-    public function __construct(DayRepository $dayRepository, SessionRepository $sessionRepository)
-    {
-        $this->dayRepository = $dayRepository;
-        $this->sessionRepository = $sessionRepository;
-    }
+    public function __construct(
+        protected readonly DayRepository $dayRepository,
+        protected readonly SessionRepository $sessionRepository,
+    ) {}
 
     public function listAction(?Session $session = null): ResponseInterface
     {
@@ -60,17 +55,19 @@ class SessionController extends ActionController
         if ($session === null) {
             $response = new ForwardResponse('list');
         } else {
-            /** @var EventTitleTagProvider $provider */
-            $provider = GeneralUtility::makeInstance(EventTitleTagProvider::class);
+            /** @var SessionTitleTagProvider $provider */
+            $provider = GeneralUtility::makeInstance(SessionTitleTagProvider::class);
             $provider->setTitle($session->getTopic());
 
             /** @var MetaTagManagerRegistry $metaTagRegistry */
             $metaTagRegistry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
 
             $ogMetaTagManager = $metaTagRegistry->getManagerForProperty('og:title');
+            // @extensionScannerIgnoreLine
             $ogMetaTagManager->addProperty('og:title', $session->getTopic());
 
             $twitterMetaTagManager = $metaTagRegistry->getManagerForProperty('twitter:title');
+            // @extensionScannerIgnoreLine
             $twitterMetaTagManager->addProperty('twitter:title', $session->getTopic());
 
             $this->view->assign('session', $session);

@@ -31,31 +31,17 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 class BackendModuleController extends ActionController
 {
-    protected int $id = 0;
+    protected int $pageId = 0;
     protected ?Day $currentDay = null;
 
-    protected DayRepository $dayRepository;
-    protected SessionRepository $sessionRepository;
-    protected ModuleTemplateFactory $moduleTemplateFactory;
-    protected IconFactory $iconFactory;
-    protected PageRenderer $pageRenderer;
-    protected BackendUriBuilder $backendUriBuilder;
-
     public function __construct(
-        DayRepository $dayRepository,
-        SessionRepository $sessionRepository,
-        ModuleTemplateFactory $moduleTemplateFactory,
-        IconFactory $iconFactory,
-        PageRenderer $pageRenderer,
-        BackendUriBuilder $backendUriBuilder
-    ) {
-        $this->dayRepository = $dayRepository;
-        $this->sessionRepository = $sessionRepository;
-        $this->moduleTemplateFactory = $moduleTemplateFactory;
-        $this->iconFactory = $iconFactory;
-        $this->pageRenderer = $pageRenderer;
-        $this->backendUriBuilder = $backendUriBuilder;
-    }
+        protected readonly DayRepository $dayRepository,
+        protected readonly SessionRepository $sessionRepository,
+        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
+        protected readonly IconFactory $iconFactory,
+        protected readonly PageRenderer $pageRenderer,
+        protected readonly BackendUriBuilder $backendUriBuilder,
+    ) {}
 
     protected function initializeAction(): void
     {
@@ -70,7 +56,7 @@ class BackendModuleController extends ActionController
             $parsedBody = [];
         }
         $queryParams = $this->request->getQueryParams();
-        $this->id = (int)($parsedBody['id'] ?? $queryParams['id'] ?? 0);
+        $this->pageId = (int)($parsedBody['id'] ?? $queryParams['id'] ?? 0);
 
         $day = (int)($parsedBody['day'] ?? $queryParams['day'] ?? 0);
         if ($day !== 0) {
@@ -96,7 +82,7 @@ class BackendModuleController extends ActionController
         }
         $view->setTitle($title);
 
-        $page = BackendUtility::getRecord('pages', $this->id);
+        $page = BackendUtility::getRecord('pages', $this->pageId);
         if ($page !== null && isset($page['doktype']) && (int)$page['doktype'] === Constants::STORAGE_FOLDER_TYPE) {
             $docHeaderComponent = $view->getDocHeaderComponent();
             $this->registerMenuDays($docHeaderComponent->getMenuRegistry());
@@ -132,62 +118,41 @@ class BackendModuleController extends ActionController
 
     protected function registerButtonNewSession(ButtonBar $buttonBar): void
     {
-        $parameters = [
-            'edit' => ['tx_sessionplaner_domain_model_session' => [$this->id => 'new']],
-            'returnUrl' => $this->createModuleUri(),
-        ];
-        $button = $buttonBar->makeLinkButton()
-            ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:session-new'))
-            ->setShowLabelText(true)
-            // @phpstan-ignore classConstant.deprecated
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
-        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 1);
+        $this->addButtonToButtonBar($buttonBar, 'tx_sessionplaner_domain_model_session', 'session-new', 1);
     }
 
     protected function registerButtonNewSpeaker(ButtonBar $buttonBar): void
     {
-        $parameters = [
-            'edit' => ['tx_sessionplaner_domain_model_speaker' => [$this->id => 'new']],
-            'returnUrl' => $this->createModuleUri(),
-        ];
-        $button = $buttonBar->makeLinkButton()
-            ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:speaker-new'))
-            ->setShowLabelText(true)
-            // @phpstan-ignore classConstant.deprecated
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
-        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 2);
+        $this->addButtonToButtonBar($buttonBar, 'tx_sessionplaner_domain_model_speaker', 'speaker-new', 2);
     }
 
     protected function registerButtonNewRoom(ButtonBar $buttonBar): void
     {
-        $parameters = [
-            'edit' => ['tx_sessionplaner_domain_model_room' => [$this->id => 'new']],
-            'returnUrl' => $this->createModuleUri(),
-        ];
-        $button = $buttonBar->makeLinkButton()
-            ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:room-new'))
-            ->setShowLabelText(true)
-            // @phpstan-ignore classConstant.deprecated
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
-        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 3);
+        $this->addButtonToButtonBar($buttonBar, 'tx_sessionplaner_domain_model_room', 'room-new', 3);
     }
 
     protected function registerButtonNewDay(ButtonBar $buttonBar): void
     {
+        $this->addButtonToButtonBar($buttonBar, 'tx_sessionplaner_domain_model_day', 'day-new', 4);
+    }
+
+    protected function addButtonToButtonBar(
+        ButtonBar $buttonBar,
+        string $table,
+        string $labelKey,
+        int $buttonGroup
+    ): void {
         $parameters = [
-            'edit' => ['tx_sessionplaner_domain_model_day' => [$this->id => 'new']],
+            'edit' => [$table => [$this->pageId => 'new']],
             'returnUrl' => $this->createModuleUri(),
         ];
         $button = $buttonBar->makeLinkButton()
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:day-new'))
+            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:' . $labelKey))
             ->setShowLabelText(true)
             // @phpstan-ignore classConstant.deprecated
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
-        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, 4);
+        $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, $buttonGroup);
     }
 
     public function createModuleUri(array $params = []): string
@@ -199,12 +164,12 @@ class BackendModuleController extends ActionController
         }
 
         $baseParams = [
-            'id' => (string)$this->id,
-            'day' => $this->currentDay !== null ? (string)$this->currentDay->getUid() : '',
+            'id' => (string)$this->pageId,
+            'day' => (string)$this->currentDay?->getUid(),
         ];
 
         $params = array_replace_recursive($baseParams, $params);
-        $params = array_filter($params, static fn ($value) => $value !== null && trim((string)$value) !== '');
+        $params = array_filter($params, static fn($value) => $value !== null && trim((string)$value) !== '');
 
         return (string)$this->backendUriBuilder->buildUriFromRoute($route->getOption('_identifier'), $params);
     }

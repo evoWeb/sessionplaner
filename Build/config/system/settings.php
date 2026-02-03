@@ -1,8 +1,8 @@
 <?php
 return [
     'BE' => [
-        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$aEw0N0dVLzR5RWZ6MTg3bQ$nU9io/R8eqYaZRM07wmCtj8FZQZBglMcrCkdbtZwEZQ',
         'debug' => true,
+        'installToolPassword' => '$argon2i$v=19$m=65536,t=16,p=1$aEw0N0dVLzR5RWZ6MTg3bQ$nU9io/R8eqYaZRM07wmCtj8FZQZBglMcrCkdbtZwEZQ',
         'passwordHashing' => [
             'className' => 'TYPO3\\CMS\\Core\\Crypto\\PasswordHashing\\Argon2iPasswordHash',
             'options' => [],
@@ -44,6 +44,10 @@ return [
             'disablePageTsTCADefaults' => '0',
             'disablePageTsTCEFORM' => '0',
             'disablePageTsTCEMAIN' => '0',
+        ],
+        'extensionmanager' => [
+            'automaticInstallation' => '1',
+            'offlineMode' => '0',
         ],
     ],
     'FE' => [

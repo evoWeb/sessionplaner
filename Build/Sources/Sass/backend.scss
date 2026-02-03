@@ -1,9 +1,4 @@
 //
-// Variables
-//
-@import 'variables';
-
-//
 // Specific
 //
-@import 'backend/sessionplaner';
+@use 'backend/sessionplaner';

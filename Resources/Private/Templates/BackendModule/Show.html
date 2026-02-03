@@ -1,3 +1,6 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <f:layout name="Module" />
 <f:section name="Content">
 
@@ -7,10 +10,10 @@
             <div class="sessionplaner" id="sessionplaner">
                 <div class="sessionplaner-title">
                     <h1>
-                        <sessionplanervh:link.be.day day="{currentDay}">
+                        <be:link.editRecord uid="{currentDay.uid}" table="tx_sessionplaner_domain_model_day">
                             {currentDay.date -> f:format.date(format:'d.m.y')} -
                             {currentDay.name}
-                        </sessionplanervh:link.be.day>
+                        </be:link.editRecord>
                     </h1>
                 </div>
                 <div
@@ -35,3 +38,4 @@
     </f:if>
 
 </f:section>
+</html>

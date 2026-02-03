@@ -141,6 +141,9 @@
       <trans-unit id="option.unknown" xml:space="preserve">
         <source>Unknown Option</source>
       </trans-unit>
+      <trans-unit id="option.none" xml:space="preserve">
+        <source>None selected</source>
+      </trans-unit>
       <trans-unit id="option.sessiontype.talk" xml:space="preserve">
         <source>Talk</source>
       </trans-unit>
@@ -206,11 +209,23 @@
       <trans-unit id="form.title.description">
         <source>A descriptive title for your submission</source>
       </trans-unit>
+      <trans-unit id="form.subtitle">
+        <source>Subtitle</source>
+      </trans-unit>
+      <trans-unit id="form.subtitle.description">
+        <source>A descriptive subtitle for your submission</source>
+      </trans-unit>
       <trans-unit id="form.description">
         <source>Description</source>
       </trans-unit>
       <trans-unit id="form.description.description">
         <source>A description of your submission</source>
+      </trans-unit>
+      <trans-unit id="form.tag_suggestion">
+        <source>Tag Suggestion</source>
+      </trans-unit>
+      <trans-unit id="form.tag_suggestion.description">
+        <source>A descriptive tag you would add to your submission</source>
       </trans-unit>
       <trans-unit id="form.type">
         <source>Type</source>

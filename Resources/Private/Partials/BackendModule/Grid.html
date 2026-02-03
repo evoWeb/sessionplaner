@@ -1,3 +1,7 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      xmlns:sessionplanervh="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <div class="sessionplaner-container">
     <div class="sessionplaner-grid">
         <div class="sessionplaner-row">
@@ -7,20 +11,20 @@
                     data-sessionplaner-room-uid="{room.uid}"
                     data-sessionplaner-room-type="{room.type}"
                     >
-                    <sessionplanervh:link.be.room room="{room}">
+                    <be:link.editRecord uid="{room.uid}" table="tx_sessionplaner_domain_model_room">
                         {room.name} <f:if condition="{room.seats}">({room.seats})</f:if>
-                    </sessionplanervh:link.be.room>
+                    </be:link.editRecord>
                 </div>
             </f:for>
         </div>
         <f:for each="{day.slots}" as="slot">
             <div class="sessionplaner-row">
                 <div class="sessionplaner-col sessionplaner-col-time">
-                    <sessionplanervh:link.be.slot slot="{slot}">
+                    <be:link.editRecord uid="{slot.uid}" table="tx_sessionplaner_domain_model_slot">
                         <strong><sessionplanervh:format.time value="{slot.start}" /></strong><br>
                         <strong><sessionplanervh:format.time value="{slot.end}" /></strong><br>
                         <small>{slot.duration} <f:translate id="minutes" /></small>
-                    </sessionplanervh:link.be.slot>
+                    </be:link.editRecord>
                 </div>
                 <f:if condition="{slot.break}">
                     <f:then>
@@ -61,3 +65,4 @@
         </f:for>
     </div>
 </div>
+</html>

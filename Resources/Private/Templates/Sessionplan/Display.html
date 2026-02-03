@@ -1,3 +1,6 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:sessionplanervh="http://typo3.org/ns/Evoweb/Sessionplaner/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <f:layout name="Frontend" />
 <f:section name="Content">
 
@@ -101,17 +104,17 @@
                                                                                     <div class="sessionplaner-tag-list">
                                                                                         <f:if condition="{session.type}">
                                                                                             <span class="sessionplaner-tag">
-                                                                                                <f:if condition="{session.type} == 1">{f:translate(id: 'type-talk')}</f:if>
-                                                                                                <f:if condition="{session.type} == 2">{f:translate(id: 'type-tutorial')}</f:if>
-                                                                                                <f:if condition="{session.type} == 3">{f:translate(id: 'type-workshop')}</f:if>
-                                                                                                <f:if condition="{session.type} == 4">{f:translate(id: 'type-discussion')}</f:if>
+                                                                                                <f:if condition="{session.type} == 1"><f:translate id="type-talk"/></f:if>
+                                                                                                <f:if condition="{session.type} == 2"><f:translate id="type-tutorial"/></f:if>
+                                                                                                <f:if condition="{session.type} == 3"><f:translate id="type-workshop"/></f:if>
+                                                                                                <f:if condition="{session.type} == 4"><f:translate id="type-discussion"/></f:if>
                                                                                             </span>
                                                                                         </f:if>
                                                                                         <f:if condition="{session.level}">
                                                                                             <span class="sessionplaner-tag">
-                                                                                                <f:if condition="{session.level} == 1">{f:translate(id: 'level-starter')}</f:if>
-                                                                                                <f:if condition="{session.level} == 2">{f:translate(id: 'level-advanced')}</f:if>
-                                                                                                <f:if condition="{session.level} == 3">{f:translate(id: 'level-pro')}</f:if>
+                                                                                                <f:if condition="{session.level} == 1"><f:translate id="level-starter"/></f:if>
+                                                                                                <f:if condition="{session.level} == 2"><f:translate id="level-advanced"/></f:if>
+                                                                                                <f:if condition="{session.level} == 3"><f:translate id="level-pro"/></f:if>
                                                                                             </span>
                                                                                         </f:if>
                                                                                         <f:if condition="{session.tags}">
@@ -162,3 +165,4 @@
     </f:if>
 
 </f:section>
+</html>

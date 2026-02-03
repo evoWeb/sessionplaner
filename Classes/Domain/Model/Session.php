@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -34,9 +35,13 @@ class Session extends AbstractSlugEntity
      */
     protected string $topic = '';
 
+    protected string $topicAddition = '';
+
     protected string $pathSegment = '';
 
     protected string $description = '';
+
+    protected string $tagSuggestion = '';
 
     protected string $speaker = '';
 
@@ -60,26 +65,26 @@ class Session extends AbstractSlugEntity
 
     /**
      * @var ObjectStorage<Speaker>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $speakers;
 
     /**
      * @var ObjectStorage<FileReference>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $documents;
 
     /**
      * @var ObjectStorage<Tag>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $tags;
 
     /**
      * @var ObjectStorage<Link>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[Extbase\ORM\Lazy]
     protected ObjectStorage $links;
 
     public function __construct()
@@ -145,6 +150,16 @@ class Session extends AbstractSlugEntity
         return $this->topic;
     }
 
+    public function setTopicAddition(string $topicAddition): void
+    {
+        $this->topicAddition = $topicAddition;
+    }
+
+    public function getTopicAddition(): string
+    {
+        return $this->topicAddition;
+    }
+
     public function setPathSegment(string $pathSegment): void
     {
         $this->pathSegment = $pathSegment;
@@ -163,6 +178,16 @@ class Session extends AbstractSlugEntity
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function setTagSuggestion(string $tagSuggestion): void
+    {
+        $this->tagSuggestion = $tagSuggestion;
+    }
+
+    public function getTagSuggestion(): string
+    {
+        return $this->tagSuggestion;
     }
 
     public function addSpeaker(Speaker $speaker): void
@@ -346,7 +371,7 @@ class Session extends AbstractSlugEntity
         $properties = $this->_getProperties();
         foreach ($properties as $key => $value) {
             $field = GeneralUtility::camelCaseToLowerCaseUnderscored($key);
-            $value = \is_object($value) && \method_exists($value, 'getUid') ? $value->getUid() :  $value;
+            $value = \is_object($value) && \method_exists($value, 'getUid') ? $value->getUid() : $value;
             $data[$field] = $value;
         }
 

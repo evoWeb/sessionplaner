@@ -46,10 +46,18 @@ class SessionLevelEnum
 
     public static function getTcaOptions(): array
     {
-        $data = [];
+        $data = [
+            [
+                'label' => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.none',
+                'value' => 0,
+            ],
+        ];
         $options = self::getAvailableOptions();
         foreach ($options as $option) {
-            $data[] = [self::getLabel($option), $option];
+            $data[] = [
+                'label' => self::getLabel($option),
+                'value' => $option,
+            ];
         }
 
         return $data;

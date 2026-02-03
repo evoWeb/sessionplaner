@@ -74,8 +74,6 @@
         ],
         "post-install-cmd": [
             "[ -d config ] || ln -snvf Build/config config",
-            "[ -d Build/public/typo3conf/ext ] || mkdir -p Build/public/typo3conf/ext/",
-            "[ -L Build/public/typo3conf/ext/sessionplaner ] || ln -snvf ../../../../. Build/public/typo3conf/ext/sessionplaner",
             "cp Build/vendor/typo3/cms-install/Resources/Private/FolderStructureTemplateFiles/root-htaccess Build/public/.htaccess"
         ],
         "post-update-cmd": [

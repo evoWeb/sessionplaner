@@ -11,49 +11,35 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Controller;
 
-use Evoweb\Sessionplaner\Domain\Model\Day;
-use Evoweb\Sessionplaner\Domain\Model\Room;
 use Evoweb\Sessionplaner\Domain\Model\Session;
-use Evoweb\Sessionplaner\Domain\Model\Slot;
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\RoomRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SlotRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 
+#[Autoconfigure(public: true)]
 final class AjaxController
 {
-    protected BackendUserAuthentication $backendUser;
-    protected ConfigurationManager $configurationManager;
-    protected SessionRepository $sessionRepository;
-    protected DayRepository $dayRepository;
-    protected RoomRepository $roomRepository;
-    protected SlotRepository $slotRepository;
-    protected PersistenceManager $persistenceManager;
+    private BackendUserAuthentication $backendUser;
 
     public function __construct(
-        ConfigurationManager $configurationManager,
-        SessionRepository $sessionRepository,
-        DayRepository $dayRepository,
-        RoomRepository $roomRepository,
-        SlotRepository $slotRepository,
-        PersistenceManager $persistenceManager
+        private readonly ValidatorResolver $validatorResolver,
+        private readonly SessionRepository $sessionRepository,
+        private readonly DayRepository $dayRepository,
+        private readonly RoomRepository $roomRepository,
+        private readonly SlotRepository $slotRepository,
+        private readonly PersistenceManager $persistenceManager,
     ) {
         $this->backendUser = $GLOBALS['BE_USER'];
-        $this->configurationManager = $configurationManager;
-        $this->sessionRepository = $sessionRepository;
-        $this->dayRepository = $dayRepository;
-        $this->roomRepository = $roomRepository;
-        $this->slotRepository = $slotRepository;
-        $this->persistenceManager = $persistenceManager;
     }
 
     public function updateSessionAction(ServerRequestInterface $request): ResponseInterface
@@ -66,7 +52,10 @@ final class AjaxController
         }
 
         $data = $this->getParameter($request)['session'] ?? [];
-        $session = $this->sessionRepository->findAnyByUid((int)$data['uid']);
+        $uid = (int)($data['uid'] ?? 0);
+        unset($data['uid']);
+
+        $session = $this->sessionRepository->findAnyByUid($uid);
         if ($session === null) {
             return $this->renderResponse([
                 'status' => 'error',
@@ -94,31 +83,24 @@ final class AjaxController
         ]);
     }
 
-    protected function validateSession(Session $session): Result
+    private function validateSession(Session $session): Result
     {
-        /** @var ValidatorResolver $validationResolver */
-        $validationResolver = GeneralUtility::makeInstance(ValidatorResolver::class);
-        $validator = $validationResolver->getBaseValidatorConjunction(Session::class);
-        return $validator->validate($session);
+        return $this->validatorResolver->getBaseValidatorConjunction(Session::class)->validate($session);
     }
 
-    protected function updateSession(Session $session, array $data = []): void
+    private function updateSession(Session $session, array $data = []): void
     {
-        unset($data['uid']);
         foreach ($data as $field => $value) {
             switch ($field) {
                 case 'room':
-                    /** @var Room $room */
                     $room = $this->roomRepository->findByUid((int)$value);
                     $session->setRoom($room);
                     break;
                 case 'slot':
-                    /** @var Slot $slot */
                     $slot = $this->slotRepository->findByUid((int)$value);
                     $session->setSlot($slot);
                     break;
                 case 'day':
-                    /** @var Day $day */
                     $day = $this->dayRepository->findByUid((int)$value);
                     $session->setDay($day);
                     break;
@@ -132,26 +114,23 @@ final class AjaxController
         }
     }
 
-    protected function hasAccess(): bool
+    private function hasAccess(): bool
     {
-        if (!($this->backendUser->isAdmin() || $this->backendUser->check('modules', 'web_SessionplanerSessionplanerMain'))) {
-            return false;
-        }
-
-        return true;
+        return $this->backendUser->isAdmin()
+            || $this->backendUser->check('modules', 'web_SessionplanerSessionplanerMain');
     }
 
-    protected function getParameter(ServerRequestInterface $request): array
+    private function getParameter(ServerRequestInterface $request): array
     {
         try {
-            $payload = json_decode((string) $request->getBody(), true, 512, JSON_THROW_ON_ERROR);
+            $payload = json_decode((string)$request->getBody(), true, 512, JSON_THROW_ON_ERROR);
             return is_array($payload) ? $payload : [];
-        } catch (\JsonException $exception) {
+        } catch (\JsonException) {
             return [];
         }
     }
 
-    protected function renderResponse(array $data): ResponseInterface
+    private function renderResponse(array $data): ResponseInterface
     {
         return new JsonResponse(
             [

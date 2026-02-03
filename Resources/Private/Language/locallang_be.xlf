@@ -6,6 +6,9 @@
       <trans-unit id="wizard.group.sessionplaner" xml:space="preserve">
         <source>Session Planer</source>
       </trans-unit>
+      <trans-unit id="tt_content.group" xml:space="preserve">
+        <source>Session Planer</source>
+      </trans-unit>
       <trans-unit id="tt_content.list_type_display" xml:space="preserve">
         <source>Sessionplan display</source>
       </trans-unit>
