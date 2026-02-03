@@ -127,6 +127,12 @@ plugin.tx_sessionplaner {
                 carbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress}
                 blindCarbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress}
             }
+            senderNotification {
+                enable = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.enable}
+                subject = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.subject}
+                senderAddress = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.senderAddress}
+                senderName = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.senderName}
+            }
             confirmation {
                 message = {$plugin.tx_sessionplaner.settings.suggest.confirmation.message}
                 pageUid = {$plugin.tx_sessionplaner.settings.suggest.confirmation.pageUid}

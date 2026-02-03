@@ -344,15 +344,38 @@ class SuggestFormFactory extends AbstractFormFactory
             ]);
         }
 
+        $message = $settings['suggest']['confirmation']['message'] ??
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
+        $confirmationMessage = LocalizationUtility::translate($message) ?? '';
+
+        if ($this->sendingSenderNotificationAllowed($settings)) {
+            $form->createFinisher('EmailToSender', [
+                'subject' => $settings['suggest']['senderNotification']['subject'],
+                'recipients' => [
+                    '{email}' => '{fullname}',
+                ],
+                'senderAddress' => $settings['suggest']['senderNotification']['senderAddress'],
+                'senderName' => $settings['suggest']['senderNotification']['senderName'],
+                'format' => 'html',
+                'headline' => $settings['suggest']['senderNotification']['subject'],
+                'variables' => [
+                    'title' => $settings['suggest']['senderNotification']['subject'],
+                    'message' => $confirmationMessage,
+                ],
+                'templateName' => 'EmailToSender',
+                'templateRootPaths' => [
+                    100 => 'EXT:sessionplaner/Resources/Private/Templates/Email/'
+                ],
+            ]);
+        }
+
         if (($settings['suggest']['confirmation']['pageUid'] ?? '') !== '') {
             $form->createFinisher('Redirect', [
                 'pageUid' => (int)$settings['suggest']['confirmation']['pageUid'],
             ]);
         } else {
-            $message = $settings['suggest']['confirmation']['message'] ??
-                'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
             $form->createFinisher('Confirmation', [
-                'message' => LocalizationUtility::translate($message) ?? '',
+                'message' => $confirmationMessage,
             ]);
         }
 
@@ -376,6 +399,20 @@ class SuggestFormFactory extends AbstractFormFactory
             && $settings['suggest']['notification']['recipientName'] !== ''
             && $settings['suggest']['notification']['senderAddress'] !== ''
             && $settings['suggest']['notification']['senderName'] !== '';
+    }
+
+    protected function sendingSenderNotificationAllowed(array $settings): bool
+    {
+        return isset(
+                $settings['suggest']['senderNotification']['enable'],
+                $settings['suggest']['senderNotification']['subject'],
+                $settings['suggest']['senderNotification']['senderAddress'],
+                $settings['suggest']['senderNotification']['senderName']
+            )
+            && (bool)$settings['suggest']['senderNotification']['enable'] === true
+            && $settings['suggest']['senderNotification']['subject'] !== ''
+            && $settings['suggest']['senderNotification']['senderAddress'] !== ''
+            && $settings['suggest']['senderNotification']['senderName'] !== '';
     }
 
     protected function getLocalizedLabel(string $label): string
