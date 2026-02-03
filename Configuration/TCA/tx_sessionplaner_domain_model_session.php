@@ -379,6 +379,7 @@ return [
                     day,
                     room,
                     slot,
+                    tag_suggestion,
                     tags,
             ',
         ],
