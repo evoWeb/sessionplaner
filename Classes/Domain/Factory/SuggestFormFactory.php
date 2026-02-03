@@ -44,9 +44,11 @@ class SuggestFormFactory extends AbstractFormFactory
 
     public function build(
         array $configuration,
-        ?string $prototypeName = 'standard',
+        ?string $prototypeName = null,
         ?ServerRequestInterface $request = null
     ): FormDefinition {
+        $prototypeName = 'standard';
+
         $prototypeConfiguration = $this->formConfigurationService->getPrototypeConfiguration($prototypeName);
 
         $settings = $this->configurationManager->getConfiguration(
