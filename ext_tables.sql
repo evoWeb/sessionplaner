@@ -45,6 +45,7 @@ CREATE TABLE tx_sessionplaner_domain_model_slot
 CREATE TABLE tx_sessionplaner_domain_model_session
 (
     topic           varchar (255) DEFAULT '' NOT NULL,
+    topic_addition  varchar (255) DEFAULT '' NOT NULL,
     path_segment    varchar(2048),
     speaker         varchar(255) DEFAULT '' NOT NULL,
     twitter         varchar(255) DEFAULT '' NOT NULL,
@@ -57,6 +58,7 @@ CREATE TABLE tx_sessionplaner_domain_model_session
     requesttype     int(11) unsigned DEFAULT '0' NOT NULL,
     norecording     tinyint(4) unsigned DEFAULT '0' NOT NULL,
     description     text,
+    tag_suggestion  varchar (255) DEFAULT '' NOT NULL,
 
     # references
     speakers        int(11) unsigned DEFAULT '0' NOT NULL,

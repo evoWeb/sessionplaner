@@ -22,6 +22,11 @@
                 <div class="sessionplaner-sessiondetail-title">
                     <h1>{session.topic}</h1>
                 </div>
+                <f:if condition="{session.topicAddition}">
+                    <div class="sessionplaner-sessiondetail-subtitle">
+                        <h2>{session.topicAddition}</h2>
+                    </div>
+                </f:if>
                 <div class="sessionplaner-sessiondetail-main">
                     <f:if condition="{session.description}">
                     <div class="sessionplaner-sessiondetail-description">

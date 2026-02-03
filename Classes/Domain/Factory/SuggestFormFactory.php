@@ -186,9 +186,43 @@ class SuggestFormFactory extends AbstractFormFactory
             'elementDescription',
             $this->getLocalizedLabel($settings['suggest']['fields']['title']['description'])
         );
-        /** @var NotEmptyValidator $titleValidator */
-        $titleValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-        $titleField->addValidator($titleValidator);
+        $titleStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['title']['validation']['min'] ?? 1];
+        if ($settings['suggest']['fields']['title']['validation']['max'] ?? false) {
+            $titleStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['title']['validation']['max'];
+        }
+        /** @var StringLengthValidator $titleStringLengthValidator */
+        $titleStringLengthValidator = $this->validatorResolver->createValidator(StringLengthValidator::class, $titleStringLengthValidatorOptions);
+        $titleField->addValidator($titleStringLengthValidator);
+        if ($titleStringLengthValidatorOptions['minimum'] > 0) {
+            /** @var NotEmptyValidator $titleNotEmptyValidator */
+            $titleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+            $titleField->addValidator($titleNotEmptyValidator);
+        }
+
+        if ((bool)($settings['suggest']['fields']['subtitle']['enable'] ?? false) === true) {
+            /** @var GenericFormElement $subtitleField */
+            $subtitleField = $sessionInformation->createElement('subtitle', 'Text');
+            $subtitleField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['subtitle']['label']));
+            $subtitleField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['subtitle']['description'])
+            );
+            $subtitleStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['subtitle']['validation']['min'] ?? 1];
+            if ($settings['suggest']['fields']['subtitle']['validation']['max'] ?? false) {
+                $subtitleStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['subtitle']['validation']['max'];
+            }
+            /** @var StringLengthValidator $subtitleStringLengthValidator */
+            $subtitleStringLengthValidator = $this->validatorResolver->createValidator(
+                StringLengthValidator::class,
+                $subtitleStringLengthValidatorOptions
+            );
+            $subtitleField->addValidator($subtitleStringLengthValidator);
+            if ($subtitleStringLengthValidatorOptions['minimum'] > 0) {
+                /** @var NotEmptyValidator $subtitleNotEmptyValidator */
+                $subtitleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+                $subtitleField->addValidator($subtitleNotEmptyValidator);
+            }
+        }
 
         /** @var GenericFormElement $descriptionField */
         $descriptionField = $sessionInformation->createElement('description', 'Textarea');
@@ -207,6 +241,31 @@ class SuggestFormFactory extends AbstractFormFactory
             ['minimum' => 5]
         );
         $descriptionField->addValidator($stringLengthValidator);
+
+        if ((bool)($settings['suggest']['fields']['tag_suggestion']['enable'] ?? false) === true) {
+            /** @var GenericFormElement $tagSuggestionField */
+            $tagSuggestionField = $sessionInformation->createElement('tag_suggestion', 'Text');
+            $tagSuggestionField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag_suggestion']['label']));
+            $tagSuggestionField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['suggest']['fields']['tag_suggestion']['description'])
+            );
+            $tagSuggestionStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['tag_suggestion']['validation']['min'] ?? 1];
+            if ($settings['suggest']['fields']['tag_suggestion']['validation']['max'] ?? false) {
+                $tagSuggestionStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['tag_suggestion']['validation']['max'];
+            }
+            /** @var StringLengthValidator $tagSuggestionStringLengthValidator */
+            $tagSuggestionStringLengthValidator = $this->validatorResolver->createValidator(
+                StringLengthValidator::class,
+                $tagSuggestionStringLengthValidatorOptions
+            );
+            $tagSuggestionField->addValidator($tagSuggestionStringLengthValidator);
+            if ($tagSuggestionStringLengthValidatorOptions['minimum'] > 0) {
+                /** @var NotEmptyValidator $tagSuggestionNotEmptyValidator */
+                $tagSuggestionNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+                $tagSuggestionField->addValidator($tagSuggestionNotEmptyValidator);
+            }
+        }
 
         if ((bool)($settings['suggest']['fields']['length']['enable'] ?? false) === true) {
             /** @var GenericFormElement $lengthField */
@@ -287,15 +346,38 @@ class SuggestFormFactory extends AbstractFormFactory
             ]);
         }
 
+        $message = $settings['suggest']['confirmation']['message'] ??
+            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
+        $confirmationMessage = LocalizationUtility::translate($message) ?? '';
+
+        if ($this->sendingSenderNotificationAllowed($settings)) {
+            $form->createFinisher('EmailToSender', [
+                'subject' => $settings['suggest']['senderNotification']['subject'],
+                'recipients' => [
+                    '{email}' => '{fullname}',
+                ],
+                'senderAddress' => $settings['suggest']['senderNotification']['senderAddress'],
+                'senderName' => $settings['suggest']['senderNotification']['senderName'],
+                'format' => 'html',
+                'headline' => $settings['suggest']['senderNotification']['subject'],
+                'variables' => [
+                    'title' => $settings['suggest']['senderNotification']['subject'],
+                    'message' => $confirmationMessage,
+                ],
+                'templateName' => 'EmailToSender',
+                'templateRootPaths' => [
+                    100 => 'EXT:sessionplaner/Resources/Private/Templates/Email/'
+                ],
+            ]);
+        }
+
         if (($settings['suggest']['confirmation']['pageUid'] ?? '') !== '') {
             $form->createFinisher('Redirect', [
                 'pageUid' => (int)$settings['suggest']['confirmation']['pageUid'],
             ]);
         } else {
-            $message = $settings['suggest']['confirmation']['message'] ??
-                'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
             $form->createFinisher('Confirmation', [
-                'message' => LocalizationUtility::translate($message) ?? '',
+                'message' => $confirmationMessage,
             ]);
         }
 
@@ -319,6 +401,20 @@ class SuggestFormFactory extends AbstractFormFactory
             && $settings['suggest']['notification']['recipientName'] !== ''
             && $settings['suggest']['notification']['senderAddress'] !== ''
             && $settings['suggest']['notification']['senderName'] !== '';
+    }
+
+    protected function sendingSenderNotificationAllowed(array $settings): bool
+    {
+        return isset(
+                $settings['suggest']['senderNotification']['enable'],
+                $settings['suggest']['senderNotification']['subject'],
+                $settings['suggest']['senderNotification']['senderAddress'],
+                $settings['suggest']['senderNotification']['senderName']
+            )
+            && (bool)$settings['suggest']['senderNotification']['enable'] === true
+            && $settings['suggest']['senderNotification']['subject'] !== ''
+            && $settings['suggest']['senderNotification']['senderAddress'] !== ''
+            && $settings['suggest']['senderNotification']['senderName'] !== '';
     }
 
     protected function getLocalizedLabel(string $label): string

@@ -2,6 +2,7 @@
 # customsubcategory=110_SPPERSISTENCE=Persistence
 # customsubcategory=120_SPSETTINGS=Settings
 # customsubcategory=130_SPSUGGESTMAIL=Suggest Notifications
+# customsubcategory=135_SPSUGGESTSENDERMAIL=Suggest Notifications to Sender
 # customsubcategory=140_SPSUGGESTCONFIRMATION=Suggest Confirmation
 
 plugin.tx_sessionplaner {
@@ -47,6 +48,16 @@ plugin.tx_sessionplaner {
                 carbonCopyAddress =
                 # cat=plugin.sessionplaner/130_SPSUGGESTMAIL/blindCarbonCopyAddress; type=string; label=Blind Carbon Copy Address
                 blindCarbonCopyAddress =
+            }
+            senderNotification {
+                # cat=plugin.sessionplaner/135_SPSUGGESTSENDERMAIL/enable; type=boolean; label=Enable
+                enable = 0
+                # cat=plugin.sessionplaner/135_SPSUGGESTSENDERMAIL/subject; type=string; label=Subject
+                subject = Thank you for your suggestion
+                # cat=plugin.sessionplaner/135_SPSUGGESTSENDERMAIL/senderAddress; type=string; label=Sender Address
+                senderAddress =
+                # cat=plugin.sessionplaner/135_SPSUGGESTSENDERMAIL/senderName; type=string; label=Sender Name
+                senderName =
             }
             confirmation {
                 # cat=plugin.sessionplaner/140_SPSUGGESTCONFIRMATION/message; type=string; label=Confirmation Message

@@ -72,6 +72,17 @@ return [
                 'max' => 256,
             ],
         ],
+        'topic_addition' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-topic_addition',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'eval' => 'trim',
+                'required' => false,
+                'max' => 256,
+            ],
+        ],
         'path_segment' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-path_segment',
@@ -154,6 +165,17 @@ return [
                 'softref' => 'typolink_tag,email[subst],url',
                 'enableRichtext' => true,
                 'richtextConfiguration' => 'default',
+            ],
+        ],
+        'tag_suggestion' => [
+            'exclude' => false,
+            'label' => $languageFile . 'tx_sessionplaner_domain_model_session-tag_suggestion',
+            'config' => [
+                'type' => 'input',
+                'size' => 40,
+                'eval' => 'trim',
+                'required' => false,
+                'max' => 256,
             ],
         ],
         'documents' => [
@@ -341,6 +363,7 @@ return [
                 --div--;General,
                     --palette--;' . $languageFile . 'tx_sessionplaner_domain_model_session.palettes.options;options,
                     topic,
+                    topic_addition,
                     path_segment,
                     description,
                     --palette--;' . $languageFile
@@ -356,6 +379,7 @@ return [
                     day,
                     room,
                     slot,
+                    tag_suggestion,
                     tags,
             ',
         ],
