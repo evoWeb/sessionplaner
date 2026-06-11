@@ -391,6 +391,7 @@ class SuggestFormFactory extends AbstractFormFactory
 
         if ($this->sendingNotificationAllowed($settings)) {
             $options = $settings['suggest']['notification'];
+            // @extensionScannerIgnoreLine
             $options['format'] = 'html';
             $options['recipients'] = [
                 $options['recipientAddress'] => $options['recipientName'],

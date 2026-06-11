@@ -19,6 +19,9 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\Route;
 use TYPO3\CMS\Backend\Routing\UriBuilder as BackendUriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Template\Components\Buttons\LinkButton;
+use TYPO3\CMS\Backend\Template\Components\Menu\Menu;
+use TYPO3\CMS\Backend\Template\Components\Menu\MenuItem;
 use TYPO3\CMS\Backend\Template\Components\MenuRegistry;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -26,6 +29,7 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -100,13 +104,13 @@ class BackendModuleController extends ActionController
         /** @var QueryResultInterface<int, Day> $days */
         $days = $this->dayRepository->findAll();
         if ($days->count() > 0) {
-            $actionMenu = $menuRegistry->makeMenu();
+            $actionMenu = GeneralUtility::makeInstance(Menu::class);
             $actionMenu->setIdentifier('actionMenu');
             $actionMenu->setLabel('');
             foreach ($days as $day) {
                 $title = $day->getDate()->format('d.m.y') . ' - ' . $day->getName();
                 $actionMenu->addMenuItem(
-                    $actionMenu->makeMenuItem()
+                    GeneralUtility::makeInstance(MenuItem::class)
                         ->setTitle($title)
                         ->setHref($this->createModuleUri(['day' => (string)$day->getUid()]))
                         ->setActive(($this->currentDay === $day))
@@ -146,7 +150,7 @@ class BackendModuleController extends ActionController
             'edit' => [$table => [$this->pageId => 'new']],
             'returnUrl' => $this->createModuleUri(),
         ];
-        $button = $buttonBar->makeLinkButton()
+        $button = GeneralUtility::makeInstance(LinkButton::class)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:' . $labelKey))
             ->setShowLabelText(true)

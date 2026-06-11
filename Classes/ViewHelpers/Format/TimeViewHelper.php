@@ -18,7 +18,7 @@ class TimeViewHelper extends AbstractViewHelper
 {
     public function initializeArguments(): void
     {
-        $this->registerArgument('value', 'int', 'integer to format', true, 0);
+        $this->registerArgument('value', 'int', 'integer to format', true);
     }
 
     public function render(): string
