@@ -235,7 +235,7 @@ class SuggestFormFactory extends AbstractFormFactory
     {
         if ((bool)($settings['enable'] ?? false) === true) {
             $tags = $this->tagRepository->findBy(['suggestFormOption' => true]);
-            if ($tags->current() !== false && $tags->current() !== null) {
+            if ($tags->count() > 0) {
                 /** @var GenericFormElement $tagField */
                 $tagField = $section->createElement('tag', 'SingleSelect');
                 $tagField->setLabel($this->getLocalizedLabel($settings['label']));
