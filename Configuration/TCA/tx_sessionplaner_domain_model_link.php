@@ -17,6 +17,10 @@ return [
         'crdate' => 'crdate',
         'sortby' => 'sorting',
         'delete' => 'deleted',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -29,9 +33,32 @@ return [
         ],
     ],
     'columns' => [
+        'hidden' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'language',
+            ],
+        ],
         'link_text' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_link-linktext',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'input',
                 'max' => 255,
@@ -42,6 +69,8 @@ return [
         'link' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_link-link',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'link',
                 'required' => true,
@@ -52,6 +81,8 @@ return [
         '0' => [
             'showitem' => '
                 --div--;General,
+                    hidden,
+                    sys_language_uid,
                     link_text,
                     link,
             ',

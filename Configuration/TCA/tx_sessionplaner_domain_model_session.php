@@ -21,6 +21,10 @@ return [
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY topic',
         'delete' => 'deleted',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -34,14 +38,30 @@ return [
     'columns' => [
         'hidden' => [
             'exclude' => false,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
             'config' => [
                 'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'language',
             ],
         ],
         'suggestion' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-suggestion',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'check',
             ],
@@ -49,6 +69,8 @@ return [
         'social' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-social',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'check',
                 'default' => 1,
@@ -57,6 +79,8 @@ return [
         'donotlink' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-donotlink',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'check',
             ],
@@ -86,6 +110,8 @@ return [
         'path_segment' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-path_segment',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'slug',
                 'generatorOptions' => [
@@ -113,6 +139,8 @@ return [
         'twitter' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-twitter',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'input',
                 'size' => 20,
@@ -124,12 +152,14 @@ return [
         'speakers' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-speakers',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'multiple' => 0,
                 'foreign_table' => 'tx_sessionplaner_domain_model_speaker',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### '
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_speaker.pid = ###CURRENT_PID### AND (tx_sessionplaner_domain_model_speaker.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_speaker.sys_language_uid = ###REC_FIELD_sys_language_uid###) '
                     . 'ORDER BY tx_sessionplaner_domain_model_speaker.name',
                 'MM' => 'tx_sessionplaner_session_speaker_mm',
                 'fieldControl' => [
@@ -149,6 +179,8 @@ return [
         'attendees' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-attendees',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'number',
                 'size' => 20,
@@ -181,6 +213,8 @@ return [
         'documents' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-download',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'file',
                 'allowed' => 'common-image-types',
@@ -191,6 +225,8 @@ return [
         'type' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-type',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -202,6 +238,8 @@ return [
         'level' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-level',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -214,6 +252,8 @@ return [
         'day' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-day',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'onChange' => 'reload',
             'config' => [
                 'type' => 'select',
@@ -225,7 +265,7 @@ return [
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_day',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID### '
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_day.pid = ###CURRENT_PID### AND (tx_sessionplaner_domain_model_day.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_day.sys_language_uid = ###REC_FIELD_sys_language_uid###) '
                     . 'ORDER BY tx_sessionplaner_domain_model_day.date',
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -235,6 +275,8 @@ return [
         'room' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-room',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -245,7 +287,7 @@ return [
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID### AND (tx_sessionplaner_domain_model_room.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_room.sys_language_uid = ###REC_FIELD_sys_language_uid###)',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
@@ -254,6 +296,8 @@ return [
         'slot' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-slot',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -264,7 +308,7 @@ return [
                     ],
                 ],
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID### AND tx_sessionplaner_domain_model_slot.day = ###REC_FIELD_day###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_slot.pid = ###CURRENT_PID### AND tx_sessionplaner_domain_model_slot.day = ###REC_FIELD_day### AND (tx_sessionplaner_domain_model_slot.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_slot.sys_language_uid = ###REC_FIELD_sys_language_uid###)',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
@@ -273,11 +317,13 @@ return [
         'tags' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-tags',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_tag',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_tag.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_tag.pid = ###CURRENT_PID### AND (tx_sessionplaner_domain_model_tag.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_tag.sys_language_uid = ###REC_FIELD_sys_language_uid###)',
                 'MM' => 'tx_sessionplaner_session_tag_mm',
                 'minitems' => 0,
                 'fieldControl' => [
@@ -297,6 +343,8 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-links',
             'description' => $languageFile . 'tx_sessionplaner_domain_model_session-links-description',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_link',
@@ -323,6 +371,8 @@ return [
         'requesttype' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-requesttype',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -335,6 +385,8 @@ return [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_session-norecording',
             'description' => $languageFile . 'tx_sessionplaner_domain_model_session-norecording-description',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'check',
             ],
@@ -344,10 +396,11 @@ return [
         'options' => [
             'showitem' => '
                 hidden,
-                suggestion,
+                sys_language_uid,
+                --linebreak--, suggestion,
                 social,
-                donotlink,
-                --linebreak--, norecording,
+                --linebreak--, donotlink,
+                norecording,
             ',
         ],
         'speaker_free' => [
@@ -366,8 +419,7 @@ return [
                     topic_addition,
                     path_segment,
                     description,
-                    --palette--;' . $languageFile
-                . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
+                    --palette--;' . $languageFile . 'tx_sessionplaner_domain_model_session.palettes.speaker_free;speaker_free,
                     speakers,
                     attendees,
                     links,
