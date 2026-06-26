@@ -1,0 +1,7 @@
+plugin.tx_sessionplaner.settings.suggest.notification.enable: true
+plugin.tx_sessionplaner.settings.suggest.notification.recipientAddress: recipient@test.local
+plugin.tx_sessionplaner.settings.suggest.notification.recipientName: Recipient
+plugin.tx_sessionplaner.settings.suggest.notification.senderAddress: sender@test.local
+plugin.tx_sessionplaner.settings.suggest.notification.senderName: Sender
+plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress: carbon-copy@test.local
+plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress: blind-carbon-copy@test.local

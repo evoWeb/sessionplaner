@@ -17,13 +17,16 @@ class SessionLevelEnum
     public const OPTION_ADVANCED = 2;
     public const OPTION_PRO = 3;
 
+    /**
+     * @var array|string[]
+     */
     protected static array $optionLabel = [
-        self::OPTION_BEGINNER =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.beginner',
-        self::OPTION_ADVANCED =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.advanced',
-        self::OPTION_PRO =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro',
+        self::OPTION_BEGINNER
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.beginner',
+        self::OPTION_ADVANCED
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.advanced',
+        self::OPTION_PRO
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro',
     ];
 
     public static function getLabel(int $option): string
@@ -34,6 +37,9 @@ class SessionLevelEnum
         return static::$optionLabel[$option];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getOptions(): array
     {
         $data = [];
@@ -44,6 +50,9 @@ class SessionLevelEnum
         return $data;
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     public static function getTcaOptions(): array
     {
         $data = [
@@ -63,6 +72,9 @@ class SessionLevelEnum
         return $data;
     }
 
+    /**
+     * @return int[]
+     */
     public static function getAvailableOptions(): array
     {
         return [

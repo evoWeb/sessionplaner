@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
@@ -50,6 +51,8 @@ class Session extends AbstractSlugEntity
     protected int $attendees = 0;
 
     protected int $type = 0;
+
+    protected int $length = 0;
 
     protected int $level = 0;
 
@@ -256,6 +259,16 @@ class Session extends AbstractSlugEntity
         return $this->type;
     }
 
+    public function setLength(int $length): void
+    {
+        $this->length = $length;
+    }
+
+    public function getLength(): int
+    {
+        return $this->length;
+    }
+
     public function setLevel(int $level): void
     {
         $this->level = $level;
@@ -299,6 +312,9 @@ class Session extends AbstractSlugEntity
         $this->documents = $documents;
     }
 
+    /**
+     * @return array<int, CoreFileReference>
+     */
     public function getDocuments(): array
     {
         $result = [];
@@ -365,13 +381,16 @@ class Session extends AbstractSlugEntity
         $this->tags->detach($tag);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         $data = [];
         $properties = $this->_getProperties();
         foreach ($properties as $key => $value) {
             $field = GeneralUtility::camelCaseToLowerCaseUnderscored($key);
-            $value = \is_object($value) && \method_exists($value, 'getUid') ? $value->getUid() : $value;
+            $value = is_object($value) && method_exists($value, 'getUid') ? $value->getUid() : $value;
             $data[$field] = $value;
         }
 

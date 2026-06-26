@@ -49,7 +49,7 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'logo' => [
@@ -67,8 +67,9 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_room-seats',
             'config' => [
                 'type' => 'number',
-                'size' => 20,
-                'max' => 256,
+                'range' => [
+                    'lower' => 1,
+                ],
             ],
         ],
         'days' => [

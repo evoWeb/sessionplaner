@@ -31,10 +31,10 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
 
     public function render(): string
     {
-        $email = $this->arguments['email'];
-        $size = $this->arguments['size'];
-        $default = $this->arguments['default'];
-        $rating = $this->arguments['rating'];
+        $email = is_string($this->arguments['email']) ? $this->arguments['email'] : '';
+        $size = is_string($this->arguments['size']) ? $this->arguments['size'] : '80';
+        $default = is_string($this->arguments['default']) ? $this->arguments['default'] : 'mm';
+        $rating = is_string($this->arguments['rating']) ? $this->arguments['rating'] : 'g';
 
         $avatarUrl = 'https://www.gravatar.com/avatar/' . md5($email)
             . '?s=' . $size

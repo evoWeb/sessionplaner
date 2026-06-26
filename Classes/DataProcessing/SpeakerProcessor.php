@@ -31,6 +31,10 @@ class SpeakerProcessor implements DataProcessorInterface
      * 1559226337 {
      *     as = speaker
      * }
+     * @param array<string, string> $contentObjectConfiguration
+     * @param array<string, string> $processorConfiguration
+     * @param array<string, array<string, int>> $processedData
+     * @return array<string, array<string, int>|Speaker>
      */
     public function process(
         ContentObjectRenderer $cObj,

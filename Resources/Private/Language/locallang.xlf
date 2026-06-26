@@ -137,6 +137,12 @@
       <trans-unit id="warning-nosessionsfound">
         <source>No Sessions found.</source>
       </trans-unit>
+      <trans-unit id="warning-nospeakersfound">
+        <source>No Speakers found.</source>
+      </trans-unit>
+      <trans-unit id="warning-notagsfound">
+        <source>No Tags found.</source>
+      </trans-unit>
       <!-- Options -->
       <trans-unit id="option.unknown" xml:space="preserve">
         <source>Unknown Option</source>

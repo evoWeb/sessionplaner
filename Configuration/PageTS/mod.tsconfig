@@ -1,0 +1,3 @@
+mod.web_list {
+  allowedNewTables = tx_sessionplaner_domain_model_day, tx_sessionplaner_domain_model_link, tx_sessionplaner_domain_model_room, tx_sessionplaner_domain_model_session, tx_sessionplaner_domain_model_slot, tx_sessionplaner_domain_model_speaker, tx_sessionplaner_domain_model_tag
+}

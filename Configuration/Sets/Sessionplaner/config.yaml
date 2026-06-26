@@ -1,0 +1,3 @@
+name: evoweb/sessionplaner
+optionalDependencies:
+  - typo3/form

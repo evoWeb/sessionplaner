@@ -9,12 +9,6 @@
       <trans-unit id="tt_content.group" xml:space="preserve">
         <source>Session Planer</source>
       </trans-unit>
-      <trans-unit id="tt_content.list_type_display" xml:space="preserve">
-        <source>Sessionplan display</source>
-      </trans-unit>
-      <trans-unit id="tt_content.list_type_display_description" xml:space="preserve">
-        <source>Show sessions</source>
-      </trans-unit>
       <trans-unit id="tt_content.list_type_suggest" xml:space="preserve">
         <source>Sessionplaner: Suggest Session</source>
       </trans-unit>

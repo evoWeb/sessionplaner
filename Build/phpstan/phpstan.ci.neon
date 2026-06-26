@@ -7,6 +7,4 @@ parameters:
   tmpDir: /tmp
 
   parallel:
-    # @todo Process timeout raised as a intermediate solution. This should be further investigated if we can mitigate
-    #       the occurring subprocess timeout issue through other configurations and minimize the execution time again.
     processTimeout: 900.0
