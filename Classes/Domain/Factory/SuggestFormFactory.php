@@ -120,13 +120,13 @@ class SuggestFormFactory extends AbstractFormFactory
     protected function sendingNotificationAllowed(array $settings): bool
     {
         return isset(
-                $settings['suggest']['notification']['enable'],
-                $settings['suggest']['notification']['subject'],
-                $settings['suggest']['notification']['recipientAddress'],
-                $settings['suggest']['notification']['recipientName'],
-                $settings['suggest']['notification']['senderAddress'],
-                $settings['suggest']['notification']['senderName']
-            )
+            $settings['suggest']['notification']['enable'],
+            $settings['suggest']['notification']['subject'],
+            $settings['suggest']['notification']['recipientAddress'],
+            $settings['suggest']['notification']['recipientName'],
+            $settings['suggest']['notification']['senderAddress'],
+            $settings['suggest']['notification']['senderName']
+        )
             && (bool)$settings['suggest']['notification']['enable'] === true
             && $settings['suggest']['notification']['subject'] !== ''
             && $settings['suggest']['notification']['recipientAddress'] !== ''
@@ -516,8 +516,8 @@ class SuggestFormFactory extends AbstractFormFactory
             $form->createFinisher('EmailToReceiver', $options);
         }
 
-        $message = $settings['suggest']['confirmation']['message'] ??
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
+        $message = $settings['suggest']['confirmation']['message']
+            ?? 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
         $confirmationMessage = LocalizationUtility::translate($message) ?? '';
 
         if ($this->sendingSenderNotificationAllowed($settings)) {
@@ -536,7 +536,7 @@ class SuggestFormFactory extends AbstractFormFactory
                 ],
                 'templateName' => 'EmailToSender',
                 'templateRootPaths' => [
-                    100 => 'EXT:sessionplaner/Resources/Private/Templates/Email/'
+                    100 => 'EXT:sessionplaner/Resources/Private/Templates/Email/',
                 ],
             ]);
         }
@@ -552,14 +552,17 @@ class SuggestFormFactory extends AbstractFormFactory
         }
     }
 
+    /**
+     * @param array<string, array<string, array<string, string|bool>>> $settings
+     */
     protected function sendingSenderNotificationAllowed(array $settings): bool
     {
         return isset(
-                $settings['suggest']['senderNotification']['enable'],
-                $settings['suggest']['senderNotification']['subject'],
-                $settings['suggest']['senderNotification']['senderAddress'],
-                $settings['suggest']['senderNotification']['senderName']
-            )
+            $settings['suggest']['senderNotification']['enable'],
+            $settings['suggest']['senderNotification']['subject'],
+            $settings['suggest']['senderNotification']['senderAddress'],
+            $settings['suggest']['senderNotification']['senderName']
+        )
             && (bool)$settings['suggest']['senderNotification']['enable'] === true
             && $settings['suggest']['senderNotification']['subject'] !== ''
             && $settings['suggest']['senderNotification']['senderAddress'] !== ''
