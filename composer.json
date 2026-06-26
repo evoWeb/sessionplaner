@@ -40,9 +40,7 @@
 		"bk2k/extension-helper": "^2.1",
 		"friendsofphp/php-cs-fixer": "^3.91.0",
 		"phpstan/phpstan": "^2.1.32",
-		"phpstan/phpstan-deprecation-rules": "^2.0",
 		"phpstan/phpstan-phpunit": "^2.0",
-		"phpstan/phpstan-strict-rules": "^2.0",
 		"phpunit/phpunit": "^11.5.0",
 		"typo3/cms-belog": "^13.4 || ^14.3 || 15.*.*@dev || dev-main",
 		"typo3/cms-beuser": "^13.4 || ^14.3 || 15.*.*@dev || dev-main",
@@ -55,7 +53,8 @@
 	"prefer-stable": true,
 	"extra": {
 		"typo3/cms": {
-			"extension-key": "sessionplaner"
+			"extension-key": "sessionplaner",
+			"web-dir": "public"
 		},
 		"branch-alias": {
 			"dev-release/5.2.1": "5.2.x-dev"
@@ -72,7 +71,7 @@
 		],
 		"post-install-cmd": [
 			"[ -d config ] || ln -snvf Build/config config",
-			"cp Build/vendor/typo3/cms-install/Resources/Private/FolderStructureTemplateFiles/root-htaccess Build/public/.htaccess"
+			"cp vendor/typo3/cms-install/Resources/Private/FolderStructureTemplateFiles/root-htaccess public/.htaccess"
 		],
 		"post-update-cmd": [
 			"@post-install-cmd"

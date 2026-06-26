@@ -1294,7 +1294,7 @@ case ${TEST_SUITE} in
         SUITE_EXIT_CODE=$?
         ;;
     lintScss)
-        COMMAND="cd Build; npm ci || exit 1; node_modules/grunt/bin/grunt stylelint"
+        COMMAND="cd Build; npm ci || exit 1; npm run lint:scss"
         ${CONTAINER_BIN} run ${CONTAINER_COMMON_PARAMS} --name lint-css-${SUFFIX} -e HOME=${CORE_ROOT}/.cache ${IMAGE_NODEJS} /bin/sh -c "${COMMAND}"
         SUITE_EXIT_CODE=$?
         ;;
