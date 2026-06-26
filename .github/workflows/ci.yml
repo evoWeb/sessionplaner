@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [ feature/runTest-update, develop, main ]
+    branches: [ task/prepare-v14, develop, main ]
     tags: [ '*' ]
   pull_request:
     branches: [ develop ]
