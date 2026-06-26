@@ -180,7 +180,7 @@ cleanTestFiles() {
         bin/ \
         Build/phpunit/FunctionalTests-Job-*.xml \
         Build/phpunit \
-        Build/public \
+        config \
         public/ \
         typo3temp/ \
         var/ \
