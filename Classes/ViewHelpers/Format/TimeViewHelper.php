@@ -23,6 +23,6 @@ class TimeViewHelper extends AbstractViewHelper
 
     public function render(): string
     {
-        return TimeFormatUtility::getFormattedTime((int)$this->arguments['value']);
+        return TimeFormatUtility::getFormattedTime(is_int($this->arguments['value']) ? $this->arguments['value'] : 0);
     }
 }

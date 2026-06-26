@@ -16,6 +16,9 @@ class SessionRequestTypeEnum
     public const OPTION_OFFER = 1;
     public const OPTION_WISH = 2;
 
+    /**
+     * @var array|string[]
+     */
     protected static array $optionLabel = [
         self::OPTION_OFFER =>
             'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionrequesttype.offer',
@@ -31,6 +34,9 @@ class SessionRequestTypeEnum
         return static::$optionLabel[$option];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getOptions(): array
     {
         $data = [];
@@ -41,6 +47,9 @@ class SessionRequestTypeEnum
         return $data;
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     public static function getTcaOptions(): array
     {
         $data = [
@@ -59,6 +68,9 @@ class SessionRequestTypeEnum
         return $data;
     }
 
+    /**
+     * @return int[]
+     */
     public static function getAvailableOptions(): array
     {
         return [

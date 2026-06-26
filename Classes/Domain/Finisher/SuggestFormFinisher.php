@@ -53,6 +53,7 @@ class SuggestFormFinisher extends AbstractFinisher
     }
 
     /**
+     * @param array<string, array<string, string>> $settings
      * @return int<0, max>
      */
     public function getStoragePid(array $settings): int
@@ -67,6 +68,7 @@ class SuggestFormFinisher extends AbstractFinisher
 
     /**
      * @param int<0, max> $storagePid
+     * @param array<string, string|int|bool> $data
      */
     public function createSession(int $storagePid, array $data): Session
     {
@@ -112,11 +114,13 @@ class SuggestFormFinisher extends AbstractFinisher
     }
 
     /**
+     * @param array<string, string|int|bool> $data
      * @param int<0, max> $storagePid
      */
     public function getSpeaker(array $data, int $storagePid): Speaker
     {
-        $speaker = $this->speakerRepository->findOneByEmailIncludeHidden($data['email'] ?? '');
+        $speaker = $this->speakerRepository
+            ->findOneByEmailIncludeHidden(is_string($data['email']) ? $data['email'] : '');
         if ($speaker === null) {
             $speaker = new Speaker();
             $speaker->setPid($storagePid);

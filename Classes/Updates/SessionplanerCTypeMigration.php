@@ -23,9 +23,7 @@ use TYPO3\CMS\Install\Updates\AbstractListTypeToCTypeUpdate;
 /**
  * @internal This class is only meant to be used within EXT:install.
  */
-// @phpstan-ignore attribute.deprecated
 #[UpgradeWizard(SessionplanerCTypeMigration::class)]
-// @phpstan-ignore class.extendsDeprecatedClass
 final class SessionplanerCTypeMigration extends AbstractListTypeToCTypeUpdate
 {
     protected function getListTypeToCTypeMapping(): array

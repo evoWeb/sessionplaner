@@ -17,7 +17,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 class Tca
 {
     /**
-     * @param array{table: string, row: array} $parameters
+     * @param array{table: string, row: array{uid: int}} $parameters
      */
     public function slotLabel(array &$parameters): void
     {

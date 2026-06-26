@@ -152,12 +152,19 @@ class BackendModuleController extends ActionController
         ];
         $button = GeneralUtility::makeInstance(LinkButton::class)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:' . $labelKey))
+            ->setTitle(
+                $this->getLanguageService()?->sL(
+                    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:' . $labelKey
+                ) ?? $labelKey
+            )
             ->setShowLabelText(true)
             ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL));
         $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, $buttonGroup);
     }
 
+    /**
+     * @param array<string, string> $params
+     */
     public function createModuleUri(array $params = []): string
     {
         $request = $this->request;
@@ -174,11 +181,12 @@ class BackendModuleController extends ActionController
         $params = array_replace_recursive($baseParams, $params);
         $params = array_filter($params, static fn($value) => $value !== null && trim((string)$value) !== '');
 
-        return (string)$this->backendUriBuilder->buildUriFromRoute($route->getOption('_identifier'), $params);
+        $routeName = is_string($route->getOption('_identifier')) ? $route->getOption('_identifier') : '';
+        return (string)$this->backendUriBuilder->buildUriFromRoute($routeName, $params);
     }
 
-    protected function getLanguageService(): LanguageService
+    protected function getLanguageService(): ?LanguageService
     {
-        return $GLOBALS['LANG'];
+        return $GLOBALS['LANG'] instanceof LanguageService ? $GLOBALS['LANG'] : null;
     }
 }

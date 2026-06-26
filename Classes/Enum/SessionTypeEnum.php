@@ -18,6 +18,9 @@ class SessionTypeEnum
     public const OPTION_WORKSHOP = 3;
     public const OPTION_DISCUSSION = 4;
 
+    /**
+     * @var string[]
+     */
     protected static array $optionLabel = [
         self::OPTION_TALK =>
             'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.talk',
@@ -37,6 +40,9 @@ class SessionTypeEnum
         return static::$optionLabel[$option];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getOptions(): array
     {
         $data = [];
@@ -47,6 +53,9 @@ class SessionTypeEnum
         return $data;
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     public static function getTcaOptions(): array
     {
         $data = [
@@ -65,6 +74,9 @@ class SessionTypeEnum
         return $data;
     }
 
+    /**
+     * @return int[]
+     */
     public static function getAvailableOptions(): array
     {
         return [

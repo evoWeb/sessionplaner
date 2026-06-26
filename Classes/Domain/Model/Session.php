@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Evoweb\Sessionplaner\Domain\Model;
 
+use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
@@ -287,6 +288,9 @@ class Session extends AbstractSlugEntity
         $this->documents = $documents;
     }
 
+    /**
+     * @return array<int, CoreFileReference>
+     */
     public function getDocuments(): array
     {
         $result = [];
@@ -353,6 +357,9 @@ class Session extends AbstractSlugEntity
         $this->tags->detach($tag);
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         $data = [];

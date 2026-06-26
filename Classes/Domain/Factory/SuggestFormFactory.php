@@ -20,12 +20,14 @@ use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Configuration\Exception\NoServerRequestGivenException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
+use TYPO3\CMS\Form\Domain\Configuration\Exception\PrototypeNotFoundException;
 use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotFoundException;
 use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotValidException;
 use TYPO3\CMS\Form\Domain\Factory\AbstractFormFactory;
@@ -46,6 +48,14 @@ class SuggestFormFactory extends AbstractFormFactory
         protected SuggestFormFinisher $suggestFormFinisher,
     ) {}
 
+    /**
+     * @param array<string, string> $configuration
+     * @throws FinisherPresetNotFoundException
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     * @throws NoServerRequestGivenException
+     * @throws PrototypeNotFoundException
+     */
     public function build(
         array $configuration,
         ?string $prototypeName = null,
@@ -102,6 +112,9 @@ class SuggestFormFactory extends AbstractFormFactory
         return $form;
     }
 
+    /**
+     * @param array<string, array<string, array<string, string>>> $settings
+     */
     protected function sendingNotificationAllowed(array $settings): bool
     {
         return (bool)($settings['suggest']['notification']['enable'] ?? false) === true
@@ -121,6 +134,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -136,6 +150,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -154,6 +169,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -168,6 +184,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -198,6 +215,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -228,6 +246,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -261,6 +280,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -276,6 +296,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -298,6 +319,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -316,6 +338,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -346,6 +369,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -363,6 +387,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, string> $settings
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
@@ -383,6 +408,7 @@ class SuggestFormFactory extends AbstractFormFactory
     }
 
     /**
+     * @param array<string, array<string, array<string, string>>> $settings
      * @throws FinisherPresetNotFoundException
      */
     private function addFinishers(FormDefinition $form, array $settings): void
@@ -402,14 +428,18 @@ class SuggestFormFactory extends AbstractFormFactory
             $form->createFinisher('EmailToReceiver', $options);
         }
 
-        if (is_array($settings['suggest']['confirmation'] ?? []) && $settings['suggest']['confirmation'] !== []) {
-            $form->createFinisher('Redirect', $settings['suggest']['confirmation']);
-        } else {
-            $message = $settings['suggest']['confirmation']['message'] ??
-                'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
+        if (
+            is_array($settings['suggest']['confirmation'] ?? [])
+            && isset($settings['suggest']['confirmation']['message'])
+        ) {
+            $message = $settings['suggest']['confirmation']['message'] != ''
+                ? $settings['suggest']['confirmation']['message']
+                : 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
             $form->createFinisher('Confirmation', [
                 'message' => LocalizationUtility::translate($message) ?? '',
             ]);
+        } elseif (is_array($settings['suggest']['confirmation'] ?? []) && $settings['suggest']['confirmation'] !== []) {
+            $form->createFinisher('Redirect', $settings['suggest']['confirmation']);
         }
     }
 }

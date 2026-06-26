@@ -39,7 +39,9 @@ final class AjaxController
         private readonly SlotRepository $slotRepository,
         private readonly PersistenceManager $persistenceManager,
     ) {
-        $this->backendUser = $GLOBALS['BE_USER'];
+        $this->backendUser = $GLOBALS['BE_USER'] instanceof BackendUserAuthentication
+            ? $GLOBALS['BE_USER']
+            : GeneralUtility::makeInstance(BackendUserAuthentication::class);
     }
 
     public function updateSessionAction(ServerRequestInterface $request): ResponseInterface
@@ -88,6 +90,9 @@ final class AjaxController
         return $this->validatorResolver->getBaseValidatorConjunction(Session::class)->validate($session);
     }
 
+    /**
+     * @param array<string, string|int> $data
+     */
     private function updateSession(Session $session, array $data = []): void
     {
         foreach ($data as $field => $value) {
@@ -107,7 +112,6 @@ final class AjaxController
                 default:
                     $methodName = 'set' . GeneralUtility::underscoredToUpperCamelCase($field);
                     if (method_exists($session, $methodName)) {
-                        // @phpstan-ignore method.dynamicName
                         $session->{$methodName}($value);
                     }
             }
@@ -120,16 +124,24 @@ final class AjaxController
             || $this->backendUser->check('modules', 'web_SessionplanerSessionplanerMain');
     }
 
+    /**
+     * @return array<string, array<string, string|int>>
+     */
     private function getParameter(ServerRequestInterface $request): array
     {
         try {
             $payload = json_decode((string)$request->getBody(), true, 512, JSON_THROW_ON_ERROR);
-            return is_array($payload) ? $payload : [];
+            /** @var array<string, array<string, string|int>> $payload */
+            $payload = is_array($payload) ? $payload : [];
+            return $payload;
         } catch (\JsonException) {
             return [];
         }
     }
 
+    /**
+     * @param array<string, array<string, array<string, mixed>>|string> $data
+     */
     private function renderResponse(array $data): ResponseInterface
     {
         return new JsonResponse(

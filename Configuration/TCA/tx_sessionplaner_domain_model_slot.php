@@ -7,13 +7,15 @@
  * LICENSE file that was distributed with this source code.
  */
 
+use Evoweb\Sessionplaner\Userfuncs\Tca;
+
 $languageFile = 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang_tca.xlf:';
 
 return [
     'ctrl' => [
         'title' => $languageFile . 'tx_sessionplaner_domain_model_slot',
         'label' => 'start',
-        'label_userFunc' => \Evoweb\Sessionplaner\Userfuncs\Tca::class . '->slotLabel',
+        'label_userFunc' => Tca::class . '->slotLabel',
         'hideTable' => true,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',

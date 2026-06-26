@@ -47,7 +47,6 @@ abstract class AbstractSlugEntity extends AbstractEntity
                 throw new NoSuchArgumentException('The property "pid" can not be empty', 1559731503);
             }
 
-            /** @phpstan-ignore-next-line */
             $this->{$slugSetter}($this->generateSlug());
         }
 
@@ -59,8 +58,12 @@ abstract class AbstractSlugEntity extends AbstractEntity
         $properties = $this->_getProperties();
         $record = [];
 
-        $fieldConfig = $GLOBALS['TCA'][$this->tablename]['columns'][$this->slugField]['config'];
-        $evalInfo = isset($fieldConfig['eval']) && $fieldConfig['eval'] !== ''
+        $tca = is_array($GLOBALS['TCA'] ?? null) ? $GLOBALS['TCA'] : [];
+        $tca = is_array($tca[$this->tablename] ?? null) ? $tca[$this->tablename] : [];
+        $columns = is_array($tca['columns'] ?? null) ? $tca['columns'] : [];
+        $column = is_array($columns[$this->slugField] ?? null) ? $columns[$this->slugField] : [];
+        $fieldConfig = is_array($column['config'] ?? null) ? $column['config'] : [];
+        $evalInfo = is_string($fieldConfig['eval'] ?? null) && $fieldConfig['eval'] !== ''
             ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true)
             : [];
 
