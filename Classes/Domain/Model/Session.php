@@ -366,7 +366,7 @@ class Session extends AbstractSlugEntity
         $properties = $this->_getProperties();
         foreach ($properties as $key => $value) {
             $field = GeneralUtility::camelCaseToLowerCaseUnderscored($key);
-            $value = \is_object($value) && \method_exists($value, 'getUid') ? $value->getUid() : $value;
+            $value = is_object($value) && method_exists($value, 'getUid') ? $value->getUid() : $value;
             $data[$field] = $value;
         }
 

@@ -79,7 +79,7 @@ abstract class AbstractSlugEntity extends AbstractEntity
 
         foreach ($properties as $k => $v) {
             $field = GeneralUtility::camelCaseToLowerCaseUnderscored($k);
-            $v = \is_object($v) && \method_exists($v, 'getUid') ? $v->getUid() : $v;
+            $v = is_object($v) && method_exists($v, 'getUid') ? $v->getUid() : $v;
             $record[$field] = $v;
         }
 

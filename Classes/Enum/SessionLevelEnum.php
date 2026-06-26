@@ -21,12 +21,12 @@ class SessionLevelEnum
      * @var array|string[]
      */
     protected static array $optionLabel = [
-        self::OPTION_BEGINNER =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.beginner',
-        self::OPTION_ADVANCED =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.advanced',
-        self::OPTION_PRO =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro',
+        self::OPTION_BEGINNER
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.beginner',
+        self::OPTION_ADVANCED
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.advanced',
+        self::OPTION_PRO
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionlevel.pro',
     ];
 
     public static function getLabel(int $option): string

@@ -20,10 +20,10 @@ class SessionRequestTypeEnum
      * @var array|string[]
      */
     protected static array $optionLabel = [
-        self::OPTION_OFFER =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionrequesttype.offer',
-        self::OPTION_WISH =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionrequesttype.wish',
+        self::OPTION_OFFER
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionrequesttype.offer',
+        self::OPTION_WISH
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessionrequesttype.wish',
     ];
 
     public static function getLabel(int $option): string

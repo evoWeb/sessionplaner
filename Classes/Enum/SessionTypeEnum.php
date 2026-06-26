@@ -22,14 +22,14 @@ class SessionTypeEnum
      * @var string[]
      */
     protected static array $optionLabel = [
-        self::OPTION_TALK =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.talk',
-        self::OPTION_TUTORIAL =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.tutorial',
-        self::OPTION_WORKSHOP =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.workshop',
-        self::OPTION_DISCUSSION =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion',
+        self::OPTION_TALK
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.talk',
+        self::OPTION_TUTORIAL
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.tutorial',
+        self::OPTION_WORKSHOP
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.workshop',
+        self::OPTION_DISCUSSION
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion',
     ];
 
     public static function getLabel(int $option): string
