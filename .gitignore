@@ -10,5 +10,6 @@ public/
 typo3temp/
 var/
 vendor/
+auth.json
 composer.lock
 FIRST_INSTALL

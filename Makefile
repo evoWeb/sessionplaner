@@ -54,6 +54,12 @@ cleanup: ##@ Cleanup project folder of all files that are not part of the sessio
 	Build/Scripts/runTests.sh -s clean
 	echo "Cleanup finished"
 
+.PHONY: cleanTests
+cleanTests: ##@ Clean test files but leave cache files
+	echo "cleanTests started"
+	Build/Scripts/runTests.sh -s cleanTests
+	echo "cleanTests finished";
+
 ##@ Install/Update
 
 .PHONY: switch-core

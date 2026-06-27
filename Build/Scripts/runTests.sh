@@ -156,7 +156,8 @@ cleanCacheFiles() {
         .cache \
         Build/.cache \
         Build/composer/.cache/ \
-        .php-cs-fixer.cache
+        .php-cs-fixer.cache \
+        auth.json
     echo "done"
 }
 
