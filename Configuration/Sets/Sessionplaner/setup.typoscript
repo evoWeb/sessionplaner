@@ -66,6 +66,28 @@ plugin.tx_sessionplaner {
         title {
           label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.title
           description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.title.description
+          validation {
+            min = 1
+            max = 255
+          }
+        }
+        subtitle {
+          enable = 0
+          label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.subtitle
+          description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.subtitle.description
+          validation {
+            min = 0
+            max = 255
+          }
+        }
+        tag_suggestion {
+          enable = 0
+          label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.tag_suggestion
+          description = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.tag_suggestion.description
+          validation {
+            min = 0
+            max = 255
+          }
         }
         description {
           label = LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.description
@@ -97,6 +119,12 @@ plugin.tx_sessionplaner {
         senderName = {$plugin.tx_sessionplaner.settings.suggest.notification.senderName}
         carbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress}
         blindCarbonCopyAddress = {$plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress}
+      }
+      senderNotification {
+        enable = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.enable}
+        subject = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.subject}
+        senderAddress = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.senderAddress}
+        senderName = {$plugin.tx_sessionplaner.settings.suggest.senderNotification.senderName}
       }
       confirmation {
         message = {$plugin.tx_sessionplaner.settings.suggest.confirmation.message}

@@ -22,6 +22,9 @@
 			<trans-unit id="categories.sessionplaner.suggest.mail" resname="categories.sessionplaner.suggest.mail">
 				<source>Suggest Notifications</source>
 			</trans-unit>
+			<trans-unit id="categories.sessionplaner.suggest.sendermail" resname="categories.sessionplaner.suggest.sendermail">
+				<source>Suggest Notifications to Sender</source>
+			</trans-unit>
 			<trans-unit id="categories.sessionplaner.suggest.confirmation" resname="categories.sessionplaner.suggest.confirmation">
 				<source>Suggest Confirmation</source>
 			</trans-unit>

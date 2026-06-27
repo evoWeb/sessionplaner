@@ -8,6 +8,8 @@ categories:
     parent: sessionplaner
   sessionplaner.suggest.mail:
     parent: sessionplaner
+  sessionplaner.suggest.sendermail:
+    parent: sessionplaner
   sessionplaner.suggest.confirmation:
     parent: sessionplaner
 
@@ -90,6 +92,26 @@ settings:
 
   plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress:
     category: sessionplaner.suggest.mail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.enable:
+    category: sessionplaner.suggest.sendermail
+    type: bool
+    default: false
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.subject:
+    category: sessionplaner.suggest.sendermail
+    type: string
+    default: 'Thank you for your suggestion'
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.senderAddress:
+    category: sessionplaner.suggest.sendermail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.senderName:
+    category: sessionplaner.suggest.sendermail
     type: string
     default: ''
 
