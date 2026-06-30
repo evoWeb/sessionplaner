@@ -10,7 +10,7 @@ _ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 # ...and turn them into do-nothing targets
 $(eval $(_ARGS):;@:)
 
-PHP_VERSION := "8.4"
+PHP_VERSION := "8.2"
 
 ##@ Docs
 
@@ -63,10 +63,10 @@ cleanTests: ##@ Clean test files but leave cache files
 ##@ Install/Update
 
 .PHONY: switch-core
-switch-core: ##@ Require core version. Needs version number given as argument. [^12.4|^13.4]
-	@if [[ $(_ARGS) != \^12.* ]] && [[ $(_ARGS) != \^13.* ]];
+switch-core: ##@ Require core version. Needs version number given as argument. [^13.4|^14.3|15-dev]
+	@if [[ $(_ARGS) != \^13.* ]] && [[ $(_ARGS) != \^14.* ]] && [[ $(_ARGS) != \^15-dev ]];
 	then \
-    	echo "This version of sessionplaner only supports v12.4 and v13.4";
+		echo "This version of sessionplaner only supports v13.4 and v14.3";
 		exit;
 	else
 		echo "Composer require typo3/cms-core:$(_ARGS) started"

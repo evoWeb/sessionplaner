@@ -39,6 +39,7 @@
 		"bk2k/bootstrap-package": "^16.0",
 		"bk2k/extension-helper": "^2.1",
 		"friendsofphp/php-cs-fixer": "^3.91.0",
+		"helhum/typo3-console": "^9.0.0",
 		"phpstan/phpstan": "^2.1.32",
 		"phpstan/phpstan-phpunit": "^2.0",
 		"phpunit/phpunit": "^11.5.0",
@@ -71,7 +72,10 @@
 		],
 		"post-install-cmd": [
 			"[ -d config ] || ln -snvf Build/config config",
-			"cp vendor/typo3/cms-install/Resources/Private/FolderStructureTemplateFiles/root-htaccess public/.htaccess"
+			"cp vendor/typo3/cms-install/Resources/Private/FolderStructureTemplateFiles/root-htaccess public/.htaccess",
+			"typo3 install:fixfolderstructure",
+			"typo3 install:extensionsetupifpossible",
+			"TYPO3_BE_USER_NAME=sessionplaner TYPO3_BE_USER_PASSWORD=Sess1onp!aner TYPO3_BE_USER_ADMIN=1 typo3 backend:user:create --no-interaction"
 		],
 		"post-update-cmd": [
 			"@post-install-cmd"
