@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "es2020",
+		"ignoreDeprecations": "6.0",
 		"allowSyntheticDefaultImports": true,
 		"incremental": true,
 		"tsBuildInfoFile": "../.cache/tsconfig.tsbuildinfo",
@@ -17,7 +18,8 @@
 		"noImplicitReturns": true,
 		"pretty": true,
 		"baseUrl": "Sources/TypeScript/",
-		"outDir": "../Resources/Public/JavaScript/backend",
+		"rootDir": "Sources/TypeScript",
+		"outDir": "../Resources/Public/JavaScript",
 		"typeRoots": [
 			"node_modules/@types",
 			"types"
@@ -27,6 +29,7 @@
 		"watchDirectory": "useFsEvents"
 	},
 	"include": [
-		"Sources/TypeScript/**/*.ts"
+		"Sources/TypeScript/**/*.ts",
+		"types/**/*.d.ts"
 	]
 }

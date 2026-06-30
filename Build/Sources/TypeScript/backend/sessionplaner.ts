@@ -3,18 +3,20 @@ import Notification from '@typo3/backend/notification.js';
 
 class Sessionplaner {
   constructor() {
-    document.querySelectorAll('[data-sessionplaner-draggable="true"]').forEach((element: HTMLElement) => {
+    document.querySelectorAll<HTMLElement>('[data-sessionplaner-draggable="true"]').forEach((element: HTMLElement) => {
       element.addEventListener('dragstart', (event: DragEvent) => {
         const target = event.target as HTMLElement;
         const session = {
           uid: target.dataset.sessionUid
         };
-        event.dataTransfer.setData('application/json', JSON.stringify(session));
-        event.dataTransfer.effectAllowed = 'move';
+        if (event.dataTransfer) {
+          event.dataTransfer.setData('application/json', JSON.stringify(session));
+          event.dataTransfer.effectAllowed = 'move';
+        }
       });
     });
 
-    document.querySelectorAll('[data-sessionplaner-dragtarget]').forEach((element: HTMLElement) => {
+    document.querySelectorAll<HTMLElement>('[data-sessionplaner-dragtarget]').forEach((element: HTMLElement) => {
       element.addEventListener('dragleave', (event: DragEvent) => {
         event.stopPropagation();
         element.classList.remove('dragtarget');
@@ -31,7 +33,9 @@ class Sessionplaner {
         }
         if (allowDrop) {
           event.preventDefault();
-          event.dataTransfer.dropEffect = 'move';
+          if (event.dataTransfer) {
+            event.dataTransfer.dropEffect = 'move';
+          }
           element.classList.add('dragtarget');
         }
       }, { capture: true });
@@ -40,8 +44,8 @@ class Sessionplaner {
         event.stopPropagation();
         element.classList.remove('dragtarget');
         const target = event.target as HTMLElement;
-        const session = JSON.parse(event.dataTransfer.getData('application/json') ?? '{}');
-        const sessionElement: HTMLElement = document.querySelector('[data-session-uid="' + session.uid + '"]');
+        const session = JSON.parse(event.dataTransfer?.getData('application/json') ?? '{}');
+        const sessionElement = document.querySelector<HTMLElement>('[data-session-uid="' + session.uid + '"]');
         if (sessionElement) {
           this.updateSession(sessionElement, {
             room: target.dataset.roomUid ?? null,
