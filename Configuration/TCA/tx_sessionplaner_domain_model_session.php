@@ -69,7 +69,7 @@ return [
                 'size' => 40,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'topic_addition' => [
@@ -80,7 +80,7 @@ return [
                 'size' => 40,
                 'eval' => 'trim',
                 'required' => false,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'path_segment' => [
@@ -153,7 +153,7 @@ return [
                 'type' => 'number',
                 'size' => 20,
                 'range' => [
-                    'lower' => 1,
+                    'lower' => 0,
                 ],
             ],
         ],
@@ -177,7 +177,7 @@ return [
                 'size' => 40,
                 'eval' => 'trim',
                 'required' => false,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'documents' => [
