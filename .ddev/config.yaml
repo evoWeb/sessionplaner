@@ -14,9 +14,9 @@ composer_version: "2"
 web_environment:
     - TYPO3_CONTEXT=Development
     - typo3DatabaseHost=db
-    - typo3DatabaseName=t3func
-    - typo3DatabasePassword=root
-    - typo3DatabaseUsername=root
+    - typo3DatabaseName=db
+    - typo3DatabasePassword=db
+    - typo3DatabaseUsername=db
 nodejs_version: "v24"
 corepack_enable: false
 host_db_port: "59013"

@@ -70,15 +70,18 @@
 			"rm .gitignore",
 			"sed -i \"s/version' => '.*'/version' => '$(echo ${GITHUB_REF} | cut -d / -f 3)'/\" ext_emconf.php\n"
 		],
-		"post-install-cmd": [
+		"_typo3": [
 			"[ -d config ] || ln -snvf Build/config config",
+			"@php Build/Scripts/importTestData.php",
 			"cp vendor/typo3/cms-install/Resources/Private/FolderStructureTemplateFiles/root-htaccess public/.htaccess",
 			"typo3 install:fixfolderstructure",
-			"typo3 install:extensionsetupifpossible",
-			"TYPO3_BE_USER_NAME=sessionplaner TYPO3_BE_USER_PASSWORD=Sess1onp!aner TYPO3_BE_USER_ADMIN=1 typo3 backend:user:create --no-interaction"
+			"typo3 install:extensionsetupifpossible"
+		],
+		"post-install-cmd": [
+			"@_typo3"
 		],
 		"post-update-cmd": [
-			"@post-install-cmd"
+			"@_typo3"
 		]
 	},
 	"autoload": {
