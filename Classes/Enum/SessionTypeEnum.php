@@ -18,15 +18,18 @@ class SessionTypeEnum
     public const OPTION_WORKSHOP = 3;
     public const OPTION_DISCUSSION = 4;
 
+    /**
+     * @var string[]
+     */
     protected static array $optionLabel = [
-        self::OPTION_TALK =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.talk',
-        self::OPTION_TUTORIAL =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.tutorial',
-        self::OPTION_WORKSHOP =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.workshop',
-        self::OPTION_DISCUSSION =>
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion',
+        self::OPTION_TALK
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.talk',
+        self::OPTION_TUTORIAL
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.tutorial',
+        self::OPTION_WORKSHOP
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.workshop',
+        self::OPTION_DISCUSSION
+            => 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:option.sessiontype.discussion',
     ];
 
     public static function getLabel(int $option): string
@@ -37,6 +40,9 @@ class SessionTypeEnum
         return static::$optionLabel[$option];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getOptions(): array
     {
         $data = [];
@@ -47,6 +53,9 @@ class SessionTypeEnum
         return $data;
     }
 
+    /**
+     * @return array<int, array<string, string|int>>
+     */
     public static function getTcaOptions(): array
     {
         $data = [
@@ -65,6 +74,9 @@ class SessionTypeEnum
         return $data;
     }
 
+    /**
+     * @return int[]
+     */
     public static function getAvailableOptions(): array
     {
         return [

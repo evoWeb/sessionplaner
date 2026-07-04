@@ -1,4 +1,7 @@
 base: 'https://ext-sessionplaner.ddev.site/'
+dependencies:
+  - bootstrap-package/full
+  - evoweb/sessionplaner
 languages:
   -
     title: English
@@ -25,4 +28,5 @@ languages:
 rootPageId: 1
 websiteTitle: ''
 imports:
-  - { resource: "EXT:sessionplaner/Configuration/Routes/Default.yaml" }
+  -
+    resource: 'EXT:sessionplaner/Configuration/Routes/Default.yaml'

@@ -14,7 +14,6 @@ namespace Evoweb\Sessionplaner\Controller;
 use Evoweb\Sessionplaner\Domain\Model\Tag;
 use Evoweb\Sessionplaner\TitleTagProvider\TagTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,7 +24,7 @@ class TagController extends ActionController
     public function showAction(?Tag $tag = null): ResponseInterface
     {
         if ($tag === null || !$tag->hasActiveSessions()) {
-            throw new PageNotFoundException('The requested tag was not found', 1735908029);
+            return new HtmlResponse($this->view->render());
         }
 
         /** @var TagTitleTagProvider $provider */

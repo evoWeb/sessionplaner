@@ -17,7 +17,7 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 class Tca
 {
     /**
-     * @param array{table: string, row: array} $parameters
+     * @param array{table: string, row: array{uid: int}} $parameters
      */
     public function slotLabel(array &$parameters): void
     {
@@ -26,12 +26,12 @@ class Tca
             return;
         }
 
-        $start = isset($record['start']) ? (int)$record['start'] : 0;
-        $duration = isset($record['duration']) ? (int)$record['duration'] : 0;
+        $start = (int)($record['start'] ?? 0);
+        $duration = (int)($record['duration'] ?? 0);
         $break = isset($record['break']) && (int)$record['break'] === 1 ? ' - BREAK' : '';
         $dayInfo = '';
 
-        if (isset($record['day']) && (int)$record['day'] > 0) {
+        if ((int)($record['day'] ?? 0) > 0) {
             $day = BackendUtility::getRecord('tx_sessionplaner_domain_model_day', (int)$record['day']);
             if (is_array($day) && isset($day['name'])) {
                 $dayInfo = ' (' . $day['name'] . ')';

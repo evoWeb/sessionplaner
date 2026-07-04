@@ -47,7 +47,6 @@ abstract class AbstractSlugEntity extends AbstractEntity
                 throw new NoSuchArgumentException('The property "pid" can not be empty', 1559731503);
             }
 
-            /** @phpstan-ignore-next-line */
             $this->{$slugSetter}($this->generateSlug());
         }
 
@@ -59,18 +58,28 @@ abstract class AbstractSlugEntity extends AbstractEntity
         $properties = $this->_getProperties();
         $record = [];
 
-        $fieldConfig = $GLOBALS['TCA'][$this->tablename]['columns'][$this->slugField]['config'];
-        $evalInfo = isset($fieldConfig['eval']) && $fieldConfig['eval'] !== ''
+        $tca = is_array($GLOBALS['TCA'] ?? null) ? $GLOBALS['TCA'] : [];
+        $tca = is_array($tca[$this->tablename] ?? null) ? $tca[$this->tablename] : [];
+        $columns = is_array($tca['columns'] ?? null) ? $tca['columns'] : [];
+        $column = is_array($columns[$this->slugField] ?? null) ? $columns[$this->slugField] : [];
+        $fieldConfig = is_array($column['config'] ?? null) ? $column['config'] : [];
+        $evalInfo = is_string($fieldConfig['eval'] ?? null) && $fieldConfig['eval'] !== ''
             ? GeneralUtility::trimExplode(',', $fieldConfig['eval'], true)
             : [];
 
         $hasToBeUniqueInSite = in_array('uniqueInSite', $evalInfo, true);
         $hasToBeUniqueInPid = in_array('uniqueInPid', $evalInfo, true);
-        $slugHelper = GeneralUtility::makeInstance(SlugHelper::class, $this->tablename, $this->slugField, $fieldConfig);
+        /** @var SlugHelper $slugHelper */
+        $slugHelper = GeneralUtility::makeInstance(
+            SlugHelper::class,
+            $this->tablename,
+            $this->slugField,
+            $fieldConfig
+        );
 
         foreach ($properties as $k => $v) {
             $field = GeneralUtility::camelCaseToLowerCaseUnderscored($k);
-            $v = \is_object($v) && \method_exists($v, 'getUid') ? $v->getUid() : $v;
+            $v = is_object($v) && method_exists($v, 'getUid') ? $v->getUid() : $v;
             $record[$field] = $v;
         }
 

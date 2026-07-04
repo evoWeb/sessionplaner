@@ -20,15 +20,21 @@ use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Configuration\Exception\NoServerRequestGivenException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
+use TYPO3\CMS\Form\Domain\Configuration\Exception\PrototypeNotFoundException;
+use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotFoundException;
+use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotValidException;
 use TYPO3\CMS\Form\Domain\Factory\AbstractFormFactory;
+use TYPO3\CMS\Form\Domain\Model\Exception\FinisherPresetNotFoundException;
 use TYPO3\CMS\Form\Domain\Model\FormDefinition;
 use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
+use TYPO3\CMS\Form\Domain\Model\FormElements\Page;
 use TYPO3\CMS\Form\Domain\Model\FormElements\Section;
 
 #[Autoconfigure(public: true)]
@@ -42,6 +48,14 @@ class SuggestFormFactory extends AbstractFormFactory
         protected SuggestFormFinisher $suggestFormFinisher,
     ) {}
 
+    /**
+     * @param array<string, string> $configuration
+     * @throws FinisherPresetNotFoundException
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     * @throws NoServerRequestGivenException
+     * @throws PrototypeNotFoundException
+     */
     public function build(
         array $configuration,
         ?string $prototypeName = null,
@@ -57,9 +71,14 @@ class SuggestFormFactory extends AbstractFormFactory
         );
 
         /** @var FormDefinition $form */
-        $form = GeneralUtility::makeInstance(FormDefinition::class, 'suggest', $prototypeConfiguration);
+        $form = GeneralUtility::makeInstance(
+            FormDefinition::class,
+            'suggest',
+            $prototypeConfiguration
+        );
         $form->setRenderingOption('controllerAction', 'form');
         $form->setRenderingOption('submitButtonLabel', $this->getLocalizedLabel($settings['suggest']['form']['submitButtonLabel']));
+
         $page = $form->createPage('suggestform');
 
         // Personal Information
@@ -67,324 +86,37 @@ class SuggestFormFactory extends AbstractFormFactory
         $personalInformation = $page->createElement('personalinformation', 'Fieldset');
         $personalInformation->setLabel($this->getLocalizedLabel($settings['suggest']['form']['personalinformation']));
 
-        /** @var GenericFormElement $fullnameField */
-        $fullnameField = $personalInformation->createElement('fullname', 'Text');
-        $fullnameField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['fullname']['label']));
-        $fullnameField->setProperty(
-            'elementDescription',
-            $this->getLocalizedLabel($settings['suggest']['fields']['fullname']['description'])
-        );
-        /** @var NotEmptyValidator $fullnameValidator */
-        $fullnameValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-        $fullnameField->addValidator($fullnameValidator);
-
-        /** @var GenericFormElement $emailField */
-        $emailField = $personalInformation->createElement('email', 'Text');
-        $emailField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['email']['label']));
-        $emailField->setProperty(
-            'elementDescription',
-            $this->getLocalizedLabel($settings['suggest']['fields']['email']['description'])
-        );
-        /** @var NotEmptyValidator $emailValidator */
-        $emailValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-        $emailField->addValidator($emailValidator);
-        /** @var EmailAddressValidator $emailAddressValidator */
-        $emailAddressValidator = $this->validatorResolver->createValidator(EmailAddressValidator::class);
-        $emailField->addValidator($emailAddressValidator);
-
-        if ((bool)($settings['suggest']['fields']['twitter']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $twitterField */
-            $twitterField = $personalInformation->createElement('twitter', 'Text');
-            $twitterField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['twitter']['label']));
-            $twitterField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['twitter']['description'])
-            );
-        }
+        $this->addFullnameField($personalInformation, $settings['suggest']['fields']['fullname'] ?? []);
+        $this->addEmailField($personalInformation, $settings['suggest']['fields']['email'] ?? []);
+        $this->addTwitterField($personalInformation, $settings['suggest']['fields']['twitter'] ?? []);
 
         // Session Information
         /** @var Section $sessionInformation */
         $sessionInformation = $page->createElement('sessioninformation', 'Fieldset');
         $sessionInformation->setLabel($this->getLocalizedLabel($settings['suggest']['form']['sessioninformation']));
 
-        if ((bool)($settings['suggest']['fields']['requesttype']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $requestTypeField */
-            $requestTypeField = $sessionInformation->createElement('requesttype', 'SingleSelect');
-            $requestTypeField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['label']));
-            $requestTypeField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['description'])
-            );
-            /** @var NotEmptyValidator $requestTypeValidator */
-            $requestTypeValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-            $requestTypeField->addValidator($requestTypeValidator);
-            $requestTypeFieldOptions = SessionRequestTypeEnum::getOptions();
-            foreach ($requestTypeFieldOptions as $requestTypeFieldOptionKey => $requestTypeFieldOptionValue) {
-                $requestTypeFieldOptions[$requestTypeFieldOptionKey] = LocalizationUtility::translate($requestTypeFieldOptionValue);
-            }
-            $prependOptionLabel = ' ';
-            if (($settings['suggest']['fields']['requesttype']['prependOptionLabel'] ?? '') !== '') {
-                $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['requesttype']['prependOptionLabel']);
-            }
-            $requestTypeField->setProperty('prependOptionLabel', $prependOptionLabel);
-            $requestTypeField->setProperty('options', $requestTypeFieldOptions);
-        }
+        $this->addRequesttypeField($sessionInformation, $settings['suggest']['fields']['requesttype'] ?? []);
+        $this->addTypeField($sessionInformation, $settings['suggest']['fields']['type'] ?? []);
+        $this->addTagField($sessionInformation, $settings['suggest']['fields']['tag'] ?? []);
+        $this->addTitleField($sessionInformation, $settings['suggest']['fields']['title'] ?? []);
+        $this->addSubtitleField($sessionInformation, $settings['suggest']['fields']['subtitle'] ?? []);
+        $this->addDescriptionField($sessionInformation, $settings['suggest']['fields']['description'] ?? []);
+        $this->addTagSuggestionField($sessionInformation, $settings['suggest']['fields']['tag_suggestion'] ?? []);
+        $this->addLengthField($sessionInformation, $settings['suggest']['fields']['length'] ?? []);
+        $this->addLevelField($sessionInformation, $settings['suggest']['fields']['level'] ?? []);
+        $this->addNorecordingField($sessionInformation, $settings['suggest']['fields']['norecording'] ?? []);
 
-        if ((bool)($settings['suggest']['fields']['type']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $typeField */
-            $typeField = $sessionInformation->createElement('type', 'SingleSelect');
-            $typeField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['type']['label']));
-            $typeField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['type']['description'])
-            );
-            /** @var NotEmptyValidator $typeValidator */
-            $typeValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-            $typeField->addValidator($typeValidator);
-            $typeFieldOptions = SessionTypeEnum::getOptions();
-            foreach ($typeFieldOptions as $typeFieldOptionKey => $typeFieldOptionValue) {
-                $typeFieldOptions[$typeFieldOptionKey] = LocalizationUtility::translate($typeFieldOptionValue);
-            }
-            $prependOptionLabel = ' ';
-            if (($settings['suggest']['fields']['type']['prependOptionLabel'] ?? '') !== '') {
-                $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['type']['prependOptionLabel']);
-            }
-            $typeField->setProperty('prependOptionLabel', $prependOptionLabel);
-            $typeField->setProperty('options', $typeFieldOptions);
-        }
+        $this->addExplanationText($page, $settings['suggest']['form'] ?? []);
 
-        if ((bool)($settings['suggest']['fields']['tag']['enable'] ?? false) === true) {
-            $tags = $this->tagRepository->findBy(['suggestFormOption' => true]);
-            if ($tags->current() !== false && $tags->current() !== null) {
-                /** @var GenericFormElement $tagField */
-                $tagField = $sessionInformation->createElement('tag', 'SingleSelect');
-                $tagField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag']['label']));
-                $tagField->setProperty(
-                    'elementDescription',
-                    $this->getLocalizedLabel($settings['suggest']['fields']['tag']['description'])
-                );
-                /** @var NotEmptyValidator $tagValidator */
-                $tagValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-                $tagField->addValidator($tagValidator);
-                $tagFieldOptions = [];
-                foreach ($tags as $tag) {
-                    $tagFieldOptions[(int)$tag->getUid()] = $tag->getLabel();
-                }
-                $prependOptionLabel = ' ';
-                if (($settings['suggest']['fields']['tag']['prependOptionLabel'] ?? '') !== '') {
-                    $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['tag']['prependOptionLabel']);
-                }
-                $tagField->setProperty('prependOptionLabel', $prependOptionLabel);
-                $tagField->setProperty('options', $tagFieldOptions);
-            }
-        }
-
-        /** @var GenericFormElement $titleField */
-        $titleField = $sessionInformation->createElement('title', 'Text');
-        $titleField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['title']['label']));
-        $titleField->setProperty(
-            'elementDescription',
-            $this->getLocalizedLabel($settings['suggest']['fields']['title']['description'])
-        );
-        $titleStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['title']['validation']['min'] ?? 1];
-        if ($settings['suggest']['fields']['title']['validation']['max'] ?? false) {
-            $titleStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['title']['validation']['max'];
-        }
-        /** @var StringLengthValidator $titleStringLengthValidator */
-        $titleStringLengthValidator = $this->validatorResolver->createValidator(StringLengthValidator::class, $titleStringLengthValidatorOptions);
-        $titleField->addValidator($titleStringLengthValidator);
-        if ($titleStringLengthValidatorOptions['minimum'] > 0) {
-            /** @var NotEmptyValidator $titleNotEmptyValidator */
-            $titleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-            $titleField->addValidator($titleNotEmptyValidator);
-        }
-
-        if ((bool)($settings['suggest']['fields']['subtitle']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $subtitleField */
-            $subtitleField = $sessionInformation->createElement('subtitle', 'Text');
-            $subtitleField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['subtitle']['label']));
-            $subtitleField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['subtitle']['description'])
-            );
-            $subtitleStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['subtitle']['validation']['min'] ?? 1];
-            if ($settings['suggest']['fields']['subtitle']['validation']['max'] ?? false) {
-                $subtitleStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['subtitle']['validation']['max'];
-            }
-            /** @var StringLengthValidator $subtitleStringLengthValidator */
-            $subtitleStringLengthValidator = $this->validatorResolver->createValidator(
-                StringLengthValidator::class,
-                $subtitleStringLengthValidatorOptions
-            );
-            $subtitleField->addValidator($subtitleStringLengthValidator);
-            if ($subtitleStringLengthValidatorOptions['minimum'] > 0) {
-                /** @var NotEmptyValidator $subtitleNotEmptyValidator */
-                $subtitleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-                $subtitleField->addValidator($subtitleNotEmptyValidator);
-            }
-        }
-
-        /** @var GenericFormElement $descriptionField */
-        $descriptionField = $sessionInformation->createElement('description', 'Textarea');
-        $descriptionField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['description']['label']));
-        $descriptionField->setProperty(
-            'elementDescription',
-            $this->getLocalizedLabel($settings['suggest']['fields']['description']['description'])
-        );
-        /** @var NotEmptyValidator $descriptionValidator */
-        $descriptionValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-        $descriptionField->addValidator($descriptionValidator);
-
-        /** @var StringLengthValidator $stringLengthValidator */
-        $stringLengthValidator = $this->validatorResolver->createValidator(
-            StringLengthValidator::class,
-            ['minimum' => 5]
-        );
-        $descriptionField->addValidator($stringLengthValidator);
-
-        if ((bool)($settings['suggest']['fields']['tag_suggestion']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $tagSuggestionField */
-            $tagSuggestionField = $sessionInformation->createElement('tag_suggestion', 'Text');
-            $tagSuggestionField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['tag_suggestion']['label']));
-            $tagSuggestionField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['tag_suggestion']['description'])
-            );
-            $tagSuggestionStringLengthValidatorOptions = ['minimum' => $settings['suggest']['fields']['tag_suggestion']['validation']['min'] ?? 1];
-            if ($settings['suggest']['fields']['tag_suggestion']['validation']['max'] ?? false) {
-                $tagSuggestionStringLengthValidatorOptions['maximum'] = (int)$settings['suggest']['fields']['tag_suggestion']['validation']['max'];
-            }
-            /** @var StringLengthValidator $tagSuggestionStringLengthValidator */
-            $tagSuggestionStringLengthValidator = $this->validatorResolver->createValidator(
-                StringLengthValidator::class,
-                $tagSuggestionStringLengthValidatorOptions
-            );
-            $tagSuggestionField->addValidator($tagSuggestionStringLengthValidator);
-            if ($tagSuggestionStringLengthValidatorOptions['minimum'] > 0) {
-                /** @var NotEmptyValidator $tagSuggestionNotEmptyValidator */
-                $tagSuggestionNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-                $tagSuggestionField->addValidator($tagSuggestionNotEmptyValidator);
-            }
-        }
-
-        if ((bool)($settings['suggest']['fields']['length']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $lengthField */
-            $lengthField = $sessionInformation->createElement('estimatedlength', 'SingleSelect');
-            $lengthField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['length']['label']));
-            $lengthField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['length']['description'])
-            );
-            $lengthField->setProperty('options', [
-                '45 Minutes' => '45 Minutes',
-                '90 Minutes' => '90 Minutes',
-            ]);
-        }
-
-        if ((bool)($settings['suggest']['fields']['level']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $levelField */
-            $levelField = $sessionInformation->createElement('level', 'SingleSelect');
-            $levelField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['level']['label']));
-            $levelField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['level']['description'])
-            );
-            /** @var NotEmptyValidator $levelValidator */
-            $levelValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
-            $levelField->addValidator($levelValidator);
-            $levelFieldOptions = SessionLevelEnum::getOptions();
-            foreach ($levelFieldOptions as $levelFieldOptionKey => $levelFieldOptionValue) {
-                $levelFieldOptions[$levelFieldOptionKey] = LocalizationUtility::translate($levelFieldOptionValue);
-            }
-            $prependOptionLabel = ' ';
-            if (($settings['suggest']['fields']['level']['prependOptionLabel'] ?? '') !== '') {
-                $prependOptionLabel = $this->getLocalizedLabel($settings['suggest']['fields']['level']['prependOptionLabel']);
-            }
-            $levelField->setProperty('prependOptionLabel', $prependOptionLabel);
-            $levelField->setProperty('options', $levelFieldOptions);
-        }
-
-        if ((bool)($settings['suggest']['fields']['norecording']['enable'] ?? false) === true) {
-            /** @var GenericFormElement $noRecordingField */
-            $noRecordingField = $sessionInformation->createElement('norecording', 'Checkbox');
-            $noRecordingField->setLabel($this->getLocalizedLabel($settings['suggest']['fields']['norecording']['label']));
-            $noRecordingField->setProperty(
-                'elementDescription',
-                $this->getLocalizedLabel($settings['suggest']['fields']['norecording']['description'])
-            );
-        }
-
-        $explanationText = $page->createElement('headline', 'StaticText');
-        if (!$explanationText instanceof GenericFormElement) {
-            throw new \RuntimeException(sprintf(
-                'Expected instance of GenericFormElement for headline, got %s',
-                get_class($explanationText)
-            ));
-        }
-        $explanationText->setProperty(
-            'text',
-            $this->getLocalizedLabel($settings['suggest']['form']['requiredField'])
-            . ' ' . $this->getLocalizedLabel($settings['suggest']['form']['requiredFieldExplanation'])
-        );
-
-        $form->addFinisher($this->suggestFormFinisher);
-
-        if ($this->sendingNotificationAllowed($settings)) {
-            $form->createFinisher('EmailToReceiver', [
-                'subject' => $settings['suggest']['notification']['subject'],
-                'recipients' => [
-                    $settings['suggest']['notification']['recipientAddress'] => $settings['suggest']['notification']['recipientName'],
-                ],
-                'senderAddress' => $settings['suggest']['notification']['senderAddress'],
-                'senderName' => $settings['suggest']['notification']['senderName'],
-                'carbonCopyAddress' => $settings['suggest']['notification']['carbonCopyAddress'] ?? '',
-                'blindCarbonCopyAddress' => $settings['suggest']['notification']['blindCarbonCopyAddress'] ?? '',
-                'replyToRecipients' => [
-                    '{email}' => '{fullname}',
-                ],
-                'format' => 'html',
-            ]);
-        }
-
-        $message = $settings['suggest']['confirmation']['message'] ??
-            'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
-        $confirmationMessage = LocalizationUtility::translate($message) ?? '';
-
-        if ($this->sendingSenderNotificationAllowed($settings)) {
-            $form->createFinisher('EmailToSender', [
-                'subject' => $settings['suggest']['senderNotification']['subject'],
-                'recipients' => [
-                    '{email}' => '{fullname}',
-                ],
-                'senderAddress' => $settings['suggest']['senderNotification']['senderAddress'],
-                'senderName' => $settings['suggest']['senderNotification']['senderName'],
-                'format' => 'html',
-                'headline' => $settings['suggest']['senderNotification']['subject'],
-                'variables' => [
-                    'title' => $settings['suggest']['senderNotification']['subject'],
-                    'message' => $confirmationMessage,
-                ],
-                'templateName' => 'EmailToSender',
-                'templateRootPaths' => [
-                    100 => 'EXT:sessionplaner/Resources/Private/Templates/Email/'
-                ],
-            ]);
-        }
-
-        if (($settings['suggest']['confirmation']['pageUid'] ?? '') !== '') {
-            $form->createFinisher('Redirect', [
-                'pageUid' => (int)$settings['suggest']['confirmation']['pageUid'],
-            ]);
-        } else {
-            $form->createFinisher('Confirmation', [
-                'message' => $confirmationMessage,
-            ]);
-        }
+        $this->addFinishers($form, $settings);
 
         $this->triggerFormBuildingFinished($form);
         return $form;
     }
 
+    /**
+     * @param array<string, array<string, array<string, string>>> $settings
+     */
     protected function sendingNotificationAllowed(array $settings): bool
     {
         return isset(
@@ -403,25 +135,437 @@ class SuggestFormFactory extends AbstractFormFactory
             && $settings['suggest']['notification']['senderName'] !== '';
     }
 
-    protected function sendingSenderNotificationAllowed(array $settings): bool
-    {
-        return isset(
-                $settings['suggest']['senderNotification']['enable'],
-                $settings['suggest']['senderNotification']['subject'],
-                $settings['suggest']['senderNotification']['senderAddress'],
-                $settings['suggest']['senderNotification']['senderName']
-            )
-            && (bool)$settings['suggest']['senderNotification']['enable'] === true
-            && $settings['suggest']['senderNotification']['subject'] !== ''
-            && $settings['suggest']['senderNotification']['senderAddress'] !== ''
-            && $settings['suggest']['senderNotification']['senderName'] !== '';
-    }
-
     protected function getLocalizedLabel(string $label): string
     {
         if (strncmp($label, 'LLL:', 4) === 0) {
             return LocalizationUtility::translate($label) ?? '';
         }
         return $label;
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addFullnameField(Section $section, array $settings): void
+    {
+        /** @var GenericFormElement $fullnameField */
+        $fullnameField = $section->createElement('fullname', 'Text');
+        $fullnameField->setLabel($this->getLocalizedLabel($settings['label']));
+        $fullnameField->setProperty('elementDescription', $this->getLocalizedLabel($settings['description']));
+        /** @var NotEmptyValidator $fullnameValidator */
+        $fullnameValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+        $fullnameField->addValidator($fullnameValidator);
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addEmailField(Section $section, array $settings): void
+    {
+        /** @var GenericFormElement $emailField */
+        $emailField = $section->createElement('email', 'Text');
+        $emailField->setLabel($this->getLocalizedLabel($settings['label']));
+        $emailField->setProperty('elementDescription', $this->getLocalizedLabel($settings['description']));
+        /** @var NotEmptyValidator $emailValidator */
+        $emailValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+        $emailField->addValidator($emailValidator);
+        /** @var EmailAddressValidator $emailAddressValidator */
+        $emailAddressValidator = $this->validatorResolver->createValidator(EmailAddressValidator::class);
+        $emailField->addValidator($emailAddressValidator);
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addTwitterField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $twitterField */
+            $twitterField = $section->createElement('twitter', 'Text');
+            $twitterField->setLabel($this->getLocalizedLabel($settings['label']));
+            $twitterField->setProperty('elementDescription', $this->getLocalizedLabel($settings['description']));
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addRequesttypeField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $requestTypeField */
+            $requestTypeField = $section->createElement('requesttype', 'SingleSelect');
+            $requestTypeField->setLabel($this->getLocalizedLabel($settings['label']));
+            $requestTypeField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['description'])
+            );
+            /** @var NotEmptyValidator $requestTypeValidator */
+            $requestTypeValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+            $requestTypeField->addValidator($requestTypeValidator);
+            $requestTypeFieldOptions = SessionRequestTypeEnum::getOptions();
+            foreach ($requestTypeFieldOptions as $requestTypeFieldOptionKey => $requestTypeFieldOptionValue) {
+                $requestTypeFieldOptions[$requestTypeFieldOptionKey] = LocalizationUtility::translate($requestTypeFieldOptionValue);
+            }
+            $prependOptionLabel = ' ';
+            if (($settings['prependOptionLabel'] ?? '') !== '') {
+                $prependOptionLabel = $this->getLocalizedLabel($settings['prependOptionLabel']);
+            }
+            $requestTypeField->setProperty('prependOptionLabel', $prependOptionLabel);
+            $requestTypeField->setProperty('options', $requestTypeFieldOptions);
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addTypeField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $typeField */
+            $typeField = $section->createElement('type', 'SingleSelect');
+            $typeField->setLabel($this->getLocalizedLabel($settings['label']));
+            $typeField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['description'])
+            );
+            /** @var NotEmptyValidator $typeValidator */
+            $typeValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+            $typeField->addValidator($typeValidator);
+            $typeFieldOptions = SessionTypeEnum::getOptions();
+            foreach ($typeFieldOptions as $typeFieldOptionKey => $typeFieldOptionValue) {
+                $typeFieldOptions[$typeFieldOptionKey] = LocalizationUtility::translate($typeFieldOptionValue);
+            }
+            $prependOptionLabel = ' ';
+            if (($settings['prependOptionLabel'] ?? '') !== '') {
+                $prependOptionLabel = $this->getLocalizedLabel($settings['prependOptionLabel']);
+            }
+            $typeField->setProperty('prependOptionLabel', $prependOptionLabel);
+            $typeField->setProperty('options', $typeFieldOptions);
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addTagField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            $tags = $this->tagRepository->findBy(['suggestFormOption' => true]);
+            if ($tags->count() > 0) {
+                /** @var GenericFormElement $tagField */
+                $tagField = $section->createElement('tag', 'SingleSelect');
+                $tagField->setLabel($this->getLocalizedLabel($settings['label']));
+                $tagField->setProperty(
+                    'elementDescription',
+                    $this->getLocalizedLabel($settings['description'])
+                );
+                /** @var NotEmptyValidator $tagValidator */
+                $tagValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+                $tagField->addValidator($tagValidator);
+                $tagFieldOptions = [];
+                foreach ($tags as $tag) {
+                    $tagFieldOptions[(int)$tag->getUid()] = $tag->getLabel();
+                }
+                $prependOptionLabel = ' ';
+                if (($settings['prependOptionLabel'] ?? '') !== '') {
+                    $prependOptionLabel = $this->getLocalizedLabel($settings['prependOptionLabel']);
+                }
+                $tagField->setProperty('prependOptionLabel', $prependOptionLabel);
+                $tagField->setProperty('options', $tagFieldOptions);
+            }
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addTitleField(Section $section, array $settings): void
+    {
+        /** @var GenericFormElement $titleField */
+        $titleField = $section->createElement('title', 'Text');
+        $titleField->setLabel($this->getLocalizedLabel($settings['label']));
+        $titleField->setProperty(
+            'elementDescription',
+            $this->getLocalizedLabel($settings['description'])
+        );
+        $titleStringLengthValidatorOptions = ['minimum' => $settings['validation']['min'] ?? 1];
+        if ($settings['validation']['max'] ?? false) {
+            $titleStringLengthValidatorOptions['maximum'] = (int)$settings['validation']['max'];
+        }
+        /** @var StringLengthValidator $titleStringLengthValidator */
+        $titleStringLengthValidator = $this->validatorResolver->createValidator(StringLengthValidator::class, $titleStringLengthValidatorOptions);
+        $titleField->addValidator($titleStringLengthValidator);
+        if ($titleStringLengthValidatorOptions['minimum'] > 0) {
+            /** @var NotEmptyValidator $titleNotEmptyValidator */
+            $titleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+            $titleField->addValidator($titleNotEmptyValidator);
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addSubtitleField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $subtitleField */
+            $subtitleField = $section->createElement('subtitle', 'Text');
+            $subtitleField->setLabel($this->getLocalizedLabel($settings['label']));
+            $subtitleField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['description'])
+            );
+            $subtitleStringLengthValidatorOptions = ['minimum' => $settings['validation']['min'] ?? 1];
+            if ($settings['validation']['max'] ?? false) {
+                $subtitleStringLengthValidatorOptions['maximum'] = (int)$settings['validation']['max'];
+            }
+            /** @var StringLengthValidator $subtitleStringLengthValidator */
+            $subtitleStringLengthValidator = $this->validatorResolver->createValidator(
+                StringLengthValidator::class,
+                $subtitleStringLengthValidatorOptions
+            );
+            $subtitleField->addValidator($subtitleStringLengthValidator);
+            if ($subtitleStringLengthValidatorOptions['minimum'] > 0) {
+                /** @var NotEmptyValidator $subtitleNotEmptyValidator */
+                $subtitleNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+                $subtitleField->addValidator($subtitleNotEmptyValidator);
+            }
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addDescriptionField(Section $section, array $settings): void
+    {
+        /** @var GenericFormElement $descriptionField */
+        $descriptionField = $section->createElement('description', 'Textarea');
+        $descriptionField->setLabel($this->getLocalizedLabel($settings['label']));
+        $descriptionField->setProperty('elementDescription', $this->getLocalizedLabel($settings['description']));
+        /** @var NotEmptyValidator $descriptionValidator */
+        $descriptionValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+        $descriptionField->addValidator($descriptionValidator);
+
+        /** @var StringLengthValidator $stringLengthValidator */
+        $stringLengthValidator = $this->validatorResolver->createValidator(
+            StringLengthValidator::class,
+            ['minimum' => 5]
+        );
+        $descriptionField->addValidator($stringLengthValidator);
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addTagSuggestionField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $tagSuggestionField */
+            $tagSuggestionField = $section->createElement('tag_suggestion', 'Text');
+            $tagSuggestionField->setLabel($this->getLocalizedLabel($settings['label']));
+            $tagSuggestionField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['description'])
+            );
+            $tagSuggestionStringLengthValidatorOptions = ['minimum' => $settings['validation']['min'] ?? 1];
+            if ($settings['validation']['max'] ?? false) {
+                $tagSuggestionStringLengthValidatorOptions['maximum'] = (int)$settings['validation']['max'];
+            }
+            /** @var StringLengthValidator $tagSuggestionStringLengthValidator */
+            $tagSuggestionStringLengthValidator = $this->validatorResolver->createValidator(
+                StringLengthValidator::class,
+                $tagSuggestionStringLengthValidatorOptions
+            );
+            $tagSuggestionField->addValidator($tagSuggestionStringLengthValidator);
+            if ($tagSuggestionStringLengthValidatorOptions['minimum'] > 0) {
+                /** @var NotEmptyValidator $tagSuggestionNotEmptyValidator */
+                $tagSuggestionNotEmptyValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+                $tagSuggestionField->addValidator($tagSuggestionNotEmptyValidator);
+            }
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addLengthField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $lengthField */
+            $lengthField = $section->createElement('length', 'SingleSelect');
+            $lengthField->setLabel($this->getLocalizedLabel($settings['label']));
+            $lengthField->setProperty('elementDescription', $this->getLocalizedLabel($settings['description']));
+            $lengthField->setProperty('options', [
+                '45' => '45 Minutes',
+                '90' => '90 Minutes',
+            ]);
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addLevelField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $levelField */
+            $levelField = $section->createElement('level', 'SingleSelect');
+            $levelField->setLabel($this->getLocalizedLabel($settings['label']));
+            $levelField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['description'])
+            );
+            /** @var NotEmptyValidator $levelValidator */
+            $levelValidator = $this->validatorResolver->createValidator(NotEmptyValidator::class);
+            $levelField->addValidator($levelValidator);
+            $levelFieldOptions = SessionLevelEnum::getOptions();
+            foreach ($levelFieldOptions as $levelFieldOptionKey => $levelFieldOptionValue) {
+                $levelFieldOptions[$levelFieldOptionKey] = LocalizationUtility::translate($levelFieldOptionValue);
+            }
+            $prependOptionLabel = ' ';
+            if (($settings['prependOptionLabel'] ?? '') !== '') {
+                $prependOptionLabel = $this->getLocalizedLabel($settings['prependOptionLabel']);
+            }
+            $levelField->setProperty('prependOptionLabel', $prependOptionLabel);
+            $levelField->setProperty('options', $levelFieldOptions);
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addNorecordingField(Section $section, array $settings): void
+    {
+        if ((bool)($settings['enable'] ?? false) === true) {
+            /** @var GenericFormElement $noRecordingField */
+            $noRecordingField = $section->createElement('norecording', 'Checkbox');
+            $noRecordingField->setLabel($this->getLocalizedLabel($settings['label']));
+            $noRecordingField->setProperty(
+                'elementDescription',
+                $this->getLocalizedLabel($settings['description'])
+            );
+        }
+    }
+
+    /**
+     * @param array<string, string> $settings
+     * @throws TypeDefinitionNotFoundException
+     * @throws TypeDefinitionNotValidException
+     */
+    private function addExplanationText(Page $page, array $settings): void
+    {
+        $explanationText = $page->createElement('headline', 'StaticText');
+        if (!$explanationText instanceof GenericFormElement) {
+            throw new \RuntimeException(sprintf(
+                'Expected instance of GenericFormElement for headline, got %s',
+                get_class($explanationText)
+            ));
+        }
+        $explanationText->setProperty(
+            'text',
+            $this->getLocalizedLabel($settings['requiredField'])
+            . ' ' . $this->getLocalizedLabel($settings['requiredFieldExplanation'])
+        );
+    }
+
+    /**
+     * @param array<string, array<string, array<string, string>>> $settings
+     * @throws FinisherPresetNotFoundException
+     */
+    private function addFinishers(FormDefinition $form, array $settings): void
+    {
+        $form->addFinisher($this->suggestFormFinisher);
+
+        if ($this->sendingNotificationAllowed($settings)) {
+            $options = $settings['suggest']['notification'];
+            // @extensionScannerIgnoreLine
+            $options['format'] = 'html';
+            $options['recipients'] = [
+                $options['recipientAddress'] => $options['recipientName'],
+            ];
+            $options['replyToRecipients'] = [
+                '{email}' => '{fullname}',
+            ];
+            $form->createFinisher('EmailToReceiver', $options);
+        }
+
+        $message = $settings['suggest']['confirmation']['message']
+            ?? 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation';
+        $confirmationMessage = LocalizationUtility::translate($message) ?? '';
+
+        if ($this->sendingSenderNotificationAllowed($settings)) {
+            $form->createFinisher('EmailToSender', [
+                'subject' => $settings['suggest']['senderNotification']['subject'],
+                'recipients' => [
+                    '{email}' => '{fullname}',
+                ],
+                'senderAddress' => $settings['suggest']['senderNotification']['senderAddress'],
+                'senderName' => $settings['suggest']['senderNotification']['senderName'],
+                'format' => 'html',
+                'headline' => $settings['suggest']['senderNotification']['subject'],
+                'variables' => [
+                    'title' => $settings['suggest']['senderNotification']['subject'],
+                    'message' => $confirmationMessage,
+                ],
+                'templateName' => 'EmailToSender',
+                'templateRootPaths' => [
+                    100 => 'EXT:sessionplaner/Resources/Private/Templates/Email/',
+                ],
+            ]);
+        }
+
+        if (($settings['suggest']['confirmation']['pageUid'] ?? '') !== '') {
+            $form->createFinisher('Redirect', [
+                'pageUid' => (int)$settings['suggest']['confirmation']['pageUid'],
+            ]);
+        } else {
+            $form->createFinisher('Confirmation', [
+                'message' => $confirmationMessage,
+            ]);
+        }
+    }
+
+    /**
+     * @param array<string, array<string, array<string, string|bool>>> $settings
+     */
+    protected function sendingSenderNotificationAllowed(array $settings): bool
+    {
+        return isset(
+            $settings['suggest']['senderNotification']['enable'],
+            $settings['suggest']['senderNotification']['subject'],
+            $settings['suggest']['senderNotification']['senderAddress'],
+            $settings['suggest']['senderNotification']['senderName']
+        )
+            && (bool)$settings['suggest']['senderNotification']['enable'] === true
+            && $settings['suggest']['senderNotification']['subject'] !== ''
+            && $settings['suggest']['senderNotification']['senderAddress'] !== ''
+            && $settings['suggest']['senderNotification']['senderName'] !== '';
     }
 }

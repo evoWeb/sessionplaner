@@ -43,7 +43,7 @@ return [
                 'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'path_segment' => [
@@ -69,7 +69,7 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'picture' => [
@@ -89,7 +89,7 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'twitter' => [
@@ -99,7 +99,7 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'linkedin' => [
@@ -109,7 +109,7 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'xing' => [
@@ -119,17 +119,15 @@ return [
                 'type' => 'input',
                 'size' => 20,
                 'eval' => 'trim',
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'email' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-email',
             'config' => [
-                'type' => 'input',
+                'type' => 'email',
                 'size' => 20,
-                'eval' => 'trim',
-                'max' => 256,
             ],
         ],
         'sessions' => [

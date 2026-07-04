@@ -2,6 +2,9 @@
 <f:layout name="Frontend" />
 <f:section name="Content">
 
+    <f:if condition="!{speakers}">
+        <p><f:translate id="warning-nospeakersfound"/></p>
+    </f:if>
     <f:if condition="{speakers}">
         <div class="sessionplaner-speakerlist">
             <f:for each="{speakers}" as="speaker">

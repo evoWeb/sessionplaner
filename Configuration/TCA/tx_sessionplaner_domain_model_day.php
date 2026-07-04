@@ -35,10 +35,9 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-name',
             'config' => [
                 'type' => 'input',
-                'size' => 20,
                 'eval' => 'trim',
                 'required' => true,
-                'max' => 256,
+                'max' => 255,
             ],
         ],
         'date' => [
@@ -47,7 +46,6 @@ return [
             'config' => [
                 'type' => 'datetime',
                 'format' => 'date',
-                'size' => 20,
             ],
         ],
         'rooms' => [

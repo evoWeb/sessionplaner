@@ -4,10 +4,12 @@
 *.cache
 bin/
 Build/node_modules/*
-Build/public/
-Build/vendor/
 config
 Documentation-GENERATED-temp/
+public/
+typo3temp/
 var/
+vendor/
+auth.json
 composer.lock
 FIRST_INSTALL

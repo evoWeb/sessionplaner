@@ -1,0 +1,126 @@
+categories:
+  sessionplaner: ~
+  sessionplaner.template:
+    parent: sessionplaner
+  sessionplaner.persistence:
+    parent: sessionplaner
+  sessionplaner.settings:
+    parent: sessionplaner
+  sessionplaner.suggest.mail:
+    parent: sessionplaner
+  sessionplaner.suggest.sendermail:
+    parent: sessionplaner
+  sessionplaner.suggest.confirmation:
+    parent: sessionplaner
+
+settings:
+
+  plugin.tx_sessionplaner.view.templateRootPath:
+    category: sessionplaner.template
+    type: string
+    default: 'EXT:sessionplaner/Resources/Private/Templates/'
+
+  plugin.tx_sessionplaner.view.partialRootPath:
+    category: sessionplaner.template
+    type: string
+    default: 'EXT:sessionplaner/Resources/Private/Partials/'
+
+  plugin.tx_sessionplaner.view.layoutRootPath:
+    category: sessionplaner.template
+    type: string
+    default: 'EXT:sessionplaner/Resources/Private/Layouts/'
+
+  plugin.tx_sessionplaner.persistence.storagePid:
+    category: sessionplaner.persistence
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.cssFile:
+    category: sessionplaner.settings
+    type: string
+    default: 'EXT:sessionplaner/Resources/Public/Stylesheets/frontend.css'
+
+  plugin.tx_sessionplaner.settings.disqusShortname:
+    category: sessionplaner.settings
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.twitterHashtag:
+    category: sessionplaner.settings
+    type: string
+    default: 'TYPO3'
+
+  plugin.tx_sessionplaner.settings.twitterAccount:
+    category: sessionplaner.settings
+    type: string
+    default: 'typo3'
+
+  plugin.tx_sessionplaner.settings.suggest.notification.enable:
+    category: sessionplaner.suggest.mail
+    type: bool
+    default: false
+
+  plugin.tx_sessionplaner.settings.suggest.notification.subject:
+    category: sessionplaner.suggest.mail
+    type: string
+    default: 'New Session Suggestion'
+
+  plugin.tx_sessionplaner.settings.suggest.notification.recipientAddress:
+    category: sessionplaner.suggest.mail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.notification.recipientName:
+    category: sessionplaner.suggest.mail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.notification.senderAddress:
+    category: sessionplaner.suggest.mail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.notification.senderName:
+    category: sessionplaner.suggest.mail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.notification.carbonCopyAddress:
+    category: sessionplaner.suggest.mail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.notification.blindCarbonCopyAddress:
+    category: sessionplaner.suggest.mail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.enable:
+    category: sessionplaner.suggest.sendermail
+    type: bool
+    default: false
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.subject:
+    category: sessionplaner.suggest.sendermail
+    type: string
+    default: 'Thank you for your suggestion'
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.senderAddress:
+    category: sessionplaner.suggest.sendermail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.senderNotification.senderName:
+    category: sessionplaner.suggest.sendermail
+    type: string
+    default: ''
+
+  plugin.tx_sessionplaner.settings.suggest.confirmation.message:
+    category: sessionplaner.suggest.confirmation
+    type: string
+    default: 'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:form.suggest.confirmation'
+
+  plugin.tx_sessionplaner.settings.suggest.confirmation.pageUid:
+    category: sessionplaner.suggest.confirmation
+    type: int
+    default: 0

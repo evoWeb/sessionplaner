@@ -19,13 +19,17 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\Route;
 use TYPO3\CMS\Backend\Routing\UriBuilder as BackendUriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Template\Components\Buttons\LinkButton;
+use TYPO3\CMS\Backend\Template\Components\Menu\Menu;
+use TYPO3\CMS\Backend\Template\Components\Menu\MenuItem;
 use TYPO3\CMS\Backend\Template\Components\MenuRegistry;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -100,13 +104,13 @@ class BackendModuleController extends ActionController
         /** @var QueryResultInterface<int, Day> $days */
         $days = $this->dayRepository->findAll();
         if ($days->count() > 0) {
-            $actionMenu = $menuRegistry->makeMenu();
+            $actionMenu = GeneralUtility::makeInstance(Menu::class);
             $actionMenu->setIdentifier('actionMenu');
             $actionMenu->setLabel('');
             foreach ($days as $day) {
                 $title = $day->getDate()->format('d.m.y') . ' - ' . $day->getName();
                 $actionMenu->addMenuItem(
-                    $actionMenu->makeMenuItem()
+                    GeneralUtility::makeInstance(MenuItem::class)
                         ->setTitle($title)
                         ->setHref($this->createModuleUri(['day' => (string)$day->getUid()]))
                         ->setActive(($this->currentDay === $day))
@@ -146,15 +150,21 @@ class BackendModuleController extends ActionController
             'edit' => [$table => [$this->pageId => 'new']],
             'returnUrl' => $this->createModuleUri(),
         ];
-        $button = $buttonBar->makeLinkButton()
+        $button = GeneralUtility::makeInstance(LinkButton::class)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', $parameters))
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:' . $labelKey))
+            ->setTitle(
+                $this->getLanguageService()?->sL(
+                    'LLL:EXT:sessionplaner/Resources/Private/Language/locallang.xlf:' . $labelKey
+                ) ?? $labelKey
+            )
             ->setShowLabelText(true)
-            // @phpstan-ignore classConstant.deprecated
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
+            ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL));
         $buttonBar->addButton($button, ButtonBar::BUTTON_POSITION_LEFT, $buttonGroup);
     }
 
+    /**
+     * @param array<string, string> $params
+     */
     public function createModuleUri(array $params = []): string
     {
         $request = $this->request;
@@ -171,11 +181,12 @@ class BackendModuleController extends ActionController
         $params = array_replace_recursive($baseParams, $params);
         $params = array_filter($params, static fn($value) => $value !== null && trim((string)$value) !== '');
 
-        return (string)$this->backendUriBuilder->buildUriFromRoute($route->getOption('_identifier'), $params);
+        $routeName = is_string($route->getOption('_identifier')) ? $route->getOption('_identifier') : '';
+        return (string)$this->backendUriBuilder->buildUriFromRoute($routeName, $params);
     }
 
-    protected function getLanguageService(): LanguageService
+    protected function getLanguageService(): ?LanguageService
     {
-        return $GLOBALS['LANG'];
+        return $GLOBALS['LANG'] instanceof LanguageService ? $GLOBALS['LANG'] : null;
     }
 }

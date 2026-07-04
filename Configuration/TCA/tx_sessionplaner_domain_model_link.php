@@ -34,7 +34,7 @@ return [
             'label' => $languageFile . 'tx_sessionplaner_domain_model_link-linktext',
             'config' => [
                 'type' => 'input',
-                'max' => 255,
+                'max' => 256,
                 'eval' => 'trim',
                 'required' => true,
             ],

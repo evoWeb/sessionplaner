@@ -1,34 +1,36 @@
 {
-  "name": "sessionplaner",
-  "description": "Bundles all resources for the usage",
-  "homepage": "https://github.com/evoWeb/sessionplaner/",
-  "author": {
-    "name": "Sebastian Fischer",
-    "email": "typo3@evoweb.de"
-  },
-  "license": "GPL-2.0+",
-  "version": "5.2.1",
-  "devDependencies": {
-		"@stylistic/eslint-plugin": "^2.6.2",
-		"@typescript-eslint/eslint-plugin": "^8.39.0",
-		"@typescript-eslint/parser": "^8.39.0",
-		"@typescript-eslint/typescript-estree": "^8.39.0",
-    "autoprefixer": "^10.4.16",
+	"name": "sessionplaner",
+	"description": "Bundles all resources for the usage",
+	"homepage": "https://github.com/evoWeb/sessionplaner/",
+	"author": {
+		"name": "Sebastian Fischer",
+		"email": "typo3@evoweb.de"
+	},
+	"license": "GPL-2.0+",
+	"version": "5.2.1",
+	"devDependencies": {
+		"@eslint/eslintrc": "^3.3.5",
+		"@eslint/js": "^10.0.1",
+		"@stylistic/eslint-plugin": "^5.10.0",
+		"@typescript-eslint/eslint-plugin": "^8.62.1",
+		"@typescript-eslint/parser": "^8.62.1",
+		"@typescript-eslint/typescript-estree": "^8.62.1",
+		"autoprefixer": "^10.5.2",
 		"chokidar-cli": "^3.0.0",
-		"concurrently": "^9.2.1",
-    "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1",
-    "postcss-scss": "^4.0.9",
-    "sass": "^1.89.2",
-    "stylelint": "^14.16.1",
-    "stylelint-order": "^5.0.0",
-    "stylelint-scss": "^5.3.2"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 5 versions"
-  ],
-  "scripts": {
+		"concurrently": "^10.0.3",
+		"postcss": "^8.5.16",
+		"postcss-cli": "^11.0.1",
+		"postcss-scss": "^4.0.9",
+		"sass": "^1.101.0",
+		"stylelint": "^14.16.1",
+		"stylelint-order": "^5.0.0",
+		"stylelint-scss": "^5.3.2"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 5 versions"
+	],
+	"scripts": {
 		"build": "npm run build:css && npm run build:js",
 
 		"build:css": "npm run scss:build && npm run css:prefix",
@@ -44,5 +46,5 @@
 		"build:js": "npm run lint:ts && npm run compile:ts",
 		"lint:ts": "eslint -c eslint.config.mjs Sources/TypeScript/**/*.ts",
 		"compile:ts": "tsc --build --force tsconfig.json"
-  }
+	}
 }

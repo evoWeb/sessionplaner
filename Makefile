@@ -10,7 +10,7 @@ _ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 # ...and turn them into do-nothing targets
 $(eval $(_ARGS):;@:)
 
-PHP_VERSION := "8.1"
+PHP_VERSION := "8.2"
 
 ##@ Docs
 
@@ -29,13 +29,13 @@ test-docs: ##@ Test the documentation rendering
 .PHONY: phpstan
 phpstan: ##@ Static code analysis with php-cs-fixer
 	echo "Checking with phpstan started"
-	Build/Scripts//runTests.sh -p ${PHP_VERSION} -s phpstan
+	Build/Scripts/runTests.sh -p ${PHP_VERSION} -s phpstan
 	echo "Checking with phpstan finished"
 
 .PHONY: cgl
 cgl: ##@ Coding guideline check with
 	echo "Coding guideline check with phpstan started"
-	Build/Scripts//runTests.sh -p ${PHP_VERSION} -s cgl -n
+	Build/Scripts/runTests.sh -p ${PHP_VERSION} -s cgl -n
 	echo "Coding guideline check with phpstan finished"
 
 ##@ Release
@@ -54,13 +54,19 @@ cleanup: ##@ Cleanup project folder of all files that are not part of the sessio
 	Build/Scripts/runTests.sh -s clean
 	echo "Cleanup finished"
 
+.PHONY: cleanTests
+cleanTests: ##@ Clean test files but leave cache files
+	echo "cleanTests started"
+	Build/Scripts/runTests.sh -s cleanTests
+	echo "cleanTests finished";
+
 ##@ Install/Update
 
 .PHONY: switch-core
-switch-core: ##@ Require core version. Needs version number given as argument. [^12.4|^13.4]
-	@if [[ $(_ARGS) != \^12.* ]] && [[ $(_ARGS) != \^13.* ]];
+switch-core: ##@ Require core version. Needs version number given as argument. [^13.4|^14.3|15-dev]
+	@if [[ $(_ARGS) != \^13.* ]] && [[ $(_ARGS) != \^14.* ]] && [[ $(_ARGS) != \^15-dev ]];
 	then \
-    	echo "This version of sessionplaner only supports v12.4 and v13.4";
+		echo "This version of sessionplaner only supports v13.4 and v14.3";
 		exit;
 	else
 		echo "Composer require typo3/cms-core:$(_ARGS) started"
