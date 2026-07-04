@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Sessionplaner extension 5.3.0
+    <title>Sessionplaner extension 6.0.0
         documentation</title>
 
     
@@ -10,11 +10,11 @@
 <meta content="phpdocumentor/guides" name="generator">
 <meta content="Sessionplaner extension" name="docsearch:name">
 <meta content="" name="docsearch:package_type">
-<meta content="5.3.0" name="docsearch:release">
-<meta content="5.3.0" name="docsearch:version">
-<meta content="2026-02-03T17:03:04+00:00" name="docsearch:modified">
-<meta content="2026-02-03T17:03:04+00:00" name="dc.modified">
-<meta content="2026-02-03T17:03:04+00:00" property="article:modified_time">
+<meta content="6.0.0" name="docsearch:release">
+<meta content="6.0.0" name="docsearch:version">
+<meta content="2026-07-04T09:49:56+00:00" name="docsearch:modified">
+<meta content="2026-07-04T09:49:56+00:00" name="dc.modified">
+<meta content="2026-07-04T09:49:56+00:00" property="article:modified_time">
     <link href="http://purl.org/dc/elements/1.1/" rel="schema.dc">
 <link href="../_resources/css/theme.css" rel="stylesheet">
 <link href="https://docs.typo3.org/search/" rel="search" title="Search">
@@ -33,17 +33,17 @@
     </div>
     <div class="page-header">
         <div class="page-header-inner">
-            <div class="d-flex flex-wrap">
-                <div class="logo-wrapper">
-                    <a class="logo" href="https://docs.typo3.org/" title="TYPO3 Documentation">
-                        <img alt="TYPO3 Logo" class="logo-image" src="../_resources/img/typo3-logo.svg" width="484" height="130">
-                    </a>
-                </div>
-                <div class="align-self-center order-lg-2 order-last">
-                    
+            <a class="navbar-brand" href="https://docs.typo3.org/" title="TYPO3 Documentation">
+                <span class="navbar-brand-text">
+                    <img src="../_resources/img/typo3-soul.svg" alt="TYPO3" class="navbar-brand-logo" width="29" height="29">
+                    <span class="navbar-brand-name">Documentation</span>
+                </span>
+            </a>
+            <div class="header-nav">
+                
 <div class="toc-header">
-    <div class="toc-title pe-3">
-                            <a class="toc-title-project" href="../Index.html">sessionplaner: TYPO3Camp Session planer</a>
+    <div class="toc-title">
+                            <a class="toc-title-project" href="../Index.html">TYPO3 event Session planer</a>
             </div>
     <label for="languageSelect" class="visually-hidden">Select language</label>
         <select id="languageSelect" class="form-select d-none">
@@ -52,49 +52,49 @@
                                   
         <label for="versionSelect" class="visually-hidden">Select version</label>
         <select id="versionSelect" class="form-select"
-                data-current-version="5.3.0"
+                data-current-version="6.0.0"
             data-override-url-proxy="../_resources/js/versions-proxy.php?url=" data-override-url-self="https://docs.typo3.org/m/typo3/tutorial-getting-started/12.4/en-us/Concepts/Index.html"
         >
             <option disabled selected>Loading versions...</option>
         </select>
-    </div>                </div>
-                <div class="ms-auto order-lg-3 d-flex">
-                    <div class="menu-search-wrapper">
-                        <button id="toc-toggle" class="btn btn-light d-block d-lg-none" tabindex="0" aria-controls="toc-collapse" aria-expanded="false">
-                            <i class="fas fa-bars"></i> <span class="visually-hidden">Mobile Menu</span>
-                        </button>
-                        <all-documentations-menu data-override-url="../_resources/js/menu-proxy.php"></all-documentations-menu>
-                                                <search role="search">
-                            <form action="https://docs.typo3.org/search/search" id="global-search-form" method="get">
-                                <div class="sr-only"><label for="globalsearchinput">TYPO3 documentation...</label></div>
-                                <div class="input-group mb-3 mt-sm-3">
-                                    <select class="form-select search__scope" id="searchscope" name="scope">
-                                        <option value="">Search all</option>
-                                    </select>
-                                    <input autocomplete="off" class="form-control shadow-none" id="globalsearchinput" name="q" placeholder="TYPO3 documentation..." type="text" value="">
-                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i>&nbsp;<span class="d-none d-md-inline">Search</span></button>
-                                </div>
-                            </form>
-                            <div id="global-search-root"></div>
-                        </search>
-                        <div class="position-relative d-inline-block">
-                            <button id="options-toggle" class="btn btn-light d-block" type="button" aria-expanded="false">
-                                <i class="fas fa-cog"></i> <span class="visually-hidden">Options</span>
+    </div>            </div>
+            <div class="header-actions">
+                <button id="search-toggle" class="btn btn-light d-lg-none" type="button"
+                        aria-label="Search" aria-expanded="false" aria-controls="header-search-expand">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                <button id="toc-toggle" class="btn btn-light d-lg-none" type="button"
+                        aria-label="Menu" aria-expanded="false" aria-controls="toc-collapse">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <all-documentations-menu data-override-url="../_resources/js/menu-proxy.php"></all-documentations-menu>
+                                <search id="header-search-expand" class="header-search" role="search" aria-label="Site search">
+                    <form action="https://docs.typo3.org/search/search" id="global-search-form" method="get">
+                        <div class="sr-only"><label for="globalsearchinput">TYPO3 documentation...</label></div>
+                        <div class="input-group">
+                            <select class="form-select search__scope" id="searchscope" name="scope">
+                                <option value="">Search all</option>
+                            </select>
+                            <input autocomplete="off" class="form-control shadow-none" id="globalsearchinput" name="q" placeholder="TYPO3 documentation..." type="text" value="">
+                            <button class="btn btn-light" type="submit" aria-label="Search">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <span>Search</span>
                             </button>
-
-                            <div id="options-panel"
-                                 class="shadow p-3"
-                                 role="menu"
-                                 aria-hidden="true">
-                                <h6 class="dropdown-header text-muted text-uppercase small mb-2">Options</h6>
-
-                                                                                                        <a class="dropdown-item d-flex align-items-center gap-2" href="../Index.html" rel="noopener">
-                                        <i class="fas fa-file-alt"></i>
-                                        Switch to regular view
-                                    </a>
-                                                            </div>
                         </div>
-                    </div>
+                    </form>
+                    <div id="global-search-root"></div>
+                </search>
+                <button id="options-toggle" class="btn btn-light" type="button"
+                        aria-controls="options-panel" aria-expanded="false" popovertarget="options-panel">
+                    <i class="fas fa-cog" aria-hidden="true"></i>
+                    <span class="visually-hidden">Options</span>
+                </button>
+                <div id="options-panel" class="shadow p-3" popover>
+                    <h6 class="dropdown-header text-muted text-uppercase small mb-2">Options</h6>
+                            <a class="dropdown-item d-flex align-items-center gap-2" href="../Index.html" rel="noopener">
+        <i class="fas fa-file-alt"></i>
+        Switch to regular view
+    </a>
                 </div>
             </div>
         </div>
@@ -108,6 +108,13 @@
                                                 <div aria-label="main navigation" class="toc"
                              role="navigation">
                                                                                 </div>
+                        <div class="toc-options d-lg-none">
+                            <p class="caption">Options</p>
+                                    <a class="dropdown-item d-flex align-items-center gap-2" href="../Index.html" rel="noopener">
+        <i class="fas fa-file-alt"></i>
+        Switch to regular view
+    </a>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -115,9 +122,9 @@
                 <div class="rst-content">                                                                <!-- content start -->
     <article>
             
-<section class="section" id="sessionplaner-typo3camp-session-planer" data-rst-anchor="start">
+<section class="section" id="typo3-event-session-planer" data-rst-anchor="start">
             <a id="start"></a>
-            <h1>sessionplaner: TYPO3Camp Session planer<a class="headerlink" href="#sessionplaner-typo3camp-session-planer" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            <h1>TYPO3 event Session planer<a class="headerlink" href="#typo3-event-session-planer" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
             <dl class="field-list simple ">
             <dt class="field-odd">Extension key</dt>
 
@@ -125,35 +132,23 @@
             
     <p>sessionplaner</p>
         </dd>
+            <dt class="field-odd">Package name</dt>
+
+        <dd class="field-odd">
+            
+    <p>evoweb/sessionplaner</p>
+        </dd>
             <dt class="field-odd">Version</dt>
 
         <dd class="field-odd">
             
-    <p>5.3.0</p>
+    <p>6.0.0</p>
         </dd>
             <dt class="field-odd">Language</dt>
 
         <dd class="field-odd">
             
     <p>en</p>
-        </dd>
-            <dt class="field-odd">Description</dt>
-
-        <dd class="field-odd">
-            
-    <p>TYPO3camp session planing inside TYPO3</p>
-        </dd>
-            <dt class="field-odd">Keywords</dt>
-
-        <dd class="field-odd">
-            
-    <p>forIntegrator</p>
-        </dd>
-            <dt class="field-odd">Copyright</dt>
-
-        <dd class="field-odd">
-            
-    <p>2013-2022</p>
         </dd>
             <dt class="field-odd">Author</dt>
 
@@ -165,33 +160,25 @@
 
         <dd class="field-odd">
             
-    <p>Open Content License available from <a href="http://www.opencontent.org/opl.shtml">http://www.opencontent.org/opl.shtml</a></p>
+    <p>This document is published under the
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0</a>
+license.</p>
         </dd>
             <dt class="field-odd">Rendered</dt>
 
         <dd class="field-odd">
             
-    <p>Tue, 03 Feb 2026 17:03:04 +0000</p>
+    <p>Sat, 04 Jul 2026 09:49:56 +0000</p>
         </dd>
     </dl>
+            <hr />
             
     <p>The content of this document is related to TYPO3,
 a GNU/GPL CMS/Framework available from <a href="http://typo3.org">http://typo3.org</a></p>
 
-                
-<div class="admonition tip" role="alert">
-    <p class="admonition-title">Tip</p>
-        <dl class="field-list simple ">
-            <dt class="field-odd">ref</dt>
-
-        <dd class="field-odd">
+            <hr />
             
-    <p><code class="code-inline" translate="no">Sitemap</code></p>
-        </dd>
-    </dl>
-</div>
-            
-    <p><strong>Table of Contents</strong></p>
+    <p><strong>Table of Contents:</strong></p>
 
             <div class="toctree-wrapper compound">
         <ul class="menu-level">
@@ -205,8 +192,14 @@ a GNU/GPL CMS/Framework available from <a href="http://typo3.org">http://typo3.o
 
 
 </li>
+    <li class="toc-item">
+    <a href="#tutorial-1">Tutorial</a>
+
+
+</li>
     </ul>
 </div>
+            
     </section>
 
         </article>
@@ -215,7 +208,8 @@ a GNU/GPL CMS/Framework available from <a href="http://typo3.org">http://typo3.o
 <section class="section" id="introduction-1" data-rst-anchor="introduction">
             <a id="introduction"></a>
             <h1>Introduction<a class="headerlink" href="#introduction-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
-            <section class="section" id="what-does-it-do">
+            <section class="section" id="what-does-it-do" data-rst-anchor="what-it-does">
+            <a id="what-it-does"></a>
             <h2>What does it do?<a class="headerlink" href="#what-does-it-do" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
             
     <p>In the backend a module assists the planing process by adding sessions
@@ -225,7 +219,7 @@ an overview of which slots are booked and which are free.</p>
             <figure>
     <img
     src="../Images/sessionplaner-backend.png"
-                alt="Example of the frontend rendering with sessionplaner"        />
+            alt="Example of the backend module of the sessionplaner"        />
 
             
             </figure>
@@ -236,13 +230,12 @@ at the following screenshot from the <a href="https://t3con19.typo3.com/program"
             <figure>
     <img
     src="../Images/t3con19-program-screenshot.png"
-                alt="Example of the frontend rendering with sessionplaner"        />
+            alt="Example of the frontend rendering with sessionplaner"        />
 
             
             </figure>
-    </section>
             <section class="section" id="features">
-            <h2>Features<a class="headerlink" href="#features" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <h3>Features<a class="headerlink" href="#features" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
             
 
 <ul>
@@ -256,6 +249,7 @@ at the following screenshot from the <a href="https://t3con19.typo3.com/program"
     <li>download all data as CSV or JSON from the backend</li>
 </ul>
 
+    </section>
     </section>
     </section>
 
@@ -277,19 +271,13 @@ list install the extension by hitting the action for that.</p>
             <section class="section" id="download-via-composer">
             <h2>Download via Composer<a class="headerlink" href="#download-via-composer" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
             
-    <p>Add evoweb/sessionplaner to the require in your composer.json like in the
-following example and run &#039;composer install&#039;.</p>
+    <p>Execute the command below in the shell on project root level.</p>
 
-            <div class="code-block-wrapper" translate="no">
+                <div class="code-block-caption">
+        <span class="caption-text">Enter on shell</span>
+    </div><div class="code-block-wrapper" translate="no">
             
-    <pre class="code-block"><code>{
-	&quot;require&quot;: {
-		&quot;typo3/cms-core&quot;: &quot;^10.0&quot;,
-		&quot;evoweb/sessionplaner&quot;: &quot;*&quot;,
-	}
-}
-
-</code></pre>
+    <pre class="code-block"><code class="hljs shell">composer require evoweb/store-finder</code></pre>
     <div class="code-block-actions">        <button class="code-block-copy" title="Copy to clipboard">
             <i class="icon fa-regular fa-copy code-block-copy-icon"></i>
             <i class="fa-solid fa-check code-block-check-icon code-block-hide"></i>
@@ -297,9 +285,92 @@ following example and run &#039;composer install&#039;.</p>
         <span class="code-block-check-tooltip code-block-hide" aria-live="polite">Copied!</span>
     </div>
 </div>
+    </section>
+    </section>
+
+        </article>
+<article>
             
-    <p>Alternatively if you have an existing project with a configured composer.json you
-can add sessionplaner with the command by running &#039;composer require evoweb/sessionplaner&#039;.</p>
+<section class="section" id="tutorial-1" data-rst-anchor="tutorial">
+            <a id="tutorial"></a>
+            <h1>Tutorial<a class="headerlink" href="#tutorial-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+            <section class="section" id="preparation-for-planing">
+            <h2>Preparation for planing<a class="headerlink" href="#preparation-for-planing" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>To be able to plan sessions you need to add the following:</p>
+
+            
+
+<ul>
+    <li>a folder for the planing data</li>
+    <li><dl>
+                        <dt>for each day of the event you need to add a &quot;Session Planer Day&quot;</dt>
+        
+        <dd>
+
+<ul>
+    <li class="dash">the days need to get &quot;Slots&quot; added to it for each slot that is available on that day</li>
+</ul>
+</dd>
+            </dl></li>
+    <li><dl>
+                        <dt>for each room in which you are having sessions a &quot;Session Planer Room&quot;</dt>
+        
+        <dd>
+
+<ul>
+    <li class="dash">add the &quot;Days&quot; to the room on which that room is available</li>
+    <li class="dash">the rooms need to get &quot;Slots&quot; added to it for each slot that is available in that room</li>
+</ul>
+</dd>
+            </dl></li>
+    <li>edit each day and add the rooms that are available on that day</li>
+    <li>in the &quot;Session Planer&quot; module, you should now have a grid comparable the screenshot</li>
+</ul>
+
+            <figure>
+    <img
+    src="../Images/sessionplaner-backend.png"
+            alt="Example of the backend module of the sessionplaner"        />
+
+            
+            </figure>
+    </section>
+            <section class="section" id="configuring-the-frontend">
+            <h2>Configuring the frontend<a class="headerlink" href="#configuring-the-frontend" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            
+    <p>For the frontend you need at least one page with a plugin of type &quot;Sessionplaner: Sessionplan&quot;.</p>
+
+            
+    <p>For more complex needs you need to play with the other modules:</p>
+
+            
+
+<ul>
+    <li>&quot;Sessionplaner: Session&quot;</li>
+    <li>&quot;Sessionplaner: Tag&quot;</li>
+    <li>&quot;Sessionplaner: Speakers&quot;</li>
+    <li>&quot;Sessionplaner: Suggest Sessions&quot;</li>
+</ul>
+
+            
+    <p>Each plugin comes with it&#039;s own settings as plugin options and do not need to be configured in TypoScript.</p>
+
+            
+    <p>TypoScript is only needed to override the templates, partials or layouts. These can be configured with constants:</p>
+
+            
+
+<ul>
+    <li><code class="code-inline" translate="no">plugin.<wbr>tx_<wbr>sessionplaner.<wbr>view.<wbr>template<wbr>Root<wbr>Path</code></li>
+    <li><code class="code-inline" translate="no">plugin.<wbr>tx_<wbr>sessionplaner.<wbr>view.<wbr>partial<wbr>Root<wbr>Path</code></li>
+    <li><code class="code-inline" translate="no">plugin.<wbr>tx_<wbr>sessionplaner.<wbr>view.<wbr>layout<wbr>Root<wbr>Path</code></li>
+</ul>
+
+            
+    <p>There is one exemption from this and that is the &quot;Suggest Sessions&quot; plugin. The form for that is configured
+within the <code class="code-inline" translate="no">plugin.<wbr>tx_<wbr>sessionplaner.<wbr>settings.<wbr>suggest</code> key. Take a deeper look into
+Configuration/TypoScript/setup.typoscript</p>
 
     </section>
     </section>
@@ -307,51 +378,10 @@ can add sessionplaner with the command by running &#039;composer require evoweb/
         </article>
 <article>
             
-<a id="Sitemap"></a>
-    <p>Sitemap
-=======</p>
-<div class="toctree-wrapper compound">
-        <ul class="menu-level">
-    <li class="toc-item">
-    <a href="#sessionplaner-typo3camp-session-planer">sessionplaner: TYPO3Camp Session planer</a>
-        <ul class="menu-level-1">
-            <li class="toc-item">
-    <a href="#introduction-1">Introduction</a>
-
-        <ul class="section-level-2">
-            <li class="toc-item">
-    <a href="#what-does-it-do">What does it do?</a>
-
-
-</li>
-            <li class="toc-item">
-    <a href="#features">Features</a>
-
-
-</li>
-                    </ul>
-</li>
-            <li class="toc-item">
-    <a href="#installation-1">Installation</a>
-
-        <ul class="section-level-2">
-            <li class="toc-item">
-    <a href="#download-via-extension-manager">Download via Extension Manager</a>
-
-
-</li>
-            <li class="toc-item">
-    <a href="#download-via-composer">Download via Composer</a>
-
-
-</li>
-                    </ul>
-</li>
-                    </ul>
-
-</li>
-    </ul>
-</div>
+<section class="section" id="sitemap-1" data-rst-anchor="sitemap">
+            <a id="sitemap"></a>
+            <h1>Sitemap<a class="headerlink" href="#sitemap-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
+    </section>
 
         </article>
 <!-- content end -->
@@ -435,9 +465,7 @@ can add sessionplaner with the command by running &#039;composer require evoweb/
             </div>
         </div>
     </div>
-</div></div>
-
-
+</div>    
 <footer class="page-footer">
     <div class="frame frame-ruler-before frame-background-dark">
         <div class="frame-container">
@@ -447,7 +475,7 @@ can add sessionplaner with the command by running &#039;composer require evoweb/
                                                                         <li><a href="https://github.com/evoWeb/sessionplaner/issues" rel="nofollow noopener" title="Issues"><span>Issues</span></a></li>
                                                 <li><a href="https://github.com/evoWeb/sessionplaner" rel="nofollow noopener" title="Repository"><span>Repository</span></a></li>
                                             </ul>                <div class="footer-additional">
-                    <p class="text-center">Last rendered: Feb 03, 2026 17:03</p>
+                    <p class="text-center">Last rendered: Jul 04, 2026 09:49</p>
                 </div>
                 <div class="footer-meta">
                                         <div class="footer-meta-copyright">
@@ -461,8 +489,16 @@ can add sessionplaner with the command by running &#039;composer require evoweb/
             </div>
         </div>
     </div>
-</footer>
-<script src="../_resources/js/popper.min.js"></script>
+</footer></div>
+
+
+<script>
+    if (!(window.CSS && CSS.supports("animation-timeline", "scroll()"))) {
+        var scrollTimelinePolyfill = document.createElement("script");
+        scrollTimelinePolyfill.src = "../_resources/js/scroll-timeline.js";
+        document.head.appendChild(scrollTimelinePolyfill);
+    }
+</script>
 <script src="../_resources/js/bootstrap.min.js"></script>
 <script src="../_resources/js/theme.min.js"></script>
 

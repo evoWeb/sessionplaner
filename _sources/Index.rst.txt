@@ -1,13 +1,16 @@
-.. include:: Includes.txt
+.. include:: /Includes.rst.txt
 
 .. _start:
 
-=======================================
-sessionplaner: TYPO3Camp Session planer
-=======================================
+==========================
+TYPO3 event Session planer
+==========================
 
 :Extension key:
     sessionplaner
+
+:Package name:
+   evoweb/sessionplaner
 
 :Version:
     |release|
@@ -15,39 +18,37 @@ sessionplaner: TYPO3Camp Session planer
 :Language:
     en
 
-:Description:
-    TYPO3camp session planing inside TYPO3
-
-:Keywords:
-    forIntegrator
-
-:Copyright:
-    2013-2022
-
 :Author:
     evoWeb
 
 :License:
-    Open Content License available from http://www.opencontent.org/opl.shtml
+   This document is published under the
+   `Creative Commons BY-NC-SA 4.0 <https://creativecommons.org/licenses/by-nc-sa/4.0/>`__
+   license.
 
 :Rendered:
     |today|
 
+----
+
 The content of this document is related to TYPO3,
 a GNU/GPL CMS/Framework available from http://typo3.org
 
-.. only:: html
+----
 
-   .. tip::
-
-      :ref: `Sitemap`
-
-**Table of Contents**
+**Table of Contents:**
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 2
    :titlesonly:
-   :glob:
 
    Introduction/Index
    Installation/Index
+   Tutorial/Index
+
+.. Meta Menu
+
+.. toctree::
+   :hidden:
+
+   Sitemap

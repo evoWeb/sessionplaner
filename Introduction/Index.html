@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-    <title>Introduction — Sessionplaner extension 5.3.0
+    <title>Introduction — Sessionplaner extension 6.0.0
         documentation</title>
 
     
@@ -10,19 +10,19 @@
 <meta content="phpdocumentor/guides" name="generator">
 <meta content="Sessionplaner extension" name="docsearch:name">
 <meta content="" name="docsearch:package_type">
-<meta content="5.3.0" name="docsearch:release">
-<meta content="5.3.0" name="docsearch:version">
-<meta content="2026-02-03T17:03:04+00:00" name="docsearch:modified">
-<meta content="2026-02-03T17:03:04+00:00" name="dc.modified">
-<meta content="2026-02-03T17:03:04+00:00" property="article:modified_time">
+<meta content="6.0.0" name="docsearch:release">
+<meta content="6.0.0" name="docsearch:version">
+<meta content="2026-07-04T09:49:56+00:00" name="docsearch:modified">
+<meta content="2026-07-04T09:49:56+00:00" name="dc.modified">
+<meta content="2026-07-04T09:49:56+00:00" property="article:modified_time">
     <link href="http://purl.org/dc/elements/1.1/" rel="schema.dc">
 <link href="../_resources/css/theme.css" rel="stylesheet">
 <link href="https://docs.typo3.org/search/" rel="search" title="Search">
 <script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/webcomponents-loader.js"></script>
 <script src="https://cdn.typo3.com/typo3infrastructure/universe/dist/typo3-universe.js" type="module"></script>
-                        <link href="../Index.html" rel="prev" title="sessionplaner: TYPO3Camp Session planer"/>
+                        <link href="../Index.html" rel="prev" title="TYPO3 event Session planer"/>
             <link href="../Installation/Index.html" rel="next" title="Installation"/>
-            <link href="../Index.html" rel="top" title="sessionplaner: TYPO3Camp Session planer"/>
+            <link href="../Index.html" rel="top" title="TYPO3 event Session planer"/>
     </head>
 <body>
 <div class="page">
@@ -36,17 +36,17 @@
     </div>
     <div class="page-header">
         <div class="page-header-inner">
-            <div class="d-flex flex-wrap">
-                <div class="logo-wrapper">
-                    <a class="logo" href="https://docs.typo3.org/" title="TYPO3 Documentation">
-                        <img alt="TYPO3 Logo" class="logo-image" src="../_resources/img/typo3-logo.svg" width="484" height="130">
-                    </a>
-                </div>
-                <div class="align-self-center order-lg-2 order-last">
-                    
+            <a class="navbar-brand" href="https://docs.typo3.org/" title="TYPO3 Documentation">
+                <span class="navbar-brand-text">
+                    <img src="../_resources/img/typo3-soul.svg" alt="TYPO3" class="navbar-brand-logo" width="29" height="29">
+                    <span class="navbar-brand-name">Documentation</span>
+                </span>
+            </a>
+            <div class="header-nav">
+                
 <div class="toc-header">
-    <div class="toc-title pe-3">
-                            <a class="toc-title-project" href="../Index.html">sessionplaner: TYPO3Camp Session planer</a>
+    <div class="toc-title">
+                            <a class="toc-title-project" href="../Index.html">TYPO3 event Session planer</a>
             </div>
     <label for="languageSelect" class="visually-hidden">Select language</label>
         <select id="languageSelect" class="form-select d-none">
@@ -55,43 +55,46 @@
                                   
         <label for="versionSelect" class="visually-hidden">Select version</label>
         <select id="versionSelect" class="form-select"
-                data-current-version="5.3.0"
+                data-current-version="6.0.0"
             data-override-url-proxy="../_resources/js/versions-proxy.php?url=" data-override-url-self="https://docs.typo3.org/m/typo3/tutorial-getting-started/12.4/en-us/Concepts/Index.html"
         >
             <option disabled selected>Loading versions...</option>
         </select>
-    </div>                </div>
-                <div class="ms-auto order-lg-3 d-flex">
-                    <div class="menu-search-wrapper">
-                        <button id="toc-toggle" class="btn btn-light d-block d-lg-none" tabindex="0" aria-controls="toc-collapse" aria-expanded="false">
-                            <i class="fas fa-bars"></i> <span class="visually-hidden">Mobile Menu</span>
-                        </button>
-                        <all-documentations-menu data-override-url="../_resources/js/menu-proxy.php"></all-documentations-menu>
-                                                <search role="search">
-                            <form action="https://docs.typo3.org/search/search" id="global-search-form" method="get">
-                                <div class="sr-only"><label for="globalsearchinput">TYPO3 documentation...</label></div>
-                                <div class="input-group mb-3 mt-sm-3">
-                                    <select class="form-select search__scope" id="searchscope" name="scope">
-                                        <option value="">Search all</option>
-                                    </select>
-                                    <input autocomplete="off" class="form-control shadow-none" id="globalsearchinput" name="q" placeholder="TYPO3 documentation..." type="text" value="">
-                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i>&nbsp;<span class="d-none d-md-inline">Search</span></button>
-                                </div>
-                            </form>
-                            <div id="global-search-root"></div>
-                        </search>
-                        <div class="position-relative d-inline-block">
-                            <button id="options-toggle" class="btn btn-light d-block" type="button" aria-expanded="false">
-                                <i class="fas fa-cog"></i> <span class="visually-hidden">Options</span>
+    </div>            </div>
+            <div class="header-actions">
+                <button id="search-toggle" class="btn btn-light d-lg-none" type="button"
+                        aria-label="Search" aria-expanded="false" aria-controls="header-search-expand">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+                <button id="toc-toggle" class="btn btn-light d-lg-none" type="button"
+                        aria-label="Menu" aria-expanded="false" aria-controls="toc-collapse">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+                <all-documentations-menu data-override-url="../_resources/js/menu-proxy.php"></all-documentations-menu>
+                                <search id="header-search-expand" class="header-search" role="search" aria-label="Site search">
+                    <form action="https://docs.typo3.org/search/search" id="global-search-form" method="get">
+                        <div class="sr-only"><label for="globalsearchinput">TYPO3 documentation...</label></div>
+                        <div class="input-group">
+                            <select class="form-select search__scope" id="searchscope" name="scope">
+                                <option value="">Search all</option>
+                            </select>
+                            <input autocomplete="off" class="form-control shadow-none" id="globalsearchinput" name="q" placeholder="TYPO3 documentation..." type="text" value="">
+                            <button class="btn btn-light" type="submit" aria-label="Search">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <span>Search</span>
                             </button>
-
-                            <div id="options-panel"
-                                 class="shadow p-3"
-                                 role="menu"
-                                 aria-hidden="true">
-                                <h6 class="dropdown-header text-muted text-uppercase small mb-2">Options</h6>
-
-                                                                                                            <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/evoWeb/sessionplaner/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2FevoWeb%2Fsessionplaner%2FIntroduction%2FIndex.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
+                        </div>
+                    </form>
+                    <div id="global-search-root"></div>
+                </search>
+                <button id="options-toggle" class="btn btn-light" type="button"
+                        aria-controls="options-panel" aria-expanded="false" popovertarget="options-panel">
+                    <i class="fas fa-cog" aria-hidden="true"></i>
+                    <span class="visually-hidden">Options</span>
+                </button>
+                <div id="options-panel" class="shadow p-3" popover>
+                    <h6 class="dropdown-header text-muted text-uppercase small mb-2">Options</h6>
+                                <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/evoWeb/sessionplaner/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2FevoWeb%2Fsessionplaner%2FIntroduction%2FIndex.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
         <i class="fas fa-comment-dots"></i>
         Give feedback
     </a>
@@ -107,14 +110,11 @@
         <i class="fab fa-github"></i>
         Edit on GitHub
     </a>
-                                                                                                                <a class="dropdown-item d-flex align-items-center gap-2" href="../singlehtml/Index.html" target="_blank" rel="noopener">
-                                            <i class="fas fa-print"></i>
-                                            Full documentation (single file)
-                                        </a>
-                                                                                                </div>
-                        </div>
+                <a class="dropdown-item d-flex align-items-center gap-2" href="../singlehtml/Index.html" target="_blank" rel="noopener">
+            <i class="fas fa-print"></i>
+            Full documentation (single file)
+        </a>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -129,7 +129,7 @@
                                 <all-documentations-menu-mobile
         data-override-url="../_resources/js/menu-proxy.php"></all-documentations-menu-mobile>
     <div aria-label="Main navigation" class="main_menu" role="navigation">
-                <p class="caption">sessionplaner: TYPO3Camp Session planer</p>
+                <p class="caption">TYPO3 event Session planer</p>
             <ul class="menu-level-1" role="menubar">
     <li class=" current active" role="menuitem">
     <a href="#" aria-current="page">
@@ -137,9 +137,39 @@
     </a></li>    <li class="" role="menuitem">
     <a href="../Installation/Index.html">
         Installation
+    </a></li>    <li class="" role="menuitem">
+    <a href="../Tutorial/Index.html">
+        Tutorial
+    </a></li>    </ul>    <ul class="menu-level-1" role="menubar">
+    <li class="" role="menuitem">
+    <a href="../Sitemap.html">
+        Sitemap
     </a></li>    </ul>
     </div>
                         </div>
+                        <div class="toc-options d-lg-none">
+                            <p class="caption">Options</p>
+                                        <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/evoWeb/sessionplaner/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2FevoWeb%2Fsessionplaner%2FIntroduction%2FIndex.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-comment-dots"></i>
+        Give feedback
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="../_sources/Introduction/Index.rst.txt" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-code"></i>
+        View source
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/WritingDocsOfficial/GithubMethod.html" id="btnHowToEdit" rel="nofollow noopener" target="_blank">
+        <i class="fas fa-info-circle"></i>
+        How to edit
+    </a>
+    <a class="dropdown-item d-flex align-items-center gap-2" href="https://github.com/evoweb/sessionplaner/edit/develop/Documentation/Introduction/Index.rst" id="btnEditOnGitHub" rel="nofollow noopener" target="_blank">
+        <i class="fab fa-github"></i>
+        Edit on GitHub
+    </a>
+                <a class="dropdown-item d-flex align-items-center gap-2" href="../singlehtml/Index.html" target="_blank" rel="noopener">
+            <i class="fas fa-print"></i>
+            Full documentation (single file)
+        </a>
+                            </div>
                     </div>
                 </nav>
             </div>
@@ -147,9 +177,10 @@
                 <div class="rst-content">                        <nav aria-label="breadcrumbs navigation" class="breadcrumb-bar" role="navigation">
         
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="../Index.html">sessionplaner: TYPO3Camp Session planer</a></li>
+    <li class="breadcrumb-item"><a href="../Index.html">TYPO3 event Session planer</a></li>
                     <li aria-current="page"  class="breadcrumb-item  active">Introduction</li>
         </ol>
+
         <div class="breadcrumb-additions">                <a class="btn btn-sm btn-light" href="https://github.com/evoWeb/sessionplaner/issues/new/choose?title=Problem+on+https%3A%2F%2Fgithub.com%2FevoWeb%2Fsessionplaner%2FIntroduction%2FIndex.html" id="btnReportIssue" rel="nofollow noopener" target="_blank">
                     <span class="btn-icon"><i class="fas fa-comment-dots"></i></span>
                     <span class="btn-text">Give feedback</span>
@@ -168,7 +199,8 @@
 <section class="section" id="introduction-1" data-rst-anchor="introduction">
             <a id="introduction"></a>
             <h1>Introduction<a class="headerlink" href="#introduction-1" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h1>
-            <section class="section" id="what-does-it-do">
+            <section class="section" id="what-does-it-do" data-rst-anchor="what-it-does">
+            <a id="what-it-does"></a>
             <h2>What does it do?<a class="headerlink" href="#what-does-it-do" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
             
     <p>In the backend a module assists the planing process by adding sessions
@@ -178,7 +210,7 @@ an overview of which slots are booked and which are free.</p>
             <figure>
     <img
     src="../Images/sessionplaner-backend.png"
-                alt="Example of the frontend rendering with sessionplaner"        />
+            alt="Example of the backend module of the sessionplaner"        />
 
             
             </figure>
@@ -189,13 +221,12 @@ at the following screenshot from the <a href="https://t3con19.typo3.com/program"
             <figure>
     <img
     src="../Images/t3con19-program-screenshot.png"
-                alt="Example of the frontend rendering with sessionplaner"        />
+            alt="Example of the frontend rendering with sessionplaner"        />
 
             
             </figure>
-    </section>
             <section class="section" id="features">
-            <h2>Features<a class="headerlink" href="#features" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h2>
+            <h3>Features<a class="headerlink" href="#features" data-bs-toggle="modal" data-bs-target="#linkReferenceModal"  title="Reference this headline">&nbsp;<i class="fa-solid fa-link"></i></a></h3>
             
 
 <ul>
@@ -209,6 +240,7 @@ at the following screenshot from the <a href="https://t3con19.typo3.com/program"
     <li>download all data as CSV or JSON from the backend</li>
 </ul>
 
+    </section>
     </section>
     </section>
         <!-- content end -->
@@ -311,9 +343,7 @@ at the following screenshot from the <a href="https://t3con19.typo3.com/program"
             </div>
         </div>
     </div>
-</div></div>
-
-
+</div>    
 <footer class="page-footer">
     <div class="frame frame-ruler-before frame-background-dark">
         <div class="frame-container">
@@ -323,7 +353,7 @@ at the following screenshot from the <a href="https://t3con19.typo3.com/program"
                                                                         <li><a href="https://github.com/evoWeb/sessionplaner/issues" rel="nofollow noopener" title="Issues"><span>Issues</span></a></li>
                                                 <li><a href="https://github.com/evoWeb/sessionplaner" rel="nofollow noopener" title="Repository"><span>Repository</span></a></li>
                                             </ul>                <div class="footer-additional">
-                    <p class="text-center">Last rendered: Feb 03, 2026 17:03</p>
+                    <p class="text-center">Last rendered: Jul 04, 2026 09:49</p>
                 </div>
                 <div class="footer-meta">
                                         <div class="footer-meta-copyright">
@@ -337,8 +367,16 @@ at the following screenshot from the <a href="https://t3con19.typo3.com/program"
             </div>
         </div>
     </div>
-</footer>
-<script src="../_resources/js/popper.min.js"></script>
+</footer></div>
+
+
+<script>
+    if (!(window.CSS && CSS.supports("animation-timeline", "scroll()"))) {
+        var scrollTimelinePolyfill = document.createElement("script");
+        scrollTimelinePolyfill.src = "../_resources/js/scroll-timeline.js";
+        document.head.appendChild(scrollTimelinePolyfill);
+    }
+</script>
 <script src="../_resources/js/bootstrap.min.js"></script>
 <script src="../_resources/js/theme.min.js"></script>
 

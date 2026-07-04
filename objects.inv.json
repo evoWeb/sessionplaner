@@ -2,97 +2,139 @@
     "std:doc": {
         "Index": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Index.html",
-            "sessionplaner: TYPO3Camp Session planer"
+            "TYPO3 event Session planer"
         ],
         "Installation\/Index": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Installation\/Index.html",
             "Installation"
         ],
         "Introduction\/Index": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Introduction\/Index.html",
             "Introduction"
         ],
         "Sitemap": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Sitemap.html",
-            "<Unknown>"
+            "Sitemap"
+        ],
+        "Tutorial\/Index": [
+            "Sessionplaner extension",
+            "6.0.0",
+            "Tutorial\/Index.html",
+            "Tutorial"
         ]
     },
     "std:label": {
         "start": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Index.html#start",
-            "sessionplaner: TYPO3Camp Session planer"
+            "TYPO3 event Session planer"
         ],
         "installation": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Installation\/Index.html#installation",
             "Installation"
         ],
         "introduction": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Introduction\/Index.html#introduction",
             "Introduction"
         ],
+        "what-it-does": [
+            "Sessionplaner extension",
+            "6.0.0",
+            "Introduction\/Index.html#what-it-does",
+            "What does it do?"
+        ],
         "sitemap": [
             "Sessionplaner extension",
-            "5.3.0",
-            "Sitemap.html#Sitemap",
-            "-"
+            "6.0.0",
+            "Sitemap.html#sitemap",
+            "Sitemap"
+        ],
+        "tutorial": [
+            "Sessionplaner extension",
+            "6.0.0",
+            "Tutorial\/Index.html#tutorial",
+            "Tutorial"
         ]
     },
     "std:title": {
-        "sessionplaner-typo3camp-session-planer": [
+        "typo3-event-session-planer": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Index.html#start",
-            "sessionplaner: TYPO3Camp Session planer"
+            "TYPO3 event Session planer"
         ],
         "installation-1": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Installation\/Index.html#installation",
             "Installation"
         ],
         "download-via-extension-manager": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Installation\/Index.html#download-via-extension-manager",
             "Download via Extension Manager"
         ],
         "download-via-composer": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Installation\/Index.html#download-via-composer",
             "Download via Composer"
         ],
         "introduction-1": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Introduction\/Index.html#introduction",
             "Introduction"
         ],
         "what-does-it-do": [
             "Sessionplaner extension",
-            "5.3.0",
-            "Introduction\/Index.html#what-does-it-do",
+            "6.0.0",
+            "Introduction\/Index.html#what-it-does",
             "What does it do?"
         ],
         "features": [
             "Sessionplaner extension",
-            "5.3.0",
+            "6.0.0",
             "Introduction\/Index.html#features",
             "Features"
+        ],
+        "sitemap-1": [
+            "Sessionplaner extension",
+            "6.0.0",
+            "Sitemap.html#sitemap",
+            "Sitemap"
+        ],
+        "tutorial-1": [
+            "Sessionplaner extension",
+            "6.0.0",
+            "Tutorial\/Index.html#tutorial",
+            "Tutorial"
+        ],
+        "preparation-for-planing": [
+            "Sessionplaner extension",
+            "6.0.0",
+            "Tutorial\/Index.html#preparation-for-planing",
+            "Preparation for planing"
+        ],
+        "configuring-the-frontend": [
+            "Sessionplaner extension",
+            "6.0.0",
+            "Tutorial\/Index.html#configuring-the-frontend",
+            "Configuring the frontend"
         ]
     }
 }
