@@ -1,7 +1,96 @@
+# 6.0.0
+
+## TASK
+
+- d880c27 [TASK] Fix scss style linting
+- c0b8eb6 [TASK] Add test data
+- 3a767b3 [TASK] Update npm packages and fix build
+- 0ac96b0 [TASK] Align TCA files with previous SQL definition
+- 7703ac4 [TASK] Align Makefile with ddev config and composer.json
+- 8adb08a [TASK] Allow making a better use of composer cache
+- f88fcb4 [TASK] Migrate new sender notification configuration
+- a0d2dae [TASK] Improve cleanTestFiles
+- 03f7e6e [TASK] Update npm packages
+- 2bd7948 [TASK] Fix ddev not able to start webserver
+- a666062 [TASK] Fix phpstan errors after merging
+- 8bfdefb [TASK] Change branches for github actions
+- 5a2e98b [TASK] Fix xliff labels
+- 95dfb5b [TASK] Fix cgl errors
+- 2b4cbe6 [TASK] Fix phpstan errors
+- 329410b [TASK] Update test infrastructure
+- bd54e66 [TASK] Update test infrastructure
+- 52672be [TASK] Fix deprecations from extension scanner
+- 553718f [TASK] Resolve phpstan errors
+- 30102e0 [TASK] Do not clear .cache folder between test runs to improve performance
+- e87d264 [TASK] Add test settings
+- 51428f2 [TASK] Allow saving session length and sort session TCA fields
+- 012b5c8 [TASK] Refactor suggest form factory and finisher
+- 06a59a3 [TASK] Replace SQL table definitions with appropriate TCA configurations
+- faba2a0 [TASK] Move CSS file inclusion from TypoScript to Layouts/Frontend.html
+- b339fc6 [TASK] Improve warning when speaker or tag is not given
+- 41aa32f [TASK] Introduce site set
+- 8fff136 [TASK] Cleanup of deprecated variables
+- 9b7b108 [TASK] Migrate plugins to content elements
+- 509dad6 [TASK] Fix some coding guideline issues
+- b4a5351 [TASK] Raise PHP to minimum 8.2 and allow installing in TYPO3 v14.0 and higher
+- 125c976 [TASK] Add tutorial to documentation and update index.rst
+
+## MISC
+
+- 5ea7418 Bump shell-quote and concurrently in /Build
+- ae9ab14 Bump postcss from 8.5.6 to 8.5.14 in /Build
+- decc733 Bump fast-uri from 3.1.0 to 3.1.2 in /Build
+- 9481fd9 Bump picomatch in /Build
+- e393d0c Bump flatted from 3.3.3 to 3.4.2 in /Build
+- 0522be9 Bump immutable from 5.1.4 to 5.1.5 in /Build
+- 8f5fd5c Bump minimatch from 3.1.2 to 3.1.5 in /Build
+- 9f10b66 Merge tag '5.3.0' into develop
+
+## Contributors
+
+- Sebastian Fischer
+- dependabot[bot]
+
+# 5.3.0
+
+## TASK
+
+- 3d19dbd [TASK] Raise version number
+- 48453d2 [TASK] Fix some coding guideline issues
+- 8f0448a [TASK] Add developer information in README.md and helper in Makefile
+- b8d3862 [TASK] Improve files in Configuration and Resource/Private
+- fd91b81 [TASK] Improve structure, dependency injection and service configuration
+- 90b6849 [TASK] Improve template for better code highlighting
+- 4a2e3ea [TASK] Replace extension link ViewHelper with backend editRecord ViewHelper
+- 1e5b5fc [TASK] Remove pre v12 code
+- afc50f2 [TASK] Replace annotation with attribute for lazy
+- 0bbb524 [TASK] Add // @extensionScannerIgnoreLine where needed to avoid warnings
+- 4784919 [TASK] Add german language to site config
+- b61247a [TASK] Add target to change the core
+- 7f0170c [TASK] Update target descriptions in Makefile
+- ed07651 [TASK] Refactor frontend pipeline
+
+## MISC
+
+- e33a743 Revert drive-by
+- 70f4666 Fix indentation
+- 4cefbc4 Add tag suggestion to showitems
+- 0503c5c Add email to sender finisher
+- 17bbab1 Add tag suggestion field
+- abf00bc Add subtitle field
+- bef53f3 Add string length validation
+- 94918ca Merge tag '5.2.1' into develop
+
+## Contributors
+
+- Marvin Buchmann
+- Sebastian Fischer
+
 # 5.2.1
 
 ## TASK
 
+- c33428e [TASK] Raise version number and update changelog
 - 58d8b99 [TASK] Update runTests.sh
 - 9ece257 [TASK] Update CI pipeline, move relevant config files and fix warnings
 
