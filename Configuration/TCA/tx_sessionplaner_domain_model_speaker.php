@@ -157,6 +157,7 @@ return [
         'detail_page' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_speaker-detail_page',
+            'l10n_mode' => 'exclude',
             'config' => [
                 'type' => 'group',
                 'allowed' => 'pages',
