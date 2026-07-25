@@ -17,7 +17,7 @@
 		"@typescript-eslint/typescript-estree": "^8.62.1",
 		"autoprefixer": "^10.5.2",
 		"chokidar-cli": "^3.0.0",
-		"concurrently": "^10.0.3",
+		"concurrently": "^10.0.4",
 		"postcss": "^8.5.16",
 		"postcss-cli": "^11.0.1",
 		"postcss-scss": "^4.0.9",
