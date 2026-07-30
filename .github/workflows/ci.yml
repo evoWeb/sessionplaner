@@ -18,35 +18,54 @@ jobs:
           persist-credentials: false
 
       - name: Run the scss lint
-        run: Build/Scripts/runTests.sh -s lintScss
+        run: Build/Scripts/runTests.sh -b docker -s lintScss
 
       - name: Install
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p 8.4 \
             -s composerInstall
+
+      - name: Lint Yaml
+        run: |
+          Build/Scripts/runTests.sh \
+            -b docker \
+            -p 8.4 \
+            -s lintYaml
+
+      - name: Lint Services Yaml
+        run: |
+          Build/Scripts/runTests.sh \
+            -b docker \
+            -p 8.4 \
+            -s lintServicesYaml
 
       - name: Run the phpstan
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p 8.4 \
             -s phpstan
 
       - name: Run the cgl lint
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p 8.4 \
             -s cgl
 
       - name: Run the xliff lint
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p 8.4 \
             -s checkIntegrityXliff
 
       - name: Test documentation build
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p 8.4 \
             -s checkRstRenderingSingle
 
@@ -73,18 +92,21 @@ jobs:
       - name: PHP lint
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p ${{ matrix.php }} \
             -s lintPhp
 
       - name: Composer install core
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p ${{ matrix.php }} \
             -s composer require ${{ matrix.prefer }} "typo3/cms-core:${{ matrix.packages.core }}"
 
       - name: Composer validate
         run: |
           Build/Scripts/runTests.sh \
+            -b docker \
             -p ${{ matrix.php }} \
             -s composerValidate
 
