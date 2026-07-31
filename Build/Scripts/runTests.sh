@@ -1151,6 +1151,7 @@ case ${TEST_SUITE} in
         ;;
     checkRstRenderingSingle)
         executeRstRendering "${systemExtensionKey}"
+        SUITE_EXIT_CODE=$?
         if false; then
         systemExtensionKey="${1}"
         if [ -n "${systemExtensionKey}" ]; then
