@@ -13,3 +13,4 @@ vendor/
 auth.json
 composer.lock
 FIRST_INSTALL
+.mcp.json
