@@ -32,18 +32,34 @@ class GravatarViewHelper extends AbstractTagBasedViewHelper
     public function render(): string
     {
         $email = is_string($this->arguments['email']) ? $this->arguments['email'] : '';
-        $size = is_string($this->arguments['size']) ? $this->arguments['size'] : '80';
+        $size = is_numeric($this->arguments['size']) ? (int)$this->arguments['size'] : 80;
+        // Fluid casts an empty size to 0, which must not render a 1 pixel image
+        $size = $size < 1 ? 80 : min(2048, $size);
         $default = is_string($this->arguments['default']) ? $this->arguments['default'] : 'mm';
         $rating = is_string($this->arguments['rating']) ? $this->arguments['rating'] : 'g';
 
-        $avatarUrl = 'https://www.gravatar.com/avatar/' . md5($email)
+        // gravatar hashes the trimmed and lowercased address
+        $hash = md5(strtolower(trim($email)));
+        $retinaSize = min(2048, $size * 2);
+
+        $this->tag->addAttribute('src', $this->buildAvatarUrl($hash, $size, $default, $rating));
+        if ($retinaSize > $size) {
+            $this->tag->addAttribute(
+                'srcset',
+                $this->buildAvatarUrl($hash, $size, $default, $rating) . ' 1x, '
+                . $this->buildAvatarUrl($hash, $retinaSize, $default, $rating) . ' 2x'
+            );
+        }
+        $this->tag->addAttribute('width', (string)$size);
+        $this->tag->addAttribute('height', (string)$size);
+        return $this->tag->render();
+    }
+
+    protected function buildAvatarUrl(string $hash, int $size, string $default, string $rating): string
+    {
+        return 'https://www.gravatar.com/avatar/' . $hash
             . '?s=' . $size
             . '&d=' . urlencode($default)
             . '&r=' . $rating;
-
-        $this->tag->addAttribute('src', $avatarUrl);
-        $this->tag->addAttribute('width', $size);
-        $this->tag->addAttribute('height', $size);
-        return $this->tag->render();
     }
 }
