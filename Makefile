@@ -38,6 +38,12 @@ cgl: ##@ Coding guideline check with
 	Build/Scripts/runTests.sh -p ${PHP_VERSION} -s cgl -n
 	echo "Coding guideline check with phpstan finished"
 
+.PHONY: functional
+functional: ##@ Run the functional test suite
+	echo "Functional tests started"
+	Build/Scripts/runTests.sh -p ${PHP_VERSION} -d sqlite -s functional
+	echo "Functional tests finished"
+
 ##@ Release
 
 .PHONY: changelog

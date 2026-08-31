@@ -110,6 +110,22 @@ jobs:
             -p ${{ matrix.php }} \
             -s composerValidate
 
+      - name: Composer install testing framework
+        run: |
+          Build/Scripts/runTests.sh \
+            -b docker \
+            -p ${{ matrix.php }} \
+            -s composer require --dev ${{ matrix.prefer }} \
+              "typo3/testing-framework:${{ matrix.packages.framework }}"
+
+      - name: Run the functional tests
+        run: |
+          Build/Scripts/runTests.sh \
+            -b docker \
+            -p ${{ matrix.php }} \
+            -d sqlite \
+            -s functional
+
   TERUpload:
     needs: [ resources, testsuite ]
     if: startsWith(github.ref, 'refs/tags/')
