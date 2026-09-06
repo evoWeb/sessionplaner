@@ -8,6 +8,7 @@ on:
     branches: [ develop ]
 
 jobs:
+
   resources:
     name: Resources tests
     runs-on: ubuntu-latest
@@ -17,15 +18,19 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Run the scss lint
-        run: Build/Scripts/runTests.sh -b docker -s lintScss
-
       - name: Install
         run: |
           Build/Scripts/runTests.sh \
             -b docker \
             -p 8.4 \
             -s composerInstall
+
+      - name: Lint SCSS
+        run: |
+          Build/Scripts/runTests.sh \
+            -b docker \
+            -p 8.4 \
+            -s lintScss
 
       - name: Lint Yaml
         run: |
@@ -41,7 +46,7 @@ jobs:
             -p 8.4 \
             -s lintServicesYaml
 
-      - name: Run the phpstan
+      - name: Run phpstan
         run: |
           Build/Scripts/runTests.sh \
             -b docker \
@@ -70,7 +75,7 @@ jobs:
             -s checkRstRenderingSingle
 
   testsuite:
-    name: All php tests for TYPO3 ${{ matrix.packages.core }} with PHP ${{ matrix.packages.php }}
+    name: All php tests for TYPO3 ${{ matrix.packages.core }} with PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -89,7 +94,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: PHP lint
+      - name: Lint php
         run: |
           Build/Scripts/runTests.sh \
             -b docker \
@@ -103,6 +108,13 @@ jobs:
             -p ${{ matrix.php }} \
             -s composer require ${{ matrix.prefer }} "typo3/cms-core:${{ matrix.packages.core }}"
 
+      - name: Composer install framework
+        run: |
+          Build/Scripts/runTests.sh \
+            -b docker \
+            -p ${{ matrix.php }} \
+            -s composer require --dev ${{ matrix.prefer }} "typo3/testing-framework:${{ matrix.packages.framework }}"
+
       - name: Composer validate
         run: |
           Build/Scripts/runTests.sh \
@@ -110,21 +122,13 @@ jobs:
             -p ${{ matrix.php }} \
             -s composerValidate
 
-      - name: Composer install testing framework
-        run: |
-          Build/Scripts/runTests.sh \
-            -b docker \
-            -p ${{ matrix.php }} \
-            -s composer require --dev ${{ matrix.prefer }} \
-              "typo3/testing-framework:${{ matrix.packages.framework }}"
-
       - name: Run the functional tests
         run: |
           Build/Scripts/runTests.sh \
             -b docker \
             -p ${{ matrix.php }} \
             -d sqlite \
-            -s functional
+            -s functional Tests/Functional
 
   TERUpload:
     needs: [ resources, testsuite ]
