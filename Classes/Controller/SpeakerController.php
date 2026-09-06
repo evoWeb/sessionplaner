@@ -16,10 +16,10 @@ use Evoweb\Sessionplaner\Domain\Repository\SpeakerRepository;
 use Evoweb\Sessionplaner\TitleTagProvider\SpeakerTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Exception\Page\PageNotFoundException;
-use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
@@ -45,15 +45,14 @@ class SpeakerController extends ActionController
             : (array)$queryResult;
 
         $speakers = array_filter($speakers, function (object $speaker): bool {
-            if (!$speaker instanceof Speaker) {
-                return false;
-            }
             return $speaker->hasActiveSessions();
         });
 
         $this->view->assign('speakers', $speakers);
 
-        return new HtmlResponse($this->view->render());
+        /** @var ViewInterface $view */
+        $view = $this->view;
+        return $this->htmlResponse($view->render());
     }
 
     public function showAction(Speaker $speaker): ResponseInterface
@@ -79,6 +78,8 @@ class SpeakerController extends ActionController
 
         $this->view->assign('speaker', $speaker);
 
-        return new HtmlResponse($this->view->render());
+        /** @var ViewInterface $view */
+        $view = $this->view;
+        return $this->htmlResponse($view->render());
     }
 }

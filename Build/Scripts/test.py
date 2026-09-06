@@ -62,7 +62,9 @@ def run_functional_tests(php: str, core: str, framework: str, prefer: str = '') 
     cleanup()
     run(f'./runTests.sh -p {php} -s lintPhp')
     run(f'./runTests.sh -p {php} -s composer -- require {prefer_arg} "typo3/cms-core:{core}"')
+    run(f'./runTests.sh -p {php} -s composer -- require --dev {prefer_arg} "typo3/testing-framework:{framework}"')
     run(f'./runTests.sh -p {php} -s composerValidate')
+    run(f'./runTests.sh -p {php} -d sqlite -s functional Tests/Functional')
     print(f'{GREEN}SUCCESS{NC}')
 
 

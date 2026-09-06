@@ -13,7 +13,7 @@ namespace Evoweb\Sessionplaner\Controller;
 
 use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class SessionplanController extends ActionController
@@ -24,6 +24,9 @@ class SessionplanController extends ActionController
     {
         $day = $this->dayRepository->findByUid($this->settings['day']);
         $this->view->assign('day', $day);
-        return new HtmlResponse($this->view->render());
+
+        /** @var ViewInterface $view */
+        $view = $this->view;
+        return $this->htmlResponse($view->render());
     }
 }

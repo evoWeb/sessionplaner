@@ -12,13 +12,15 @@ declare(strict_types=1);
 namespace Evoweb\Sessionplaner\Controller;
 
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Http\HtmlResponse;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class SuggestController extends ActionController
 {
     public function formAction(): ResponseInterface
     {
-        return new HtmlResponse($this->view->render());
+        /** @var ViewInterface $view */
+        $view = $this->view;
+        return $this->htmlResponse($view->render());
     }
 }

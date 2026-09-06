@@ -16,9 +16,9 @@ use Evoweb\Sessionplaner\Domain\Repository\DayRepository;
 use Evoweb\Sessionplaner\Domain\Repository\SessionRepository;
 use Evoweb\Sessionplaner\TitleTagProvider\SessionTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -44,7 +44,9 @@ class SessionController extends ActionController
 
             $this->view->assign('sessions', $sessions);
 
-            $response = new HtmlResponse($this->view->render());
+            /** @var ViewInterface $view */
+            $view = $this->view;
+            $response = $this->htmlResponse($view->render());
         }
 
         return $response;
@@ -72,7 +74,9 @@ class SessionController extends ActionController
 
             $this->view->assign('session', $session);
 
-            $response = new HtmlResponse($this->view->render());
+            /** @var ViewInterface $view */
+            $view = $this->view;
+            $response = $this->htmlResponse($view->render());
         }
 
         return $response;

@@ -32,6 +32,7 @@ class Tca
         $dayInfo = '';
 
         if ((int)($record['day'] ?? 0) > 0) {
+            /** @var array<string, string> $day */
             $day = BackendUtility::getRecord('tx_sessionplaner_domain_model_day', (int)$record['day']);
             if (is_array($day) && isset($day['name'])) {
                 $dayInfo = ' (' . $day['name'] . ')';

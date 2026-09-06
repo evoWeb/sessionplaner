@@ -14,17 +14,20 @@ namespace Evoweb\Sessionplaner\Controller;
 use Evoweb\Sessionplaner\Domain\Model\Tag;
 use Evoweb\Sessionplaner\TitleTagProvider\TagTitleTagProvider;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class TagController extends ActionController
 {
     public function showAction(?Tag $tag = null): ResponseInterface
     {
+        /** @var ViewInterface $view */
+        $view = $this->view;
+
         if ($tag === null || !$tag->hasActiveSessions()) {
-            return new HtmlResponse($this->view->render());
+            return $this->htmlResponse($view->render());
         }
 
         /** @var TagTitleTagProvider $provider */
@@ -42,8 +45,8 @@ class TagController extends ActionController
         // @extensionScannerIgnoreLine
         $twitterMetaTagManager->addProperty('twitter:title', $tag->getLabel());
 
-        $this->view->assign('tag', $tag);
+        $view->assign('tag', $tag);
 
-        return new HtmlResponse($this->view->render());
+        return $this->htmlResponse($view->render());
     }
 }
