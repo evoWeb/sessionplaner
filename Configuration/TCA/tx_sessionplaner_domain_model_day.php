@@ -19,6 +19,10 @@ return [
         'crdate' => 'crdate',
         'delete' => 'deleted',
         'default_sortby' => 'ORDER BY date',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -30,6 +34,27 @@ return [
         ],
     ],
     'columns' => [
+        'hidden' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'sys_language_uid' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'language',
+            ],
+        ],
         'name' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-name',
@@ -43,6 +68,8 @@ return [
         'date' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-date',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'datetime',
                 'format' => 'date',
@@ -51,11 +78,13 @@ return [
         'rooms' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-rooms',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_room',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_room.pid = ###CURRENT_PID### AND tx_sessionplaner_domain_model_room.sys_language_uid IN (-1,0)',
                 'MM' => 'tx_sessionplaner_day_room_mm',
                 'size' => 6,
                 'minitems' => 0,
@@ -66,6 +95,8 @@ return [
         'slots' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_day-slots',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_sessionplaner_domain_model_slot',
@@ -81,6 +112,8 @@ return [
         '0' => [
             'showitem' => '
                 --div--;General,
+                    hidden,
+                    sys_language_uid,
                     name,
                     date,
                     rooms,

@@ -17,6 +17,10 @@ return [
         'crdate' => 'crdate',
         'default_sortby' => 'ORDER BY label',
         'delete' => 'deleted',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'translationSource' => 'l10n_source',
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
@@ -28,6 +32,27 @@ return [
         ],
     ],
     'columns' => [
+        'hidden' => [
+            'exclude' => false,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+            ],
+        ],
+        'sys_language_uid' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
+            'config' => [
+                'type' => 'language',
+            ],
+        ],
         'label' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-label',
@@ -42,6 +67,8 @@ return [
         'color' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-color',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
@@ -88,6 +115,8 @@ return [
         'path_segment' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-path_segment',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'slug',
                 'generatorOptions' => [
@@ -104,6 +133,8 @@ return [
         'suggest_form_option' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-suggest_form_option',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
@@ -118,11 +149,13 @@ return [
         'sessions' => [
             'exclude' => false,
             'label' => $languageFile . 'tx_sessionplaner_domain_model_tag-sessions',
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_sessionplaner_domain_model_session',
-                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID###',
+                'foreign_table_where' => 'AND tx_sessionplaner_domain_model_session.pid = ###CURRENT_PID### AND (tx_sessionplaner_domain_model_session.sys_language_uid IN (-1,0) OR tx_sessionplaner_domain_model_session.sys_language_uid = ###REC_FIELD_sys_language_uid###)',
                 'MM' => 'tx_sessionplaner_session_tag_mm',
                 'MM_opposite_field' => 'tags',
                 'minitems' => 0,
@@ -133,6 +166,8 @@ return [
         '0' => [
             'showitem' => '
                 --div--;General,
+                    hidden,
+                    sys_language_uid,
                     label,
                     path_segment,
                     color,
